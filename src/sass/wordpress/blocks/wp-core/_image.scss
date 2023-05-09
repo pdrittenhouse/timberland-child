@@ -1,0 +1,25 @@
+.wp-block-image {
+
+  &:not(.is-style-rounded) {
+
+    img {}
+  }
+
+  figure {
+
+    &.aligncenter,
+    &.alignleft,
+    &.alignright {}
+    &.alignleft,
+    &.alignright {}
+
+
+    &.aligncenter {}
+
+    &.alignleft {}
+
+    &.alignright {}
+  }
+
+  img {}
+}

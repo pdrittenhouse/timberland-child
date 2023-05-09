@@ -1,0 +1,157 @@
+// Breakout Contaner Single Side
+.breakout-right {
+
+  @each $name, $width in $container-max-widths {
+    @if $name =='sm' {
+      @include media-breakpoint-down($name) {
+        width: calc(100% + (100vw - #{$width}) + #{$grid-gutter-width});
+        margin-left: calc(((100vw - #{$width}) / -2) - (#{$grid-gutter-width} / 2));
+      }
+    }
+
+    @else {
+      @include media-breakpoint-up($name) {
+        width: calc(100% + ((100vw - #{$width}) / 2) + (#{$grid-gutter-width} / 2));
+        margin-right: calc(((100vw - #{$width}) / -2) - (#{$grid-gutter-width} / 2));
+      }
+    }
+  }
+}
+
+.breakout-left {
+
+  @each $name, $width in $container-max-widths {
+    @if $name =='sm' {
+      @include media-breakpoint-down($name) {
+        width: calc(100% + (100vw - #{$width}) + #{$grid-gutter-width});
+        margin-right: calc(((100vw - #{$width}) / -2) - (#{$grid-gutter-width} / 2));
+      }
+    }
+
+    @else {
+      @include media-breakpoint-up($name) {
+        width: calc(100% + ((100vw - #{$width}) / 2) + (#{$grid-gutter-width} / 2));
+        margin-left: calc(((100vw - #{$width}) / -2) - (#{$grid-gutter-width} / 2));
+      }
+    }
+  }
+}
+
+// Overflow
+.overflow-hidden {
+  overflow: hidden;
+  > .container {
+    overflow: hidden;
+  }
+}
+.overflow-visible {
+  overflow: visible;
+  >.container {
+    overflow: visible;
+  }
+}
+.overflow-auto {
+  overflow: auto;
+  >.container {
+    overflow: auto;
+  }
+}
+.overflow-scroll {
+  overflow: scroll;
+  >.container {
+    overflow: scroll;
+  }
+}
+.overflow-x-hidden {
+  overflow-x: hidden;
+  > .container {
+    overflow-x: hidden;
+  }
+}
+.overflow-x-visible {
+  overflow-x: visible;
+  >.container {
+    overflow-x: visible;
+  }
+}
+.overflow-x-auto {
+  overflow-x: auto;
+  >.container {
+    overflow-x: auto;
+  }
+}
+.overflow-x-scroll {
+  overflow-x: scroll;
+  >.container {
+    overflow-x: scroll;
+  }
+}
+.overflow-y-hidden {
+  overflow-y: hidden;
+  >.container {
+    overflow-y: hidden;
+  }
+}
+.overflow-y-visible {
+  overflow-y: visible;
+  >.container {
+    overflow-y: visible;
+  }
+}
+.overflow-y-auto {
+  overflow-y: auto;
+  >.container {
+    overflow-y: auto;
+  }
+}
+.overflow-y-scroll {
+  overflow-y: scroll;
+  >.container {
+    overflow-y: scroll;
+  }
+}
+
+// Angle Graphic
+@each $name, $color in $theme-colors {
+
+  .angle-left-#{$name} {
+
+    &:before {
+      @include absolute-position('left', 'outside');
+      content: "";
+      display: block;
+      background-image: svg-url('<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 60 500" enable-background="new 0 0 60 500" xml:space="preserve"> <g> <polygon fill="#{$color}" points="60,0 60,0 60,500 0,500 0,500"/></g></svg>');
+      background-repeat: no-repeat;
+      background-position: right center;
+      background-size: contain;
+      z-index: z('site-content');
+      width: 100%;
+      pointer-events: none;
+    }
+  }
+
+  .angle-right-#{$name} {
+
+    &:after {
+      @include absolute-position('right', 'outside');
+      content: "";
+      display: block;
+      background-image: svg-url('<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 60 500" style="enable-background:new 0 0 60 500;" xml:space="preserve"> <g> <polygon fill="#{$color}" points="0,500 0,500 0,0 60,0 60,0"/> </g> </svg>');
+      background-repeat: no-repeat;
+      background-position: left center;
+      background-size: contain;
+      z-index: z('site-content');
+      width: 100%;
+      pointer-events: none;
+    }
+  }
+
+}
+
+
+// Z Index
+@each $index in $z-indexes {
+  .z-#{$index} {
+    z-index: z(#{$index}) !important;
+  }
+}

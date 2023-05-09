@@ -1,0 +1,47 @@
+.post-type-post {
+
+  .include-containers & {
+
+    .article-content--container {}
+
+    .article-content--row {}
+
+    .article-content--column {}
+  }
+
+  .article {
+
+    &-header {
+
+      > .container {
+
+        > .row {
+
+          > .col {}
+        }
+      }
+    }
+
+    &-title {}
+
+    &-content {}
+
+    &-body {}
+
+    &-footer {
+
+      > .container {
+
+        > .row {
+
+          > .col {}
+        }
+      }
+    }
+
+    &-author {}
+
+    &-edit {}
+  }
+
+}

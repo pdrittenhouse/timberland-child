@@ -1,0 +1,68 @@
+{#
+/**
+ * Block Name:
+ *
+ * This is the template that displays the  block.
+ */
+#}
+
+{#{% if is_preview %}#}
+{#<p>Some editor instructions here.</p>#}
+{#{% endif %}#}
+
+{#{{ block['className'] }}#}
+{#{{ block['align'] ? 'align-' ~ block['align'] }}#}
+{#{{ block['align_text']}}#}
+{#{{ block['align_content'] }}#}
+{#{{ block['full_height'] }}#}
+
+{# Parent Block Data #}
+{# ACF <= v.5.9 #}
+{#{% set parent = function('get_parent_block', block['id'], block['name']) %}#}
+{# ACF >= v.6.0 #}
+{#{{ parent_block_data['data'] }}#}
+{# Block Context #}
+{#{{ block_context['acf/fields'] }}#}
+
+{% set block_classes = block_classes|default([])|merge([
+  'logo-grid-block',
+  block['className']
+]) | sort | join(' ') | trim %}
+
+{% set block_attributes = block_attributes|default([])|merge([
+]) | sort | join(' ') | trim %}
+
+<div class="{{ block_classes }}" {{ block_attributes }}>
+  {% embed '@atoms/grid/_grid.tpl.twig' with {
+    container: false,
+    grid_other_classes: 'logo-grid',
+  } %}
+    {% block column_1 %}
+      {% if fields.title %}
+      <h4 class="logo-grid--title">{{ fields.title }}</h4>
+      {% endif %}
+      {% if fields.intro %}
+      <div class="logo-grid--intro">{{ fields.intro }}</div>
+      {% endif %}
+      <div class="logo-grid--wrapper {{ fields.grayscale == true ? 'grayscale-images' }}">
+        {% if fields.logos %}
+          {% for logo in fields.logos %}
+            <div class="logo-grid--item">
+              {% include "@atoms/image/_image.tpl.twig" with {
+                variant: 'primary',
+                src: logo.logo['image_type'] == 'file' ? logo.logo['image']['url'] : logo.logo['image_type'] == 'url' ? logo.logo['image_url'],
+                alt: logo.logo['image_type'] == 'file' ? logo.logo['image']['alt'],
+                width: logo.width ? logo.width ~ 'px',
+                height: logo.height ? logo.height ~ 'px',
+                image_classes: [
+                  'logo-grid--image',
+                  logo.name
+                ],
+              } %}
+            </div>
+          {% endfor %}
+        {% endif %}        
+      </div>
+    {% endblock %}
+  {% endembed %}
+</div>

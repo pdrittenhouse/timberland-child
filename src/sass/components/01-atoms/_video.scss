@@ -1,0 +1,18 @@
+// Custom styles for video
+
+.video {
+
+  &-title {}
+
+  &-responsive {}
+
+  video {}
+
+  &.wide {
+    .video-responsive {}
+  }
+
+  &.aspect-ratio--1920-1080 {
+    .video-responsive {}
+  }
+}

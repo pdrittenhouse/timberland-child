@@ -1,0 +1,27 @@
+// Custom styles for branding
+
+.branding {
+
+  &.hide-text {
+
+    .branding--site-name,
+    .branding--site-slogan {}
+  }
+
+  a {}
+
+  &--site-logo {}
+
+  &--logo-img {
+
+    img,
+    svg {}
+  }
+
+  &--site-name {
+
+    + .branding--site-slogan {}
+  }
+
+  &--site-slogan {}
+}

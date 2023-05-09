@@ -1,0 +1,69 @@
+{#
+/**
+ * Block Name: Price
+ *
+ * This is the template that displays the price block.
+ */
+#}
+
+{% if is_preview %}
+    {# <p>Some editor instructions here.</p> #}
+{% endif %}
+
+{# Price Classes #}
+{% set price_classes = [
+    'price',
+    block['className'],
+    fields.style != 'default' ? fields.style
+]|sort|join(' ')|trim %}
+
+{# Price Styles #}
+{% set price_styles = [
+    'text-align: ' ~ fields.align ~ ';',
+] | sort | join(' ') | trim %}
+
+<div class="{{ price_classes }}" {{ price_styles ? 'style="' ~ price_styles ~ '"'}}>
+    <div class="price-wrapper">
+        {% if fields.label %}
+            <span class="label">{{ fields.label }}</span>
+        {% endif %}
+
+        {% if fields.symbol or fields.whole_amount or fields.separator or fields.change_amount or fields.frequency_separator or fields.frequency or fields.terms %}
+            <div class="amount">
+                {% if fields.symbol or fields.whole_amount or fields.separator %}
+                    <div class="price-main">
+                        {% if fields.symbol %}
+                            <span class="symbol">{{ fields.symbol }}</span>
+                        {% endif %}
+                        {% if fields.whole_amount %}
+                            <span class="whole">{{ fields.whole_amount }}</span>
+                        {% endif %}
+                        {% if fields.separator %}
+                            <span class="separator">{{ fields.separator }}</span>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                {% if fields.change_amount or fields.frequency_separator or fields.frequency %}
+                    <div class="price-meta">
+                        {% if fields.change_amount %}
+                            <span class="remainder">{{ fields.change_amount }}</span>
+                        {% endif %}
+                        {% if fields.frequency_separator %}
+                            <span class="frequency-separator">{{ fields.frequency_separator }}</span>
+                        {% endif %}
+                        {% if fields.frequency %}
+                            <span class="frequency">{{ fields.frequency }}</span>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% if fields.terms %}
+            <div class="details">
+                <span class="terms">{{ fields.terms }}</span>
+            </div>
+        {% endif %}
+    </div>
+</div>

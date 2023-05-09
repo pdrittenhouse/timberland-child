@@ -1,0 +1,107 @@
+// Custom styles for flickity carousel
+
+.flickity-carousel {
+
+  &:after {}
+
+  &.flickity-enabled {
+
+    + .button--row {}
+  }
+
+  &.is-draggable {}
+
+  &--wrapper {
+
+    .button {
+
+      &:focus {}
+
+      &:hover {}
+
+      &--row {}
+
+      &--previous,
+      &--next {
+
+        &:before {}
+
+        &:hover {
+
+          &:before {}
+        }
+      }
+
+      &--previous {
+
+        &:before {}
+      }
+
+      &--next {
+
+        &:before {}
+      }
+
+      &.is-selected {}
+
+      &--group {}
+    }
+  }
+
+  .flickity-page-dots {
+
+    .dot {
+
+      &:before {}
+
+      &.is-selected {}
+    }
+  }
+
+  .flickity-prev-next-button {
+
+    &:hover {
+
+      path {}
+    }
+
+    &:disabled {
+
+      .button--previous,
+      .button--next {}
+    }
+
+    path {}
+
+    &.previous {}
+
+    &.next {}
+  }
+
+  .carousel-cell {
+
+    &.is-selected {}
+
+    img {}
+  }
+
+  &.image-lightbox-slider {
+
+    .flickity-page-dots {}
+
+    .carousel-cell {
+
+      &.is-selected {}
+    }
+  }
+
+  &.image-lightbox-control {
+
+    .flickity-page-dots {}
+
+    .carousel-cell {
+
+      &.is-selected {}
+    }
+  }
+}

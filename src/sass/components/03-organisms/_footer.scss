@@ -1,0 +1,373 @@
+// Custom styles for footer
+
+// The non-printing variables, functions, and mixins of 00-protons/variables
+// are provided to this file via:
+//   webpack.config.js: sass-loader.data|includePaths
+
+.site-footer {
+
+  &.two-cols {
+
+    .site-footer--brand-name {}
+
+    .site-footer--navigation {}
+
+    .footer-nav,
+    .utility-nav {}
+
+    .footer-social-nav {}
+
+    .site-footer--info {}
+
+    .site-footer--contact-info {
+
+      .list-item {}
+    }
+
+    .site-footer--utilities {}
+
+    .site-footer--copyright {}
+
+    &:not(.reverse-cols) {
+
+      .footer-nav,
+      .utility-nav {
+
+        > .nav-item {
+
+          &:first-child {
+
+            > .nav-link {}
+          }
+        }
+      }
+
+      .footer-social-nav {
+
+        .social-nav-item {
+
+          &:first-child {}
+        }
+      }
+
+      .site-footer--contact-info {
+
+        &.inline {
+
+          .list-item {
+
+            &:last-child {}
+          }
+        }
+      }
+    }
+
+    &.reverse-cols {
+
+      .site-footer--brand-name {}
+
+      .site-footer--navigation {}
+
+      .footer-nav {
+
+        > .nav-item {
+
+          &:last-child {
+
+            > .nav-link {}
+          }
+        }
+      }
+
+      .footer-social-nav {
+
+        .social-nav-item {
+
+          &:last-child {}
+        }
+      }
+
+      .site-footer--info {}
+
+      .site-footer--contact-info {
+
+        &.inline {
+
+          .list-item {
+
+            &:last-child {}
+          }
+        }
+      }
+
+      .site-footer--meta {}
+    }
+
+    &.reverse-meta {
+
+      .site-footer--utilities {}
+
+      .utility-nav {
+
+        > .nav-item {
+
+          &:last-child {
+
+            > .nav-link {}
+          }
+        }
+      }
+
+      .site-footer--copyright {}
+    }
+  }
+
+  &:not(.two-cols) {
+
+    .site-footer--navigation {}
+
+    .site-footer--info {}
+
+    .site-footer--contact-info {
+
+      .list-item {}
+    }
+
+    .site-footer--utilities {}
+
+    .utility-nav {}
+
+    .site-footer--copyright {}
+  }
+
+  a {
+
+    &:hover,
+    &:focus {}
+  }
+
+  &--navigation {
+
+    > .row {}
+  }
+
+  &--branding {}
+
+  .footer-brand {
+
+    .branding--site-logo {}
+  }
+
+  .branding--link {
+
+    &:hover,
+    &:focus {}
+  }
+
+  .branding--site-name,
+  .branding--site-slogan {
+
+    &:hover,
+    &:focus {}
+  }
+
+  .branding--site-name {}
+
+  .branding--site-slogan {}
+
+  &--brand-name {}
+
+  &--cta {}
+
+  .footer-cta-button {
+
+    &:not(.navbar-toggler) {}
+
+    .svg {}
+
+    &:hover,
+    &:focus {
+
+      .svg {}
+    }
+  }
+
+  &--nav {}
+
+  .navbar-nav {
+
+    .nav {
+
+      > .nav-item {
+
+        > .nav-link {
+
+          &:hover,
+          &:focus {}
+        }
+      }
+    }
+  }
+
+  .footer-nav {
+
+    > .nav-item {
+
+      > .nav-link {
+
+        &:hover,
+        &:focus {}
+      }
+    }
+  }
+
+  &--social-nav {}
+
+  .footer-social-nav {
+
+    .social-nav-item {
+
+      &:hover,
+      &:focus {
+
+        .icon,
+        .svg--icon,
+        svg {}
+      }
+
+      .icon,
+      .svg--icon,
+      svg {}
+    }
+
+    .social-nav-link {
+
+      &:hover {}
+    }
+  }
+
+  &--search {}
+
+  .searchform {}
+
+  .search-field {
+
+    &:hover,
+    &:focus {}
+  }
+
+  .search-submit {
+
+    &:not(.navbar-toggler) {}
+  }
+
+  &--info {
+
+    > .row {}
+  }
+
+  &--company {}
+
+  &--contact-info {
+
+    &.inline {
+
+      .list-item {
+
+        &:last-child {}
+      }
+    }
+
+    &:not(.inline) {
+
+      .list-item {
+
+        &:last-child {}
+      }
+    }
+
+    .list-item {}
+
+    strong {}
+
+    a {
+
+      &:hover {}
+    }
+
+    address {}
+  }
+
+  &--disclaimer-wrapper {}
+
+  &--disclaimer{
+
+    p {
+
+      &:last-child {}
+    }
+  }
+
+  &--attribution-wrapper {}
+
+  &--attribution {
+
+    p {
+
+      &:last-child {}
+    }
+  }
+
+  &--meta {
+
+    > .row {}
+  }
+
+  &--utilities {}
+
+  .utility-nav {
+
+    > .nav-item {
+
+      > .nav-link {
+
+        &:hover,
+        &:focus {}
+      }
+    }
+  }
+
+  &--copyright {
+
+    .copyright {
+
+      &.hide-label {
+
+        .label {}
+      }
+
+      &.hide-icon {
+
+        .icon {}
+      }
+
+      &.hide-year {
+
+        .year {}
+      }
+
+      &.hide-name {
+
+        .name {}
+      }
+    }
+
+    .label {}
+
+    .icon {}
+
+    .year {}
+
+    .name {}
+  }
+}

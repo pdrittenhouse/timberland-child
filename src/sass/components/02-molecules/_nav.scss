@@ -1,0 +1,64 @@
+// Custom styles for nav
+
+.navbar-nav {
+
+  // Hoverable Dropdown Menus
+  &.dropdown-hover {
+
+    .dropdown {
+
+      > .dropdown-toggle {
+
+        &:after {}
+      }
+
+      .item-label {}
+
+      .caret {
+
+        &:after {}
+      }
+
+      > .dropdown-menu {}
+
+      //MULTILEVEL MENU SUPPORT
+      .dropdown-item {
+
+        &:active {}
+
+        .dropdown-submenu {}
+      }
+    }
+  }
+
+}
+
+.nav {
+
+  &-item {}
+
+  &-link {
+
+    &:hover {}
+  }
+
+  .item-label {}
+
+  .dropdown-toggle {
+
+    &:after {}
+  }
+
+  .dropdown-menu {}
+
+  .dropdown-item {
+
+    .nav-link {
+
+      &:hover {}
+    }
+
+    .item-label {}
+  }
+
+}

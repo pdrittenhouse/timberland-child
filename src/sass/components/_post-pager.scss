@@ -1,0 +1,59 @@
+.post-pager {
+
+    .back {}
+
+    &-item {
+
+        &:first-child {}
+
+        &:last-child {}
+
+        &:first-child:last-child {
+
+            .post-pager-item-content {}
+        }
+    }
+
+    &-item-content {}
+
+    .prev-post {
+
+        .label {
+
+            &:before {}
+        }
+    }
+
+    .next-post {
+
+        .label {
+
+            &:after {}
+        }
+    }
+
+    .label {
+
+        &:before,
+        &:after {}
+    }
+
+    .date {}
+
+    .title {}
+
+    .pagination-link {
+
+        &.prev {
+
+            a {}
+        }
+
+        &.next {
+
+            a {}
+        }
+
+        a {}
+    }
+}

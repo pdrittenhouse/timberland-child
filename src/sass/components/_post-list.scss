@@ -1,0 +1,9 @@
+.post-list {
+
+  .blog & {}
+
+  &--item {
+
+    &:last-child {}
+  }
+}

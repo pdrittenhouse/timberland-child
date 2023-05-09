@@ -1,0 +1,362 @@
+{#
+/**
+ * Block Name: Hero Unit
+ *
+ * This is the template that displays the hero unit block.
+ */
+#}
+
+{#{% if is_preview %}#}
+{#<p>Some editor instructions here.</p>#}
+{#{% endif %}#}
+
+{#{{ block['className'] }}#}
+{#{{ block['align'] ? 'align-' ~ block['align'] }}#}
+{#{{ block['align_text']}}#}
+{#{{ block['align_content'] }}#}
+{#{{ block['full_height'] }}#}
+
+{# Parent Block Data #}
+{# ACF <= v.5.9 #}
+{#{% set parent = function('get_parent_block', block['id'], block['name']) %}#}
+{# ACF >= v.6.0 #}
+{#{{ parent_block_data['data'] }}#}
+{# Block Context #}
+{#{{ block_context['acf/fields'] }}#}
+{# Post Data #}
+{#{{ block_post }}#}
+
+{# Set Hero Styles #}
+{% set bg_color =  fields.bg_video != true and fields.bg_color['bg_color'] == 'custom' and fields.bg_color['bg_custom_color'] ? 'background-color: ' ~  fields.bg_color['bg_custom_color'] ~ ';' %}
+{% set text_color =  fields.color['color'] == 'custom' and fields.color['custom_color'] ? 'color: ' ~  fields.color['custom_color'] ~ ';' %}
+{% set bg_image = fields.bg_image['bg_image_type'] == 'file' and fields.bg_image['bg_image']['url'] ? fields.bg_image['bg_image']['url'] : fields.bg_image['bg_image_type'] == 'url' and fields.bg_image['bg_image_url'] ? fields.bg_image['bg_image_url'] %}
+{% set bg_image_size = fields.bg_image['bg_size'] == 'custom' and fields.bg_image['custom_bg_size'] ? 'background-size: ' ~ fields.bg_image['custom_bg_size'] ~ ';' : fields.bg_image['bg_size'] ? 'background-size: ' ~ fields.bg_image['bg_size'] ~ ';' %}
+{% set bg_hor_pos = fields.bg_image['bg_horizontal_position'] == 'custom' ? fields.bg_image['custom_bg_horizontal_position'] : fields.bg_image['bg_horizontal_position'] ? fields.bg_image['bg_horizontal_position'] %}
+{% set bg_ver_pos = fields.bg_image['bg_vertical_position'] == 'custom' ? fields.bg_image['custom_bg_vertical_position'] : fields.bg_image['bg_vertical_position'] ? fields.bg_image['bg_vertical_position'] %}
+{% set bg_position = bg_hor_pos or bg_ver_pos ? 'background-position: ' ~ bg_hor_pos ~ ' ' ~ bg_ver_pos ~ ';' %}
+{% set bg_repeat = fields.bg_image['bg_repeat'] ? 'background-repeat: ' ~ fields.bg_image['bg_repeat'] ~ ';' %}
+{% set bg_attachment = fields.bg_image['bg_attachment'] ? 'background-attachment: ' ~ fields.bg_image['bg_attachment'] ~ ';' %}
+{% set padding_top  = fields.padding['padding']['top'] is not empty ? 'padding-top: ' ~ fields.padding['padding']['top'] ~ 'px;' %}
+{% set padding_bottom = fields.padding['padding']['bottom'] is not empty ? 'padding-bottom: ' ~ fields.padding['padding']['bottom'] ~ 'px;' %}
+{% set padding_left = fields.padding['padding']['left'] is not empty ? 'padding-left: ' ~ fields.padding['padding']['left'] ~ 'px;' %}
+{% set padding_right = fields.padding['padding']['right'] is not empty ? 'padding-right: ' ~ fields.padding['padding']['right'] ~ 'px;' %}
+{% set margin_top = fields.margin['margin']['top']['auto'] == true ? 'margin-top: auto;' : fields.margin['margin']['top']['top'] is not empty ? 'margin-top: ' ~ fields.margin['margin']['top']['top'] ~ 'px;' %}
+{% set margin_bottom = fields.margin['margin']['bottom']['auto'] == true ? 'margin-bottom: auto;' : fields.margin['margin']['bottom']['bottom'] is not empty ? 'margin-bottom: ' ~ fields.margin['margin']['bottom']['bottom'] ~ 'px;' %}
+{% set margin_left = fields.margin['margin']['left']['auto'] == true ? 'margin-left: auto;' : fields.margin['margin']['left']['left'] is not empty ? 'margin-left: ' ~ fields.margin['margin']['left']['left'] ~ 'px;' %}
+{% set margin_right = fields.margin['margin']['right']['auto'] == true ? 'margin-right: auto;' : fields.margin['margin']['right']['right'] is not empty ? 'margin-right: ' ~ fields.margin['margin']['right']['right'] ~ 'px;' %}
+{% set height = fields.height['height']['height']['value'] is not empty ? 'height: ' ~ fields.height['height']['height']['value']  ~ fields.height['height']['height']['unit'] ~  ';' %}
+{% set min_height = fields.height['height']['min_height'] is not empty ? 'min-height: ' ~ fields.height['height']['min_height']  ~ 'px;' %}
+{% set max_height = fields.height['height']['max_height'] is not empty ? 'max-height: ' ~ fields.height['height']['max_height']  ~ 'px;' %}
+{% set border_top_width = fields['border']['top']['width'] is not empty ? 'border-top-width: ' ~ fields['border']['top']['width'] ~ 'px;' %}
+{% set border_top_style = fields['border']['top']['style'] ? 'border-top-style: ' ~ fields['border']['top']['style'] ~ ';' %}
+{% set border_top_color = fields['border']['top']['color'] == 'custom' and fields['border']['top']['custom_color'] ? 'border-top-color: ' ~ fields['border']['top']['custom_color'] ~ ';' : fields['border']['top']['color'] == 'palette' and fields['border']['top']['theme_color'] ? 'border-top-color: var(--' ~ fields['border']['top']['theme_color'] ~ ');' %}
+{% set border_bottom_width = fields['border']['bottom']['width'] is not empty ? 'border-bottom-width: ' ~ fields['border']['bottom']['width'] ~ 'px;' %}
+{% set border_bottom_style = fields['border']['bottom']['style'] ? 'border-bottom-style: ' ~ fields['border']['bottom']['style'] ~ ';' %}
+{% set border_bottom_color = fields['border']['bottom']['color'] == 'custom' and fields['border']['bottom']['custom_color'] ? 'border-bottom-color: ' ~ fields['border']['bottom']['custom_color'] ~ ';' : fields['border']['bottom']['color'] == 'palette' and fields['border']['bottom']['theme_color'] ? 'border-bottom-color: var(--' ~ fields['border']['bottom']['theme_color'] ~ ');' %}
+{% set border_left_width = fields['border']['left']['width'] is not empty ? 'border-left-width: ' ~ fields['border']['left']['width'] ~ 'px;' %}
+{% set border_left_style = fields['border']['left']['style'] ? 'border-left-style: ' ~ fields['border']['left']['style'] ~ ';' %}
+{% set border_left_color = fields['border']['left']['color'] == 'custom' and fields['border']['left']['custom_color'] ? 'border-left-color: ' ~ fields['border']['left']['custom_color'] ~ ';' : fields['border']['left']['color'] == 'palette' and fields['border']['left']['theme_color'] ? 'border-left-color: var(--' ~ fields['border']['left']['theme_color'] ~ ');' %}
+{% set border_right_width = fields['border']['right']['width'] is not empty ? 'border-right-width: ' ~ fields['border']['right']['width'] ~ 'px;' %}
+{% set border_right_style = fields['border']['right']['style'] ? 'border-right-style: ' ~ fields['border']['right']['style'] ~ ';' %}
+{% set border_right_color = fields['border']['right']['color'] == 'custom' and fields['border']['right']['custom_color'] ? 'border-right-color: ' ~ fields['border']['right']['custom_color'] ~ ';' : fields['border']['right']['color'] == 'palette' and fields['border']['right']['theme_color'] ? 'border-right-color: var(--' ~ fields['border']['right']['theme_color'] ~ ');' %}
+{% set border_top_left_radius = fields['border_radius']['top_left'] is not empty ? 'border-top-left-radius: ' ~ fields['border_radius']['top_left'] ~ 'px;' %}
+{% set border_top_right_radius = fields['border_radius']['top_right'] is not empty ? 'border-top-right-radius: ' ~ fields['border_radius']['top_right'] ~ 'px;' %}
+{% set border_bottom_left_radius = fields['border_radius']['bottom_left'] is not empty ? 'border-bottom-left-radius: ' ~ fields['border_radius']['bottom_left'] ~ 'px;' %}
+{% set border_bottom_right_radius = fields['border_radius']['bottom_right'] is not empty ? 'border-bottom-right-radius: ' ~ fields['border_radius']['bottom_right'] ~ 'px;' %}
+{% set box_shadow_color = fields['box_shadow']['color']['color'] == 'palette' and fields['box_shadow']['color']['theme_color'] ? 'var(--' ~ fields['box_shadow']['color']['theme_color'] ~ ')' : fields['box_shadow']['color']['color'] == 'custom' and fields['box_shadow']['color']['custom_color'] ? fields['box_shadow']['color']['custom_color'] %}
+{% set box_shadow_inset = fields['box_shadow']['inset'] == true ? 'inset' %}
+{% set box_shadow = fields['box_shadow']['horizontal_offset'] is not empty or fields['box_shadow']['vertical_offset'] is not empty or fields['box_shadow']['blur'] is not empty or fields['box_shadow']['spread'] is not empty or box_shadow_color or box_shadow_inset == true ? 'box-shadow: ' ~ fields['box_shadow']['horizontal_offset'] ~ 'px ' ~ fields['box_shadow']['vertical_offset'] ~ 'px ' ~ fields['box_shadow']['blur'] ~ 'px ' ~ fields['box_shadow']['spread'] ~ 'px ' ~ box_shadow_color ~ ' ' ~ box_shadow_inset ~ ';' %}
+
+{# Set Background Video Position #}
+{% set vpos = fields.bg_vertical_position ? fields.bg_vertical_position ~ '%' : '0%' %}
+{% set hpos = fields.bg_horizontal_position ? fields.bg_horizontal_position ~ '%' : '0%' %}
+
+{% set block_classes = block_classes|default([])|merge([
+	'hero-unit',
+	((fields.image['image_type'] == 'file' and fields.image['image']['url'] is empty) or (fields.image['image_type'] == 'url' and fields.image['image_url'] is empty)) and fields.innerblocks_location == 'image' ? 'has-image',
+	fields.bg_video != true and fields.bg_color['bg_color'] == 'palette' and fields.bg_color['bg_theme_color'] ? 'bg-' ~ fields.bg_color['bg_theme_color'],
+	fields.color['color'] == 'palette' and fields.color['theme_color'] ? 'text-' ~ fields.color['theme_color'],
+	fields.hero_type == 'jumbotron' and fields.hero_layout.jumbotron_layout['jumbotron_layout'] != 'default' ? 'jumbotron-' ~ fields.hero_layout.jumbotron_layout['jumbotron_layout'],
+	fields.hero_type == 'jumbotron' and (fields.hero_layout.jumbotron_layout['jumbotron_layout'] == 'gradient-overlay-left' or fields.hero_layout.jumbotron_layout['jumbotron_layout'] == 'gradient-overlay-right') ? 'gradient-' ~ fields.hero_layout.jumbotron_layout['gradient'],
+	fields.hero_type == 'feature' and fields.hero_layout.feature_layout['feature_layout'] != 'default' ? 'feature-' ~ fields.hero_layout.feature_layout['feature_layout'],
+	block['className']
+]) | sort | join(' ') | trim %}
+
+{% set block_attributes = block_attributes|default([])|merge([
+	fields.hero_type == 'feature' and (bg_color or text_color or bg_image_size or bg_position or bg_repeat or bg_attachment or margin_top or margin_bottom or margin_left or margin_right or padding_top or padding_bottom or padding_left or padding_right or height or min_height or max_height or border_top_width or border_top_style or border_top_color or border_bottom_width or border_bottom_style or border_bottom_color or border_left_width or border_left_style or border_left_color or border_right_width or border_right_style or border_right_color or border_top_left_radius or border_top_right_radius or border_bottom_left_radius or border_bottom_right_radius or box_shadow) ? 'style="' ~ bg_color ~ text_color ~ bg_image_size ~ bg_position ~ bg_repeat ~ bg_attachment ~ margin_top ~ margin_bottom ~ margin_left ~ margin_right ~ padding_top ~ padding_bottom ~ padding_left ~ padding_right ~ height ~ min_height ~ max_height ~ border_top_width ~ border_top_style ~ border_top_color ~ border_bottom_width ~ border_bottom_style ~ border_bottom_color ~ border_left_width ~ border_left_style ~ border_left_color ~ border_right_width ~ border_right_style ~ border_right_color ~ border_top_left_radius ~ border_top_right_radius ~ border_bottom_left_radius ~ border_bottom_right_radius ~ box_shadow ~ '"',
+	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_mp4 ? 'data-mp4="' ~ fields.bg_mp4 ~ '"',
+	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_webm ? 'data-webm="' ~ fields.bg_webm ~ '"',
+	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_ogv ? 'data-ogv="' ~ fields.bg_ogv ~ '"',
+	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.jumbotron_bg_image['bg_image_type'] == 'file' and fields.jumbotron_bg_image['bg_image']['url'] ? 'data-poster="' ~ fields.jumbotron_bg_image['bg_image']['url'] ~ '"' : fields.bg_video == true and fields.jumbotron_bg_image['bg_image_type'] == 'url' and fields.jumbotron_bg_image['bg_image_url'] ? 'data-poster="' ~ fields.jumbotron_bg_image['bg_image_url'] ~ '"',
+	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_loop == true ? 'data-loop="true"' : 'data-loop="false"',
+	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_muted == true ? 'data-muted="true"' : 'data-muted="false"',
+	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_autoplay == true ? 'data-autoplay="true"' : 'data-autoplay="false"',
+	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_resizing == true ? 'data-resizing="true"' : 'data-resizing="false"',
+	fields.hero_type == 'jumbotron' and fields.bg_video == true ? 'data-position="' ~ hpos ~ ' ' ~ vpos ~ '"',
+	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_color['bg_color'] == 'custom' and fields.bg_color['bg_custom_color'] ? 'data-bg-color="' ~ fields.bg_color['bg_custom_color'] ~ '"' : fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_color['bg_color'] == 'palette' and fields.bg_color['bg_theme_color'] ? fields.hero_type == 'jumbotron' and fields.bg_video == true ? 'data-bg-color="var(--' ~ fields.bg_color['bg_theme_color'] ~ ')"' : 'data-bg-color="transparent"',
+	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_video_classes ? 'data-video-classes="' ~ fields.bg_video_classes ~ '"'
+]) | sort | join(' ') | trim %}
+
+{% if fields.button['link']['title'] %}
+	{% if fields.button['dropdown'] == true %}
+		{% set button_template = '_button~dropdown.tpl.twig' %}
+	{% else %}
+		{% set button_template = '_button.tpl.twig' %}
+	{% endif %}
+
+	{# Set Button Styles #}
+	{% if fields.button['close'] != 'black' and fields.button['close'] != 'white' and fields.button['style'] == 'custom' %}
+		{% set button_bg_color = fields.button['background_color']['bg_color'] == 'custom' ? 'background-color: ' ~ fields.button['background_color']['bg_custom_color'] ~ ';' %}
+		{% set button_text_color = fields.button['text_color']['color'] == 'custom' ? 'color: ' ~ fields.button['text_color']['custom_color'] ~ ';' %}
+		{% set button_transform = fields.button['text_transform']['text_transform'] ? 'text-transform: ' ~ fields.button['text_transform']['text_transform'] ~ ';' %}
+		{% set button_padding_top  = fields.button['padding']['padding']['top'] is not empty ? 'padding-top: ' ~ fields.button['padding']['padding']['top'] ~ 'px;' %}
+		{% set button_padding_bottom = fields.button['padding']['padding']['bottom'] is not empty ? 'padding-bottom: ' ~ fields.button['padding']['padding']['bottom'] ~ 'px;' %}
+		{% set button_padding_left = fields.button['padding']['padding']['left'] is not empty ? 'padding-left: ' ~ fields.button['padding']['padding']['left'] ~ 'px;' %}
+		{% set button_padding_right = fields.button['padding']['padding']['right'] is not empty ? 'padding-right: ' ~ fields.button['padding']['padding']['right'] ~ 'px;' %}
+		{% set button_border_top_width = fields.button['border']['top']['width'] is not empty ? 'border-top-width: ' ~ fields.button['border']['top']['width'] ~ 'px;' %}
+		{% set button_border_top_style = fields.button['border']['top']['style'] ? 'border-top-style: ' ~ fields.button['border']['top']['style'] ~ ';' %}
+		{% set button_border_top_color = fields.button['border']['top']['color'] == 'custom' and fields.button['border']['top']['custom_color'] ? 'border-top-color: ' ~ fields.button['border']['top']['custom_color'] ~ ';' : fields.button['border']['top']['color'] == 'palette' and fields.button['border']['top']['theme_color'] ? 'border-top-color: var(--' ~ fields.button['border']['top']['theme_color'] ~ ');' %}
+		{% set button_border_bottom_width = fields.button['border']['bottom']['width'] is not empty ? 'border-bottom-width: ' ~ fields.button['border']['bottom']['width'] ~ 'px;' %}
+		{% set button_border_bottom_style = fields.button['border']['bottom']['style'] ? 'border-bottom-style: ' ~ fields.button['border']['bottom']['style'] ~ ';' %}
+		{% set button_border_bottom_color = fields.button['border']['bottom']['color'] == 'custom' and fields.button['border']['bottom']['custom_color'] ? 'border-bottom-color: ' ~ fields.button['border']['bottom']['custom_color'] ~ ';' : fields.button['border']['bottom']['color'] == 'palette' and fields.button['border']['bottom']['theme_color'] ? 'border-bottom-color: var(--' ~ fields.button['border']['bottom']['theme_color'] ~ ');' %}
+		{% set button_border_left_width = fields.button['border']['left']['width'] is not empty ? 'border-left-width: ' ~ fields.button['border']['left']['width'] ~ 'px;' %}
+		{% set button_border_left_style = fields.button['border']['left']['style'] ? 'border-left-style: ' ~ fields.button['border']['left']['style'] ~ ';' %}
+		{% set button_border_left_color = fields.button['border']['left']['color'] == 'custom' and fields.button['border']['left']['custom_color'] ? 'border-left-color: ' ~ fields.button['border']['left']['custom_color'] ~ ';' : fields.button['border']['left']['color'] == 'palette' and fields.button['border']['left']['theme_color'] ? 'border-left-color: var(--' ~ fields.button['border']['left']['theme_color'] ~ ');' %}
+		{% set button_border_right_width = fields.button['border']['right']['width'] is not empty ? 'border-right-width: ' ~ fields.button['border']['right']['width'] ~ 'px;' %}
+		{% set button_border_right_style = fields.button['border']['right']['style'] ? 'border-right-style: ' ~ fields.button['border']['right']['style'] ~ ';' %}
+		{% set button_border_right_color = fields.button['border']['right']['color'] == 'custom' and fields.button['border']['right']['custom_color'] ? 'border-right-color: ' ~ fields.button['border']['right']['custom_color'] ~ ';' : fields.button['border']['right']['color'] == 'palette' and fields.button['border']['right']['theme_color'] ? 'border-right-color: var(--' ~ fields.button['border']['right']['theme_color'] ~ ');' %}
+		{% set button_border_top_left_radius = fields.button['border_radius']['top_left'] is not empty ? 'border-top-left-radius: ' ~ fields.button['border_radius']['top_left'] ~ 'px;' %}
+		{% set button_border_top_right_radius = fields.button['border_radius']['top_right'] is not empty ? 'border-top-right-radius: ' ~ fields.button['border_radius']['top_right'] ~ 'px;' %}
+		{% set button_border_bottom_left_radius = fields.button['border_radius']['bottom_left'] is not empty ? 'border-bottom-left-radius: ' ~ fields.button['border_radius']['bottom_left'] ~ 'px;' %}
+		{% set button_border_bottom_right_radius = fields.button['border_radius']['bottom_right'] is not empty ? 'border-bottom-right-radius: ' ~ fields.button['border_radius']['bottom_right'] ~ 'px;' %}
+		{% set button_box_shadow_color = fields.button['box_shadow']['color']['color'] == 'palette' and fields.button['box_shadow']['color']['theme_color'] ? 'var(--' ~ fields.button['box_shadow']['color']['theme_color'] ~ ')' : fields.button['box_shadow']['color']['color'] == 'custom' and fields.button['box_shadow']['color']['custom_color'] ? fields.button['box_shadow']['color']['custom_color'] %}
+		{% set button_box_shadow_inset = fields.button['box_shadow']['inset'] == true ? 'inset' %}
+		{% set button_box_shadow = fields.button['box_shadow']['horizontal_offset'] is not empty or fields.button['box_shadow']['vertical_offset'] is not empty or fields.button['box_shadow']['blur'] is not empty or fields.button['box_shadow']['spread'] is not empty or box_shadow_color or box_shadow_inset == true ? 'box-shadow: ' ~ fields.button['box_shadow']['horizontal_offset'] ~ 'px ' ~ fields.button['box_shadow']['vertical_offset'] ~ 'px ' ~ fields.button['box_shadow']['blur'] ~ 'px ' ~ fields.button['box_shadow']['spread'] ~ 'px ' ~ box_shadow_color ~ ' ' ~ box_shadow_inset ~ ';' %}
+		{% set button_text_shadow_color = fields.button['text_shadow']['color']['color'] == 'palette' and fields.button['text_shadow']['color']['theme_color'] ? 'var(--' ~ fields.button['text_shadow']['color']['theme_color'] ~ ')' : fields.button['text_shadow']['color']['color'] == 'custom' and fields.button['text_shadow']['color']['custom_color'] ? fields.button['text_shadow']['color']['custom_color'] %}
+		{% set button_text_shadow = fields.button['text_shadow']['horizontal_offset'] is not empty or fields.button['text_shadow']['vertical_offset'] is not empty or fields.button['text_shadow']['blur'] is not empty or text_shadow_color ? 'text-shadow: ' ~ fields.button['text_shadow']['horizontal_offset'] ~ 'px ' ~ fields.button['text_shadow']['vertical_offset'] ~ 'px ' ~ fields.button['text_shadow']['blur'] ~ 'px ' ~ text_shadow_color ~ ';' %}
+	{% endif %}
+	{% set button_fontsize = fields.button['font_size']['font_size']['value'] is not empty ? 'font-size: ' ~ fields.button['font_size']['font_size']['value'] ~ fields['font_size']['font_size']['unit'] ~ ';' %}
+	{% set button_width = fields.button['width']['width']['value'] is not empty ? 'width: ' ~ fields.button['width']['width']['value']  ~ fields.button['width']['width']['unit'] ~  ';' %}
+	{% set button_min_width = fields.button['width']['min_width'] is not empty ? 'min-width: ' ~ fields.button['width']['min_width']  ~ 'px;' %}
+	{% set button_max_width = fields.button['width']['max_width'] is not empty ? 'max-width: ' ~ fields.button['width']['max_width']  ~ 'px;' %}
+	{% set button_margin_top = fields.button['margin']['margin']['top']['auto'] == true ? 'margin-top: auto;' : parent_block_data['name'] != 'acf/group' and fields.button['margin']['margin']['top']['top'] is not empty ? 'margin-top: ' ~ fields.button['margin']['margin']['top']['top'] ~ 'px;' %}
+	{% set button_margin_bottom = fields.button['margin']['margin']['bottom']['auto'] == true ? 'margin-bottom: auto;' : parent_block_data['name'] != 'acf/group' and fields.button['margin']['margin']['bottom']['bottom'] is not empty ? 'margin-bottom: ' ~ fields.button['margin']['margin']['bottom']['bottom'] ~ 'px;' %}
+	{% set button_margin_left = fields.button['margin']['margin']['left']['auto'] == true ? 'margin-left: auto;' : parent_block_data['name'] != 'acf/group' and fields.button['margin']['margin']['left']['left'] is not empty ? 'margin-left: ' ~ fields.button['margin']['margin']['left']['left'] ~ 'px;' %}
+	{% set button_margin_right = fields.button['margin']['margin']['right']['auto'] == true ? 'margin-right: auto;' : parent_block_data['name'] != 'acf/group' and fields.button['margin']['margin']['right']['right'] is not empty ? 'margin-right: ' ~ fields.button['margin']['margin']['right']['right'] ~ 'px;' %}
+{% endif %}
+
+{% if fields.hero_type == 'jumbotron' %}
+	{% embed '@molecules/jumbotron/_jumbotron.tpl.twig' with {
+      jumbotron_other_styles: bg_color ~ text_color ~ bg_image_size ~ bg_position ~ bg_repeat ~ bg_attachment ~ margin_top ~ margin_bottom ~ margin_left ~ margin_right ~ height ~ min_height ~ max_height ~ border_top_width ~ border_top_style ~ border_top_color ~ border_bottom_width ~ border_bottom_style ~ border_bottom_color ~ border_left_width ~ border_left_style ~ border_left_color ~ border_right_width ~ border_right_style ~ border_right_color ~ border_top_left_radius ~ border_top_right_radius ~ border_bottom_left_radius ~ border_bottom_right_radius ~ box_shadow,
+      jumbotron_bg_image: fields.bg_video != true ? bg_image,
+	  image_left: fields.image_left,
+      jumbotron_image: fields.image['image_type'] == 'file' and fields.image['image']['url'] ? fields.image['image']['url'] : fields.image['image_type'] == 'url' and fields.image['image_url'] ? fields.image['image_url'],
+      remove_container: fields.include_container == true and (options.remove_content_containers == true or block_post.custom['remove_content_container'] == true) ? false : true,
+      jumbotron_fluid: fields['full_width'],
+	  vertical_center: fields.vertical_center,
+      button_text: 'Learn more',
+      button_color: 'primary',
+      button_size: 'lg',
+      button_link: 'https://github.com/phase2/particle',
+      jumbotron_other_classes: block_classes,
+      jumbotron_other_attributes: block_attributes
+    } %}
+		{% block jumbotron_image %}
+			{% if (fields.image['image_type'] == 'file' and fields.image['image']['url']) or (fields.image['image_type'] == 'url' and fields.image['image_url']) or fields.innerblocks_location == 'image' %}
+				<div class="jumbotron--image">
+					<div class="image-wrapper">
+						{% include '@atoms/image/_image.tpl.twig' with {
+							variant: 'primary',
+							src: fields.image['image_type'] == 'file' and fields.image['image']['url'] ? fields.image['image']['url'] : fields.image['image_type'] == 'url' and fields.image['image_url'] ? fields.image['image_url'],
+							alt: fields.image['image_type'] == 'file' and fields.image['image']['alt'] ? fields.image['image']['alt'],
+							image_other_classes: ''
+						} %}
+					</div>
+
+				{% if fields.innerblocks_location == 'image' %}
+					<div class="jumbotron-inner-blocks">
+						<InnerBlocks />
+					</div>
+				{% endif %}
+				</div>
+			{% endif %}
+		{% endblock jumbotron_image %}
+		{% block jumbotron_content %}
+			<div class="jumbotron--content" {{ padding_top or padding_bottom or padding_left or padding_right ? 'style="' ~ padding_top ~ padding_bottom ~ padding_left ~ padding_right ~ '"' }}>
+				<div class="content-wrapper">
+					{% if fields['label'] %}
+						<span class="jumbotron--label" {{ (fields.color['color'] == 'palette' and fields.color['theme_color']) or (fields.color['color'] == 'custom' and fields.color['custom_color']) ? 'style="color: inherit;"' }}>{{ fields['label'] }}</span>
+					{% endif %}
+
+					{% if fields['title'] %}
+						<h2 class="jumbotron--title" {{ (fields.color['color'] == 'palette' and fields.color['theme_color']) or (fields.color['color'] == 'custom' and fields.color['custom_color']) ? 'style="color: inherit;"' }}>{{ fields['title'] }}</h2>
+					{% endif %}
+
+					{% if fields['subtitle'] %}
+						<h3 class="jumbotron--subtitle" {{ (fields.color['color'] == 'palette' and fields.color['theme_color']) or (fields.color['color'] == 'custom' and fields.color['custom_color']) ? 'style="color: inherit;"' }}>{{ fields['subtitle'] }}</h3>
+					{% endif %}
+
+					{% if fields['text'] %}
+						<div class="jumbotron--text">{{ fields['text'] }}</div>
+					{% endif %}
+				</div>
+
+				{% if fields.innerblocks_location == 'content' %}
+					<div class="jumbotron-inner-blocks">
+						<InnerBlocks />
+					</div>
+				{% endif %}
+
+				{% if fields.button['link']['title'] %}
+					{% include '@atoms/button/' ~ button_template with {
+						button_element: fields.button['element'],
+						button_text: fields.button['link']['title'],
+						button_link: fields.button['link']['url'],
+						button_target: fields.button['toggle'] == true ? fields.button['link']['url'] : fields.button['link']['target'],
+						button_color: fields.button['close'] != 'black' and fields.button['close'] != 'white' and fields.button['style'] != 'custom' ? fields.button['style'] | default('default'),
+						button_size: fields.button['size'],
+						button_outline: fields.button['outline'],
+						button_block: fields.button['full_width'],
+						button_toggle: fields.button['toggle'],
+						button_id: fields.button['id'] ? fields.button['id'] : fields.button['id_gen'] ? 'button' ~ fields.button['id_gen'],
+						button_active: fields.button['active'],
+						button_disabled: fields.button['disabled'],
+						button_expanded: fields.button['active'],
+						button_value: fields.button['value'],
+						button_controls: fields.button['toggle'] == true ? fields.button['link']['url'] | trim('#'),
+						nowrap: fields.button['nowrap'],
+						contextual_content: fields.button['toggle'] == 'tooltip' or fields.button['toggle'] == 'popover' ? fields.button['toggle'],
+						title: fields.button['context']['title'],
+						popover_content: fields.button['context']['content'],
+						context_placement: fields.button['context']['placement'],
+						context_container: fields.button['context']['container'],
+						close_button: fields.button['close'],
+						hide_label: fields.button['hide_label'],
+						button_classes: [
+							fields.button['close'] != 'black' and fields.button['close'] != 'white' and fields.button['background_color']['bg_color'] == 'palette' and fields.button['background_color']['bg_theme_color'] ? 'bg-' ~ fields.button['background_color']['bg_theme_color'],
+							fields.button['close'] != 'black' and fields.button['close'] != 'white' and fields.button['text_color']['color'] == 'palette' and fields.button['text_color']['theme_color'] ? 'text-' ~ fields.button['text_color']['theme_color'],
+							fields.button['full_width'] != true and fields.button['display']['display'] is not null ? fields.button['display']['display']
+						],
+						button_other_classes: fields.button['classes'],
+						button_attributes: [
+							button_bg_color or button_text_color or button_transform or button_padding_top or button_padding_bottom or button_padding_left or button_padding_right or button_border_top_width or button_border_top_style or button_border_top_color or button_border_bottom_width or button_border_bottom_style or button_border_bottom_color or button_border_left_width or button_border_left_style or button_border_left_color or button_border_right_width or button_border_right_style or button_border_right_color or button_border_top_left_radius or button_border_top_right_radius or button_border_bottom_left_radius or button_border_bottom_right_radius or button_box_shadow or button_text_shadow or button_fontsize or button_width or button_min_width or button_max_width or button_margin_top or button_margin_bottom or button_margin_left or button_margin_right ? 'style="' ~ button_bg_color ~ button_text_color ~ button_fontsize ~ button_transform ~ button_padding_top ~ button_padding_bottom ~ button_padding_left ~ button_padding_right ~ button_border_top_width ~ button_border_top_style ~ button_border_top_color ~ button_border_bottom_width ~ button_border_bottom_style ~ button_border_bottom_color ~ button_border_left_width ~ button_border_left_style ~ button_border_left_color ~ button_border_right_width ~ button_border_right_style ~ button_border_right_color ~ button_border_top_left_radius ~ button_border_top_right_radius ~ button_border_bottom_left_radius ~ button_border_bottom_right_radius ~ button_box_shadow ~ button_text_shadow ~ button_width ~ button_min_width ~ button_max_width ~ button_margin_top ~ button_margin_bottom ~ button_margin_left ~ button_margin_right ~ '"'
+						]
+					} %}
+				{% endif %}
+			</div>
+		{% endblock jumbotron_content %}
+	{% endembed %}
+{% elseif fields.hero_type == 'feature' %}
+	{% embed '@molecules/feature/_feature.tpl.twig' with {
+		id: fields.id['id'] ? fields.id['id'] : fields.id['id_gen'] ? 'feature' ~ fields.id['id_gen'],
+		include_container: fields.include_container,
+		full_width: fields.full_width,
+		vertical: fields.vertical,
+		vertical_center: fields.vertical_center,
+		link: fields.button.link.url,
+		linked: fields.linked,
+		target: fields.button.link.target,
+		heading: fields.heading,
+		label: fields.label,
+		title: fields.title,
+		subtitle: fields.subtitle,
+		description: fields.text,
+		image: {
+			variant: 'aspect-ratio',
+			src: fields.image['image_type'] == 'file' and fields.image['image']['url'] ? fields.image['image']['url'] : fields.image['image_type'] == 'url' and fields.image['image_url'] ? fields.image['image_url'],
+			alt: fields.image['image_type'] == 'file' and fields.image['image']['alt'] ? fields.image['image']['alt'],
+			width: '16',
+			height: '9'
+		},
+		image_right: fields.image_right,
+		caption: fields.caption,
+		caption_position: fields.caption_position,
+		feature_other_classes: block_classes,
+		feature_other_attributes: block_attributes,
+		} %}
+		{% block image %}
+			{% if image.src or fields.innerblocks_location == 'image' %}
+				<div class="feature-image">
+					{% if image.src %}
+						<figure class="feature-image-wrapper" role="figure"  aria-labelledby="{{ id ~ 'image-caption' }}" id="{{ id ~ 'image' }}">
+							{% if caption_position == 'before' %}
+								<figcaption id="{{ id ~ 'image-caption' }}">{{ caption }}</figcaption>
+							{% endif %}
+							{% include '@atoms/image/_image.tpl.twig' with image %}
+							{% if caption_position == 'after' %}
+								<figcaption id="{{ id ~ 'image-caption' }}">{{ caption }}</figcaption>
+							{% endif %}
+						</figure>
+					{% endif %}
+					{% if fields.innerblocks_location == 'image' %}
+						<div class="feature-inner-blocks">
+							<InnerBlocks />
+						</div>
+					{% endif %}
+				</div>
+			{% endif %}
+		{% endblock %}
+		{% block body %}
+			{% if label %}
+				<span class="feature-label" {{ (fields.color['color'] == 'palette' and fields.color['theme_color']) or (fields.color['color'] == 'custom' and fields.color['custom_color']) ? 'style="color: inherit;"' }}>{{ label }}</span>
+			{% endif %}
+			{% if title %}
+				<h2 class="feature-title" {{ (fields.color['color'] == 'palette' and fields.color['theme_color']) or (fields.color['color'] == 'custom' and fields.color['custom_color']) ? 'style="color: inherit;"' }}>{{ title }}</h2>
+			{% endif %}
+			{% if subtitle %}
+				<h3 class="feature-subtitle" {{ (fields.color['color'] == 'palette' and fields.color['theme_color']) or (fields.color['color'] == 'custom' and fields.color['custom_color']) ? 'style="color: inherit;"' }}>{{ subtitle }}</h3>
+			{% endif %}
+			{% if description %}
+			<div class="feature-description">
+				{{ description }}
+			</div>
+			{% endif %}
+			{% if fields.innerblocks_location == 'content' %}
+				<div class="feature-inner-blocks">
+					<InnerBlocks />
+				</div>
+			{% endif %}
+		{% endblock body %}
+
+		{% block footer %}
+			<footer class="feature-footer">
+			{% if fields.button['link']['title'] %}
+				{% include '@atoms/button/' ~ button_template with {
+				button_element: linked == false ? 'a' : 'button',
+				button_link: link,
+				button_text: fields.button['link']['title'],
+				button_target: fields.button['toggle'] == true ? fields.button['link']['url'] : fields.button['link']['target'],
+				button_color: fields.button['close'] != 'black' and fields.button['close'] != 'white' and fields.button['style'] != 'custom' ? fields.button['style'] | default('default'),
+				button_size: fields.button['size'],
+				button_outline: fields.button['outline'],
+				button_block: fields.button['full_width'],
+				button_toggle: fields.button['toggle'],
+				button_id: fields.button['id'] ? fields.button['id'] : fields.button['id_gen'] ? 'button' ~ fields.button['id_gen'],
+				button_active: fields.button['active'],
+				button_disabled: fields.button['disabled'],
+				button_expanded: fields.button['active'],
+				button_value: fields.button['value'],
+				button_controls: fields.button['toggle'] == true ? fields.button['link']['url'] | trim('#'),
+				nowrap: fields.button['nowrap'],
+				contextual_content: fields.button['toggle'] == 'tooltip' or fields.button['toggle'] == 'popover' ? fields.button['toggle'],
+				title: fields.button['context']['title'],
+				popover_content: fields.button['context']['content'],
+				context_placement: fields.button['context']['placement'],
+				context_container: fields.button['context']['container'],
+				close_button: fields.button['close'],
+				hide_label: fields.button['hide_label'],
+				button_classes: [
+					fields.button['close'] != 'black' and fields.button['close'] != 'white' and fields.button['background_color']['bg_color'] == 'palette' and fields.button['background_color']['bg_theme_color'] ? 'bg-' ~ fields.button['background_color']['bg_theme_color'],
+					fields.button['close'] != 'black' and fields.button['close'] != 'white' and fields.button['text_color']['color'] == 'palette' and fields.button['text_color']['theme_color'] ? 'text-' ~ fields.button['text_color']['theme_color'],
+					fields.button['full_width'] != true and fields.button['display']['display'] is not null ? fields.button['display']['display']
+				],
+				button_other_classes: fields.button['classes'],
+				button_attributes: [
+					button_bg_color or button_text_color or button_transform or button_padding_top or button_padding_bottom or button_padding_left or button_padding_right or button_border_top_width or button_border_top_style or button_border_top_color or button_border_bottom_width or button_border_bottom_style or button_border_bottom_color or button_border_left_width or button_border_left_style or button_border_left_color or button_border_right_width or button_border_right_style or button_border_right_color or button_border_top_left_radius or button_border_top_right_radius or button_border_bottom_left_radius or button_border_bottom_right_radius or button_box_shadow or button_text_shadow or button_fontsize or button_width or button_min_width or button_max_width or button_margin_top or button_margin_bottom or button_margin_left or button_margin_right ? 'style="' ~ button_bg_color ~ button_text_color ~ button_fontsize ~ button_transform ~ button_padding_top ~ button_padding_bottom ~ button_padding_left ~ button_padding_right ~ button_border_top_width ~ button_border_top_style ~ button_border_top_color ~ button_border_bottom_width ~ button_border_bottom_style ~ button_border_bottom_color ~ button_border_left_width ~ button_border_left_style ~ button_border_left_color ~ button_border_right_width ~ button_border_right_style ~ button_border_right_color ~ button_border_top_left_radius ~ button_border_top_right_radius ~ button_border_bottom_left_radius ~ button_border_bottom_right_radius ~ button_box_shadow ~ button_text_shadow ~ button_width ~ button_min_width ~ button_max_width ~ button_margin_top ~ button_margin_bottom ~ button_margin_left ~ button_margin_right ~ '"'
+				]
+				} %}
+			{% endif %}
+			</footer>
+		{% endblock %}
+	{% endembed %}
+{% endif %}

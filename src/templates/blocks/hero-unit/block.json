@@ -1,0 +1,45 @@
+{
+  "name": "acf/hero-unit",
+  "title": "Hero Unit",
+  "description": "Display a hero unit.",
+  "category": "timberland-child",
+  "icon": "superhero",
+  "keywords": ["hero", "unit", "jumbotron", "feature", "promo"],
+  "attributes": {},
+  "supports": {
+    "jsx": true,
+    "align": true,
+    "alignContent": true,
+    "alignText": true,
+    "anchor": true,
+    "className": true,
+    "multiple": true,
+    "html": false,
+    "inserter": true,
+    "fullHeight": false,
+    "color": {
+      "text": true,
+      "background": true,
+      "link": true,
+      "gradients": true,
+      "linkColor": true
+    },
+    "typography": {
+      "fontSize": true
+    }
+  },
+  "styles": [
+    { "name": "default", "label": "Default", "isDefault": true },
+    { "name": "other", "label": "Other" }
+  ],
+  "editorScript": "./index.js",
+  "script": "./script.js",
+  "editorStyle": "./index.css",
+  "style": "./style.css",
+  "acf": {
+    "mode": "preview",
+    "renderCallback": "dream_block_render",
+    "postTypes": true,
+    "reusable": true
+  }
+}

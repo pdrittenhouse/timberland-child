@@ -1,0 +1,123 @@
+/* stylelint-disable */
+.gform_wrapper {
+
+  &.gform_validation_error {
+
+    .validation_error {}
+
+    .gform_validation_errors {
+
+      > h2 {}
+
+      & > ol {
+
+        li {}
+
+        a {}
+      }
+    }
+
+    .gfield_error {
+
+      [aria-invalid=true] {}
+    }
+
+    .gform_body {
+
+      .gform_fields {
+
+        .gfield {
+
+          &.gfield_error {
+
+            .description,
+            .gfield_description,
+            .gsection_description,
+            .instruction {}
+
+            .gfield_validation_message,
+            .validation_message {}
+
+            &:not(.gf_left_half):not(.gf_right_half) {}
+
+            input {
+
+              &:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]) {}
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .gfield_required {}
+
+  &.gravity-theme {
+
+    .gform_heading {
+
+      .gform_title {}
+
+      .gform_description {}
+    }
+
+    .gform-body {
+
+      // REMOVE DEFAULT GRAVITY FORMS LAYOUT STYLING
+      .gform_fields {}
+
+      .gfield {
+
+        &.gfield--width-full,
+        &.gfield--width-half,
+        &.gfield--width-quarter,
+        &.gfield--width-third,
+        &.gfield--width-two-thirds,
+        &.gfield--width-three-quarter,
+        &.gfield--width-five-sixths,
+        &.gfield--width-five-twelfths,
+        &.gfield--width-seven-twelfths,
+        &.gfield--width-eleven-twetfths {}
+      }
+
+      .ginput_complex {
+
+        span {}
+      }
+
+      input:not([type="submit"]),
+      input[type=color],
+      input[type=date],
+      input[type=datetime-local],
+      input[type=datetime],
+      input[type=email],
+      input[type=month],
+      input[type=number],
+      input[type=password],
+      input[type=search],
+      input[type=tel],
+      input[type=text],
+      input[type=time],
+      input[type=url],
+      input[type=week],
+      select,
+      textarea {
+
+        &:hover,
+        &:focus {}
+
+        &:not([type=radio]):not([type=checkbox]):not([type=image]):not([type=file]) {}
+      }
+    }
+
+    .gform_footer {
+
+      .button {}
+    }
+  }
+}
+
+.gform_confirmation_wrapper {
+
+  .gform_confirmation_message {}
+}

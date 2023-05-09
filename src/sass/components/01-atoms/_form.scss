@@ -1,0 +1,66 @@
+// Custom styles for form
+
+.form {
+
+  &-title {
+
+  }
+
+  &-intro {
+
+  }
+}
+
+// Form Elements
+fieldset {}
+
+legend {}
+
+label {}
+
+select {}
+
+keygen {}
+
+textarea,
+input:not([type="submit"]) {
+
+  &:hover,
+  &:focus {}
+}
+
+input {
+
+  &[type="image"] {}
+
+  &[type="range"] {}
+
+  &[type="color"] {}
+
+  &[type="checkbox"] {
+
+    // Custom Checkbox
+    & + label {}
+
+    &:checked {
+
+      & + label {}
+    }
+  }
+
+  &[type="radio"] {
+
+    // Custom Radio Button
+    & + label {}
+
+    &:checked {
+
+      & + label {}
+    }
+  }
+
+  &[type="submit"] {}
+}
+
+//Placeholders
+@include placeholder {}

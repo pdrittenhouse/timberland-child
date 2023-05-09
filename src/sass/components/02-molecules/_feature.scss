@@ -1,0 +1,168 @@
+// Custom styles for feature
+
+.feature {
+
+  header {}
+
+  &-heading {}
+
+  &-link {
+
+    &:hover {}
+  }
+
+  &:not(.feature-vertical) {
+
+    .feature-wrapper {}
+
+    .feature-image {}
+
+    .feature-body {}
+
+    &:not(.feature-image-right) {
+
+      .feature-body {}
+    }
+
+    &.feature-image-right {
+
+      .feature-wrapper {}
+
+      .feature-image {}
+
+      .feature-body {}
+    }
+
+  }
+
+  &-wrapper {}
+
+  &-image {}
+
+  &-body {}
+
+  &-label {}
+
+  &-title {}
+
+  &-subtitle {}
+
+  &-description {}
+
+  &-footer {
+
+    .btn {}
+  }
+
+  &-vertical {
+
+    .feature-wrapper {
+
+      &:before {}
+    }
+
+    .feature-image {}
+
+    .feature-body {}
+
+    .feature-title {}
+
+    .feature-description {}
+
+    .feature-footer {
+      .btn {}
+    }
+
+  }
+
+  // Layouts
+
+  &-fifty-fifty {
+    background-color: transparent;
+    padding: 0;
+
+    &:not(.feature-vertical) {
+
+      &.has-image {
+
+        .feature-wrapper {
+
+          @include media-breakpoint-up(lg) {
+            grid-template-columns: calc(50% - 12px) auto;
+          }
+        }
+
+        .feature-image {
+
+          @include media-breakpoint-up(md) {
+            padding-right: rem-calc(30px);
+            padding-left: 0;
+          }
+        }
+
+        .feature-body {
+
+          @include media-breakpoint-up(xl) {
+            padding-left: calc(9.3% + 12px);
+          }
+        }
+      }
+
+      &.feature-image-right {
+
+        &.has-image {
+
+          .feature-wrapper {
+
+            @include media-breakpoint-up(lg) {
+              grid-template-columns: auto calc(50% - 12px);
+            }
+          }
+
+          .feature-image {
+
+            @include media-breakpoint-up(md) {
+              padding-left: rem-calc(30px);
+              padding-right: 0;
+            }
+          }
+
+          .feature-body {
+
+            @include media-breakpoint-up(xl) {
+              padding-right: calc(9.3% + 12px);
+            }
+          }
+        }
+      }
+
+    }
+
+    .feature-heading {}
+
+    .feature-link {}
+
+    .feature-wrapper {}
+
+    .feature-image {}
+
+    .feature-image-wrapper {}
+
+    .feature-body {
+      position: relative;
+    }
+
+    .feature-content {}
+
+    .feature-label {}
+
+    .feature-title {}
+
+    .feature-subtitle {}
+
+    .feature-description {}
+
+    .feature-inner-blocks {}
+  }
+
+}

@@ -1,0 +1,31 @@
+{
+    "name": "tagstart-child",
+    "version": "1.0.0",
+    "private": true,
+    "description": "A WordPress child theme",
+    "main": "index.php",
+    "prefix": "../",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "P.D. Rittenhouse",
+    "license": "ISC",
+    "browserslist": "last 3 versions",
+    "devDependencies": {
+        "autoprefixer": "^10.4.13",
+        "cssnano": "^5.1.14",
+        "grunt": "^1.5.3",
+        "grunt-cli": "^1.4.3",
+        "grunt-contrib-copy": "^1.0.0",
+        "grunt-contrib-jshint": "^1.1.0",
+        "grunt-contrib-uglify": "^2.3.0",
+        "grunt-contrib-watch": "^1.1.0",
+        "grunt-postcss": "^0.8.0",
+        "grunt-sass": "^3.1.0",
+        "grunt-svg-sprite": "^2.0.1",
+        "sass": "^1.56.1"
+    },
+    "dependencies": {
+        "bootstrap": "^5.2.2"
+    }
+}

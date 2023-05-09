@@ -1,0 +1,81 @@
+// Custom styles for button
+
+.button {
+
+  &:not(.navbar-toggler) { // Exclude nav toggle
+
+    // Bootstrap Button Overrides
+    &.btn {
+
+      &-block {}
+
+      &-default {
+
+        &.ghost {}
+      }
+
+      &-primary {}
+
+      &-secondary {}
+
+      &-tertiary {}
+
+      &-quaternary {}
+
+      &-quinary {}
+
+      &-senary {}
+
+      &-septenary {}
+
+      &-octonary {}
+
+      &-nonary {}
+
+      &-denary {}
+
+      &-white {}
+
+      &-success {}
+
+      &-danger {}
+
+      &-warning {}
+
+      &-info {}
+
+      &-light {}
+
+      &-dark {}
+
+      &-link {}
+    }
+
+  }
+
+  &-block {}
+
+  &--label {}
+
+  .svg {}
+
+}
+
+ .buttons-group {
+
+   &.vertical {
+
+     .button {
+
+       &:last-child {}
+     }
+   }
+
+   &:not(.vertical) {
+
+     .button {
+
+       &:last-child {}
+     }
+   }
+ }

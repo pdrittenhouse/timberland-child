@@ -1,0 +1,72 @@
+.no-gf-layout {
+
+  .get-involved_wrapper {
+
+    &.gravity-theme {
+
+      .gform_heading {}
+
+      .get-involved {
+        @include justify-content(center);
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto auto auto;
+        column-gap: rem-calc(10px);
+
+        .gform-body {
+          display: contents;
+        }
+
+        .gform_fields {
+          display: contents;
+        }
+
+        .gfield {
+          margin-bottom: rem-calc(10px);
+        }
+
+        #field_2_2 {
+          grid-column-start: 1;
+          grid-column-end: span 4;
+          grid-row-start: 1;
+          grid-row-end: auto;
+        }
+
+        #field_2_4 {
+          grid-column-start: 5;
+          grid-column-end: span 3;
+          grid-row-start: 1;
+          grid-row-end: auto;
+        }
+
+        #field_2_5 {
+          grid-column-start: 1;
+          grid-column-end: span 7;
+          grid-row-start: 2;
+          grid-row-end: auto;
+        }
+
+        .gform_footer {
+          padding: 0;
+          margin: 0;
+          grid-column-start: 1;
+          grid-column-end: span 7;
+          grid-row-start: 3;
+          grid-row-end: auto;
+
+          .button {
+            @include flex(1 1 auto);
+            margin: 0;
+          }
+        }
+      }
+
+      .gform_validation_errors {}
+    }
+  }
+
+  .gform_confirmation_wrapper.get-involved {
+
+    .gform_confirmation_message {}
+  }
+}

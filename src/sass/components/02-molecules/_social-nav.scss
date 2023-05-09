@@ -1,0 +1,84 @@
+// Custom styles for social nav
+
+.social-nav {
+
+  &-item {
+
+    &:hover,
+    &:focus {
+
+      .icon,
+      .svg--icon,
+      svg {}
+    }
+
+    .icon,
+    .svg--icon,
+    svg {}
+
+    &.facebook {}
+
+    &.twitter {}
+
+    &.linked-in {}
+
+    &.youtube {}
+
+    &.instagram {}
+  }
+
+  &.bullet-icons--before,
+  &.bullet-icons--after {
+
+    > .social-nav-item {
+      >.icon,
+      >.svg--icon {}
+    }
+  }
+
+  .icon,
+  .svg--icon {}
+
+  &-link {
+
+    &:hover {}
+  }
+
+  .label {}
+
+  &.hide-labels {
+
+    .social-nav-item {}
+
+    .label {}
+
+    &.bullet-icons--before,
+    &.bullet-icons--after {
+
+      > .social-nav-item {
+        >.icon,
+        >.svg--icon {}
+      }
+    }
+  }
+
+  &.hide-icons {
+    .icon,
+    .svg,
+    .svg--icon {}
+
+    .social-nav-link {}
+  }
+
+  &.nav-direction-horizontal {
+
+    .social-nav-item {}
+  }
+
+  &.nav-direction-vertical {
+
+    .social-nav-item {}
+  }
+
+}
+

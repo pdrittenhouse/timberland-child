@@ -1,0 +1,22 @@
+.wp-block-quote {
+
+  &:first-child {}
+
+  &:last-child {}
+
+  > p {
+
+    .post-type-post .article-body &,
+    .post-type-page .article-body &,
+    .post-type-issue .article-body & {}
+
+    &:before {}
+
+    &:after {}
+  }
+
+  cite {
+
+    &:before {}
+  }
+}

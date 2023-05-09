@@ -1,0 +1,946 @@
+// Custom styles for card
+
+.card {
+
+  &.flip-card {
+
+    &:hover {
+
+      .front,
+      .back {}
+
+      .back {}
+
+      .front {}
+    }
+
+    .card-wrapper {}
+
+    .front,
+    .back {
+
+      &:before {}
+    }
+
+    .back {}
+
+    .front {}
+
+    .card-content-wrapper-outer {}
+
+    .card-back-content {}
+  }
+
+  &.has-bg-img {}
+
+  &-content-wrapper-outer {}
+
+  &-content-wrapper-inner {}
+
+  &-header {}
+
+  &-image {
+
+    .image--aspect-ratio {
+
+      img {}
+    }
+  }
+
+  &-content {}
+
+  &-intro {}
+
+  &-lead {}
+
+  &-label {}
+
+  &-title {}
+
+  &-subtitle {}
+
+  &-body {
+
+    .card-intro + & {}
+  }
+
+  &-text {}
+
+  &-footer {}
+
+  &-footer-content {}
+
+  &--linked {
+
+    &:hover,
+    &:focus {}
+
+    .card-label {}
+
+    .card-title {}
+
+    .card-subtitle {}
+
+    .card-text {}
+  }
+
+
+  // Horizontal Cards
+  &--horizontal {
+
+    .card-content-wrapper-outer,
+    .card-content-wrapper-inner {}
+
+    &.card-image-right {
+
+      .card-image {}
+
+      .card-body-wrapper {}
+    }
+
+    .card-image {
+
+      .image,
+      .content {}
+
+      img {}
+    }
+
+    .card-body-wrapper {}
+  }
+
+
+  // Custom Layouts
+  &-content-slide-up {
+    @include aspect-ratio(5,7,'.card-wrapper');
+    border: none;
+    border-radius: rem-calc(24px);
+    overflow: hidden;
+
+    .card-wrapper {
+      @include flexbox;
+      @include flex-flow(row nowrap);
+      @include align-items(flex-end);
+    }
+
+    .front {
+      @include flex( 1 1 auto);
+      position: relative;
+
+      &:before {
+        content: "";
+        background-image: svg-url('<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 12 12" enable-background="new 0 0 12 12" xml:space="preserve"> <path fill="#FFFFFF" d="M12,0v12H0C6.6,12,12,6.6,12,0z"/> </svg>');
+        display: block;
+        height: rem-calc(24px);
+        width: rem-calc(24px);
+        position: absolute;
+        bottom: 100%;
+        right: 0;
+      }
+    }
+
+    .back {
+      @include flex( 1 1 auto);
+    }
+
+    .card-header {
+      //@include flexbox();
+      //@include flex-flow(row nowrap);
+      //@include justify-content(flex-start);
+      background-color: var(--card-bg);
+      border-top-left-radius: rem-calc(24px);
+      //border-top-right-radius: rem-calc(24px);
+      border: none;
+      padding-top: rem-calc(16px);
+      padding-bottom: 0;
+      padding-left: rem-calc(82px);
+      position: relative;
+      gap: rem-calc(16px);
+    }
+
+    .card-lead {
+      //@include flex(1 1 auto);
+      //@include order(1);
+      //@include flexbox();
+      //@include flex-flow(row nowrap);
+      //@include align-items(center);
+      gap: rem-calc(16px);
+    }
+
+    .card-label {
+      @include fontSize(14px, 14px);
+    }
+
+    .card-image {
+      //@include flex(0 0 auto);
+      //@include order(0);
+      height: rem-calc(50px);
+      width: rem-calc(50px);
+      border-radius: 50%;
+      overflow: hidden;
+      position: absolute;
+      top: rem-calc(16px);
+      left: rem-calc(16px);
+    }
+
+    .card-content {
+      background-color: var(--card-bg);
+
+      &:last-child {
+        padding-bottom: rem-calc(24px);
+      }
+    }
+
+    .card-intro {
+      padding: rem-calc(0 0 0 82px);
+    }
+
+    .card-title {
+      @include fontSize(24px, 24px);
+    }
+
+    .card-subtitle {
+      @include fontSize(18px, 18px);
+    }
+
+    .card-body {
+      padding-bottom: 0;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition-property: opacity, max-height;
+      transition-duration: calc(#{$transition-duration} * 3);
+      transition-timing-function: $transition-timing-function;
+      will-change: opacity, max-height;
+    }
+
+    .card-text {
+      @include fontSize(14px, 20px);
+      padding-top: rem-calc(16px);
+
+      p {
+        @include truncate($multiline: true, $fade: true, $width: auto, $fontSize: 1, $lineHeight: 1.25, $lineCount: 4, $context: 16px, $bgColor: transparent, $undo: false);
+      }
+    }
+
+    .card-footer {
+      border: none;
+      background-color: var(--white);
+      padding-bottom: rem-calc(24px);
+    }
+
+    .card-footer-content {
+
+      p {
+        @include fontSize(14px, 20px);
+      }
+    }
+
+    &:hover,
+    &:focus {
+
+      .card-body {
+        max-height: rem-calc(600px);
+        opacity: 1;
+      }
+    }
+  }
+
+  &-centered-slide-up {
+    text-align: center;
+    border: none;
+    border-radius: rem-calc(12px);
+    overflow: hidden;
+    box-shadow: rem-calc(2px) rem-calc(2px) rem-calc(4px) rem-calc(2px) rgba(c(black), 0.125);
+    transition-property: transform, box-shadow;
+    transition-duration: calc(#{$transition-duration} * 2);
+    transition-timing-function: $transition-timing-function;
+    will-change: transform, box-shadow;
+
+    .front {
+      @include overlays($color: c(black), $opacity: .6);
+    }
+
+    .card-header {
+      padding-top: rem-calc(40px);
+      border: none;
+    }
+
+    .card-lead {
+      margin-bottom: rem-calc(24px);
+    }
+
+    .card-label {
+      @include fontSize(14px, 14px);
+      color: var(--white);
+    }
+
+    .card-image {
+      border-radius: rem-calc(8px);
+      overflow: hidden;
+      height: rem-calc(100px);
+      width: rem-calc(100px);
+      margin: 0 auto;
+    }
+
+    .card-content {
+      color: var(--white);
+    }
+
+    .card-intro {
+      padding-bottom: 0;
+    }
+
+    .card-title {
+      @include fontSize(24px, 24px);
+      color: var(--white);
+    }
+
+    .card-subtitle {
+      @include fontSize(18px, 18px);
+      color: var(--white);
+      margin-bottom: rem-calc(24px);
+    }
+
+    .card-body {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition-property: opacity, max-height;
+      transition-duration: calc(#{$transition-duration} * 3);
+      transition-timing-function: $transition-timing-function;
+      will-change: opacity, max-height;
+      padding-bottom: rem-calc(24px);
+    }
+
+    .card-text {
+      @include fontSize(14px, 20px);
+
+      p {
+        @include truncate($multiline: true, $fade: false, $width: auto, $fontSize: 1, $lineHeight: 1.25, $lineCount: 4, $context: 16px, $bgColor: transparent, $undo: false);
+      }
+    }
+
+    .card-footer {
+      border: none;
+      color: var(--white);
+    }
+
+    .card-footer-content {
+
+      p {
+        @include fontSize(14px, 20px);
+      }
+    }
+
+    &:hover,
+    &:focus {
+      transform: translateY(-40px);
+      box-shadow: rem-calc(4px) rem-calc(12px) rem-calc(8px) rem-calc(4px) rgba(c(black), 0.25);
+
+      .card-body {
+        max-height: rem-calc(600px);
+        opacity: 1;
+      }
+    }
+
+    &.card--horizontal {
+      text-align: left;
+
+      .card-header {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+
+      .card-body {
+        opacity: 1;
+      }
+
+      .card-intro {
+        padding-top: 0;
+      }
+    }
+  }
+
+  &-image-overlap {
+    border: none;
+    border-radius: rem-calc(8px);
+    text-align: center;
+    top: rem-calc(20px);
+
+    .front {
+      @include overlays($color: c(black), $opacity: .6);
+    }
+
+    .card-header {
+      border: none;
+    }
+
+    .card-lead {
+      position: absolute;
+      top: rem-calc(156px);
+      left: 0;
+      right: 0;
+      z-index: z('site-content');
+    }
+
+    .card-label {
+      @include fontSize(14px, 14px);
+      color: var(--white);
+    }
+
+    .card-image {
+      display: inline-block;
+      border-radius: 20px;
+      overflow: hidden;
+      padding: 0px;
+      transform: skew(0deg, 13deg);
+      position: relative;
+      font-size: 0px;
+      margin: rem-calc(-40px 0 0);
+      background: #c8c2c2;
+      height: rem-calc(180px);
+      width: rem-calc(180px);
+
+      .image {
+        height: calc(100% + 40px);
+        object-fit: cover;
+        transform: skew(0deg, -13deg);
+        margin-top: rem-calc(-20px);
+      }
+    }
+
+    .card-content {
+      color: var(--white);
+    }
+
+    .card-intro {}
+
+    .card-title {
+      @include fontSize(24px, 24px);
+      color: var(--white);
+    }
+
+    .card-subtitle {
+      @include fontSize(18px, 18px);
+      color: var(--white);
+    }
+
+    .card-body {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition-property: opacity, max-height;
+      transition-duration: calc(#{$transition-duration} * 3);
+      transition-timing-function: $transition-timing-function;
+      will-change: opacity, max-height;
+      padding-bottom: rem-calc(24px);
+    }
+
+    .card-text {
+      @include fontSize(14px, 20px);
+
+      p {
+        @include truncate($multiline: true, $fade: false, $width: auto, $fontSize: 1, $lineHeight: 1.25, $lineCount: 4, $context: 16px, $bgColor: transparent, $undo: false);
+      }
+    }
+
+    .card-footer {
+      border: none;
+      color: var(--white);
+    }
+
+    .card-footer-content {
+
+      p {
+        @include fontSize(14px, 20px);
+      }
+    }
+
+    &:hover,
+    &:focus {
+
+      .card-image{}
+
+      .card-body {
+        max-height: rem-calc(600px);
+        opacity: 1;
+      }
+    }
+  }
+
+  &-image-overlay-zoom {
+    @include aspect-ratio(5,7,'.card-wrapper');
+    transition-property: transform, box-shadow;
+    transition-duration: calc(#{$transition-duration} * 2);
+    transition-timing-function: $transition-timing-function;
+    will-change: transform, box-shadow;
+
+
+    .card-content-wrapper-inner {
+      @include cover;
+      @include flexbox;
+      @include flex-flow(column nowrap);
+    }
+
+    .front,
+    .back {
+      @include flex( 1 1 auto);
+    }
+
+    .card-header {
+      @include flex(0 1 auto);
+      border: none;
+      color: var(--white);
+      padding: 0;
+    }
+
+    .card-lead {
+      position: relative;
+      z-index: z('site-content');
+      padding: rem-calc(24px 16px 0);
+      background-color: rgba(c(black), .6);
+    }
+
+    .card-label {
+      @include fontSize(14px, 14px);
+      color: var(--white);
+    }
+
+    .card-content {
+      @include flex(0 1 auto);
+      position: relative;
+      z-index: z('site-content');
+      background-color: rgba(c(black), .6);
+      color: var(--white);
+    }
+
+    .card-intro {
+      padding: rem-calc(0 16px 16px);
+    }
+
+    .card-title {
+      @include fontSize(24px, 24px);
+      color: var(--white);
+    }
+
+    .card-subtitle {
+      @include fontSize(18px, 18px);
+      color: var(--white);
+    }
+
+    .card-body {}
+
+    .card-text {
+
+      p {
+        @include fontSize(14px, 20px);
+      }
+    }
+
+    .card-footer {
+      @include flex(1 1 auto);
+      @include flexbox;
+      @include flex-flow(column nowrap);
+      border: none;
+      padding: 0;
+    }
+
+    .card-footer-content {
+      @include flex(1 1 auto);
+      position: relative;
+      z-index: z('site-content');
+      background-color: rgba(c(black), .6);
+      color: var(--white);
+      padding: rem-calc(0 16px 24px);
+
+      p {
+        @include fontSize(14px, 20px);
+      }
+    }
+
+    .card-image {
+      @include cover;
+
+      .image {
+        @include cover-image-max;
+      }
+    }
+
+    &:hover,
+    &:focus {
+      box-shadow: rem-calc(2px) rem-calc(2px) rem-calc(4px) rem-calc(2px) rgba(c(black), 0.25);
+      transform: scale(1.05);
+    }
+  }
+
+  &-overlay-slide-down {
+    text-align: center;
+
+    .card-content-wrapper-inner {
+
+      &:before {
+        @include cover;
+        content: "";
+        background-color: rgba(c(black), .7);
+        display: block;
+        transition-property: bottom;
+        transition-duration: calc(#{$transition-duration} * 2);
+        transition-timing-function: $transition-timing-function;
+        transition-delay: $transition-duration;
+        will-change: bottom;
+        bottom: 100%;
+      }
+    }
+
+    .card-header {
+      border: none;
+      position: relative;
+      padding-top: rem-calc(24px);
+      padding-bottom: 0;
+
+      .card-image {
+        margin-bottom: rem-calc(16px);
+        margin-top: rem-calc(16px);
+      }
+    }
+
+    .card-lead {}
+
+    .card-label {
+      @include fontSize(14px, 14px);
+      color: var(--white);
+      text-shadow: rem-calc(2px) rem-calc(2px) rem-calc(4px) rgba(c(black), .8);
+    }
+
+    .card-image {
+      width: rem-calc(100px);
+      height: 100px;
+      overflow: hidden;
+      border-radius: 50%;
+      margin-left: auto;
+      margin-right: auto;
+      z-index: z(site-content);
+      box-shadow: rem-calc(1px) rem-calc(1px) rem-calc(2px) rem-calc(1px) rgba(c(black), .4);
+
+      .image {}
+    }
+
+    .card-content {
+      color: var(--white);
+      position: relative;
+    }
+
+    .card-intro {
+      padding: rem-calc(0 16px 16px);
+    }
+
+    .card-title {
+      @include fontSize(24px, 24px);
+      color: var(--white);
+      text-shadow: rem-calc(2px) rem-calc(2px) rem-calc(4px) rgba(c(black), .8);
+    }
+
+    .card-subtitle {
+      @include fontSize(18px, 18px);
+      color: var(--white);
+      text-shadow: rem-calc(2px) rem-calc(2px) rem-calc(4px) rgba(c(black), .8);
+      transition-property: opacity;
+      transition-duration: calc(#{$transition-duration} * 2);
+      transition-timing-function: $transition-timing-function;
+      transition-delay: 0ms;
+      will-change: opacity;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .card-body {
+      transition-property: opacity;
+      transition-duration: calc(#{$transition-duration} * 2);
+      transition-timing-function: $transition-timing-function;
+      transition-delay: 0ms;
+      will-change: opacity;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .card-text {
+      @include fontSize(14px, 20px);
+
+      p {
+        @include truncate($multiline: true, $fade: false, $width: auto, $fontSize: 1, $lineHeight: 1.25, $lineCount: 4, $context: 16px, $bgColor: transparent, $undo: false);
+      }
+    }
+
+    .card-footer {
+      border: none;
+      padding: rem-calc(0 16px 24px);
+      position: relative;
+      transition-property: opacity;
+      transition-duration: calc(#{$transition-duration} * 2);
+      transition-timing-function: $transition-timing-function;
+      transition-delay: 0ms;
+      will-change: opacity;
+      opacity: 0;
+      pointer-events: none;
+
+      .card-image {
+        margin-top: rem-calc(16px);
+      }
+    }
+
+    .card-footer-content {
+      color: var(--white);
+
+      p {
+        @include fontSize(14px, 20px);
+      }
+    }
+
+    &:hover,
+    &:focus {
+
+      .card-content-wrapper-inner {
+
+        &:before {
+          bottom: 0;
+
+        }
+      }
+
+      .card-subtitle {
+        opacity: 1;
+        transition-delay: calc(#{$transition-duration} * 2.5);
+        pointer-events: all;
+      }
+
+      .card-body,
+      .card-footer {
+        opacity: 1;
+        transition-delay: calc(#{$transition-duration} * 3);
+        pointer-events: all;
+      }
+    }
+
+    &.card--horizontal {
+      text-align: left;
+
+      .card-image {
+        width: 33.33333333%;
+        height: 100%;
+        overflow: visible;
+        border-radius: 0;
+        padding-top: rem-calc(16px);
+
+        .image {
+          border-radius: 50%;
+          overflow: hidden;
+          margin-left: rem-calc(8px);
+        }
+      }
+
+      .card-header {
+        //padding-top: 0;
+      }
+
+      .card-text {
+        transition-property: opacity;
+        transition-duration: calc(#{$transition-duration} * 2);
+        transition-timing-function: $transition-timing-function;
+        transition-delay: 0ms;
+        will-change: opacity;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      &:hover,
+      &:focus {
+
+        .card-text {
+          opacity: 1;
+          transition-delay: calc(#{$transition-duration} * 3);
+          pointer-events: all;
+        }
+      }
+    }
+  }
+
+  &-info-slide-up {
+    @include aspect-ratio(5,7,'.card-wrapper');
+    background-size: auto 100%;
+    transition-property: background-size;
+    transition-duration: calc(#{$transition-duration} * 2);
+    transition-timing-function: $transition-timing-function;
+    will-change: background-size;
+
+    .card-content-wrapper-inner {
+      @include absolute-position('bottom', 'inside');
+      background-color: var(--black);
+    }
+
+    .card-header {
+      border: none;
+      padding-right: rem-calc(66px);
+    }
+
+    .card-lead {
+      position: relative;
+      z-index: z(site-content);
+    }
+
+    .card-label {
+      @include fontSize(14px, 14px);
+      color: var(--white);
+    }
+
+    .card-image {
+      position: absolute;
+      top: rem-calc(6px);
+      right: rem-calc(16px);
+      width: rem-calc(50px);
+      height: rem-calc(50px);
+      border-radius: 50%;
+      overflow: hidden;
+
+      .image {
+        @include cover-image-max;
+      }
+    }
+
+    .card-content {
+      position: relative;
+      z-index: z(site-content);
+      color: var(--white);
+    }
+
+    .card-intro {
+      padding: rem-calc(0 66px 0 16px);
+      overflow: hidden;
+      transition-property: max-height, opacity;
+      transition-duration: calc(#{$transition-duration} * 2);
+      transition-timing-function: $transition-timing-function;
+      transition-delay: $transition-duration;
+      will-change: max-height, opacity;
+      max-height: 0;
+      opacity: 0;
+    }
+
+    .card-title {
+      @include fontSize(24px, 24px);
+      color: var(--white);
+    }
+
+    .card-subtitle {
+      @include fontSize(18px, 18px);
+      color: var(--white);
+      margin-bottom: rem-calc(16px);
+    }
+
+    .card-body {
+      padding-bottom: rem-calc(8px);
+      transition-property: max-height, opacity;
+      transition-duration: calc(#{$transition-duration} * 2);
+      transition-timing-function: $transition-timing-function;
+      transition-delay: $transition-duration;
+      will-change: max-height, opacity;
+      max-height: 0;
+      opacity: 0;
+    }
+
+    .card-text {
+      @include fontSize(14px, 20px);
+
+      p {
+        @include truncate($multiline: true, $fade: false, $width: auto, $fontSize: 1, $lineHeight: 1.25, $lineCount: 4, $context: 16px, $bgColor: transparent, $undo: false);
+      }
+    }
+
+    .card-footer {
+      border: none;
+      position: relative;
+      z-index: z(site-content);
+      color: var(--white);
+      transition-property: max-height, opacity;
+      transition-duration: calc(#{$transition-duration} * 2);
+      transition-timing-function: $transition-timing-function;
+      transition-delay: $transition-duration;
+      will-change: max-height, opacity;
+      max-height: 0;
+      opacity: 0;
+    }
+
+    .card-footer-content {}
+
+    &:hover,
+    &:focus {
+
+      .card-intro,
+      .card-body,
+      .card-footer {
+        max-height: rem-calc(500px);
+        opacity: 1;
+      }
+    }
+  }
+
+  &-full-bg-image {
+    border: none;
+
+    .card-row {
+      @include justify-content(flex-end);
+    }
+
+    .card-image {
+      @include make-col(12);
+      @include cover;
+
+      .image {
+        @include cover-image-max;
+      }
+    }
+
+    .card-body-wrapper {
+      @include make-col(6);
+      z-index: z(site-content);
+      background-color: var(--white);
+      margin: rem-calc(16px);
+    }
+
+    .card-header {
+      border: none;
+    }
+
+    .card-lead {}
+
+    .card-label {}
+
+    .card-content {}
+
+    .card-intro {
+      padding: rem-calc(0 16px);
+    }
+
+    .card-title {
+      @include fontSize(24px, 24px);
+    }
+
+    .card-subtitle {
+      @include fontSize(18px, 18px);
+    }
+
+    .card-body {}
+
+    .card-text {
+      @include fontSize(14px, 20px);
+
+      p {
+        @include truncate($multiline: true, $fade: false, $width: auto, $fontSize: 1, $lineHeight: 1.25, $lineCount: 4, $context: 16px, $bgColor: transparent, $undo: false);
+      }
+    }
+
+    .card-footer {
+      border: none;
+      padding-top: 0;
+    }
+  }
+}

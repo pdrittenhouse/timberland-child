@@ -1,0 +1,20 @@
+.mtsnb {
+
+  &-container-outer {}
+
+  &-container {
+
+    .mtsnb & {}
+  }
+
+  &-content {}
+
+  &-text {}
+
+  &-link {
+
+    &:hover,
+    &:focus {}
+  }
+
+}

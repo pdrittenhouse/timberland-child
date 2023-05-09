@@ -1,0 +1,565 @@
+.no-gf-layout {
+
+  .donor-form_wrapper {
+
+    &.gravity-theme {
+
+      .gform_heading {}
+
+      .donor-form {
+
+        .gf_progressbar_wrapper {}
+
+        .gform-body {}
+
+        .gform_page {}
+
+        .gform_page_fields {}
+
+        .gform_fields {}
+
+        .gfield {}
+
+        #gform_fields_4 {}
+
+        #field_4_19 {
+
+          .ginput_container_radio {}
+
+          .gfield_radio {
+            @include flexbox;
+            @include flex-flow(row wrap);
+            @include justify-content(space-between);
+            @include align-items(flex-start);
+
+            &:after {
+              @include flex(0 1 100%);
+              content: "";
+              display: block;
+
+              @include media-breakpoint-only(sm) {
+                @include flex(0 1 calc((100% - 10px ) / 2));
+              }
+
+              @include media-breakpoint-up(md) {
+                @include flex(0 1 calc((100% - 20px) / 3));
+              }
+            }
+          }
+
+          .gchoice {
+            @include flex(0 1 100%);
+            @include flexbox;
+            @include flex-flow(row nowrap);
+            position: relative;
+            margin-bottom: rem-calc(10px);
+
+            @include media-breakpoint-only(sm) {
+              @include flex(0 1 calc((100% - 10px ) / 2));
+            }
+
+            @include media-breakpoint-up(md) {
+              @include flex(0 1 calc((100% - 20px) / 3));
+            }
+
+            input {
+              position: absolute;
+              opacity: 0;
+              width: 0;
+              height: 0;
+
+              &:checked {
+
+                & + label {
+                  background-color: var(--gray-ultralight);
+                  color: var(--black);
+                }
+              }
+            }
+
+            label {
+              @include flex(1 1 auto);
+              @include fontSize(24px);
+              background-color: var(--gray-dark);
+              color: var(--white);
+              padding: rem-calc(16px);
+              text-align: center;
+              max-width: none;
+
+              &:hover {
+                cursor: pointer;
+                background-color: var(--gray-ultralight);
+                color: var(--black);
+              }
+            }
+          }
+        }
+
+        #field_4_30 {
+
+          .ginput_container {
+            margin-bottom: rem-calc(16px);
+          }
+
+          .ginput_amount,
+          input[type="tel"] {
+            background-color: var(--gray-ultralight);
+          }
+        }
+
+        #field_4_25 {
+          margin-top: rem-calc(10px);
+
+          .gfield_label {
+            margin: 0;
+            vertical-align: bottom;
+
+            &:after {
+              content: ":";
+            }
+          }
+
+          .ginput_container {
+            display: inline;
+          }
+
+          .ginput_total {
+            padding: 0;
+            border: none;
+            vertical-align: bottom;
+          }
+        }
+
+        #gform_fields_4_2 {}
+
+        #field_4_5 {
+          margin-bottom: rem-calc(10px);
+
+          .ginput_container_name {
+            @include flexbox;
+            @include flex-flow(row wrap);
+            @include justify-content(space-between);
+            @include align-items(flex-start);
+            @include css-column-gap(10px);
+          }
+
+          .name_first {
+            @include flex(1 1 100%);
+            margin-bottom: rem-calc(10px);
+            display: block;
+
+            @include media-breakpoint-up(md) {
+              @include flex(1 1 auto);
+              margin-bottom: 0;
+            }
+          }
+
+          .name_last {
+            @include flex(1 1 100%);
+            display: block;
+
+            @include media-breakpoint-up(md) {
+              @include flex(1 1 auto);
+            }
+          }
+        }
+
+        #field_4_6 {
+          margin-bottom: rem-calc(10px);
+
+          @include media-breakpoint-up(md) {
+            display: inline-block;
+            width: calc((100% - 10px) / 2);
+            margin-right: rem-calc(10px);
+            vertical-align: top;
+          }
+        }
+
+        #field_4_8 {
+          margin-bottom: rem-calc(10px);
+
+          @include media-breakpoint-up(md) {
+            display: inline-block;
+            width: calc((100% - 10px) / 2);
+            vertical-align: top;
+          }
+        }
+
+        #field_4_7 {
+          margin-bottom: rem-calc(10px);
+
+          .ginput_container_address {
+
+            @include media-breakpoint-up(md) {
+              display: grid;
+              grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+              grid-template-rows: auto auto auto;
+              column-gap: rem-calc(10px);
+            }
+          }
+
+          .address_line_1 {
+            margin-bottom: rem-calc(10px);
+
+            @include media-breakpoint-up(md) {
+              grid-column-start: 1;
+              grid-column-end: span 6;
+              grid-row-start: 1;
+              grid-row-end: auto;
+            }
+          }
+
+          .address_line_2 {
+            margin-bottom: rem-calc(10px);
+
+            @include media-breakpoint-up(md) {
+              grid-column-start: 1;
+              grid-column-end: span 6;
+              grid-row-start: 2;
+              grid-row-end: auto;
+            }
+          }
+
+          .address_city {
+            margin-bottom: rem-calc(10px);
+
+            @include media-breakpoint-up(md) {
+              margin-bottom: 0;
+              grid-column-start: 1;
+              grid-column-end: span 2;
+              grid-row-start: 3;
+              grid-row-end: auto;
+            }
+          }
+
+          .address_state {
+            margin-bottom: rem-calc(10px);
+
+            @include media-breakpoint-up(md) {
+              margin-bottom: 0;
+              grid-column-start: 3;
+              grid-column-end: span 2;
+              grid-row-start: 3;
+              grid-row-end: auto;
+            }
+
+            select {
+              height: 100%;
+            }
+          }
+
+          .address_zip {
+
+            @include media-breakpoint-up(md) {
+              grid-column-start: 5;
+              grid-column-end: span 2;
+              grid-row-start: 3;
+              grid-row-end: auto;
+            }
+          }
+        }
+
+        #field_4_29 {
+          margin-bottom: rem-calc(10px) !important;
+
+          p {
+            @include fontSize(14px);
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+
+        #field_4_32 {
+          margin-bottom: rem-calc(10px);
+
+          .ginput_container_checkbox {}
+
+          .gfield_checkbox {}
+
+          .gfield-choice-input {
+
+            &:checked {
+
+              & + label {}
+            }
+          }
+
+          label {}
+        }
+
+        #field_4_33 {
+          margin-bottom: rem-calc(10px);
+
+          @include media-breakpoint-up(md) {
+            display: inline-block;
+            width: calc((100% - 10px) / 2);
+            margin-right: rem-calc(10px);
+            vertical-align: top;
+          }
+        }
+
+        #field_4_34 {
+          margin-bottom: rem-calc(10px);
+
+          @include media-breakpoint-up(md) {
+            display: inline-block;
+            width: calc((100% - 10px) / 2);
+            vertical-align: top;
+          }
+        }
+
+        #field_4_26 {
+          margin-top: rem-calc(10px);
+
+          .gfield_label {
+            margin: 0;
+            vertical-align: bottom;
+
+            &:after {
+              content: ":";
+            }
+          }
+
+          .ginput_container {
+            display: inline;
+          }
+
+          .ginput_total {
+            padding: 0;
+            border: none;
+            vertical-align: bottom;
+          }
+        }
+
+        #gform_fields_4_3 {}
+
+        #field_4_31 {
+          margin-bottom: rem-calc(10px);
+
+          .ginput_container_creditcard {}
+
+          #input_4_31_1_container {
+            margin-bottom: rem-calc(10px);
+            position: relative;
+
+            .gform_card_icon_container {
+              @include justify-content(flex-end);
+
+              @include media-breakpoint-up(md) {
+                margin: 0;
+                position: absolute;
+                top: rem-calc(8px);
+                right: 0;
+              }
+            }
+
+            .gform_card_icon {}
+
+            input {
+
+              @include media-breakpoint-up(md) {
+                padding-right: rem-calc(200px);
+              }
+            }
+          }
+
+          #input_4_31_2_container {
+            margin-bottom: rem-calc(10px);
+
+            @include media-breakpoint-up(md) {
+              @include flexbox;
+              @include flex-flow(row wrap);
+              @include justify-content(space-between);
+              @include align-items(flex-start);
+              @include css-column-gap(10px);
+            }
+
+            .ginput_cardinfo_left {
+              margin-bottom: rem-calc(10px);
+
+              @include media-breakpoint-up(md) {
+                @include flex(1 1 calc(75% - 5px));
+                margin-bottom: 0;
+              }
+            }
+
+            .ginput_card_expiration_container {
+
+              @include media-breakpoint-up(md) {
+                @include flexbox;
+                @include flex-flow(row wrap);
+                @include justify-content(space-between);
+                @include align-items(flex-start);
+                @include css-column-gap(10px);
+              }
+            }
+
+            .ginput_card_expiration_month_container {
+              margin-bottom: rem-calc(10px);
+
+              @include media-breakpoint-up(md) {
+                @include flex(1 1 calc((100% - 10px) / 2));
+                margin-bottom: 0;
+              }
+            }
+
+            .ginput_card_expiration_month {
+              margin: 0;
+            }
+
+            .ginput_card_expiration_year_container {
+
+              @include media-breakpoint-up(md) {
+                @include flex(1 1 calc((100% - 10px) / 2));
+              }
+            }
+
+            .ginput_card_expiration_year {}
+
+            .ginput_cardinfo_right {
+              position: relative;
+
+              @include media-breakpoint-up(md) {
+                @include flex(1 1 calc(25% - 5px));
+                @include flexbox;
+                @include flex-flow(row wrap);
+                @include justify-content(space-between);
+                @include align-items(flex-start);
+              }
+            }
+
+            .ginput_card_security_code {
+              max-width: none;
+              width: 100%;
+              padding-right: rem-calc(46px);
+
+              @include media-breakpoint-up(md) {
+                @include flex(1 1 100%);
+              }
+            }
+
+            .ginput_card_security_code_icon {
+              position: absolute;
+              top: rem-calc(8px);
+              right: 0;
+
+              input {}
+            }
+          }
+
+          #input_4_31_5_container {}
+        }
+
+        #field_4_27 {
+          margin-top: rem-calc(10px);
+
+          .gfield_label {
+            margin: 0;
+            vertical-align: bottom;
+
+            &:after {
+              content: ":";
+            }
+          }
+
+          .ginput_container {
+            display: inline;
+          }
+
+          .ginput_total {
+            padding: 0;
+            border: none;
+            vertical-align: bottom;
+          }
+        }
+
+        #field_4_35 {
+          margin-bottom: rem-calc(10px);
+        }
+
+        .gform_page_footer {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto;
+          column-gap: rem-calc(10px);
+
+          .gform_previous_button {
+            @include button();
+            grid-column-start: 1;
+            grid-column-end: auto;
+            grid-row-start: 1;
+            grid-row-end: auto;
+            margin: 0;
+
+            @include media-breakpoint-down(lg) {
+              @include fontSize(14px);
+            }
+
+            &:hover,
+            &:focus {
+
+              @include media-breakpoint-down(lg) {
+                @include fontSize(14px);
+              }
+            }
+          }
+
+          .gform_next_button {
+            @include button();
+            grid-column-start: 2;
+            grid-column-end: auto;
+            grid-row-start: 1;
+            grid-row-end: auto;
+            margin: 0;
+
+            @include media-breakpoint-down(lg) {
+              @include fontSize(14px);
+            }
+
+            &:hover,
+            &:focus {
+
+              @include media-breakpoint-down(lg) {
+                @include fontSize(14px);
+              }
+            }
+          }
+
+          .gform_button {
+            @include button();
+            grid-column-start: 2;
+            grid-column-end: auto;
+            grid-row-start: 1;
+            grid-row-end: auto;
+            margin: 0;
+
+            @include media-breakpoint-down(lg) {
+              @include fontSize(14px);
+            }
+
+            &:hover,
+            &:focus {
+
+              @include media-breakpoint-down(lg) {
+                @include fontSize(14px);
+              }
+            }
+          }
+        }
+
+        .gform_footer {
+
+          .button {}
+        }
+      }
+    }
+  }
+
+  .gform_confirmation_wrapper.donor-form {
+
+    .gform_confirmation_message {}
+  }
+
+}

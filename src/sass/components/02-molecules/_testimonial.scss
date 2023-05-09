@@ -1,0 +1,31 @@
+// Custom styles for testimonial
+
+.testimonial {
+
+  &-image {}
+
+  &-body {}
+
+  &-quote {
+
+    .field,
+    .field-container,
+    .field-container-content {}
+  }
+
+  &-title {}
+
+  &-meta {}
+
+  &-author {
+
+    &:before {}
+
+    .field,
+    .field-container,
+    .field-container-content {}
+  }
+
+  &-descriptor {}
+}
+

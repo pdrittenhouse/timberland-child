@@ -1,0 +1,30 @@
+.wp-block-query {
+
+  &.is-layout-flow {}
+}
+
+.wp-block-post-template {
+
+  &.is-layout-flow {}
+
+  // Grid
+  &.is-flex-container {}
+
+  &.columns-3 {}
+
+  // Card
+  &.card-query {
+
+    // Card Grid
+    &.is-flex-container {}
+
+    &.columns-3 {}
+  }
+
+  .post {}
+}
+
+.wp-block-query-pagination {
+
+  &.is-layout-flex {}
+}

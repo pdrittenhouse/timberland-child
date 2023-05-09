@@ -1,0 +1,132 @@
+.no-gf-layout {
+
+  .contact-us_wrapper {
+
+    &.gravity-theme {
+
+      .gform_heading {}
+
+      .contact-us {
+
+        @include media-breakpoint-up(lg) {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+          grid-template-rows: auto auto auto auto;
+          column-gap: rem-calc(10px);
+        }
+
+        .gform-body {
+          display: contents;
+        }
+
+        .gform_fields {
+          display: contents;
+        }
+
+        .gfield {
+          margin-bottom: rem-calc(10px);
+
+          input,
+          textarea {}
+        }
+
+        #field_3_1 {
+          margin-bottom: 0;
+
+          @include media-breakpoint-up(lg) {
+            grid-column-start: 1;
+            grid-column-end: span 6;
+            grid-row-start: 1;
+            grid-row-end: 2;
+          }
+
+          .ginput_complex {
+
+            @include media-breakpoint-up(lg) {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              grid-template-rows: auto;
+              column-gap: rem-calc(10px);
+            }
+          }
+
+          .name_first {
+            margin-bottom: rem-calc(10px);
+
+            @include media-breakpoint-up(lg) {
+              grid-column-start: 1;
+              grid-column-end: auto;
+              grid-row-start: 1;
+              grid-row-end: auto;
+            }
+          }
+
+          .name_last {
+            margin-bottom: rem-calc(10px);
+
+            @include media-breakpoint-up(lg) {
+              grid-column-start: 2;
+              grid-column-end: auto;
+              grid-row-start: 1;
+              grid-row-end: auto;
+            }
+          }
+        }
+
+        #field_3_2 {
+
+          @include media-breakpoint-up(lg) {
+            grid-column-start: 1;
+            grid-column-end: span 3;
+            grid-row-start: 2;
+            grid-row-end: 3;
+          }
+        }
+
+        #field_3_3 {
+
+          @include media-breakpoint-up(lg) {
+            grid-column-start: 4;
+            grid-column-end: span 3;
+            grid-row-start: 2;
+            grid-row-end: 3;
+          }
+        }
+
+        #field_3_4 {
+
+          @include media-breakpoint-up(lg) {
+            grid-column-start: 1;
+            grid-column-end: span 6;
+            grid-row-start: 3;
+            grid-row-end: 4;
+          }
+        }
+
+        .gform_footer {
+          @include justify-content(center);
+          margin: 0;
+          padding: 0;
+
+          @include media-breakpoint-up(lg) {
+            grid-column-start: 1;
+            grid-column-end: span 6;
+            grid-row-start: 4;
+            grid-row-end: auto;
+          }
+
+          .button {
+            @include flex(1 1 auto);
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .gform_confirmation_wrapper.contact-us {
+
+    .gform_confirmation_message {}
+  }
+
+}

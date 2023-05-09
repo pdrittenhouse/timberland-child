@@ -1,0 +1,171 @@
+.posts-loop {
+
+  ////////////////////////////////
+  // ELEMENTS
+  ////////////////////////////////
+
+  // Featured Image
+  &--featured-image--wrapper {}
+
+  &--post-thumbnail {
+
+    img {}
+  }
+
+  // Post Title
+  &--post-title--wrapper {
+
+    a {}
+  }
+
+  &--post-title {}
+
+  // Post Excerpt
+  &--post-excerpt--wrapper {}
+
+  &--post-excerpt {}
+
+  // Post Content
+  &--post-content--wrapper {}
+
+  &--post-content {}
+
+  // Post Link
+  &--post-link--wrapper {}
+
+  &--post-link--label {}
+
+  &--post-link {}
+
+  &--post-url {}
+
+  // Post Authors
+  &--post-author--wrapper {}
+
+  &--post-author {}
+
+  &--post-author--gravatar {
+
+    img {}
+  }
+
+  &--post-author--label {}
+
+  &--post-author--link {}
+
+  &--post-author--name {}
+
+  &--post-author--email {}
+
+  // Post Date
+  &--post-date--wrapper {}
+
+  &--post-date--label {}
+
+  &--date--link {}
+
+  &--post-date {}
+
+  // Post Modified
+  &--post-modified--wrapper {}
+
+  &--post-modified--label {}
+
+  &--post-modified--link {}
+
+  &--post-modified--date {}
+
+  &--post-modified--separator {}
+
+  &--post-modified--author {}
+
+  &--post-modified--author-email {}
+
+  // Post Type
+  &--post-type--wrapper {}
+
+  &--post-type--label {}
+
+  &--post-type--link {}
+
+  &--post-type {}
+
+  // Parent
+  &--post-parent--wrapper {}
+
+  &--post-parent--label {}
+
+  &--post-parent-link {}
+
+  &--post-parent {}
+
+  // Children
+  &--post-children--wrapper {}
+
+  &--post-children--label {}
+
+  &--child--link {}
+
+  &--child {}
+
+  //Comment Count
+  &--comment-count--wrapper {}
+
+  &--comment-count--label {}
+
+  &--comment-count {}
+
+  // Terms
+  &--terms--wrapper {}
+
+  &--terms--label {}
+
+  &--term--link {}
+
+  &--term {}
+
+  // Categories
+  &--categories--wrapper {}
+
+  &--categories--label {}
+
+  &--category--link {}
+
+  &--category {}
+
+  // Tags
+  &--tags--wrapper {}
+
+  &--tags--label {}
+
+  &--tag--link {}
+
+  &--tag {}
+
+
+  ////////////////////////////////
+  // PATTERNS
+  ////////////////////////////////
+
+  // Card
+  &--card {}
+
+  // Card Grid
+  &--card-grid {}
+
+  // Slider
+  &--slider {}
+
+  &--slide {
+
+    &.full-height {
+
+      .posts-loop--card {}
+    }
+  }
+
+  // List
+  &--post-list {}
+
+  &--post-list--item {}
+}

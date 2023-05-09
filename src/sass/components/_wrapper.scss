@@ -1,0 +1,27 @@
+.content-wrapper {
+
+  &.sidebar-active {
+
+    &.sidebar-left {
+
+      .wrapper {}
+
+      .sidebar {}
+    }
+
+    &:not(.sidebar-left) {
+
+      .wrapper {}
+
+      .sidebar {}
+    }
+
+    .wrapper {}
+
+    .sidebar {}
+  }
+
+  .wrapper {}
+
+  .sidebar {}
+}

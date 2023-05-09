@@ -1,0 +1,18 @@
+// Custom styles for progress
+
+.progress {
+
+  &--wrapper {}
+
+  &--container {}
+
+  &--bar { // HTML5 progress bars
+
+  }
+
+  &--label {}
+
+  &-bar { // Bootstrap progress bars
+
+  }
+}

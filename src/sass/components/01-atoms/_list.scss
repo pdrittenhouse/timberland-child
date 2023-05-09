@@ -1,0 +1,35 @@
+// Custom styles for list
+
+.list {
+  &-type--ordered {}
+
+  &-type--unordered {}
+
+  &.bullet-icons {
+
+    > .list-item  {
+      &:before {}
+
+      > .icon,
+      > .svg {}
+    }
+
+    &--before{
+      > .list-item {
+        > .icon,
+        > .svg {}
+      }
+    }
+
+    &--after {
+
+      > .list-item {
+        > .icon,
+        > .svg {}
+      }
+    }
+  }
+
+  .icon,
+  .svg {}
+}

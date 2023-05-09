@@ -1,0 +1,39 @@
+// Custom styles for promo
+
+.promo {
+
+  &--1-up {
+
+    .promo-content {}
+
+    .promo-intro {}
+
+    .promo-text {}
+
+    .promo-cta {}
+
+    .button-group {}
+  }
+
+  &--2-up {
+
+    .promo-1,
+    .promo-2 {
+
+      .promo-intro {}
+
+      .promo-title,
+      .promo-text {}
+
+      .promo-cta {}
+
+      .button-group {}
+    }
+
+    .promo-1 {}
+
+    .promo-2 {}
+
+  }
+
+}

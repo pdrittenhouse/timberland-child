@@ -1,0 +1,15 @@
+// Custom styles for collapse
+
+.collapse {
+  // NOTE: ADDING STYLING TO THE .collapse ELEMENT WILL OVERRIDE THE GLOBAL BOOTSTRAP COMPONENT STYLING
+
+  &--container {}
+
+  &--controls {}
+
+  &--content {}
+
+  &--wrapper {}
+
+  &--inner {}
+}

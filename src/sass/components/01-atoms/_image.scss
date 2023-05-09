@@ -1,0 +1,20 @@
+// Custom styles for image
+
+.image {
+
+  &--bg {}
+
+  &--aspect-ratio {
+
+    img { }
+
+    &.ar-1-1 {}
+
+    &.ar-3-2 {}
+
+    &.ar-16-9 {}
+
+    &.ar-21-9 {}
+  }
+
+}

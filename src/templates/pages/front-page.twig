@@ -1,0 +1,23 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+
+  {% if post.content %}
+    <section class="homepage-content-wrapper">
+      <div class="homepage-content--container">
+        <div class="homepage-content--row">
+          <div class="homepage-content--column">
+            <div class="homepage-content">
+              {{post.content}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+{% endblock %}
+
+{% block foot %}
+
+{% endblock %}

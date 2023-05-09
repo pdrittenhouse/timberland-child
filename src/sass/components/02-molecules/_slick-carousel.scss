@@ -1,0 +1,103 @@
+// Custom styles for slick carousel
+
+.slick-carousel {
+
+  &.slick-initialized {}
+
+  &.slick-slider {}
+
+  &.slick-dotted {
+
+    + .slick-carousel-controls {
+
+      .slick-arrow {
+
+        &.slick-prev {}
+
+        &.slick-next {}
+      }
+
+      .slick-dots {}
+    }
+  }
+
+  &-wrapper {
+
+    &.show-custom-controls {
+
+      .slick-carousel {}
+    }
+  }
+
+  &-controls {
+
+    &:empty {}
+  }
+
+  &-controls .slick-arrow,
+  .slick-arrow {
+
+    &:before {}
+
+    &:hover {
+
+      &:before {}
+    }
+
+    &.slick-disabled {}
+
+    &.slick-prev {
+
+      &:before {}
+    }
+
+    &.slick-next {
+
+      &:before {}
+    }
+  }
+
+  &-controls .slick-dots,
+  .slick-dots {
+
+    &:not(.nav) {
+
+      > li {
+
+        &:before {}
+      }
+    }
+
+    li {
+
+      &.slick-active {
+
+        button {
+
+          &:before {}
+        }
+      }
+    }
+
+    button {
+
+      &:before {}
+    }
+  }
+
+  .slick-list {}
+
+  .slick-track {}
+
+  .slick-slide {
+
+    &.slick-current {}
+
+    &.slick-active {}
+  }
+
+  &.testimonial-slider {
+
+    .slick-slide {}
+  }
+}

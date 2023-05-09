@@ -1,0 +1,70 @@
+// Custom styles for pagination
+
+.pagination {
+
+  &:not(.nav) {}
+
+  &-wrapper {}
+
+  .page-item {
+
+    &.current {
+
+      .page-link {}
+    }
+
+    &.btn {
+
+      &.disabled {}
+
+      a {}
+
+      .page-link {
+
+        &:before {}
+
+        &:hover {
+
+          &:before {}
+        }
+      }
+    }
+
+    &.first {
+
+      .page-link {
+
+        &:before {}
+      }
+    }
+
+    &.prev {
+
+      .page-link {
+
+        &:before {}
+      }
+    }
+
+    &.next {
+
+      .page-link {
+
+        &:before {}
+      }
+    }
+
+    &.last {
+
+      .page-link {
+
+        &:before {}
+      }
+    }
+  }
+
+  .page-link {
+
+    &:hover {}
+  }
+}

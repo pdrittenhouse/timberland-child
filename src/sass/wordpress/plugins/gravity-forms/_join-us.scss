@@ -1,0 +1,72 @@
+.no-gf-layout {
+
+  .join-us_wrapper {
+
+    &.gravity-theme {
+
+      .gform_heading {}
+
+      .join-us {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto auto;
+
+        .gform-body {
+          display: contents;
+        }
+
+        .gform_fields {
+          display: contents;
+        }
+
+        .gfield {
+          margin-bottom: rem-calc(10px);
+        }
+
+        #field_1_2 {
+          grid-column-start: 1;
+          grid-column-end: span 4;
+          grid-row-start: 2;
+          grid-row-end: auto;
+          margin-bottom: 0;
+        }
+
+        #field_1_4 {
+          grid-column-start:6;
+          grid-column-end: span 3;
+          grid-row-start: 1;
+          grid-row-end: auto;
+        }
+
+        #field_1_3 {
+          grid-column-start: 1;
+          grid-column-end: span 5;
+          grid-row-start: 1;
+          grid-row-end: auto;
+        }
+
+        .gform_footer {
+          @include justify-content(center);
+          padding: 0;
+          margin: 0;
+          grid-column-start: 5;
+          grid-column-end: span 4;
+          grid-row-start: 2;
+          grid-row-end: auto;
+
+          .button {
+            @include fontSize(18px);
+            @include flex(1 1 auto);
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .gform_confirmation_wrapper.join-us {
+
+    .gform_confirmation_message {}
+  }
+
+}

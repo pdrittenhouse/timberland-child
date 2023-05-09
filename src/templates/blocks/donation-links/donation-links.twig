@@ -1,0 +1,185 @@
+{#
+/**
+ * Block Name: Donation Links
+ *
+ * This is the template that displays the donation links block.
+ */
+#}
+
+{#{% if is_preview %}#}
+{#<p>Some editor instructions here.</p>#}
+{#{% endif %}#}
+
+{#{{ block['className'] }}#}
+{#{{ block['align'] ? 'align-' ~ block['align'] }}#}
+{#{{ block['align_text']}}#}
+{#{{ block['align_content'] }}#}
+{#{{ block['full_height'] }}#}
+
+{# Parent Block Data #}
+{# ACF <= v.5.9 #}
+{#{% set parent = function('get_parent_block', block['id'], block['name']) %}#}
+{# ACF >= v.6.0 #}
+{#{{ parent_block_data['data'] }}#}
+{# Block Context #}
+{#{{ block_context['acf/fields'] }}#}
+{# Post Data #}
+{#{{ block_post }}#}
+
+{% set bg_color =  fields.bg_color['bg_color'] == 'custom' and fields.bg_color['bg_custom_color'] ? 'background-color: ' ~  fields.bg_color['bg_custom_color'] ~ ';' %}
+{% set text_color =  fields.color['color'] == 'custom' and fields.color['custom_color'] ? 'color: ' ~  fields.color['custom_color'] ~ ';' %}
+{% set padding_top  = fields.padding['padding']['top'] is not empty ? 'padding-top: ' ~ fields.padding['padding']['top'] ~ 'px;' %}
+{% set padding_bottom = fields.padding['padding']['bottom'] is not empty ? 'padding-bottom: ' ~ fields.padding['padding']['bottom'] ~ 'px;' %}
+{% set padding_left = fields.padding['padding']['left'] is not empty ? 'padding-left: ' ~ fields.padding['padding']['left'] ~ 'px;' %}
+{% set padding_right = fields.padding['padding']['right'] is not empty ? 'padding-right: ' ~ fields.padding['padding']['right'] ~ 'px;' %}
+{% set margin_top = fields.margin['margin']['top']['auto'] == true ? 'margin-top: auto;' : fields.margin['margin']['top']['top'] is not empty ? 'margin-top: ' ~ fields.margin['margin']['top']['top'] ~ 'px;' %}
+{% set margin_bottom = fields.margin['margin']['bottom']['auto'] == true ? 'margin-bottom: auto;' : fields.margin['margin']['bottom']['bottom'] is not empty ? 'margin-bottom: ' ~ fields.margin['margin']['bottom']['bottom'] ~ 'px;' %}
+{% set margin_left = fields.margin['margin']['left']['auto'] == true ? 'margin-left: auto;' : fields.margin['margin']['left']['left'] is not empty ? 'margin-left: ' ~ fields.margin['margin']['left']['left'] ~ 'px;' %}
+{% set margin_right = fields.margin['margin']['right']['auto'] == true ? 'margin-right: auto;' : fields.margin['margin']['right']['right'] is not empty ? 'margin-right: ' ~ fields.margin['margin']['right']['right'] ~ 'px;' %}
+{% set border_top_width = fields['border']['top']['width'] is not empty ? 'border-top-width: ' ~ fields['border']['top']['width'] ~ 'px;' %}
+{% set border_top_style = fields['border']['top']['style'] ? 'border-top-style: ' ~ fields['border']['top']['style'] ~ ';' %}
+{% set border_top_color = fields['border']['top']['color'] == 'custom' and fields['border']['top']['custom_color'] ? 'border-top-color: ' ~ fields['border']['top']['custom_color'] ~ ';' : fields['border']['top']['color'] == 'palette' and fields['border']['top']['theme_color'] ? 'border-top-color: var(--' ~ fields['border']['top']['theme_color'] ~ ');' %}
+{% set border_bottom_width = fields['border']['bottom']['width'] is not empty ? 'border-bottom-width: ' ~ fields['border']['bottom']['width'] ~ 'px;' %}
+{% set border_bottom_style = fields['border']['bottom']['style'] ? 'border-bottom-style: ' ~ fields['border']['bottom']['style'] ~ ';' %}
+{% set border_bottom_color = fields['border']['bottom']['color'] == 'custom' and fields['border']['bottom']['custom_color'] ? 'border-bottom-color: ' ~ fields['border']['bottom']['custom_color'] ~ ';' : fields['border']['bottom']['color'] == 'palette' and fields['border']['bottom']['theme_color'] ? 'border-bottom-color: var(--' ~ fields['border']['bottom']['theme_color'] ~ ');' %}
+{% set border_left_width = fields['border']['left']['width'] is not empty ? 'border-left-width: ' ~ fields['border']['left']['width'] ~ 'px;' %}
+{% set border_left_style = fields['border']['left']['style'] ? 'border-left-style: ' ~ fields['border']['left']['style'] ~ ';' %}
+{% set border_left_color = fields['border']['left']['color'] == 'custom' and fields['border']['left']['custom_color'] ? 'border-left-color: ' ~ fields['border']['left']['custom_color'] ~ ';' : fields['border']['left']['color'] == 'palette' and fields['border']['left']['theme_color'] ? 'border-left-color: var(--' ~ fields['border']['left']['theme_color'] ~ ');' %}
+{% set border_right_width = fields['border']['right']['width'] is not empty ? 'border-right-width: ' ~ fields['border']['right']['width'] ~ 'px;' %}
+{% set border_right_style = fields['border']['right']['style'] ? 'border-right-style: ' ~ fields['border']['right']['style'] ~ ';' %}
+{% set border_right_color = fields['border']['right']['color'] == 'custom' and fields['border']['right']['custom_color'] ? 'border-right-color: ' ~ fields['border']['right']['custom_color'] ~ ';' : fields['border']['right']['color'] == 'palette' and fields['border']['right']['theme_color'] ? 'border-right-color: var(--' ~ fields['border']['right']['theme_color'] ~ ');' %}
+{% set border_top_left_radius = fields['border_radius']['top_left'] is not empty ? 'border-top-left-radius: ' ~ fields['border_radius']['top_left'] ~ 'px;' %}
+{% set border_top_right_radius = fields['border_radius']['top_right'] is not empty ? 'border-top-right-radius: ' ~ fields['border_radius']['top_right'] ~ 'px;' %}
+{% set border_bottom_left_radius = fields['border_radius']['bottom_left'] is not empty ? 'border-bottom-left-radius: ' ~ fields['border_radius']['bottom_left'] ~ 'px;' %}
+{% set border_bottom_right_radius = fields['border_radius']['bottom_right'] is not empty ? 'border-bottom-right-radius: ' ~ fields['border_radius']['bottom_right'] ~ 'px;' %}
+{% set box_shadow_color = fields['box_shadow']['color']['color'] == 'palette' and fields['box_shadow']['color']['theme_color'] ? 'var(--' ~ fields['box_shadow']['color']['theme_color'] ~ ')' : fields['box_shadow']['color']['color'] == 'custom' and fields['box_shadow']['color']['custom_color'] ? fields['box_shadow']['color']['custom_color'] %}
+{% set box_shadow_inset = fields['box_shadow']['inset'] == true ? 'inset' %}
+{% set box_shadow = fields['box_shadow']['horizontal_offset'] is not empty or fields['box_shadow']['vertical_offset'] is not empty or fields['box_shadow']['blur'] is not empty or fields['box_shadow']['spread'] is not empty or box_shadow_color or box_shadow_inset == true ? 'box-shadow: ' ~ fields['box_shadow']['horizontal_offset'] ~ 'px ' ~ fields['box_shadow']['vertical_offset'] ~ 'px ' ~ fields['box_shadow']['blur'] ~ 'px ' ~ fields['box_shadow']['spread'] ~ 'px ' ~ box_shadow_color ~ ' ' ~ box_shadow_inset ~ ';' %}
+
+{% set block_classes = block_classes|default([])|merge([
+    'donation-links-block',
+    fields.bg_color['bg_color'] == 'palette' and fields.bg_color['bg_theme_color'] ? 'bg-' ~ fields.bg_color['bg_theme_color'],
+    fields.color['color'] == 'palette' and fields.color['theme_color'] ? 'text-' ~ fields.color['theme_color'],
+    fields.layout != 'default' ? 'donation-links-block-' ~ fields.layout,
+    block['className']
+]) | sort | join(' ') | trim %}
+
+{% set block_attributes = block_attributes|default([])|merge([
+    bg_color or text_color or margin_top or margin_bottom or margin_left or margin_right or padding_top or padding_bottom or padding_left or padding_right or border_top_width or border_top_style or border_top_color or border_bottom_width or border_bottom_style or border_bottom_color or border_left_width or border_left_style or border_left_color or border_right_width or border_right_style or border_right_color or border_top_left_radius or border_top_right_radius or border_bottom_left_radius or border_bottom_right_radius or box_shadow ? 'style="' ~ bg_color ~ text_color ~ margin_top ~ margin_bottom ~ margin_left ~ margin_right ~ padding_top ~ padding_bottom ~ padding_left ~ padding_right ~ border_top_width ~ border_top_style ~ border_top_color ~ border_bottom_width ~ border_bottom_style ~ border_bottom_color ~ border_left_width ~ border_left_style ~ border_left_color ~ border_right_width ~ border_right_style ~ border_right_color ~ border_top_left_radius ~ border_top_right_radius ~ border_bottom_left_radius ~ border_bottom_right_radius ~ box_shadow ~ '"'
+]) | sort | join(' ') | trim %}
+
+<div class="{{ block_classes }}" {{ block_attributes }}>
+
+    {% if fields.label or fields.title or fields.subtitle or fields.intro %}
+        <div class="donation-links-block--header">
+            {% if fields.label %}
+                <span class="donation-links-block--label">{{ fields.label }}</span>
+            {% endif %}
+            {% if fields.title %}
+                <h2 class="donation-links-block--title">{{ fields.title }}</h2>
+            {% endif %}
+            {% if fields.subtitle %}
+                <h3 class="donation-links-block--subtitle">{{ fields.subtitle }}</h3>
+            {% endif %}
+            {% if fields.intro %}
+                <div class="donation-links-block--intro">{{ fields.intro }}</div>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {% if fields.inner_blocks == 'before' %}
+        <div class="donation-links-block--inner-blocks">
+            <InnerBlocks />
+        </div>
+    {% endif %}
+
+    {% if fields.links %}
+        <div class="donation-links-block--links">
+            <ul class="donation-links-block--links-list">
+                {% for link in fields.links %}
+
+                    {% set button_bg_color = link.link['background_color']['bg_color'] == 'custom' ? 'background-color: ' ~ link.link['background_color']['bg_custom_color'] ~ ';' %}
+                    {% set button_text_color = link.link['text_color']['color'] == 'custom' ? 'color: ' ~ link.link['text_color']['custom_color'] ~ ';' %}
+                    {% set button_transform = link.link['text_transform']['text_transform'] ? 'text-transform: ' ~ link.link['text_transform']['text_transform'] ~ ';' %}
+                    {% set button_padding_top  = link.link['padding']['padding']['top'] is not empty ? 'padding-top: ' ~ link.link['padding']['padding']['top'] ~ 'px;' %}
+                    {% set button_padding_bottom = link.link['padding']['padding']['bottom'] is not empty ? 'padding-bottom: ' ~ link.link['padding']['padding']['bottom'] ~ 'px;' %}
+                    {% set button_padding_left = link.link['padding']['padding']['left'] is not empty ? 'padding-left: ' ~ link.link['padding']['padding']['left'] ~ 'px;' %}
+                    {% set button_padding_right = link.link['padding']['padding']['right'] is not empty ? 'padding-right: ' ~ link.link['padding']['padding']['right'] ~ 'px;' %}
+                    {% set button_border_top_width = link.link['border']['top']['width'] is not empty ? 'border-top-width: ' ~ link.link['border']['top']['width'] ~ 'px;' %}
+                    {% set button_border_top_style = link.link['border']['top']['style'] ? 'border-top-style: ' ~ link.link['border']['top']['style'] ~ ';' %}
+                    {% set button_border_top_color = link.link['border']['top']['color'] == 'custom' and link.link['border']['top']['custom_color'] ? 'border-top-color: ' ~ link.link['border']['top']['custom_color'] ~ ';' : link.link['border']['top']['color'] == 'palette' and link.link['border']['top']['theme_color'] ? 'border-top-color: var(--' ~ link.link['border']['top']['theme_color'] ~ ');' %}
+                    {% set button_border_bottom_width = link.link['border']['bottom']['width'] is not empty ? 'border-bottom-width: ' ~ link.link['border']['bottom']['width'] ~ 'px;' %}
+                    {% set button_border_bottom_style = link.link['border']['bottom']['style'] ? 'border-bottom-style: ' ~ link.link['border']['bottom']['style'] ~ ';' %}
+                    {% set button_border_bottom_color = link.link['border']['bottom']['color'] == 'custom' and link.link['border']['bottom']['custom_color'] ? 'border-bottom-color: ' ~ link.link['border']['bottom']['custom_color'] ~ ';' : link.link['border']['bottom']['color'] == 'palette' and link.link['border']['bottom']['theme_color'] ? 'border-bottom-color: var(--' ~ link.link['border']['bottom']['theme_color'] ~ ');' %}
+                    {% set button_border_left_width = link.link['border']['left']['width'] is not empty ? 'border-left-width: ' ~ link.link['border']['left']['width'] ~ 'px;' %}
+                    {% set button_border_left_style = link.link['border']['left']['style'] ? 'border-left-style: ' ~ link.link['border']['left']['style'] ~ ';' %}
+                    {% set button_border_left_color = link.link['border']['left']['color'] == 'custom' and link.link['border']['left']['custom_color'] ? 'border-left-color: ' ~ link.link['border']['left']['custom_color'] ~ ';' : link.link['border']['left']['color'] == 'palette' and link.link['border']['left']['theme_color'] ? 'border-left-color: var(--' ~ link.link['border']['left']['theme_color'] ~ ');' %}
+                    {% set button_border_right_width = link.link['border']['right']['width'] is not empty ? 'border-right-width: ' ~ link.link['border']['right']['width'] ~ 'px;' %}
+                    {% set button_border_right_style = link.link['border']['right']['style'] ? 'border-right-style: ' ~ link.link['border']['right']['style'] ~ ';' %}
+                    {% set button_border_right_color = link.link['border']['right']['color'] == 'custom' and link.link['border']['right']['custom_color'] ? 'border-right-color: ' ~ link.link['border']['right']['custom_color'] ~ ';' : link.link['border']['right']['color'] == 'palette' and link.link['border']['right']['theme_color'] ? 'border-right-color: var(--' ~ link.link['border']['right']['theme_color'] ~ ');' %}
+                    {% set button_border_top_left_radius = link.link['border_radius']['top_left'] is not empty ? 'border-top-left-radius: ' ~ link.link['border_radius']['top_left'] ~ 'px;' %}
+                    {% set button_border_top_right_radius = link.link['border_radius']['top_right'] is not empty ? 'border-top-right-radius: ' ~ link.link['border_radius']['top_right'] ~ 'px;' %}
+                    {% set button_border_bottom_left_radius = link.link['border_radius']['bottom_left'] is not empty ? 'border-bottom-left-radius: ' ~ link.link['border_radius']['bottom_left'] ~ 'px;' %}
+                    {% set button_border_bottom_right_radius = link.link['border_radius']['bottom_right'] is not empty ? 'border-bottom-right-radius: ' ~ link.link['border_radius']['bottom_right'] ~ 'px;' %}
+                    {% set button_box_shadow_color = link.link['box_shadow']['color']['color'] == 'palette' and link.link['box_shadow']['color']['theme_color'] ? 'var(--' ~ link.link['box_shadow']['color']['theme_color'] ~ ')' : link.link['box_shadow']['color']['color'] == 'custom' and link.link['box_shadow']['color']['custom_color'] ? link.link['box_shadow']['color']['custom_color'] %}
+                    {% set button_box_shadow_inset = link.link['box_shadow']['inset'] == true ? 'inset' %}
+                    {% set button_box_shadow = link.link['box_shadow']['horizontal_offset'] is not empty or link.link['box_shadow']['vertical_offset'] is not empty or link.link['box_shadow']['blur'] is not empty or link.link['box_shadow']['spread'] is not empty or box_shadow_color or box_shadow_inset == true ? 'box-shadow: ' ~ link.link['box_shadow']['horizontal_offset'] ~ 'px ' ~ link.link['box_shadow']['vertical_offset'] ~ 'px ' ~ link.link['box_shadow']['blur'] ~ 'px ' ~ link.link['box_shadow']['spread'] ~ 'px ' ~ box_shadow_color ~ ' ' ~ box_shadow_inset ~ ';' %}
+                    {% set button_text_shadow_color = link.link['text_shadow']['color']['color'] == 'palette' and link.link['text_shadow']['color']['theme_color'] ? 'var(--' ~ link.link['text_shadow']['color']['theme_color'] ~ ')' : link.link['text_shadow']['color']['color'] == 'custom' and link.link['text_shadow']['color']['custom_color'] ? link.link['text_shadow']['color']['custom_color'] %}
+                    {% set button_text_shadow = link.link['text_shadow']['horizontal_offset'] is not empty or link.link['text_shadow']['vertical_offset'] is not empty or link.link['text_shadow']['blur'] is not empty or text_shadow_color ? 'text-shadow: ' ~ link.link['text_shadow']['horizontal_offset'] ~ 'px ' ~ link.link['text_shadow']['vertical_offset'] ~ 'px ' ~ link.link['text_shadow']['blur'] ~ 'px ' ~ text_shadow_color ~ ';' %}
+                    {% set button_fontsize = link.link['font_size']['font_size']['value'] is not empty ? 'font-size: ' ~ link.link['font_size']['font_size']['value'] ~ fields['font_size']['font_size']['unit'] ~ ';' %}
+                    {% set button_width = link.link['width']['width']['value'] is not empty ? 'width: ' ~ link.link['width']['width']['value']  ~ link.link['width']['width']['unit'] ~  ';' %}
+                    {% set button_min_width = link.link['width']['min_width'] is not empty ? 'min-width: ' ~ link.link['width']['min_width']  ~ 'px;' %}
+                    {% set button_max_width = link.link['width']['max_width'] is not empty ? 'max-width: ' ~ link.link['width']['max_width']  ~ 'px;' %}
+                    {% set button_margin_top = link.link['margin']['margin']['top']['auto'] == true ? 'margin-top: auto;' : parent_block_data['name'] != 'acf/group' and link.link['margin']['margin']['top']['top'] is not empty ? 'margin-top: ' ~ link.link['margin']['margin']['top']['top'] ~ 'px;' %}
+                    {% set button_margin_bottom = link.link['margin']['margin']['bottom']['auto'] == true ? 'margin-bottom: auto;' : parent_block_data['name'] != 'acf/group' and link.link['margin']['margin']['bottom']['bottom'] is not empty ? 'margin-bottom: ' ~ link.link['margin']['margin']['bottom']['bottom'] ~ 'px;' %}
+                    {% set button_margin_left = link.link['margin']['margin']['left']['auto'] == true ? 'margin-left: auto;' : parent_block_data['name'] != 'acf/group' and link.link['margin']['margin']['left']['left'] is not empty ? 'margin-left: ' ~ link.link['margin']['margin']['left']['left'] ~ 'px;' %}
+                    {% set button_margin_right = link.link['margin']['margin']['right']['auto'] == true ? 'margin-right: auto;' : parent_block_data['name'] != 'acf/group' and link.link['margin']['margin']['right']['right'] is not empty ? 'margin-right: ' ~ link.link['margin']['margin']['right']['right'] ~ 'px;' %}
+
+                    <li class="donation-links-block--links-list-item">
+                        {% include '@atoms/button/_button.tpl.twig' with {
+                            button_element: link.link['element'],
+                            button_text: link.link['link']['title'],
+                            button_link: link.link['link']['url'],
+                            button_target: link.link['toggle'] == true ? link.link['link']['url'] : link.link['link']['target'],
+                            button_color: link.link['style'] != 'custom' ? link.link['style'] | default('default'),
+                            button_size: link.link['size'],
+                            button_outline: link.link['outline'],
+                            button_block: link.link['full_width'],
+                            button_toggle: link.link['toggle'],
+                            button_active: link.link['active'],
+                            button_disabled: link.link['disabled'],
+                            button_expanded: link.link['active'],
+                            button_value: link.link['value'],
+                            button_controls: link.link['toggle'] == true ? link.link['link']['url'] | trim('#'),
+                            nowrap: link.link['nowrap'],
+                            contextual_content: link.link['toggle'] == 'tooltip' or link.link['toggle'] == 'popover' ? link.link['toggle'],
+                            title: link.link['context']['title'],
+                            popover_content: link.link['context']['content'],
+                            context_placement: link.link['context']['placement'],
+                            context_container: link.link['context']['container'],
+                            hide_label: link.link['hide_label'],
+                            button_classes: [
+                                'donation-links-block--link',
+                                link.link['background_color']['bg_color'] == 'palette' and link.link['background_color']['bg_theme_color'] ? 'bg-' ~ link.link['background_color']['bg_theme_color'],
+                                link.link['text_color']['color'] == 'palette' and link.link['text_color']['theme_color'] ? 'text-' ~ link.link['text_color']['theme_color'],
+                                link.link['full_width'] != true and link.link['display']['display'] is not null ? link.link['display']['display']
+                            ],
+                            button_other_classes: link.link['classes'],
+                            button_attributes: [
+                                button_bg_color or button_text_color or button_transform or button_padding_top or button_padding_bottom or button_padding_left or button_padding_right or button_border_top_width or button_border_top_style or button_border_top_color or button_border_bottom_width or button_border_bottom_style or button_border_bottom_color or button_border_left_width or button_border_left_style or button_border_left_color or button_border_right_width or button_border_right_style or button_border_right_color or button_border_top_left_radius or button_border_top_right_radius or button_border_bottom_left_radius or button_border_bottom_right_radius or button_box_shadow or button_text_shadow or button_fontsize or button_width or button_min_width or button_max_width or button_margin_top or button_margin_bottom or button_margin_left or button_margin_right ? 'style="' ~ button_bg_color ~ button_text_color ~ button_fontsize ~ button_transform ~ button_padding_top ~ button_padding_bottom ~ button_padding_left ~ button_padding_right ~ button_border_top_width ~ button_border_top_style ~ button_border_top_color ~ button_border_bottom_width ~ button_border_bottom_style ~ button_border_bottom_color ~ button_border_left_width ~ button_border_left_style ~ button_border_left_color ~ button_border_right_width ~ button_border_right_style ~ button_border_right_color ~ button_border_top_left_radius ~ button_border_top_right_radius ~ button_border_bottom_left_radius ~ button_border_bottom_right_radius ~ button_box_shadow ~ button_text_shadow ~ button_width ~ button_min_width ~ button_max_width ~ button_margin_top ~ button_margin_bottom ~ button_margin_left ~ button_margin_right ~ '"'
+                            ]
+                        } %}
+                    </li>
+
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if fields.inner_blocks == 'after' %}
+        <div class="donation-links-block--inner-blocks">
+            <InnerBlocks />
+        </div>
+    {% endif %}
+
+</div>

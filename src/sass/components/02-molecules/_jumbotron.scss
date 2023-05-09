@@ -1,0 +1,1788 @@
+// Custom styles for jumbotron
+
+.jumbotron {
+
+  &--image {}
+
+  img {}
+
+  &--content {}
+
+  &--title {}
+
+  &--subtitle {}
+
+  &-fifty-fifty {
+
+    &:not(.no-container) {
+
+      &.has-image {
+
+        .jumbotron--image {
+
+          @include media-breakpoint-up(lg) {
+            @include make-col(6);
+          }
+        }
+
+        .jumbotron--content {
+
+          @include media-breakpoint-up(lg) {
+            @include make-col(6);
+          }
+        }
+      }
+    }
+
+    &.no-container {
+
+      &.has-image {
+
+        .jumbotron--image {
+
+          @include media-breakpoint-up(lg) {
+            @include flex(0 0 50%);
+          }
+        }
+
+        .jumbotron--content {
+
+          @include media-breakpoint-up(lg) {
+            @include flex(0 0 50%);
+          }
+        }
+      }
+    }
+
+    .jumbotron--image {
+
+      .image-wrapper {
+        height: 100%;
+      }
+
+      .image {
+        @include cover-image-max;
+      }
+    }
+  }
+
+  &-card-content-left {
+    padding: rem-calc(60px 0);
+
+    @include media-breakpoint-up(xl) {
+      padding: rem-calc(120px 0);
+    }
+
+    &:not(.no-container) {
+
+      .row {
+        @include align-items(flex-start);
+      }
+
+      &.has-image,
+      &:not(.has-image) {
+
+        .jumbotron--image {
+          padding: rem-calc(0 40px);
+
+          @include media-breakpoint-up(lg) {
+            @include make-col(6);
+            padding: rem-calc(0 40px);
+          }
+        }
+
+        .jumbotron--content {
+          padding: rem-calc(32px);
+
+          @include media-breakpoint-up(lg) {
+            @include make-col(6);
+            padding: rem-calc(32px);
+          }
+        }
+
+      }
+    }
+
+    &.no-container {
+
+      &.has-image,
+      &:not(.has-image) {
+
+        .jumbotron--image {
+          padding: rem-calc(0 40px);
+
+          @include media-breakpoint-up(lg) {
+            @include flex(0 0 50%);
+            padding: rem-calc(0 40px);
+          }
+        }
+
+        .jumbotron--content {
+          padding: rem-calc(32px);
+
+          @include media-breakpoint-up(lg) {
+            @include flex(0 0 50%);
+            padding: rem-calc(32px);
+          }
+        }
+      }
+    }
+
+    .jumbotron--image {}
+
+    .jumbotron--content {
+      background-color: var(--white);
+      border-radius: rem-calc(8px);
+    }
+
+    .jumbotron--label {
+      @include fontSize(14px, 14px);
+      @include font($font-stack-headings);
+      font-weight: 600;
+    }
+
+    .jumbotron--title {
+      @include fontSize(34px, 42px);
+      font-weight: 500;
+    }
+
+    .jumbotron--subtitle {
+      @include fontSize(24px, 32px);
+      font-weight: 500;
+    }
+
+    .jumbotron--text {
+      @include fontSize(14px, 22px);
+    }
+
+  }
+
+  &-card-content-right {
+    padding: rem-calc(60px 0);
+
+    @include media-breakpoint-up(xl) {
+      padding: rem-calc(120px 0);
+    }
+
+    &:not(.no-container) {
+
+      .row {
+        @include align-items(flex-start);
+      }
+
+      &.has-image,
+      &:not(.has-image) {
+
+        .jumbotron--image {
+          padding: rem-calc(0 40px);
+
+          @include media-breakpoint-up(lg) {
+            @include make-col(6);
+            padding: rem-calc(0 40px);
+          }
+        }
+
+        .jumbotron--content {
+          padding: rem-calc(32px);
+
+          @include media-breakpoint-up(lg) {
+            @include make-col(6);
+            padding: rem-calc(32px);
+          }
+        }
+
+      }
+
+      &:not(.has-image) {
+
+        .jumbotron--content {
+
+          @include media-breakpoint-up(lg) {
+            @include make-col-offset(6);
+          }
+        }
+      }
+    }
+
+    &.no-container {
+
+      &.has-image,
+      &:not(.has-image) {
+
+        .jumbotron--image {
+          padding: rem-calc(0 40px);
+
+          @include media-breakpoint-up(lg) {
+            @include flex(0 0 50%);
+            padding: rem-calc(0 40px);
+          }
+        }
+
+        .jumbotron--content {
+          padding: rem-calc(32px);
+
+          @include media-breakpoint-up(lg) {
+            @include flex(0 0 50%);
+            padding: rem-calc(32px);
+          }
+        }
+      }
+
+      &:not(.has-image) {
+
+        @include media-breakpoint-up(lg) {
+          @include justify-content(flex-end);
+        }
+      }
+    }
+
+    .jumbotron--image {}
+
+    .jumbotron--content {
+      background-color: var(--white);
+      border-radius: rem-calc(8px);
+    }
+
+    .jumbotron--label {
+      @include fontSize(14px, 14px);
+      @include font($font-stack-headings);
+      font-weight: 600;
+    }
+
+    .jumbotron--title {
+      @include fontSize(34px, 42px);
+      font-weight: 500;
+    }
+
+    .jumbotron--subtitle {
+      @include fontSize(24px, 32px);
+      font-weight: 500;
+    }
+
+    .jumbotron--text {
+      @include fontSize(14px, 22px);
+    }
+
+  }
+
+  &-full-height-centered {
+    position: relative;
+    min-height: 100vh;
+
+    @include media-breakpoint-up(lg) {
+      height: 100vh;
+    }
+
+    &:not(.no-container) {
+
+      .container,
+      .container-fluid{
+        height: 100%;
+      }
+
+      .row {
+        @include flex-wrap(wrap);
+        height: 100%;
+      }
+
+      &.has-image {
+
+        .jumbotron--image {
+
+          @include media-breakpoint-up(lg) {
+            @include make-col(12);
+          }
+        }
+
+        .jumbotron--content {
+
+          @include media-breakpoint-up(lg) {
+            @include make-col(12);
+          }
+        }
+      }
+    }
+
+    &.no-container {
+      @include flex-wrap(wrap);
+
+      &.has-image {
+
+        .jumbotron--image {
+
+          @include media-breakpoint-up(lg) {
+            @include flex(0 0 100%);
+          }
+        }
+
+        .jumbotron--content {
+
+          @include media-breakpoint-up(lg) {
+            @include flex(0 0 100%);
+          }
+        }
+      }
+    }
+
+    &:not(.no-container),
+    &.no-container {
+
+      .jumbotron--content {
+        padding: rem-calc(60px);
+
+        @include media-breakpoint-between(lg, xl) {
+          padding: rem-calc(60px 120px);
+        }
+
+        @include media-breakpoint-up(xxl) {
+          padding: rem-calc(120px 180px);
+        }
+      }
+    }
+
+    .jumbotron--image {
+      height: 100%;
+
+      img {
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .jumbotron--content {
+      text-align: center;
+      text-shadow: 2px 2px 4px rgba(c(black), .125);
+
+      @include media-breakpoint-up(lg) {
+        @include absolute-center(false, true, true);
+        left: 0;
+        right: 0;
+      }
+    }
+
+    .jumbotron--label {
+      @include fontSize(14px, 14px);
+      @include font($font-stack-alternate, 700);
+      font-weight: 600;
+      color: var(--secondary);
+
+      @include media-breakpoint-only(lg) {
+        @include fontSize(16px, 16px);
+      }
+
+      @include media-breakpoint-between(xl, xxxl) {
+        @include fontSize(18px, 18px);
+      }
+
+      @include media-breakpoint-up(xxxl) {
+        @include fontSize(24px, 24px);
+      }
+    }
+
+    .jumbotron--title {
+      @include fontSize(40px, 40px);
+      color: var(--primary);
+      font-weight: bold;
+
+      @include media-breakpoint-only(lg) {
+        @include fontSize(56px, 56px);
+      }
+
+      @include media-breakpoint-between(xl, xxxl) {
+        @include fontSize(70px, 70px);
+      }
+
+      @include media-breakpoint-up(xxxl) {
+        @include fontSize(111px, 111px);
+      }
+    }
+
+    .jumbotron--subtitle {
+      @include fontSize(18px, 24px);
+      color: var(--secondary);
+      margin-bottom: rem-calc(30px);
+      font-weight: 500;
+
+      @include media-breakpoint-only(lg) {
+        @include fontSize(18px, 18px);
+      }
+
+      @include media-breakpoint-between(xl, xxxl) {
+        @include fontSize(24px, 24px);
+      }
+
+      @include media-breakpoint-up(xxxl) {
+        @include fontSize(47px, 47px);
+      }
+    }
+
+    .jumbotron--text {
+      @include fontSize(14px, 22px);
+    }
+  }
+
+  &-content-overlap-left {
+    position: relative;
+    padding: rem-calc(60px 0);
+
+    @include media-breakpoint-up(xl) {
+      display: grid;
+      grid-template-columns: 60% auto;
+      grid-template-rows: 1fr auto;
+      padding: rem-calc(90px 45px);
+    }
+
+    &:not(.no-container) {
+
+      .container {
+
+        @include media-breakpoint-up(xl) {
+          display: contents;
+        }
+      }
+
+      .row {
+
+        @include media-breakpoint-up(xl) {
+          display: contents;
+        }
+      }
+
+      &.has-image {
+
+        .jumbotron--image {
+
+          @include media-breakpoint-up(lg) {
+            @include make-col(12);
+          }
+        }
+
+        .jumbotron--content {
+
+          @include media-breakpoint-up(lg) {
+            @include make-col(12);
+          }
+        }
+
+        &.image-left {
+
+          .jumbotron--image {
+
+            @include media-breakpoint-up(xl) {
+              grid-column-start: 2;
+              grid-column-end: auto;
+              grid-row-start: 2;
+              grid-row-end: auto;
+            }
+          }
+
+          .jumbotron--content {
+
+            @include media-breakpoint-up(xl) {
+              grid-column-start: 2;
+              grid-column-end: auto;
+              grid-row-start: 1;
+              grid-row-end: auto;
+            }
+          }
+        }
+      }
+    }
+
+    &.no-container {
+
+      &.has-image {
+
+        .jumbotron--image {
+
+          @include media-breakpoint-up(lg) {
+            @include flex(0 0 100%);
+          }
+        }
+
+        .jumbotron--content {
+
+          @include media-breakpoint-up(lg) {
+            @include flex(0 0 100%);
+          }
+        }
+
+        &.image-left {
+
+          .jumbotron--image {
+
+            @include media-breakpoint-up(xl) {
+              grid-column-start: 2;
+              grid-column-end: auto;
+              grid-row-start: 2;
+              grid-row-end: auto;
+            }
+          }
+
+          .jumbotron--content {
+
+            @include media-breakpoint-up(xl) {
+              grid-column-start: 2;
+              grid-column-end: auto;
+              grid-row-start: 1;
+              grid-row-end: auto;
+            }
+          }
+        }
+      }
+    }
+
+    .jumbotron--image {
+
+      @include media-breakpoint-up(xl) {
+        grid-column-start: 2;
+        grid-column-end: auto;
+        grid-row-start: 1;
+        grid-row-end: auto;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: flex-end;
+      }
+    }
+
+    .jumbotron--content {
+
+      @include media-breakpoint-up(xl) {
+        grid-column-start: 2;
+        grid-column-end: auto;
+        grid-row-start: 2;
+        grid-row-end: auto;
+      }
+    }
+
+    .content-wrapper {}
+
+    .jumbotron--label {
+      @include font($font-stack-alternate);
+      @include fontSize(23px, 23px);
+      color: var(--tertiary);
+      letter-spacing: rem-calc(4.2px);
+      text-shadow: 0 rem-calc(3px) rem-calc(6px) rgba(c(black), .16);
+      margin-bottom: rem-calc(12px);
+
+      @include media-breakpoint-only(lg) {
+        @include fontSize(18px, 18px);
+      }
+    }
+
+    .jumbotron--title {
+      @include fontSize(52px, 54px);
+      color: var(--primary);
+      //margin-bottom: rem-calc(30px);
+      text-shadow: 0 rem-calc(3px) rem-calc(6px) rgba(c(black), .16);
+      font-weight: 900;
+
+      @include media-breakpoint-only(lg) {
+        @include fontSize(28px, 30px);
+      }
+
+      @include media-breakpoint-between(xl, xxl) {
+        @include fontSize(46px, 48px);
+      }
+    }
+
+    .jumbotron--subtitle {
+      @include fontSize(18px, 24px);
+      color: var(--denary);
+      margin-bottom: rem-calc(30px);
+      letter-spacing: rem-calc(6px);
+
+      @include media-breakpoint-only(lg) {
+        @include fontSize(18px, 18px);
+      }
+
+      @include media-breakpoint-between(xl, xxl) {
+        @include fontSize(24px, 24px);
+      }
+
+      @include media-breakpoint-up(xxxl) {
+        //@include fontSize(34px, 34px);
+        @include fontSize(47px, 47px);
+      }
+    }
+
+    .jumbotron-inner-blocks {
+
+      @include media-breakpoint-up(xl) {
+        @include absolute-position('bottom', 'outside');
+        right: 40%;
+        margin-top: rem-calc(-150px);
+        z-index: z(site-content);
+      }
+    }
+  }
+
+  &-content-overlap-right {
+    position: relative;
+    padding: rem-calc(60px 0);
+
+    @include media-breakpoint-up(xl) {
+      display: grid;
+      grid-template-columns: 40% auto;
+      grid-template-rows: 1fr auto;
+      padding: rem-calc(90px 45px);
+    }
+
+    &:not(.no-container) {
+
+      .container {
+
+        @include media-breakpoint-up(xl) {
+          display: contents;
+        }
+      }
+
+      .row {
+
+        @include media-breakpoint-up(xl) {
+          display: contents;
+        }
+      }
+
+      &.has-image {
+
+        .jumbotron--image {
+
+          @include media-breakpoint-up(lg) {
+            @include make-col(12);
+          }
+        }
+
+        .jumbotron--content {
+
+          @include media-breakpoint-up(lg) {
+            @include make-col(12);
+          }
+        }
+
+        &.image-left {
+
+          .jumbotron--image {
+
+            @include media-breakpoint-up(xl) {
+              grid-column-start: 1;
+              grid-column-end: auto;
+              grid-row-start: 2;
+              grid-row-end: auto;
+            }
+          }
+
+          .jumbotron--content {
+
+            @include media-breakpoint-up(xl) {
+              grid-column-start: 1;
+              grid-column-end: auto;
+              grid-row-start: 1;
+              grid-row-end: auto;
+            }
+          }
+        }
+      }
+    }
+
+    &.no-container {
+
+      &.has-image {
+
+        .jumbotron--image {
+
+          @include media-breakpoint-up(lg) {
+            @include flex(0 0 100%);
+          }
+        }
+
+        .jumbotron--content {
+
+          @include media-breakpoint-up(lg) {
+            @include flex(0 0 100%);
+          }
+        }
+
+        &.image-left {
+
+          .jumbotron--image {
+
+            @include media-breakpoint-up(xl) {
+              grid-column-start: 2;
+              grid-column-end: auto;
+              grid-row-start: 2;
+              grid-row-end: auto;
+            }
+          }
+
+          .jumbotron--content {
+
+            @include media-breakpoint-up(xl) {
+              grid-column-start: 2;
+              grid-column-end: auto;
+              grid-row-start: 1;
+              grid-row-end: auto;
+            }
+          }
+        }
+      }
+    }
+
+    .jumbotron--image {
+
+      @include media-breakpoint-up(xl) {
+        grid-column-start: 1;
+        grid-column-end: auto;
+        grid-row-start: 1;
+        grid-row-end: auto;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: flex-end;
+      }
+    }
+
+    .jumbotron--content {
+
+      @include media-breakpoint-up(xl) {
+        grid-column-start: 1;
+        grid-column-end: auto;
+        grid-row-start: 2;
+        grid-row-end: auto;
+      }
+    }
+
+    .content-wrapper {}
+
+    .jumbotron--label {
+      @include font($font-stack-alternate);
+      @include fontSize(23px, 23px);
+      color: var(--tertiary);
+      letter-spacing: rem-calc(4.2px);
+      text-shadow: 0 rem-calc(3px) rem-calc(6px) rgba(c(black), .16);
+      margin-bottom: rem-calc(12px);
+
+      @include media-breakpoint-only(lg) {
+        @include fontSize(18px, 18px);
+      }
+    }
+
+    .jumbotron--title {
+      @include fontSize(52px, 54px);
+      color: var(--primary);
+      //margin-bottom: rem-calc(30px);
+      text-shadow: 0 rem-calc(3px) rem-calc(6px) rgba(c(black), .16);
+      font-weight: 900;
+
+      @include media-breakpoint-only(lg) {
+        @include fontSize(28px, 30px);
+      }
+
+      @include media-breakpoint-between(xl, xxl) {
+        @include fontSize(46px, 48px);
+      }
+    }
+
+    .jumbotron--subtitle {
+      @include fontSize(18px, 24px);
+      color: var(--denary);
+      margin-bottom: rem-calc(30px);
+      letter-spacing: rem-calc(6px);
+
+      @include media-breakpoint-only(lg) {
+        @include fontSize(18px, 18px);
+      }
+
+      @include media-breakpoint-between(xl, xxl) {
+        @include fontSize(24px, 24px);
+      }
+
+      @include media-breakpoint-up(xxxl) {
+        //@include fontSize(34px, 34px);
+        @include fontSize(47px, 47px);
+      }
+    }
+
+    .jumbotron-inner-blocks {
+
+      @include media-breakpoint-up(xl) {
+        @include absolute-position('bottom', 'outside');
+        left: 40%;
+        margin-top: rem-calc(-150px);
+        z-index: z(site-content);
+      }
+    }
+  }
+
+  &-gradient-overlay-left {
+    padding: rem-calc(120px 0);
+
+    @include media-breakpoint-up(xl) {
+      padding: rem-calc(240px 0);
+    }
+
+    &:not(.no-container) {
+
+      .row {
+        @include align-items(flex-start);
+      }
+
+      &.has-image,
+      &:not(.has-image) {
+
+        .jumbotron--image {
+          padding: rem-calc(0 40px);
+
+          @include media-breakpoint-up(lg) {
+            @include make-col(6);
+            padding: rem-calc(0 40px);
+          }
+        }
+
+        .jumbotron--content {
+          padding: rem-calc(32px);
+
+          @include media-breakpoint-up(lg) {
+            @include make-col(6);
+            padding: rem-calc(32px);
+          }
+        }
+
+      }
+    }
+
+    &.no-container {
+
+      &.has-image,
+      &:not(.has-image) {
+
+        .jumbotron--image {
+          padding: rem-calc(0 40px);
+
+          @include media-breakpoint-up(lg) {
+            @include flex(0 0 50%);
+            padding: rem-calc(0 40px);
+          }
+        }
+
+        .jumbotron--content {
+          padding: rem-calc(32px);
+
+          @include media-breakpoint-up(lg) {
+            @include flex(0 0 50%);
+            padding: rem-calc(32px);
+          }
+        }
+      }
+    }
+
+    &.gradient-primary-secondary-horizontal {
+
+      .bg {
+        background: var(--primary-secondary-horizontal);
+      }
+    }
+
+    &.gradient-tertiary-quaternary-vertical {
+
+      .bg {
+        background: var(--tertiary-quaternary-vertical);
+      }
+    }
+
+    &.gradient-quinary-senary-diagonal-up {
+
+      .bg {
+        background: var(--quinary-senary-diagonal-up);
+      }
+    }
+
+    &.gradient-septenary-octonary-diagonal-down {
+
+      .bg {
+        background: var(--septenary-octonary-diagonal-down);
+      }
+    }
+
+    &.gradient-nonary-denary-diagonal-down {
+
+      .bg {
+        background: var(--nonary-denary-diagonal-down);
+      }
+    }
+
+    &.gradient-primary-secondary-radial {
+
+      .bg {
+        background: var(--primary-secondary-radial);
+      }
+    }
+
+    .bg {
+      @include cover;
+      pointer-events: none;
+      z-index: 0;
+      opacity: .7;
+    }
+
+    .jumbotron--image {
+      position: relative;
+      z-index: z(site-content);
+    }
+
+    .jumbotron--content {
+      position: relative;
+      z-index: z(site-content);
+    }
+
+    .jumbotron--label {
+      @include fontSize(14px, 14px);
+      @include font($font-stack-headings);
+      font-weight: 600;
+    }
+
+    .jumbotron--title {
+      @include fontSize(34px, 42px);
+      font-weight: 500;
+    }
+
+    .jumbotron--subtitle {
+      @include fontSize(24px, 32px);
+      font-weight: 500;
+    }
+
+    .jumbotron--text {
+      @include fontSize(14px, 22px);
+    }
+
+  }
+
+  &-gradient-overlay-right {
+    padding: rem-calc(120px 0);
+
+    @include media-breakpoint-up(xl) {
+      padding: rem-calc(240px 0);
+    }
+
+    &:not(.no-container) {
+
+      .row {
+        @include align-items(flex-start);
+      }
+
+      &.has-image,
+      &:not(.has-image) {
+
+        .jumbotron--image {
+          padding: rem-calc(0 40px);
+
+          @include media-breakpoint-up(lg) {
+            @include make-col(6);
+            padding: rem-calc(0 40px);
+          }
+        }
+
+        .jumbotron--content {
+          padding: rem-calc(32px);
+
+          @include media-breakpoint-up(lg) {
+            @include make-col(6);
+            padding: rem-calc(32px);
+          }
+        }
+
+      }
+
+      &:not(.has-image) {
+
+        .jumbotron--content {
+
+          @include media-breakpoint-up(lg) {
+            @include make-col-offset(6);
+          }
+        }
+      }
+    }
+
+    &.no-container {
+
+      &.has-image,
+      &:not(.has-image) {
+
+        .jumbotron--image {
+          padding: rem-calc(0 40px);
+
+          @include media-breakpoint-up(lg) {
+            @include flex(0 0 50%);
+            padding: rem-calc(0 40px);
+          }
+        }
+
+        .jumbotron--content {
+          padding: rem-calc(32px);
+
+          @include media-breakpoint-up(lg) {
+            @include flex(0 0 50%);
+            padding: rem-calc(32px);
+          }
+        }
+      }
+
+      &:not(.has-image) {
+
+        @include media-breakpoint-up(lg) {
+          @include justify-content(flex-end);
+        }
+      }
+    }
+
+    &.gradient-primary-secondary-horizontal {
+
+      .bg {
+        background: var(--primary-secondary-horizontal);
+      }
+    }
+
+    &.gradient-tertiary-quaternary-vertical {
+
+      .bg {
+        background: var(--tertiary-quaternary-vertical);
+      }
+    }
+
+    &.gradient-quinary-senary-diagonal-up {
+
+      .bg {
+        background: var(--quinary-senary-diagonal-up);
+      }
+    }
+
+    &.gradient-septenary-octonary-diagonal-down {
+
+      .bg {
+        background: var(--septenary-octonary-diagonal-down);
+      }
+    }
+
+    &.gradient-nonary-denary-diagonal-down {
+
+      .bg {
+        background: var(--nonary-denary-diagonal-down);
+      }
+    }
+
+    &.gradient-primary-secondary-radial {
+
+      .bg {
+        background: var(--primary-secondary-radial);
+      }
+    }
+
+    .bg {
+      @include cover;
+      pointer-events: none;
+      z-index: 0;
+      opacity: .7;
+    }
+
+    .jumbotron--image {
+      position: relative;
+      z-index: z(site-content);
+    }
+
+    .jumbotron--content {
+      position: relative;
+      z-index: z(site-content);
+    }
+
+    .jumbotron--label {
+      @include fontSize(14px, 14px);
+      @include font($font-stack-headings);
+      font-weight: 600;
+    }
+
+    .jumbotron--title {
+      @include fontSize(34px, 42px);
+      font-weight: 500;
+    }
+
+    .jumbotron--subtitle {
+      @include fontSize(24px, 32px);
+      font-weight: 500;
+    }
+
+    .jumbotron--text {
+      @include fontSize(14px, 22px);
+    }
+
+  }
+
+  &-angles-left {
+    @include flex-flow(row wrap);
+    padding: rem-calc(300px 0 0);
+    position: relative;
+
+    @include media-breakpoint-up(xl) {
+      padding: 0;
+    }
+
+    &:not(.no-container) {
+
+      .row {
+        @include align-items(flex-start);
+      }
+
+      &.has-image,
+      &:not(.has-image) {
+
+        .jumbotron--image {
+
+          @include media-breakpoint-down(xl) {
+            @include order(0);
+          }
+
+          @include media-breakpoint-between(md, xl) {
+            @include make-col(12);
+          }
+
+          @include media-breakpoint-up(xl) {
+            @include make-col(6);
+          }
+        }
+
+        .jumbotron--content {
+
+          @include media-breakpoint-between(md, xl) {
+            @include make-col(12);
+          }
+
+          @include media-breakpoint-up(xl) {
+            @include make-col(6);
+          }
+        }
+
+      }
+    }
+
+    &.no-container {
+      @include flex-flow(row wrap);
+
+      &.has-image,
+      &:not(.has-image) {
+
+        .jumbotron--image {
+
+          @include media-breakpoint-down(xl) {
+            @include order(0);
+          }
+
+          @include media-breakpoint-between(md, xl) {
+            @include flex(0 0 100%);
+          }
+
+          @include media-breakpoint-up(xl) {
+            @include flex(0 0 50%);
+          }
+        }
+
+        .jumbotron--content {
+
+          @include media-breakpoint-between(md, xl) {
+            @include flex(0 0 100%);
+          }
+
+          @include media-breakpoint-up(xl) {
+            @include flex(0 0 50%);
+          }
+        }
+      }
+    }
+
+    .bg {}
+
+    .jumbotron--image {
+      //position: relative;
+      z-index: z(site-content);
+      padding-bottom: rem-calc(32px);
+
+      .image {
+        max-width: rem-calc(150px);
+        position: absolute;
+        top: rem-calc(24px);
+        left: rem-calc(24px);
+
+        @include media-breakpoint-up(xl) {
+          max-width: rem-calc(200px);
+          left: auto;
+          right: rem-calc(24px);
+        }
+      }
+    }
+
+    .jumbotron--content {
+      position: relative;
+      z-index: z(site-content);
+      background-color: var(--tertiary);
+      //padding: rem-calc(32px);
+
+      @include media-breakpoint-up(xl) {
+        background-color: var(--white);
+      }
+
+      @include media-breakpoint-only(xl) {
+        padding: rem-calc(64px 32px 64px 64px);
+      }
+
+      @include media-breakpoint-only(xxl) {
+        padding: rem-calc(90px 964px 90px 90px);
+      }
+
+      @include media-breakpoint-up(xxxl) {
+        padding: rem-calc(120px 64px 120px 90px);
+      }
+
+      &:before {
+        @include absolute-position('top', 'outside');
+        content: "";
+        display: block;
+        background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 500 60' enable-background='new 0 0 500 60' xml:space='preserve'%3E%3Cg%3E%3Cpolygon fill='%23009dc4' points='500,60 500,60 0,60 0,0 0,0 '/%3E%3C/g%3E%3C/svg%3E%0A");
+        background-repeat: no-repeat;
+        background-position: right bottom;
+        background-size: contain;
+        height: rem-calc(85px);
+        z-index: z('site-content');
+        //margin-bottom: rem-calc(-2px);
+
+        @include media-breakpoint-up(xl) {
+          @include absolute-position($undo: true);
+          @include absolute-position('right', 'outside');
+          height: auto;
+          background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 60 500' enable-background='new 0 0 60 500' xml:space='preserve'%3E%3Cg%3E%3Cpolygon fill='%23fff' points='0,0 0,0 0,500 60,500 60,500 '/%3E%3C/g%3E%3C/svg%3E%0A");
+          margin-left: rem-calc(-2px);
+          margin-bottom: 0;
+        }
+
+        @include media-breakpoint-only(xl) {
+          width: rem-calc(64px);
+        }
+
+        @include media-breakpoint-up(xxl) {
+          width: rem-calc(80px);
+        }
+      }
+
+      &:after {
+        @include absolute-position('top', 'outside');
+        content: "";
+        display: block;
+        background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 162 60' enable-background='new 0 0 162 60' xml:space='preserve'%3E%3Cpolygon fill='%23fff' points='162,60 162,0 0,60 '/%3E%3C/svg%3E%0A");
+        background-repeat: no-repeat;
+        background-position: right bottom;
+        background-size: contain;
+        height: rem-calc(85px);
+        z-index: 0;
+        //margin-bottom: rem-calc(-1px);
+
+        @include media-breakpoint-up(xl) {
+          @include absolute-position($undo: true);
+          @include absolute-position('right', 'outside');
+          height: auto;
+          background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 60 162' enable-background='new 0 0 60 162' xml:space='preserve'%3E%3Cpolygon fill='%23009dc4' points='0,0 60,0 0,162 '/%3E%3C/svg%3E%0A");
+          background-position: left top;
+          margin-left: rem-calc(-1px);
+          margin-bottom: 0;
+        }
+
+        @include media-breakpoint-only(xl) {
+          width: rem-calc(82px);
+        }
+
+        @include media-breakpoint-up(xxl) {
+          width: rem-calc(100px);
+        }
+      }
+
+      .content-wrapper {
+        max-width: rem-calc(520px);
+        margin: 0 auto;
+
+        @include media-breakpoint-up(xl) {
+          max-width: rem-calc(380px);
+          margin: 0 auto;
+        }
+      }
+    }
+
+    .jumbotron--label {
+      @include fontSize(14px, 14px);
+      @include font($font-stack-headings);
+      font-weight: 600;
+
+      @include media-breakpoint-down(xl) {
+        @include remove;
+      }
+    }
+
+    .jumbotron--title {
+      @include fontSize(50px, 58px);
+      font-weight: 700;
+      color: var(--tertiary);
+
+      @include media-breakpoint-down(xl) {
+        @include remove;
+      }
+
+      @include media-breakpoint-up(xl) {
+        @include fontSize(68px, 76px);
+      }
+    }
+
+    .jumbotron--subtitle {
+      @include fontSize(24px, 32px);
+      font-weight: 500;
+
+      @include media-breakpoint-down(xl) {
+        @include remove;
+      }
+    }
+
+    .jumbotron--text {
+      @include fontSize(14px, 22px);
+
+      @include media-breakpoint-down(xl) {
+        @include remove;
+      }
+    }
+
+    .jumbotron-inner-blocks {
+      max-width: rem-calc(520px);
+      margin: 0 auto;
+
+      @include media-breakpoint-up(xl) {
+        max-width: rem-calc(380px);
+        margin: 0 auto;
+      }
+    }
+
+  }
+
+  &-angles-right {
+    @include flex-flow(row wrap);
+    padding: rem-calc(300px 0 0);
+    position: relative;
+
+    @include media-breakpoint-up(xl) {
+      padding: 0;
+    }
+
+    &:not(.no-container) {
+
+      .row {
+        @include align-items(flex-start);
+      }
+
+      &.has-image,
+      &:not(.has-image) {
+
+        .jumbotron--image {
+          @include order(0);
+
+          @include media-breakpoint-between(md, xl) {
+            @include make-col(12);
+          }
+
+          @include media-breakpoint-up(xl) {
+            @include make-col(6);
+          }
+        }
+
+        .jumbotron--content {
+
+          @include media-breakpoint-between(md, xl) {
+            @include make-col(12);
+          }
+
+          @include media-breakpoint-up(xl) {
+            @include make-col(6);
+          }
+        }
+
+      }
+
+      &:not(.has-image) {
+
+        .jumbotron--content {
+
+          @include media-breakpoint-up(md) {
+            @include make-col-offset(0);
+          }
+
+          @include media-breakpoint-up(xl) {
+            @include make-col-offset(6);
+          }
+        }
+      }
+    }
+
+    &.no-container {
+      @include flex-flow(row wrap);
+
+      &.has-image,
+      &:not(.has-image) {
+
+        .jumbotron--image {
+          @include order(0);
+
+          @include media-breakpoint-between(md, xl) {
+            @include flex(0 0 100%);
+          }
+
+          @include media-breakpoint-up(xl) {
+            @include flex(0 0 50%);
+          }
+        }
+
+        .jumbotron--content {
+
+          @include media-breakpoint-between(md, xl) {
+            @include flex(0 0 100%);
+          }
+
+          @include media-breakpoint-up(xl) {
+            @include flex(0 0 50%);
+          }
+        }
+      }
+
+      &:not(.has-image) {
+
+        @include media-breakpoint-between(md, xl) {
+          //@include justify-content(center);
+        }
+
+        @include media-breakpoint-up(xl) {
+          @include justify-content(flex-end);
+        }
+      }
+    }
+
+    .bg {}
+
+    .jumbotron--image {
+      //position: relative;
+      z-index: z(site-content);
+      padding-bottom: rem-calc(32px);
+
+      .image {
+        max-width: rem-calc(150px);
+        position: absolute;
+        top: rem-calc(24px);
+        left: rem-calc(24px);
+
+        @include media-breakpoint-up(xl) {
+          max-width: rem-calc(200px);
+        }
+      }
+    }
+
+    .jumbotron--content {
+      position: relative;
+      z-index: z(site-content);
+      background-color: var(--tertiary);
+      //padding: rem-calc(32px);
+
+      @include media-breakpoint-up(xl) {
+        background-color: var(--white);
+      }
+
+      @include media-breakpoint-only(xl) {
+        padding: rem-calc(64px 64px 64px 32px);
+      }
+
+      @include media-breakpoint-only(xxl) {
+        padding: rem-calc(90px 90px 90px 64px);
+      }
+
+      @include media-breakpoint-up(xxxl) {
+        padding: rem-calc(120px 90px 120px 64px);
+      }
+
+      &:before {
+        @include absolute-position('top', 'outside');
+        content: "";
+        display: block;
+        background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 500 60' enable-background='new 0 0 500 60' xml:space='preserve'%3E%3Cg%3E%3Cpolygon fill='%23009dc4' points='0,60 0,60 500,60 500,0 500,0 '/%3E%3C/g%3E%3C/svg%3E%0A");
+        background-repeat: no-repeat;
+        background-position: right bottom;
+        background-size: contain;
+        height: rem-calc(85px);
+        z-index: z('site-content');
+        //margin-bottom: rem-calc(-2px);
+
+        @include media-breakpoint-up(xl) {
+          @include absolute-position($undo: true);
+          @include absolute-position('left', 'outside');
+          height: auto;
+          background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 60 500' enable-background='new 0 0 60 500' xml:space='preserve'%3E%3Cg%3E%3Cpolygon fill='%23fff' points='60,0 60,0 60,500 0,500 0,500 '/%3E%3C/g%3E%3C/svg%3E%0A");
+          margin-right: rem-calc(-2px);
+          margin-bottom: 0;
+        }
+
+        @include media-breakpoint-only(xl) {
+          width: rem-calc(64px);
+        }
+
+        @include media-breakpoint-up(xxl) {
+          width: rem-calc(80px);
+        }
+      }
+
+      &:after {
+        @include absolute-position('top', 'outside');
+        content: "";
+        display: block;
+        background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 162 60' enable-background='new 0 0 162 60' xml:space='preserve'%3E%3Cpolygon fill='%23fff' points='0,60 0,0 162,60 '/%3E%3C/svg%3E%0A");
+        background-repeat: no-repeat;
+        background-position: left bottom;
+        background-size: contain;
+        height: rem-calc(85px);
+        z-index: 0;
+        //margin-bottom: rem-calc(-1px);
+
+        @include media-breakpoint-up(xl) {
+          @include absolute-position($undo: true);
+          @include absolute-position('left', 'outside');
+          height: auto;
+          background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 60 162' enable-background='new 0 0 60 162' xml:space='preserve'%3E%3Cpolygon fill='%23009dc4' points='60,0 0,0 60,162 '/%3E%3C/svg%3E%0A");
+          background-position: right top;
+          margin-right: rem-calc(-1px);
+          margin-bottom: 0;
+        }
+
+        @include media-breakpoint-only(xl) {
+          width: rem-calc(82px);
+        }
+
+        @include media-breakpoint-up(xxl) {
+          width: rem-calc(100px);
+        }
+      }
+
+      .content-wrapper {
+        max-width: rem-calc(520px);
+        margin: 0 auto;
+
+        @include media-breakpoint-up(xl) {
+          max-width: rem-calc(380px);
+          margin: 0 auto;
+        }
+      }
+    }
+
+    .jumbotron--label {
+      @include fontSize(14px, 14px);
+      @include font($font-stack-headings);
+      font-weight: 600;
+
+      @include media-breakpoint-down(xl) {
+        @include remove;
+      }
+    }
+
+    .jumbotron--title {
+      @include fontSize(50px, 58px);
+      font-weight: 700;
+      color: var(--tertiary);
+
+      @include media-breakpoint-down(xl) {
+        @include remove;
+      }
+
+      @include media-breakpoint-up(xl) {
+        @include fontSize(68px, 76px);
+      }
+    }
+
+    .jumbotron--subtitle {
+      @include fontSize(24px, 32px);
+      font-weight: 500;
+
+      @include media-breakpoint-down(xl) {
+        @include remove;
+      }
+    }
+
+    .jumbotron--text {
+      @include fontSize(14px, 22px);
+
+      @include media-breakpoint-down(xl) {
+        @include remove;
+      }
+    }
+
+    .jumbotron-inner-blocks {
+      max-width: rem-calc(520px);
+      margin: 0 auto;
+
+      @include media-breakpoint-up(xl) {
+        max-width: rem-calc(380px);
+        margin: 0 auto;
+      }
+    }
+
+  }
+
+  &-content-overlay-bottom {
+    position: relative;
+
+    &:not(.no-container) {
+
+      .row {
+        @include align-items(flex-start);
+      }
+
+      &.has-image,
+      &:not(.has-image) {
+
+        .jumbotron--image {
+          @include order(0);
+
+          @include media-breakpoint-up(md) {
+            @include make-col(12);
+          }
+        }
+
+        .jumbotron--content {
+
+          @include media-breakpoint-up(md) {
+            @include make-col(12);
+          }
+        }
+
+      }
+
+      &:not(.has-image) {
+
+        .jumbotron--content {
+
+          @include media-breakpoint-up(md) {
+            @include make-col-offset(0);
+          }
+        }
+      }
+    }
+
+    &.no-container {
+      @include flex-flow(row wrap);
+
+      &.has-image,
+      &:not(.has-image) {
+
+        .jumbotron--image {
+          @include order(0);
+
+          @include media-breakpoint-up(md) {
+            @include flex(0 0 100%);
+          }
+        }
+
+        .jumbotron--content {
+
+          @include media-breakpoint-up(md) {
+            @include flex(0 0 100%);
+          }
+        }
+      }
+
+      &:not(.has-image) {
+        @include justify-content(center);
+
+        @include media-breakpoint-up(xl) {
+          @include justify-content(center);
+        }
+      }
+    }
+
+    &.has-image {
+
+      .jumbotron--content {
+
+        @include media-breakpoint-up(md) {
+          @include absolute-position('bottom', 'inside');
+        }
+      }
+    }
+
+    &:not(.has-image) {
+      min-height: rem-calc(600px);
+
+      @include media-breakpoint-between(xl, xxl) {
+        min-height: rem-calc(800px);
+      }
+
+      @include media-breakpoint-only(xxl) {
+        min-height: rem-calc(1000px);
+      }
+
+      @include media-breakpoint-up(xxxl) {
+        min-height: rem-calc(1200px);
+      }
+
+      .jumbotron--content {
+        @include absolute-position('bottom', 'inside');
+      }
+    }
+
+    .jumbotron--image {
+      @include aspect-ratio(16, 9, '.image-wrapper');
+      overflow: hidden;
+      transition: opacity $transition-duration $transition-timing-function;
+      will-change: opacity;
+
+      @include media-breakpoint-down(lg) {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .image-wrapper {
+        height: 100%;
+      }
+
+      .image {
+        @include cover-image-max();
+      }
+    }
+
+    .jumbotron--content {
+      background-color: rgba(c(black), .72);
+      color: var(--white);
+      padding: rem-calc(32px 24px);
+
+      .content-wrapper {}
+    }
+
+    .jumbotron--label {}
+
+    .jumbotron--title {
+      @include fontSize(28px, 34px);
+      font-weight: 700;
+
+      @include media-breakpoint-only(lg) {
+        @include fontSize(32px, 38px);
+      }
+
+      @include media-breakpoint-between(xl, xxxl) {
+        @include fontSize(44px, 50px);
+      }
+
+      @include media-breakpoint-up(xxxl) {
+        @include fontSize(58px, 64px);
+      }
+    }
+
+    .jumbotron--subtitle {}
+
+    .jumbotron--text {}
+
+    .jumbotron--inner-blocks {}
+  }
+}

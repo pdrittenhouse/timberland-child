@@ -1,0 +1,50 @@
+// Custom styles for video promo
+
+.video-promo {
+
+  &--content {}
+
+  &--header {
+
+    .video-promo--container {}
+  }
+
+  &--title {}
+
+  &--subtitle {}
+
+  &--intro {}
+
+  &--body {
+
+    .video-promo--header + & {}
+
+    .video-promo--container {}
+
+    .video-promo--content {}
+  }
+
+  &--video {}
+
+  &--play {
+
+    &:hover,
+    &:focus {}
+
+    &.hide {}
+  }
+
+  .video {}
+
+  &--promos {
+
+    .button {
+
+      &:not(.navbar-toggler)[class*='btn-'] {}
+
+      .button--label {}
+
+      .svg {}
+    }
+  }
+}

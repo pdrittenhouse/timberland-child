@@ -1,0 +1,13 @@
+// Custom styles for blockquote
+
+.blockquote {
+
+  &:first-child {}
+
+  &:last-child {}
+
+  q {}
+
+  cite {}
+
+}

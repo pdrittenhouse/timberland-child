@@ -1,0 +1,206 @@
+// Bootstrap variable customization
+// See all variables available at: src/libs/bootstrap/scss/_variables.scss
+// NOTE: This DOES NOT override the values and styles coming from the parent thene unless used
+//       This only provides bootstrap variables/mixins/functions for use in child theme
+
+// Spacing
+// Bootstrap Spacers use $spacer var of 1rem and assumes browser 16px default.
+// Updating the values in $spacers list adds the value to Bootstrap's utility spacers.
+// Example, the below adds a mb-6 utility spacing class.
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+) !default;
+
+// Grid
+$grid-columns:                12 !default;
+$grid-gutter-width:           1.5rem !default;
+$grid-row-columns:            6 !default;
+
+$grid-breakpoints: (
+  xs: em-calc(0),
+  sm: em-calc(390px), //20em
+  md: em-calc(540px), //36em
+  lg: em-calc(992px), //48em
+  xl: em-calc(1024px), //73.25em
+  xxl: em-calc(1400px), //90em
+  xxxl: em-calc(1708px), //111.25em
+  xxxxl: em-calc(2300px), //150em
+);
+
+$container-max-widths: (
+  sm: rem-calc(370px), //18.75rem
+  md: rem-calc(576px), //33.75rem
+  lg: rem-calc(960px), //45rem
+  xl: rem-calc(1172px), //64rem
+  xxl: rem-calc(1440px), //87.5rem
+  xxxl: rem-calc(1780px), //106.75rem
+  xxxxl: rem-calc(2400px), //143.75rem
+);
+
+// Colors
+$primary:       c(blaze-orange);
+$secondary:     c(burnt-orange);
+$tertiary:      c(pacific-blue);
+$quaternary:    c(shiraz);
+$quinary:       c(merlin);
+$senary:        c(pacific-blue);
+$septenary:     c(blaze-orange);
+$octonary:      c(merlin);
+$nonary:        c(burnt-orange);
+$denary:        c(california);
+$success:       lightgreen;
+$info:          yellow;
+$warning:       pink;
+$danger:        red;
+$light:         c(gray, ultralight);
+$dark:          c(gray, dark);
+
+// Replace Bootstrap theme-colors sass map
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "tertiary":   $tertiary,
+  "quaternary": $quaternary,
+  "quinary":    $quinary,
+  "senary":     $senary,
+  "septenary":  $septenary,
+  "octonary":   $octonary,
+  "nonary":     $nonary,
+  "denary":     $denary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+);
+
+// Merge colors with Bootstrap $theme-colors sass map (no 'bs-' prefix)
+@each $name, $variantList in $c-palette {
+  @each $variant, $color in $variantList {
+    @if ($variant == 'base') {
+      $new-color: (
+        '#{"" + $name}': $color
+      );
+      $theme-colors: map-merge($theme-colors, $new-color);
+    } @else {
+      $new-color: (
+        '#{"" + $name}-#{$variant}': $color
+      );
+      $theme-colors: map-merge($theme-colors, $new-color);
+    }
+  }
+}
+
+// Create CSS properties for colors without bs- prefix [FIX FOR DEPRECATED BOOTSTRAP 4 FUNCTIONALITY]
+@each $name, $color in $theme-colors {
+  :root {
+    --#{"" + $name}: #{$color};
+  }
+}
+
+// Content
+$body-bg:                   c(white);
+$body-color:                c(black);
+
+// Type
+// Assumes the browser default, typically `16px`. Should match base font size set in /non-printing/_type.scss.
+$font-size-base:              $baseFontSize;
+
+$font-size-lg:                $font-size-base * 1.25 !default;
+$font-size-sm:                $font-size-base * .875 !default;
+
+$font-family-sans-serif:      $font-stack-sans-serif;
+$font-family-monospace:       $font-stack-monospace;
+$font-family-base:            $font-stack-base;
+$font-family-code:            $font-stack-code;
+
+$font-weight-lighter:         lighter !default;
+$font-weight-light:           300 !default;
+$font-weight-normal:          400 !default;
+$font-weight-bold:            700 !default;
+$font-weight-bolder:          bolder !default;
+
+$font-weight-base:            $font-weight-normal !default;
+$line-height-base:            1.4;
+
+$h1-font-size:                calc(#{$font-size-base} * 4.625); //111px
+$h2-font-size:                calc(#{$font-size-base} * 3.29166667); //79px
+$h3-font-size:                calc(#{$font-size-base} * 3.04166667); //73px
+$h4-font-size:                calc(#{$font-size-base} * 2.708333); //65px
+$h5-font-size:                calc(#{$font-size-base} * 1.4166667); //34px
+$h6-font-size:                calc(#{$font-size-base} * 1.125); //27px
+
+$headings-margin-bottom:      calc(#{$spacer} * .625);
+$headings-font-family:        $font-stack-headings;
+$headings-font-weight:        500 !default;
+$headings-line-height:        var(--heading-line-height);
+$headings-color:              null !default;
+
+$lead-font-size:              $font-size-base * 1.25 !default;
+$blockquote-font-size:        $font-size-base * 1.25 !default;
+
+// Forms
+$form-check-min-height:       $font-size-base * $line-height-base !default;
+
+// Navbar
+$nav-link-padding-y:          $font-size-base * .5;
+$nav-link-height:             $font-size-base * $line-height-base + $nav-link-padding-y * 2 !default;
+$navbar-brand-font-size:      $font-size-lg !default;
+$navbar-brand-height:         $navbar-brand-font-size * $line-height-base !default;
+
+// Progress
+$progress-font-size:          $font-size-base * .75 !default;
+
+// Buttons
+$btn-border-radius:           rem-calc(0);
+
+// Cards
+$card-border-width:           var(--card-border-width);
+$card-border-radius:          var(--card-border-radius);
+$card-border-color:           var(--card-border-color);
+$card-bg:                     var(--card-bg);
+
+// Links
+$link-color:                  var(--link);
+$link-decoration:             var(--link-decoration-line) var(--link-decoration-style) var(--link-decoration-color);
+$link-hover-color:            var(--link-hover);
+$link-hover-decoration:       var(--link-hover-decoration-line) var(--link-hover-decoration-style) var(--link-hover-decoration-color);
+
+// Form Inputs
+$input-padding-y:         rem-calc(11px);
+$input-padding-x:         rem-calc(15px);
+$input-font-size:         var(--input-font-size);
+$input-font-family:       null !default;
+$input-line-height:       $line-height-base !default;
+
+// Dropdowns
+$dropdown-color:          $body-color;
+$dropdown-bg:             c(white);
+$dropdown-border-color:   c(black);
+$dropdown-divider-bg:     $dropdown-border-color;
+
+//-----------------------------------------------------------------------------
+
+// Bootstrap non-printing tools. DO NOT REMOVE,
+// because Sass overrides must be defined
+// BEFORE the !default values are.
+@import "../../libs/bootstrap/mixins/banner";
+@include bsBanner("");
+
+// scss-docs-start import-stack
+// Configuration
+@import "../../libs/bootstrap/functions";
+@import "../../libs/bootstrap/variables";
+@import "../../libs/bootstrap/maps";
+@import "../../libs/bootstrap/mixins";
+@import "../../libs/bootstrap/utilities";
+
+// CSS Properties
+@import "../../libs/bootstrap/root";

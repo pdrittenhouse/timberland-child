@@ -1,0 +1,15 @@
+// Custom styles for SVG
+
+.svg {
+
+  &--colorable {}
+
+  picture {}
+
+  &--icon {
+
+    svg {}
+  }
+
+  &--link {}
+}

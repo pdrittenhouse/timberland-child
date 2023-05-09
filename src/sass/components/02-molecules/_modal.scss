@@ -1,0 +1,25 @@
+// Custom styles for modal
+
+.modal {
+
+  &-dialog {}
+
+  &-content {}
+
+  &-header {
+
+    .modal--close {}
+  }
+
+  &--close {}
+
+  &-title {}
+
+  &-body {}
+
+  &-footer {}
+
+  &-footer-content {}
+
+  &-actions {}
+}
