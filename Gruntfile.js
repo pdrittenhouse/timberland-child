@@ -73,6 +73,16 @@ module.exports = function(grunt) {
                 }
             }
         },
+        imagemin: {
+            dynamic: {
+                files: [{
+                    expand: true,
+                    cwd: './src/img',
+                    src: ['**/*.{png,jpg,jpeg,gif,svg,webp}'],
+                    dest: 'dist/img'
+                }]
+            }
+        },
         uglify: {
             options: {
                 sourceMap : true
@@ -155,10 +165,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks('grunt-svg-sprite');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
 
     // Default task(s).
-    grunt.registerTask("default", ["svg_sprite", "uglify","sass"]);
-    grunt.registerTask("init", ["copy", "svg_sprite","uglify","sass"]);
-    // grunt.registerTask("init", ["copy", "uglify","sass"]);
-    grunt.registerTask("prod", ["svg_sprite", "uglify","sass","postcss"]);
+    grunt.registerTask("default", ["imagemin","svg_sprite", "uglify","sass"]);
+    grunt.registerTask("init", ["copy","imagemin","svg_sprite","uglify","sass"]);
+    grunt.registerTask("prod", ["imagemin","svg_sprite", "uglify","sass","postcss"]);
 };
