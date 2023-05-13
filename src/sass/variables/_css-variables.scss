@@ -759,6 +759,7 @@
 
   // Footer Branding
   --footer-branding-width: #{rem-calc(394px)};
+  --footer-branding-width-mobile: #{rem-calc(120px)};
   --footer-branding-color: #{c(black)};
   --footer-branding-hover-color: #{c(blaze-orange)};
   --footer-branding-margin-top: 0;
