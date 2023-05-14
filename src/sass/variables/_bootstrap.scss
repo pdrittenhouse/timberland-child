@@ -3,6 +3,10 @@
 // NOTE: This DOES NOT override the values and styles coming from the parent thene unless used
 //       This only provides bootstrap variables/mixins/functions for use in child theme
 
+// Prefix
+$variable-prefix:             bs- !default; // Deprecated in v5.2.0 for the shorter `$prefix`
+$prefix:                      $variable-prefix !default;
+
 // Spacing
 // Bootstrap Spacers use $spacer var of 1rem and assumes browser 16px default.
 // Updating the values in $spacers list adds the value to Bootstrap's utility spacers.
@@ -185,6 +189,17 @@ $dropdown-color:          $body-color;
 $dropdown-bg:             c(white);
 $dropdown-border-color:   c(black);
 $dropdown-divider-bg:     $dropdown-border-color;
+
+// Accordions
+//$accordion-padding-y:                     1rem !default;
+//$accordion-padding-x:                     1.25rem !default;
+//$accordion-body-padding-y:                $accordion-padding-y !default;
+//$accordion-body-padding-x:                $accordion-padding-x !default;
+//$accordion-button-padding-y:              $accordion-padding-y !default;
+//$accordion-button-padding-x:              $accordion-padding-x !default;
+//$accordion-border-width:                  rem-calc(1px);
+//$accordion-border-radius:                 rem-calc(12px);
+//$accordion-inner-border-radius:           rem-calc(12px);
 
 //-----------------------------------------------------------------------------
 
