@@ -1,4 +1,19 @@
 // Custom styles for offcanvas
 
+%offcanvas-css-vars {
+  // scss-docs-start offcanvas-css-vars
+  --#{$prefix}offcanvas-zindex: #{$zindex-offcanvas};
+  --#{$prefix}offcanvas-width: #{$offcanvas-horizontal-width};
+  --#{$prefix}offcanvas-height: #{$offcanvas-vertical-height};
+  --#{$prefix}offcanvas-padding-x: #{$offcanvas-padding-x};
+  --#{$prefix}offcanvas-padding-y: #{$offcanvas-padding-y};
+  --#{$prefix}offcanvas-color: #{$offcanvas-color};
+  --#{$prefix}offcanvas-bg: #{$offcanvas-bg-color};
+  --#{$prefix}offcanvas-border-width: #{$offcanvas-border-width};
+  --#{$prefix}offcanvas-border-color: #{$offcanvas-border-color};
+  --#{$prefix}offcanvas-box-shadow: #{$offcanvas-box-shadow};
+  // scss-docs-end offcanvas-css-vars
+}
+
 .offcanvas {
 }
