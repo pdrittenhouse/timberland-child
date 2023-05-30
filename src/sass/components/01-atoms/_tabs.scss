@@ -1,0 +1,132 @@
+// Custom styles for tabs
+
+// The non-printing variables, functions, and mixins of 00-protons/variables
+// are provided to this file via:
+//   webpack.config.js: sass-loader.data|includePaths
+
+.tabs-wrapper {
+
+  .tabs__tab {}
+
+  &.vertical {
+
+    > .tabs {
+
+      .tabs__tab {
+
+        &:last-child {
+
+          &.r-tabs-state-active {}
+        }
+
+        &.r-tabs-state-active {}
+      }
+    }
+
+    > .tabs__content-wrapper {
+
+      &.r-tabs-panel {}
+    }
+
+    > .tabs__content {}
+  }
+}
+
+.tabs {
+
+  .typeset & {}
+
+  > .tabs__tab {}
+
+  &__tab {
+
+    &:hover,
+    &:focus {}
+
+    &.r-tabs-state-active {
+
+      .tabs__tab-link {}
+    }
+
+    &:first-child {}
+
+    &.r-tabs-state-disabled {
+
+      &:hover {}
+
+      .tabs__tab-link {}
+    }
+  }
+
+  .tabs__tab-link {}
+
+  &__tab-link {
+
+    &:hover,
+    &:focus {}
+  }
+
+  &--secondary {
+
+    .tabs__tab {
+
+      &.r-tabs-state-active {
+
+        .tabs__tab-link {}
+      }
+    }
+
+    .tabs__tab-link {}
+
+    ~ .tabs__content-wrapper {}
+  }
+
+  &__content-wrapper {
+
+    &.r-tabs-panel {}
+  }
+
+  &__content {}
+}
+
+.r-tabs-accordion-title {
+
+  .tabs + & {
+
+    .r-tabs-anchor {}
+  }
+
+  &:nth-last-child(2) {
+
+    .r-tabs-anchor {}
+
+    + .tabs__content-wrapper {}
+  }
+
+  &.r-tabs-state-active {
+
+    &:nth-last-child(2) {
+
+      .r-tabs-anchor {}
+    }
+
+    .r-tabs-anchor {
+
+      &:after {}
+    }
+  }
+
+  &.r-tabs-state-disabled {
+
+    &:hover {}
+
+    .r-tabs-anchor {}
+  }
+
+  .r-tabs-anchor {
+
+    &:hover {}
+
+    &:after {}
+  }
+}
