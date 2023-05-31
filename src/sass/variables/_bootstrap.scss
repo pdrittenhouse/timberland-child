@@ -27,24 +27,26 @@ $grid-gutter-width:           1.5rem !default;
 $grid-row-columns:            6 !default;
 
 $grid-breakpoints: (
-  xs: em-calc(0),
-  sm: em-calc(390px), //20em
-  md: em-calc(540px), //36em
-  lg: em-calc(992px), //48em
-  xl: em-calc(1024px), //73.25em
-  xxl: em-calc(1400px), //90em
-  xxxl: em-calc(1708px), //111.25em
-  xxxxl: em-calc(2300px), //150em
+    xs: em-calc(0),
+    sm: em-calc(390px), //24.375em
+    md: em-calc(540px), //33.75em
+    lg: em-calc(768px), //48em
+    xl: em-calc(992px), //62em
+    xxl: em-calc(1024px), //64em
+    xxxl: em-calc(1400px), //87.5em
+    xxxxl: em-calc(1708px), //106.75em
+    xxxxxl: em-calc(2300px), //143.75em
 );
 
 $container-max-widths: (
-  sm: rem-calc(370px), //18.75rem
-  md: rem-calc(576px), //33.75rem
-  lg: rem-calc(960px), //45rem
-  xl: rem-calc(1172px), //64rem
-  xxl: rem-calc(1440px), //87.5rem
-  xxxl: rem-calc(1780px), //106.75rem
-  xxxxl: rem-calc(2400px), //143.75rem
+    sm: rem-calc(370px), //23.125rem
+    md: rem-calc(576px), //36rem
+    lg: rem-calc(740px), //46.25rem
+    xl: rem-calc(960px), //60rem
+    xxl: rem-calc(1172px), //73.25rem
+    xxxl: rem-calc(1440px), //90rem
+    xxxxl: rem-calc(1780px), //111.25rem
+    xxxxxl: rem-calc(2400px), //150rem
 );
 
 // Colors
