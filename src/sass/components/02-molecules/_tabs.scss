@@ -1,0 +1,227 @@
+.tabs-wrapper {
+  --#{$prefix}nav-tabs-border-width: #{$nav-tabs-border-width};
+  --#{$prefix}nav-tabs-border-color: #{$nav-tabs-border-color};
+  --#{$prefix}nav-tabs-border-radius: #{$nav-tabs-border-radius};
+  --#{$prefix}nav-tabs-link-hover-border-color: #{$nav-tabs-link-hover-border-color};
+  --#{$prefix}nav-tabs-link-active-color: #{$nav-tabs-link-active-color};
+  --#{$prefix}nav-tabs-link-active-bg: #{$nav-tabs-link-active-bg};
+  --#{$prefix}nav-tabs-link-active-border-color: #{$nav-tabs-link-active-border-color};
+
+  //padding: rem-calc(32px 0);
+  margin: rem-calc(0 30px);
+
+  .tabs__tab {}
+
+  &.vertical {
+
+    // jQuery Responsive Tabs
+    &.jquery {
+
+      > .tabs {
+
+        .tabs__tab {
+
+          &:last-child {
+
+            &.r-tabs-state-active {}
+          }
+
+          &.r-tabs-state-active {}
+        }
+      }
+
+      > .tabs__content-wrapper {
+
+        &.r-tabs-panel {}
+      }
+
+      > .tabs__content {}
+    }
+
+    // Bootstrap
+    .bootstrap {}
+  }
+
+  // jQuery Responsive Tabs
+  &.jquery {
+
+    .tabs {
+
+      .typeset & {}
+
+      > .tabs__tab {}
+
+      &__tab {
+        @include flex(1 1 auto);
+        font-weight: bold;
+        text-align: center;
+
+        &:hover,
+        &:focus {}
+
+        &.r-tabs-state-active {
+
+          .tabs__tab-link {
+            background-color: var(--white);
+          }
+        }
+
+        &:first-child {}
+
+        &.r-tabs-state-disabled {
+
+          &:hover {}
+
+          .tabs__tab-link {}
+        }
+      }
+
+      .tabs__tab-link {}
+
+      &__tab-link {
+        @include font($font-stack-headings);
+        @include fontSize(24px);
+        padding: rem-calc(12px 24px);
+        transition: color $transition-duration $transition-timing-function;
+
+        @include media-breakpoint-between(lg, xl) {
+          @include fontSize(16px);
+        }
+
+        @include media-breakpoint-up(xl) {
+          @include fontSize(18px);
+        }
+
+        &:hover,
+        &:focus {}
+      }
+
+      &--secondary {
+
+        .tabs__tab {
+
+          &.r-tabs-state-active {
+
+            .tabs__tab-link {}
+          }
+        }
+
+        .tabs__tab-link {}
+
+        ~ .tabs__content-wrapper {}
+      }
+
+      &__content-wrapper {
+
+        &.r-tabs-state-active {}
+
+        &.r-tabs-panel {}
+      }
+
+      &__content {
+        background-color: var(--white);
+        text-align: center;
+
+        @include media-breakpoint-up(lg) {
+          text-align: left;
+        }
+      }
+    }
+
+    .r-tabs-accordion-title {
+      border: none;
+      position: relative;
+
+      &:after {
+        @include absolute-center(true, false, false);
+        content: "";
+        display: block;
+        height: rem-calc(3px);
+        width: rem-calc(60px);
+        bottom: 0;
+        background-color: rgba(c(white), .5);
+        transition: opacity, background-color;
+        transition-duration: $transition-duration;
+        transition-timing-function: $transition-timing-function;
+      }
+
+      &:hover,
+      &:focus {
+
+        &:after {
+          background-color: var(--quaternary);
+        }
+      }
+
+      .tabs + & {
+
+        .r-tabs-anchor {}
+      }
+
+      &:nth-last-child(2) {
+
+        .r-tabs-anchor {}
+
+        + .tabs__content-wrapper {}
+      }
+
+      &.r-tabs-state-active {
+
+        &:nth-last-child(2) {
+
+          .r-tabs-anchor {}
+        }
+
+        .r-tabs-anchor {
+          background-color: transparent;
+          color: var(--white);
+
+          &:after {
+            @include icon-minus($width: 16px, $height: 16px, $color: #daeeff, $display: inline-block);
+          }
+        }
+      }
+
+      &.r-tabs-state-disabled {
+
+        &:hover {}
+
+        .r-tabs-anchor {
+          @include icon-plus($width: 16px, $height: 16px, $color: #daeeff, $display: inline-block);
+        }
+      }
+
+      .r-tabs-anchor {
+        @include font($font-stack-headings);
+        @include fontSize(24px);
+        padding: rem-calc(12px 24px);
+        background-color: transparent;
+        text-align: center;
+        font-weight: bold;
+        color: var(--quaternary);
+
+        &:hover,
+        &:focus {
+          background-color: transparent;
+          color: var(--white);
+        }
+
+        &:after {
+          @include icon-plus($width: 16px, $height: 16px, $color: #fff, $display: inline-block);
+        }
+      }
+    }
+  }
+
+  // Bootstrap
+  &.bootstrap {
+
+    > nav {}
+
+    > .tab-content {
+      background-color: var(--white);
+      border: var(--bs-nav-tabs-border-width) solid var(--bs-nav-tabs-border-color);
+      border-top: none;
+    }
+  }
+}
