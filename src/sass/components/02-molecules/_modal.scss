@@ -25,6 +25,8 @@
   --#{$prefix}modal-footer-border-width: #{$modal-footer-border-width};
   // scss-docs-end modal-css-vars
 
+  &-backdrop {}
+
   &-dialog {}
 
   &-content {}
