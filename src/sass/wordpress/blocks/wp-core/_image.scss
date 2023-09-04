@@ -5,6 +5,18 @@
     img {}
   }
 
+  &.is-style-full-height {
+
+    @for $i from 0 to length($spacers) {
+
+      $space: map-get($spacers, $i);
+
+      &.fix-height-#{$i} {
+        height: calc(100% + #{map-get($spacers, $i)});
+      }
+    }
+  }
+
   figure {
 
     &.aligncenter,
