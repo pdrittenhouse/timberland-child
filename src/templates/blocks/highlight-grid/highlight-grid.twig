@@ -1,0 +1,66 @@
+{#
+/**
+ * Block Name: Highlight Grid
+ *
+ * This is the template that displays the  block.
+ */
+#}
+
+{#{% if is_preview %}#}
+{#<p>Some editor instructions here.</p>#}
+{#{% endif %}#}
+
+{#{{ block['className'] }}#}
+{#{{ block['align'] ? 'align-' ~ block['align'] }}#}
+{#{{ block['align_text']}}#}
+{#{{ block['align_content'] }}#}
+{#{{ block['full_height'] }}#}
+
+{# Parent Block Data - ACF <= v.5.9 #}
+{#{% set parent = function('get_parent_block', block['id'], block['name']) %}#}
+{# Parent Block Data - ACF >= v.6.0 #}
+{#{{ parent_block_data['data'] }}#}
+{# Block Context #}
+{#{{ block_context['acf/fields'] }}#}
+{# ACF Options Fields #}
+{#{{ options }}#}
+{# ACF Fields #}
+{#{{ fields }}#}
+{# Site Data #}
+{#{{ site }}#}
+{# SASS Data #}
+{#{{ sass_data }}#}
+{# Post Data #}
+{#{{ block_post }}#}
+
+{% set block_classes = block_classes|default([])|merge([
+    'block-highlight-grid',
+    block['className']
+]) | sort | join(' ') | trim %}
+
+{% set block_attributes = block_attributes|default([])|merge([
+
+]) | sort | join(' ') | trim %}
+
+<div class="{{ block_classes }}" {{ block_attributes }}>
+    <div class="block-highlight-grid--wrapper">
+        {% for item in fields.items %}
+            <div class="block-highlight-grid--item">
+                {% if item.item_type == true and item.image is not empty %}
+                    {% include "@atoms/image/_image.tpl.twig" with {
+                        variant: 'primary',
+                        src: item.image.url,
+                        alt: item.image.alt,
+                        image_other_classes: 'block-highlight-grid--image'
+                    } %}
+                {% elseif item.title %}
+                    <h4 class="block-highlight-grid--title">{{ item.title }}</h4>
+                {% endif %}
+
+                {% if item.label %}
+                    <h6 class="block-highlight-grid--label">{{ item.label }}</h6>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
