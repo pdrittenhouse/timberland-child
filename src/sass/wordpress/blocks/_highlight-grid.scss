@@ -1,0 +1,175 @@
+.block-highlight-grid {
+
+  &--wrapper {
+    @include flex-grid ($columns: 3, $card: '.block-highlight-grid--item', $inner: null, $gutter: 0, $mobilecolumns: true);
+
+    > .block-highlight-grid--item {
+
+      @include media-breakpoint-down(xl) {
+        @include flex(1 1 calc(100% / 2));
+      }
+    }
+  }
+
+  &--item {
+    text-align: center;
+    //margin-bottom: rem-calc(30px);
+    padding: rem-calc(60px 0);
+    position: relative;
+
+    @include media-breakpoint-down(xl) {
+      border-left: none;
+      border-right: none;
+    }
+
+    @include media-breakpoint-up(xl) {
+      border: rem-calc(1px) solid var(--white);
+      padding: rem-calc(30px 20px);
+      border-top: none;
+      border-left: none;
+    }
+
+    &:after {
+      @include absolute-center(true, false, true);
+      content: "";
+      display: block;
+      width: rem-calc(120px);
+      top: 100%;
+      margin-top: rem-calc(-1px);
+      background-color: var(--white);
+      height: rem-calc(2px);
+
+      @include media-breakpoint-up(xl) {
+        content: none;
+      }
+    }
+
+    // First item
+    &:first-of-type {
+
+      @include media-breakpoint-down(xl) {
+        //padding-top: 0;
+      }
+    }
+
+    // Last item
+    &:last-of-type {
+      border-bottom: none;
+
+      @include media-breakpoint-down(xl) {
+        //padding-bottom: 0;
+      }
+
+      &:after {
+        //content: none;
+      }
+    }
+
+    // First 2 items
+    &:nth-of-type(-n+2) {
+
+      @include media-breakpoint-down(xl) {
+        padding-top: 0;
+      }
+    }
+
+    // Last 2 items
+    &:nth-last-of-type(-n+2) {
+
+      @include media-breakpoint-down(xl) {
+        padding-bottom: 0;
+      }
+
+      &:after {
+
+        @include media-breakpoint-down(xl) {
+          content: none;
+        }
+      }
+    }
+
+    // First 3 items
+    &:nth-of-type(-n+3) {
+
+    }
+
+    // First in row
+    &:nth-of-type(3n+1) {
+
+    }
+
+    // Second to last item
+    &:nth-last-of-type(2) {
+
+      @include media-breakpoint-up(xl) {
+        border-bottom: none;
+      }
+    }
+
+    // If second to last item is first in row
+    &:nth-of-type(3n + 1):nth-last-of-type(2) {
+
+      @include media-breakpoint-up(xl) {
+        border-bottom: none;
+      }
+    }
+
+    // If second to last item is first in row
+    &:nth-of-type(3n):nth-last-of-type(2) {
+
+      @include media-breakpoint-up(xl) {
+        border-bottom: rem-calc(1px) solid var(--white);
+      }
+    }
+
+    // If third from last item is first in row
+    &:nth-of-type(3n + 1):nth-last-of-type(3) {
+
+      @include media-breakpoint-up(xl) {
+        border-bottom: none;
+      }
+    }
+
+    // Last in row
+    &:nth-of-type(3n) {
+
+      @include media-breakpoint-up(xl) {
+        border-right: none;
+      }
+    }
+
+    &:nth-child(odd) {}
+
+    &:nth-child(even) {}
+  }
+
+  &--image {
+    margin-bottom: rem-calc(10px);
+    max-width: rem-calc(47px);
+    max-height: rem-calc(26px);
+
+    @include media-breakpoint-up(md) {
+      max-width: rem-calc(70px);
+      max-height: rem-calc(38px);
+    }
+  }
+
+  &--title {
+    color: var(--primary);
+
+    @include media-breakpoint-down(md) {
+      @include fontSize(26px, 26px);
+    }
+
+    span {
+      background: $red-blue-horizontal;
+      background-size: 800% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient 15s ease infinite, spin 60s ease infinite;
+      font-weight: 700;
+    }
+  }
+
+  &--label {}
+}
