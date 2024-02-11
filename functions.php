@@ -9,7 +9,8 @@ $dream_child_includes = array(
     "blocks.php",
     "redirects.php",
     "rewrites.php",
-    "routes.php"
+    "routes.php",
+    "search.php",
 );
 
 foreach($dream_child_includes as $inc){
