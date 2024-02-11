@@ -17,7 +17,6 @@
     height: $height;
     width: $width;
     background-position: center;
-    vertical-align: middle;
 }
 {{/shapes}}
 // ----------------------------------------------------------------
@@ -39,6 +38,42 @@
     } @else {
         .icon-{{ base }}-#{"" + $name}-#{$variant} {
             @include icon-{{ base }}($color: #{c($name, $variant)});
+        }
+    }
+  }
+}
+
+// Button Icon Utility Classes
+.button.btn-icon-{{ base }} {
+
+    &:before {
+        @include icon-{{ base }};
+        content: "";
+        vertical-align: middle;
+    }
+}
+
+// Colorized Button Icon Utility Classes
+// Loop over every color in $c-palette and create a CSS class to colorize it
+@each $name, $variantList in $c-palette {
+  @each $variant in map-keys($variantList) {
+    @if ($variant == 'base') {
+        .button.btn-icon-{{ base }}-#{"" + $name} {
+            
+            &:before {
+                @include icon-{{ base }}($color: #{c($name)});
+                content: "";
+                vertical-align: middle;
+            }
+        }
+    } @else {
+        .button.btn-icon-{{ base }}-#{"" + $name}-#{$variant} {
+            
+            &:before {
+                @include icon-{{ base }}($color: #{c($name, $variant)});
+                content: "";
+                vertical-align: middle;
+            }
         }
     }
   }
