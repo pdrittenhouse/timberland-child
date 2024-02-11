@@ -1,0 +1,74 @@
+{
+    "version": 1,
+    "settings": {
+        "color": {
+            "palette": [
+                {
+                    "name": "Primary",
+                    "slug": "primary",
+                    "color": "var(--primary)"
+                },
+                {
+                    "name": "Secondary",
+                    "slug": "secondary",
+                    "color": "var(--secondary)"
+                },
+                {
+                    "name": "Tertiary",
+                    "slug": "tertiary",
+                    "color": "var(--tertiary)"
+                },
+                {
+                    "name": "Quaternary",
+                    "slug": "quaternary",
+                    "color": "var(--quaternary)"
+                },
+                {
+                    "name": "Quinary",
+                    "slug": "quinary",
+                    "color": "var(--quinary)"
+                },
+                {
+                    "name": "Senary",
+                    "slug": "senary",
+                    "color": "var(--senary)"
+                },
+                {
+                    "name": "Septenary",
+                    "slug": "septenary",
+                    "color": "var(--septenary)"
+                },
+                {
+                    "name": "Octonary",
+                    "slug": "octonary",
+                    "color": "var(--octonary)"
+                },
+                {
+                    "name": "Nonary",
+                    "slug": "nonary",
+                    "color": "var(--nonary)"
+                },
+                {
+                    "name": "Denary",
+                    "slug": "denary",
+                    "color": "var(--denary)"
+                },
+                {
+                    "name": "Light",
+                    "slug": "light",
+                    "color": "var(--light)"
+                },
+                {
+                    "name": "Dark",
+                    "slug": "dark",
+                    "color": "var(--dark)"
+                },
+                {
+                    "name": "Transparent",
+                    "slug": "transparent",
+                    "color": "var(--transparent)"
+                }
+            ]
+        }
+    }
+}
