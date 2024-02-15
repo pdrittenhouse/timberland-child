@@ -11,6 +11,7 @@ $dream_child_includes = array(
     "rewrites.php",
     "routes.php",
     "search.php",
+    "theme-support.php"
 );
 
 foreach($dream_child_includes as $inc){
