@@ -12,10 +12,11 @@
     "license": "ISC",
     "browserslist": "last 3 versions",
     "devDependencies": {
-        "autoprefixer": "^10.4.13",
-        "cssnano": "^5.1.14",
+        "autoprefixer": "^9.8.6",
+        "cssnano": "^4.1.11",
         "grunt": "^1.5.3",
         "grunt-cli": "^1.4.3",
+        "grunt-contrib-compress": "^2.0.0",
         "grunt-contrib-copy": "^1.0.0",
         "grunt-contrib-imagemin": "^4.0.0",
         "grunt-contrib-jshint": "^1.1.0",
@@ -24,6 +25,7 @@
         "grunt-postcss": "^0.8.0",
         "grunt-sass": "^3.1.0",
         "grunt-svg-sprite": "^2.0.1",
+        "pixrem": "^5.0.0",
         "sass": "^1.56.1"
     },
     "dependencies": {
