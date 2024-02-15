@@ -73,16 +73,6 @@ module.exports = function(grunt) {
                 }
             }
         },
-        imagemin: {
-            dynamic: {
-                files: [{
-                    expand: true,
-                    cwd: './src/img',
-                    src: ['**/*.{png,jpg,jpeg,gif,svg,webp}'],
-                    dest: 'dist/img'
-                }]
-            }
-        },
         uglify: {
             options: {
                 sourceMap : true
@@ -145,30 +135,51 @@ module.exports = function(grunt) {
         postcss: {
             options: {
                 processors: [
-                    require("autoprefixer")(), // add vendor prefixes
-                    require("cssnano")() // minify the result
+                    require('pixrem')(), // add fallbacks for rem units
+                    require('autoprefixer')(), // add vendor prefixes
+                    require('cssnano')({
+                        preset: ['default', {
+                            discardComments: { removeAll: true }, // Remove all comments
+                            discardDuplicates: true // Remove duplicate CSS rules
+                        }]
+                    }) // minify the result
                 ]
             },
             public: {
                 map: {
-                    inline: false, // save all sourcemaps as separate files...
+                    inline: false, // Save all sourcemaps as separate files...
                     annotation: "dist/" // ...to the specified directory
                 },
                 src: "dist/*.css"
             }
+        },
+        compress: {
+            main: {
+                options: {
+                    mode: 'gzip'
+                },
+                expand: true,
+                cwd: 'dist/',
+                src: ['**/*.js', '**/*.css'],
+                dest: 'dist/',
+                ext: '.gz'
+            }
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-sass");
     grunt.loadNpmTasks("grunt-postcss");
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-watch");
-    grunt.loadNpmTasks('grunt-svg-sprite');
-    grunt.loadNpmTasks('grunt-contrib-imagemin');
+    grunt.loadNpmTasks("grunt-svg-sprite");
+    grunt.loadNpmTasks('grunt-contrib-compress');
 
     // Default task(s).
-    grunt.registerTask("default", ["imagemin","svg_sprite", "uglify","sass"]);
-    grunt.registerTask("init", ["copy","imagemin","svg_sprite","uglify","sass"]);
-    grunt.registerTask("prod", ["imagemin","svg_sprite", "uglify","sass","postcss"]);
+    // grunt.registerTask("default", ["svg_sprite","uglify","sass"]);
+    grunt.registerTask("default", ["uglify","sass"]);
+    grunt.registerTask("sprites", ["svg_sprite","sass"]);
+    grunt.registerTask("init", ["copy", "svg_sprite", "uglify", "sass"]);
+    // grunt.registerTask("init", ["copy", "uglify", "sass"]);
+    grunt.registerTask("prod", ["svg_sprite", "uglify","sass","postcss", "compress"]);
 };
