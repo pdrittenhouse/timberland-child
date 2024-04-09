@@ -10,7 +10,7 @@
 {% if options.hide_header_content == true %}
   {% embed '@organisms/header/_header.tpl.twig' with {
     background: header_bg ? header_bg,
-    navbar_breakpoint: 'lg',
+    navbar_breakpoint: 'xl',
     navbar_toggler_classes: hide_primary_nav == 'both' and hide_header_cta == 'both' and hide_header_search == 'both' and hide_secondary_nav == 'both' and hide_social_nav == 'both' and hide_secondary_nav == 'both' ? 'd-none',
     header_classes: [
       'site-header--centered',
@@ -34,7 +34,7 @@
       align_to_content ? 'align-to-content',
       full_screen ? 'full-screen-mobile-nav',
       center_mobile_nav ? 'center-mobile-nav-content',
-    post.meta('site_header_layout') != 'default' ? 'site-header-' ~ post.meta('site_header_layout') : options.site_header_layout != 'default' ? 'site-header-' ~ options.site_header_layout,
+      options.site_header_layout.header_layout != 'default' ? 'site-header-' ~ options.site_header_layout.header_layout : post.meta('site_header_layout').header_layout != 'default' ? 'site-header-' ~ post.meta('site_header_layout').header_layout,
       'd-block'
     ],
     header_other_classes: ''
@@ -127,7 +127,7 @@
   {# Header #}
   {% embed '@organisms/header/_header.tpl.twig' with {
     background: header_bg ? header_bg,
-    navbar_breakpoint: 'lg',
+    navbar_breakpoint: 'xl',
     navbar_toggler_classes: hide_primary_nav == 'both' and hide_header_cta == 'both' and hide_header_search == 'both' and hide_secondary_nav == 'both' and hide_social_nav == 'both' and hide_secondary_nav == 'both' ? 'd-none',
     header_classes: [
       'site-header--centered',
@@ -151,7 +151,7 @@
       align_to_content ? 'align-to-content',
       full_screen ? 'full-screen-mobile-nav',
       center_mobile_nav ? 'center-mobile-nav-content',
-    post.meta('site_header_layout') != 'default' ? 'site-header-' ~ post.meta('site_header_layout') : options.site_header_layout != 'default' ? 'site-header-' ~ options.site_header_layout,
+      options.site_header_layout.header_layout != 'default' ? 'site-header-' ~ options.site_header_layout.header_layout : post.meta('site_header_layout').header_layout != 'default' ? 'site-header-' ~ post.meta('site_header_layout').header_layout,
     ],
     header_other_classes: ''
   } %}
@@ -218,7 +218,7 @@
       {% include "partials/menus/menu.twig" with {
         'menu': menu_secondary.get_items,
         'nav_id': 'secondaryNav',
-        'navbar_breakpoint': 'lg',
+        'navbar_breakpoint': 'xs',
         'nav_classes': [
           hide_secondary_nav == 'mobile' ? 'd-none d-xxl-flex',
           hide_secondary_nav == 'desktop' ? 'd-xxl-none',
@@ -256,7 +256,7 @@
         'navbar_id': 'primaryNavigation',
         'nav_id': 'primaryNav',
         'hover_dropdown': true,
-        'navbar_breakpoint': 'lg',
+        'navbar_breakpoint': 'xl',
         'breakpoints': sass_data['scssBreakpoints'],
         'nav_classes': [
           hide_primary_nav == 'mobile' ? 'd-none d-xxl-flex',
@@ -345,7 +345,25 @@
 
     {% block search %}
       <div class="pt-2 {{ hide_header_search == 'mobile' ? 'd-none d-xxl-flex' }} {{ hide_header_search == 'desktop' ? 'd-xxl-none' }} {{ hide_header_search == 'both' ? 'd-none' }}">
-        {{ function('get_search_form') }}
+{#        {{ function('get_search_form') }}#}
+        {% include "partials/content/searchform.twig" with {
+          show_label: false,
+          label: '',
+          placeholder: 'Search',
+          placeholder_color: 'black',
+          button_text: 'Search',
+          button_color: 'tobasco',
+          button_size: 'lg',
+          button_outline: false,
+          button_block: false,
+          button_nowrap: true,
+          hide_button_label: true,
+          hide_icon: false,
+          icon_width: '16px',
+          icon_height: '16px',
+          icon_name: 'search',
+          icon_color: 'white'
+        } %}
       </div>
     {% endblock search %}
 
