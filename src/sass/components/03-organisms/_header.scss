@@ -1837,6 +1837,7 @@
         > .dropdown-toggle {}
 
         > .dropdown-menu {
+          background-color: var(--header-bg);
 
           > .dropdown-item {
             padding: 0;
