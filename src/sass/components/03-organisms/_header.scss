@@ -1792,6 +1792,10 @@
       @include justify-content(var(--nav-alignment-mobile-flex));
     }
 
+    @include media-breakpoint-between(lg, xl) {
+      padding-right: 0;
+    }
+
     @include media-breakpoint-up(xl) {
       @include justify-content(flex-end);
       padding-right: rem-calc(20px);
