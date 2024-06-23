@@ -8,3 +8,51 @@
 
     .search-submit {}
 }
+
+.search-results {
+
+    &--header {}
+
+    &--search {}
+
+    &--search-form {}
+
+    .searchform {
+        position: relative;
+
+        .searchform {
+
+            > div {}
+        }
+
+        label {}
+
+        .search-field {
+            width: 100%;
+            padding-top: rem-calc(19px);
+            padding-bottom: rem-calc(19px);
+        }
+        
+        .search-submit {
+            position: absolute;
+            top: rem-calc(8px);
+            right: rem-calc(8px);
+
+            .button--label {}
+
+            .search-icon {}
+        }
+    }
+
+    &--wrapper {}
+
+    .post-grid {}
+
+    .grid {
+        align-items: stretch;
+    }
+
+    &--result {
+        height: 100%;
+    }
+}
