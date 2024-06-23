@@ -1,0 +1,114 @@
+.block-logo-slider {
+
+    .slick-carousel-wrapper {}
+
+    .slick-carousel {
+        padding: 0;
+    }
+
+    .slick-slide {
+        margin: rem-calc(0 24px);
+
+        .slide {}
+    }
+
+    .logo {
+        @include flexbox;
+        @include flex-flow(row wrap);
+        @include justify-content(center);
+        @include align-items(center);
+        display: flex !important;
+
+        img {
+            max-width: 100%;
+        }
+    }
+
+    .flickity-carousel--wrapper {}
+
+    .flickity-carousel {
+        padding: 0;
+
+        &.flickity-enabled {
+
+            .flickity-slider {
+                @include flexbox;
+                @include align-items(center);
+            }
+        }
+
+        &.bw-imgs {
+
+            .carousel-cell {
+
+                img {
+                    filter: grayscale(1) contrast(130%);
+                }
+            }
+        }
+
+        &.count-one {}
+
+        &.count-three {
+
+            .carousel-cell {
+                width: 50%;
+
+                @include media-breakpoint-up(md) {
+                    width: 33.333%;
+                }
+            }
+        }
+
+        &.count-five {
+
+            .carousel-cell {
+                width: 50%;
+
+                @include media-breakpoint-between(md, xl) {
+                    width: 33.333%;
+                }
+
+                @include media-breakpoint-up(xl) {
+                    width: 20%;
+                }
+            }
+        }
+
+        &.count-eight {
+
+            .carousel-cell {
+                width: 50%;
+
+                @include media-breakpoint-between(md, xl) {
+                    width: 33.333%;
+                }
+
+                @include media-breakpoint-between(xl, xxl) {
+                    width: 20%;
+                }
+
+                @include media-breakpoint-up(xxl) {
+                    width: 12.5%;
+                }
+            }
+        }
+    }
+
+    .flickity-viewport {}
+
+    .flickity-slider {}
+
+    .carousel-cell {
+        @include flexbox;
+        @include flex-flow(row wrap);
+        @include justify-content(center);
+        @include align-items(center);
+        padding: rem-calc(16px 24px);
+        width: 100%;
+
+        img {
+            max-width: 100%;
+        }
+    }
+}
