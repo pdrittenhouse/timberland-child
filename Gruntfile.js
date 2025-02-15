@@ -23,7 +23,7 @@ module.exports = function(grunt) {
                         expand: true,
                         flatten: false, // flattens results to a single level
                         cwd: 'node_modules/bootstrap/scss/', // makes all src relative to cwd
-                        src: ['vendor/**/*', 'mixins/**/*', 'helpers/**/*', 'utilities/**/*', '_functions.scss', '_variables.scss', '_maps.scss', '_mixins.scss', '_utilities.scss', '_root.scss', '_reboot.scss'], // includes files within path
+                        src: ['vendor/**/*', 'mixins/**/*', 'helpers/**/*', 'utilities/**/*', '_functions.scss', '_variables*.scss', '_maps.scss', '_mixins.scss', '_utilities.scss', '_root.scss', '_reboot.scss'], // includes files within path
                         dest: 'src/libs/bootstrap/', //copy file to location
                         filter: 'isFile',
                     },
