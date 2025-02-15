@@ -177,7 +177,7 @@
           color: var(--white);
 
           &:after {
-            @include icon-minus($width: 16px, $height: 16px, $color: #daeeff, $display: inline-block);
+            //@include icon-minus($width: 16px, $height: 16px, $color: #daeeff, $display: inline-block);
           }
         }
       }
@@ -187,7 +187,7 @@
         &:hover {}
 
         .r-tabs-anchor {
-          @include icon-plus($width: 16px, $height: 16px, $color: #daeeff, $display: inline-block);
+          //@include icon-plus($width: 16px, $height: 16px, $color: #daeeff, $display: inline-block);
         }
       }
 
@@ -207,7 +207,7 @@
         }
 
         &:after {
-          @include icon-plus($width: 16px, $height: 16px, $color: #fff, $display: inline-block);
+          //@include icon-plus($width: 16px, $height: 16px, $color: #fff, $display: inline-block);
         }
       }
     }

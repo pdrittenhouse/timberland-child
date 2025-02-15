@@ -16,7 +16,6 @@
     height: $height;
     width: $width;
     background-position: center;
-    vertical-align: middle;
 }
 @mixin icon-moon($width: 24px, $height: 24px, $color: #000, $display: inline-block) {
     display: $display;
@@ -26,7 +25,6 @@
     height: $height;
     width: $width;
     background-position: center;
-    vertical-align: middle;
 }
 // ----------------------------------------------------------------
 
@@ -50,6 +48,42 @@
     }
   }
 }
+
+// Button Icon Utility Classes
+.button.btn-icon-cloud {
+
+    &:before {
+        @include icon-cloud;
+        content: "";
+        vertical-align: middle;
+    }
+}
+
+// Colorized Button Icon Utility Classes
+// Loop over every color in $c-palette and create a CSS class to colorize it
+@each $name, $variantList in $c-palette {
+  @each $variant in map-keys($variantList) {
+    @if ($variant == 'base') {
+        .button.btn-icon-cloud-#{"" + $name} {
+            
+            &:before {
+                @include icon-cloud($color: #{c($name)});
+                content: "";
+                vertical-align: middle;
+            }
+        }
+    } @else {
+        .button.btn-icon-cloud-#{"" + $name}-#{$variant} {
+            
+            &:before {
+                @include icon-cloud($color: #{c($name, $variant)});
+                content: "";
+                vertical-align: middle;
+            }
+        }
+    }
+  }
+}
 // ----------------------------------------------------------------
 
 .icon-moon {
@@ -67,6 +101,42 @@
     } @else {
         .icon-moon-#{"" + $name}-#{$variant} {
             @include icon-moon($color: #{c($name, $variant)});
+        }
+    }
+  }
+}
+
+// Button Icon Utility Classes
+.button.btn-icon-moon {
+
+    &:before {
+        @include icon-moon;
+        content: "";
+        vertical-align: middle;
+    }
+}
+
+// Colorized Button Icon Utility Classes
+// Loop over every color in $c-palette and create a CSS class to colorize it
+@each $name, $variantList in $c-palette {
+  @each $variant in map-keys($variantList) {
+    @if ($variant == 'base') {
+        .button.btn-icon-moon-#{"" + $name} {
+            
+            &:before {
+                @include icon-moon($color: #{c($name)});
+                content: "";
+                vertical-align: middle;
+            }
+        }
+    } @else {
+        .button.btn-icon-moon-#{"" + $name}-#{$variant} {
+            
+            &:before {
+                @include icon-moon($color: #{c($name, $variant)});
+                content: "";
+                vertical-align: middle;
+            }
         }
     }
   }

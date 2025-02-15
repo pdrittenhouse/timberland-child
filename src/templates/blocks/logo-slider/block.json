@@ -1,0 +1,45 @@
+{
+  "name": "acf/logo-slider",
+  "title": "Logo Slider",
+  "description": "A logo slider block.",
+  "category": "updater",
+  "icon": "wordpress-alt",
+  "keywords": ["logo", "slider", "carousel"],
+  "attributes": {},
+  "supports": {
+    "jsx": true,
+    "align": true,
+    "alignContent": true,
+    "alignText": true,
+    "anchor": true,
+    "className": true,
+    "multiple": true,
+    "html": false,
+    "inserter": true,
+    "fullHeight": false,
+    "color": {
+      "text": false,
+      "background": true,
+      "link": false,
+      "gradients": true,
+      "linkColor": true
+    },
+    "typography": {
+      "fontSize": true
+    }
+  },
+  "styles": [
+    { "name": "default", "label": "Default", "isDefault": true },
+    { "name": "large", "label": "Large" }
+  ],
+  "editorScript": "./index.js",
+  "script": "./script.js",
+  "editorStyle": "./index.css",
+  "style": "./style.css",
+  "acf": {
+    "mode": "preview",
+    "renderCallback": "dream_block_render",
+    "postTypes": true,
+    "reusable": true
+  }
+}

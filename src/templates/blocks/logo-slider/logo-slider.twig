@@ -1,0 +1,158 @@
+{#
+/**
+ * Block Name: Logo Slider
+ *
+ * This is the template that displays the logo slider block.
+ */
+#}
+
+{% if is_preview %}
+	{# <p>Some editor instructions here.</p> #}
+{% endif %}
+
+{# Block Classes #}
+{% set block_classes = [
+   'block-logo-slider',
+   block['className']
+]|sort|join(' ')|trim %}
+
+{# Block Styles #}
+{% set block_styles = [
+] | sort | join(' ') | trim %}
+
+{# Block Attributes #}
+{% set block_attributes = [
+   'class="' ~ block_classes ~ '"',
+    block_styles ? 'style="' ~ block_styles ~ '"'
+]|sort|join(' ')|trim %}
+
+{% set slides = [] %}
+
+{% for logo in fields.logos %}
+	{% set slides = slides | merge(['<img src="' ~ logo.logo['url'] ~ '" alt="' ~ logo.logo['alt'] ~ '" />']) %}
+{% endfor %}
+
+<div {{ block_attributes }}>
+	{# {{ function('print_r', '<pre>') }}
+	{{ function('print_r', fields.autoplay_speed) }}
+	{{ function('print_r', '</pre>') }} #}
+
+	{% if fields.slider == 'slick' %}
+
+		{% set responsive_settings = [] %}
+
+		{% for item in fields.responsive %}
+			{% set breakpoint = item.breakpoint %}
+			{% set settings = {} %}
+			{% for setting in item.settings %}
+				{% set responsive_setting = setting.setting %}
+				{% if setting.value_type == 'int' %}
+					{% set value = setting.value | number_format %}
+				{% else %}
+					{% set value = setting.value %}
+				{% endif %}
+				
+				{% set settings = settings | merge({(responsive_setting): value}) %}
+			{% endfor %}
+			{% set responsive_settings = responsive_settings | merge([
+				{
+					breakpoint: breakpoint,
+					settings: settings
+				}
+			]) %}
+		{% endfor %}
+
+		{% embed '@molecules/slick-carousel/_slick-carousel.tpl.twig' with {
+			dots: fields.show_dot_nav,
+			slides: slides,
+			slick_carousel_other_classes: 'equal-height-slides',
+			adaptiveHeight: fields.adaptive_height,
+			autoplay: fields.auto_play,
+			autoplaySpeed: fields.autoplay_speed is not empty ? fields.autoplay_speed | number_format(0, '.', ''),
+			arrows: fields.show_arrowsti,
+			centerMode: fields.center_mode,
+			fade: fields.fade,
+			infinite: fields.loop,
+			speed: fields.speed is not empty ? fields.speed | number_format(0, '.', ''),
+			variableWidth: fields.variable_width,
+			vertical: fields.vertical,
+			verticalSwiping: fields.vertical_swiping,
+			draggable: fields.draggable,
+			pause_on_focus: fields.pause_on_focus,
+			pause_on_hover: fields.pause_on_hover,
+			pause_on_dots_hover: pause_on_dots_hover,
+			swipe: fields.swipe,
+			swipe_to_slide: fields.swipe_to_slide,
+			touch_move: fields.touch_move,
+			slidesToShow: fields.logo_count,
+			slidesToScroll: fields.scroll_count,
+			easing: fields.easing,
+			css_ease: fields.css_ease,
+			edge_friction: fields.edge_friction,
+			responsive: responsive_settings | json_encode
+		} %}
+			{% block slides %}
+				{% for logo in fields.logos %}
+					<div class="logo slide">
+						{% include "@atoms/image/_image.tpl.twig" with {
+							variant: 'primary',
+							src: logo.logo['url'],
+							alt: logo.logo['alt'],
+							placeholder: false,
+						} %}
+					</div>
+				{% endfor %}
+			{% endblock slides %}
+		{% endembed %}
+
+	{% elseif fields.slider == 'flickity' %}
+
+		{% embed '@molecules/flickity-carousel/_flickity-carousel.tpl.twig' with {
+			flickity_carousel_classes: [
+				'count-' ~ fields.logo_count | default('one'),
+				fields.grayscale_images ? 'bw-imgs',
+				'equal-height-slides',
+			],
+			slides: slides,
+			draggable: fields.draggable,
+			freeScroll: fields.free_scroll,
+			wrapAround: fields.loop,
+			autoPlay: fields.auto_play and fields.autoplay_speed is not empty ? fields.autoplay_speed | number_format(0, '.', '') : fields.auto_play,
+			pauseAutoPlayOnHover: fields.pause_on_hover,
+			fullscreen: false,
+			fade: fields.fade,
+			adaptiveHeight: fields.adaptive_height,
+			setGallerySize: false,
+			cellAlign: fields.alignment | default('center'),
+			contain: true,
+			prevNextButtons: fields.show_arrows,
+			pageDots: fields.show_dot_nav,
+			percent_position: true
+		} %}
+			{% block slides %}
+				{% for logo in fields.logos %}
+					<div class="carousel-cell">
+						{% if logo.link %}
+							<a href="{{ logo.link }}" {{ logo.open_in_new_tab ? 'target="_blank"' }}>
+						{% endif %}
+						{% include "@atoms/image/_image.tpl.twig" with {
+							variant: 'primary',
+							src: logo.logo['url'],
+							alt: logo.logo['alt'],
+							placeholder: false,
+							image_other_classes: 'logo',
+							width: logo.width,
+							height: logo.height
+						} %}
+						{% if logo.link %}
+							</a>
+						{% endif %}
+					</div>
+				{% endfor %}
+			{% endblock slides %}
+		{% endembed %}
+
+	{% endif %}
+
+</div>
+
