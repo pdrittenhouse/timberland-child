@@ -1,1 +1,38 @@
-.block-menu {}
+.block-menu {
+
+    nav {}
+  
+    .nav-item {}
+  
+    .nav-link {}
+  
+    &.menu-nav {
+  
+      nav {}
+  
+      .nav-item {}
+  
+      .nav-link {
+        @include font($font-stack-navs);
+      }
+    }
+  
+    &.menu-social {
+  
+      nav {}
+  
+      .nav-item {}
+  
+      .nav-link {}
+    }
+  
+    &.menu-custom {
+  
+      nav {}
+  
+      .nav-item {}
+  
+      .nav-link {}
+    }
+  }
+  
