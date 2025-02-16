@@ -911,13 +911,17 @@
   $font-style: $btnFontStyle,
   $letter-spacing: $btnLetterSpacing,
   $line-height: $btnLineHeight,
+  $label-font-size: $btnLabelFontSize,
+  $label-line-height: $btnLabelLineHeight,
   $text-transform: $btnTextTransform,
   $font-family-hover: $btnFontFamilyHover,
   $font-size-hover: $btnFontSizeHover,
+  $label-font-size-hover: $btnLabelFontSizeHover,
   $font-weight-hover: $btnFontWeightHover,
   $font-style-hover: $btnFontStyleHover,
   $letter-spacing-hover: $btnLetterSpacingHover,
   $line-height-hover: $btnLineHeightHover,
+  $label-line-height-hover: $btnLabelLineHeightHover,
   $text-transform-hover: $btnTextTransformHover,
   $padding: $btnPadding,
   $padding-hover: $btnPaddingHover,
@@ -974,6 +978,11 @@
   text-decoration: none;
   vertical-align: middle;
 
+  .button--label,
+  .button-label {
+    line-height: $label-line-height;
+  }
+
   &:visited {
     color: $color;
   }
@@ -1009,6 +1018,11 @@
     box-shadow: $box-shadow-hover-x $box-shadow-hover-y $box-shadow-hover-blur $box-shadow-hover-spread $box-shadow-hover-color;
     text-shadow: $text-shadow-hover-x $text-shadow-hover-y $text-shadow-hover-blur $text-shadow-hover-color;
     padding: $padding-hover;
+
+    .button--label,
+    .button-label {
+      line-height: $label-line-height-hover;
+    }
   }
 };
 
