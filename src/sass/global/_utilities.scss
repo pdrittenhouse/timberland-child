@@ -477,3 +477,90 @@ $widths: (
         }
     }
 }
+
+// Viewport widths
+@each $size in $widths {
+  .vw-#{$size} {
+    width: #{$size + 'vw'};
+  }
+}
+
+@each $name, $width in $grid-breakpoints {
+  @each $size in $widths {
+    .vw-#{$name}-#{$size} {
+
+      @include media-breakpoint-up($name) {
+        width: #{$size + 'vw'};
+      }
+    }
+  }
+}
+
+@each $name, $width in $grid-breakpoints {
+  @each $size in $widths {
+    .vw-#{$name}-max-#{$size} {
+
+      @include media-breakpoint-down($name) {
+        width: #{$size + 'vw'};
+      }
+    }
+  }
+}
+
+// Min viewport widths
+@each $size in $widths {
+  .min-vw-#{$size} {
+    min-width: #{$size + 'vw'};
+  }
+}
+
+@each $name, $width in $grid-breakpoints {
+  @each $size in $widths {
+    .min-vw-#{$name}-#{$size} {
+
+      @include media-breakpoint-up($name) {
+        min-width: #{$size + 'vw'};
+      }
+    }
+  }
+}
+
+@each $name, $width in $grid-breakpoints {
+  @each $size in $widths {
+    .min-vw-#{$name}-max-#{$size} {
+
+      @include media-breakpoint-down($name) {
+        min-width: #{$size + 'vw'};
+      }
+    }
+  }
+}
+
+// Max viewport widths
+@each $size in $widths {
+  .max-vw-#{$size} {
+    max-width: #{$size + 'vw'};
+  }
+}
+
+@each $name, $width in $grid-breakpoints {
+  @each $size in $widths {
+    .max-vw-#{$name}-#{$size} {
+
+      @include media-breakpoint-up($name) {
+        max-width: #{$size + 'vw'};
+      }
+    }
+  }
+}
+
+@each $name, $width in $grid-breakpoints {
+  @each $size in $widths {
+    .max-vw-#{$name}-max-#{$size} {
+
+      @include media-breakpoint-down($name) {
+        max-width: #{$size + 'vw'};
+      }
+    }
+  }
+}
