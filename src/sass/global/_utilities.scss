@@ -564,3 +564,99 @@ $widths: (
     }
   }
 }
+
+// Show on page load
+$displays: (
+  block,
+  inline-block,
+  inline,
+  flex,
+  inline-flex,
+  grid,
+  inline-grid,
+  table,
+  table-row,
+  table-cell
+);
+@each $display in $displays {
+  .show-on-load-#{$display} {
+    display: none;
+    visibility: hidden;
+
+    .page-loaded & {
+      display: #{$display};
+      visibility: visible;
+    }
+  }
+}
+@each $name, $width in $grid-breakpoints {
+  @each $display in $displays {
+    .show-on-load-#{$name}-#{$display} {
+      display: none;
+      visibility: hidden;
+
+      .page-loaded & {
+
+        @include media-breakpoint-up($name) {
+          display: #{$display};
+          visibility: visible;
+        }
+      }
+    }
+  }
+}
+@each $name, $width in $grid-breakpoints {
+  @each $display in $displays {
+    .show-on-load-#{$name}-max-#{$display} {
+      display: none;
+      visibility: hidden;
+
+      .page-loaded & {
+
+        @include media-breakpoint-down($name) {
+          display: #{$display};
+          visibility: visible;
+        }
+      }
+    }
+  }
+}
+
+// Hide until page load
+[class*="hide-until-load"] {
+  transition-property: opacity;
+  transition-duration: $transition-duration;
+  transition-timing-function: $transition-timing-function;
+  transition-delay: 50ms; // Small delay to let display change happen first
+  opacity: 0;
+
+  .page-loaded & {
+    opacity: 1;
+  }
+}
+@each $name, $width in $grid-breakpoints {
+  @each $display in $displays {
+    .hide-until-load-#{$name} {
+      opacity: 0;
+
+      .page-loaded & {
+
+        @include media-breakpoint-up($name) {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+@each $name, $width in $grid-breakpoints {
+  .hide-until-load-#{$name}-max {
+    opacity: 0;
+
+    .page-loaded & {
+
+      @include media-breakpoint-down($name) {
+        opacity: 1;
+      }
+    }
+  }
+}
