@@ -627,7 +627,6 @@ $displays: (
   transition-property: opacity;
   transition-duration: $transition-duration;
   transition-timing-function: $transition-timing-function;
-  transition-delay: 50ms; // Small delay to let display change happen first
   opacity: 0;
 
   .page-loaded & {
