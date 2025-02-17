@@ -75,6 +75,7 @@
   &-item {}
 
   &-link {
+    @include font($font-stack-navs, 400);
 
     &:hover {}
   }

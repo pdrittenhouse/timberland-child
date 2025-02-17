@@ -517,8 +517,8 @@
   --social-nav-item-bg: transparent;
   --social-nav-item-bg-hover: transparent;
   --social-nav-item-spacing: #{rem-calc(20px)};
-  --social-nav-item-width: auto;
-  --social-nav-item-height: auto;
+  --social-nav-item-width: #{rem-calc(24px)};
+  --social-nav-item-height: #{rem-calc(24px)};
   --social-nav-item-border-radius: 0;
   --social-nav-item-border-color: transparent;
   --social-nav-item-hover-border-color: transparent;

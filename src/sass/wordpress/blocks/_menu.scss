@@ -14,6 +14,7 @@
   
       .nav-link {
         @include font($font-stack-navs);
+        font-weight: normal;
       }
     }
   
