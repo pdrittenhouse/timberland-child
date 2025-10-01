@@ -53,7 +53,8 @@ module.exports = function(grunt) {
                 src: ['*.svg'],
                 dest: 'dist',
                 options: {
-                    transform: [{
+                    shape: {
+                       transform: [{
                            svgo: {
                                plugins: [
                                    { name: 'preset-default' },
@@ -63,7 +64,7 @@ module.exports = function(grunt) {
                            }
                        }]
                    },
-                    mode: {
+                   mode: {
                         view: {
                             dest: '',
                             sprite: './svg/sprites/sprite',
