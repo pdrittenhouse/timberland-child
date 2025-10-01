@@ -53,6 +53,16 @@ module.exports = function(grunt) {
                 src: ['*.svg'],
                 dest: 'dist',
                 options: {
+                    transform: [{
+                           svgo: {
+                               plugins: [
+                                   { name: 'preset-default' },
+                                   { name: 'removeAttrs', params: { attrs: '(fill|stroke)' } },
+                                   { name: 'removeStyleElement' }
+                               ]
+                           }
+                       }]
+                   },
                     mode: {
                         view: {
                             dest: '',
