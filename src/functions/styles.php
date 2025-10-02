@@ -198,27 +198,21 @@ function check_and_enqueue_child_block_admin_styles($content, $child_theme_block
 }
 
 function dream_enqueue_child_block_admin_styles() {
-    $child_theme_blocks_path = dirname(__DIR__, 2) . '/src/templates/blocks';
-    $child_theme_blocks = array_filter(scandir($child_theme_blocks_path), 'filter_block_dir');
+  $child_theme_blocks_path = dirname(__DIR__, 2) . '/src/templates/blocks';
+  $child_theme_blocks = array_filter(scandir($child_theme_blocks_path), 'filter_block_dir');
 
-
-    if (get_post() !== null) {
-        // Get the post content
-        $post_content = get_post()->post_content;
-
-
-        // Check post content
-        check_and_enqueue_child_block_admin_styles($post_content, $child_theme_blocks_path, $child_theme_blocks);
-
-
-        // Parse patterns and check content within patterns
-        if (preg_match_all('/<!-- wp:block {"ref":(\d+)} \/-->/', $post_content, $matches)) {
-            foreach ($matches[1] as $pattern_id) {
-                $pattern_content = get_post($pattern_id)->post_content;
-                check_and_enqueue_child_block_admin_styles($pattern_content, $child_theme_blocks_path, $child_theme_blocks);
-            }
-        }
-    }
+  // Always enqueue all block admin styles
+  foreach ($child_theme_blocks as $block) {
+	  if (file_exists($child_theme_blocks_path . '/' . $block . '/index.css')) {
+		  wp_enqueue_style(
+			  'child_block_admin_style_' . $block,
+			  get_stylesheet_directory_uri() . '/src/templates/blocks/' . $block . '/index.css',
+			  array(),
+			  wp_get_theme()->get('Version'),
+			  'all'
+		  );
+	  }
+  }
 }
 add_action('enqueue_block_editor_assets', 'dream_enqueue_child_block_admin_styles');
 
