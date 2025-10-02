@@ -13,22 +13,12 @@
 //}
 
 function dream_child_enqueue_scripts() {
-    if (file_exists(get_stylesheet_directory() . '/dist/scripts.gz')) {
-        wp_enqueue_script(
-            'child-script',
-            get_stylesheet_directory_uri() . '/dist/scripts.gz',
-            array('script'),
-            wp_get_theme()->get('Version'),
-            true
-        );
-    } else {
-        wp_enqueue_script( 'child-script',
-            get_stylesheet_directory_uri() . '/dist/scripts.min.js',
-            array ( 'script'),
-            wp_get_theme()->get( 'Version' ),
-            true
-        );
-    }
+    wp_enqueue_script( 'child-script',
+		get_stylesheet_directory_uri() . '/dist/scripts.min.js',
+		array ( 'script'),
+		wp_get_theme()->get( 'Version' ),
+		true
+	);
 }
 if ( !is_admin() ) {
     add_action( 'wp_enqueue_scripts', 'dream_child_enqueue_scripts', 9999 );
