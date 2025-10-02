@@ -153,22 +153,16 @@ function dream_enqueue_child_block_admin_scripts() {
     $child_theme_blocks_path = dirname(__DIR__, 2) . '/src/templates/blocks';
     $child_theme_blocks = array_filter(scandir($child_theme_blocks_path), 'filter_block_dir');
 
-
-    if (get_post() !== null) {
-        // Get the post content
-        $post_content = get_post()->post_content;
-
-
-        // Check post content
-        check_and_enqueue_child_block_admin_scripts($post_content, $child_theme_blocks_path, $child_theme_blocks);
-
-
-        // Parse patterns and check content within patterns
-        if (preg_match_all('/<!-- wp:block {"ref":(\d+)} \/-->/', $post_content, $matches)) {
-            foreach ($matches[1] as $pattern_id) {
-                $pattern_content = get_post($pattern_id)->post_content;
-                check_and_enqueue_child_block_admin_scripts($pattern_content, $child_theme_blocks_path, $child_theme_blocks);
-            }
+    // Always enqueue all block admin scripts
+    foreach ($child_theme_blocks as $block) {
+        if (file_exists($child_theme_blocks_path . '/' . $block . '/index.js')) {
+            wp_enqueue_script(
+                'child_block_admin_script_' . $block,
+                get_stylesheet_directory_uri() . '/src/templates/blocks/' . $block . '/index.js',
+                array('jquery', 'acf-input'),
+                wp_get_theme()->get('Version'),
+                true
+            );
         }
     }
 }
