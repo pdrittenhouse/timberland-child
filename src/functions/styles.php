@@ -17,30 +17,30 @@ function dream_child_enqueue_styles() {
 		$cached_child_customizer_css .= theme_get_customizer_buttons();
 		$cached_child_customizer_css .= theme_get_customizer_global();
 		$cached_child_customizer_css .= theme_get_customizer_forms();
-		// $cached_child_customizer_css .= theme_get_customizer_alerts();
+		$cached_child_customizer_css .= theme_get_customizer_alerts();
 		$cached_child_customizer_css .= theme_get_customizer_cards();
 		$cached_child_customizer_css .= theme_get_customizer_modals();
 		$cached_child_customizer_css .= theme_get_customizer_social_navs();
-		// $cached_child_customizer_css .= theme_get_customizer_header();
-		// $cached_child_customizer_css .= theme_get_customizer_header_branding();
+		$cached_child_customizer_css .= theme_get_customizer_header();
+		$cached_child_customizer_css .= theme_get_customizer_header_branding();
 		$cached_child_customizer_css .= theme_get_customizer_navbar();
-		// $cached_child_customizer_css .= theme_get_customizer_primary_nav();
-		// $cached_child_customizer_css .= theme_get_customizer_secondary_nav();
-		// $cached_child_customizer_css .= theme_get_customizer_header_cta();
-		// $cached_child_customizer_css .= theme_get_customizer_header_cta_mobile();
-		// $cached_child_customizer_css .= theme_get_customizer_header_search();
-		// $cached_child_customizer_css .= theme_get_customizer_header_social_nav();
-		// $cached_child_customizer_css .= theme_get_customizer_footer();
-		// $cached_child_customizer_css .= theme_get_customizer_footer_branding();
-		// $cached_child_customizer_css .= theme_get_customizer_footer_cta();
-		// $cached_child_customizer_css .= theme_get_customizer_footer_nav();
-		// $cached_child_customizer_css .= theme_get_customizer_utility_nav();
-		// $cached_child_customizer_css .= theme_get_customizer_footer_social_nav();
-		// $cached_child_customizer_css .= theme_get_customizer_footer_search();
-		// $cached_child_customizer_css .= theme_get_customizer_footer_contact_info();
-		// $cached_child_customizer_css .= theme_get_customizer_footer_disclaimer();
-		// $cached_child_customizer_css .= theme_get_customizer_footer_attribution();
-		// $cached_child_customizer_css .= theme_get_customizer_footer_copyright();
+		$cached_child_customizer_css .= theme_get_customizer_primary_nav();
+		$cached_child_customizer_css .= theme_get_customizer_secondary_nav();
+		$cached_child_customizer_css .= theme_get_customizer_header_cta();
+		$cached_child_customizer_css .= theme_get_customizer_header_cta_mobile();
+		$cached_child_customizer_css .= theme_get_customizer_header_search();
+		$cached_child_customizer_css .= theme_get_customizer_header_social_nav();
+		$cached_child_customizer_css .= theme_get_customizer_footer();
+		$cached_child_customizer_css .= theme_get_customizer_footer_branding();
+		$cached_child_customizer_css .= theme_get_customizer_footer_cta();
+		$cached_child_customizer_css .= theme_get_customizer_footer_nav();
+		$cached_child_customizer_css .= theme_get_customizer_utility_nav();
+		$cached_child_customizer_css .= theme_get_customizer_footer_social_nav();
+		$cached_child_customizer_css .= theme_get_customizer_footer_search();
+		$cached_child_customizer_css .= theme_get_customizer_footer_contact_info();
+		$cached_child_customizer_css .= theme_get_customizer_footer_disclaimer();
+		$cached_child_customizer_css .= theme_get_customizer_footer_attribution();
+		$cached_child_customizer_css .= theme_get_customizer_footer_copyright();
 
 		// Cache for 1 week (or until customizer is saved)
 		set_transient( 'dream_child_customizer_css', $cached_child_customizer_css, WEEK_IN_SECONDS );
@@ -69,30 +69,30 @@ function dream_child_enqueue_admin_styles() {
 		$cached_child_admin_customizer_css .= theme_get_customizer_buttons();
 		$cached_child_admin_customizer_css .= theme_get_customizer_global();
 		$cached_child_admin_customizer_css .= theme_get_customizer_forms();
-		$cached_child_admin_customizer_css .= theme_get_customizer_alerts();
+		// $cached_child_admin_customizer_css .= theme_get_customizer_alerts();
 		$cached_child_admin_customizer_css .= theme_get_customizer_cards();
 		$cached_child_admin_customizer_css .= theme_get_customizer_modals();
 		$cached_child_admin_customizer_css .= theme_get_customizer_social_navs();
-		$cached_child_admin_customizer_css .= theme_get_customizer_header();
-		$cached_child_admin_customizer_css .= theme_get_customizer_header_branding();
+		// $cached_child_admin_customizer_css .= theme_get_customizer_header();
+		// $cached_child_admin_customizer_css .= theme_get_customizer_header_branding();
 		$cached_child_admin_customizer_css .= theme_get_customizer_navbar();
-		$cached_child_admin_customizer_css .= theme_get_customizer_primary_nav();
-		$cached_child_admin_customizer_css .= theme_get_customizer_secondary_nav();
-		$cached_child_admin_customizer_css .= theme_get_customizer_header_cta();
-		$cached_child_admin_customizer_css .= theme_get_customizer_header_cta_mobile();
-		$cached_child_admin_customizer_css .= theme_get_customizer_header_search();
-		$cached_child_admin_customizer_css .= theme_get_customizer_header_social_nav();
-		$cached_child_admin_customizer_css .= theme_get_customizer_footer();
-		$cached_child_admin_customizer_css .= theme_get_customizer_footer_branding();
-		$cached_child_admin_customizer_css .= theme_get_customizer_footer_cta();
-		$cached_child_admin_customizer_css .= theme_get_customizer_footer_nav();
-		$cached_child_admin_customizer_css .= theme_get_customizer_utility_nav();
-		$cached_child_admin_customizer_css .= theme_get_customizer_footer_social_nav();
-		$cached_child_admin_customizer_css .= theme_get_customizer_footer_search();
-		$cached_child_admin_customizer_css .= theme_get_customizer_footer_contact_info();
-		$cached_child_admin_customizer_css .= theme_get_customizer_footer_disclaimer();
-		$cached_child_admin_customizer_css .= theme_get_customizer_footer_attribution();
-		$cached_child_admin_customizer_css .= theme_get_customizer_footer_copyright();
+		// $cached_child_admin_customizer_css .= theme_get_customizer_primary_nav();
+		// $cached_child_admin_customizer_css .= theme_get_customizer_secondary_nav();
+		// $cached_child_admin_customizer_css .= theme_get_customizer_header_cta();
+		// $cached_child_admin_customizer_css .= theme_get_customizer_header_cta_mobile();
+		// $cached_child_admin_customizer_css .= theme_get_customizer_header_search();
+		// $cached_child_admin_customizer_css .= theme_get_customizer_header_social_nav();
+		// $cached_child_admin_customizer_css .= theme_get_customizer_footer();
+		// $cached_child_admin_customizer_css .= theme_get_customizer_footer_branding();
+		// $cached_child_admin_customizer_css .= theme_get_customizer_footer_cta();
+		// $cached_child_admin_customizer_css .= theme_get_customizer_footer_nav();
+		// $cached_child_admin_customizer_css .= theme_get_customizer_utility_nav();
+		// $cached_child_admin_customizer_css .= theme_get_customizer_footer_social_nav();
+		// $cached_child_admin_customizer_css .= theme_get_customizer_footer_search();
+		// $cached_child_admin_customizer_css .= theme_get_customizer_footer_contact_info();
+		// $cached_child_admin_customizer_css .= theme_get_customizer_footer_disclaimer();
+		// $cached_child_admin_customizer_css .= theme_get_customizer_footer_attribution();
+		// $cached_child_admin_customizer_css .= theme_get_customizer_footer_copyright();
 
 		// Cache for 1 week (or until customizer is saved)
 		set_transient( 'dream_child_admin_customizer_css', $cached_child_admin_customizer_css, WEEK_IN_SECONDS );
@@ -126,75 +126,80 @@ if (is_admin()) {
 
 
 /**
- * Child Block Styles
+ * Block Styles
  * @link https://jasonyingling.me/enqueueing-scripts-and-styles-for-gutenberg-blocks/
  */
 
-function dream_enqueue_child_block_styles() {
-	if (get_post() === null) {
+/**
+ * Block Styles - Detect blocks early when post content is guaranteed to be loaded
+ * @link https://jasonyingling.me/enqueueing-scripts-and-styles-for-gutenberg-blocks/
+ */
+
+// Detect blocks on 'wp' hook (after main query is set, before template loads)
+add_action('wp', function() {
+	// Only run on singular pages where we have a single post
+	if (!is_singular()) {
 		return;
 	}
 
 	$post_id = get_the_ID();
-	$child_blocks_metadata = dream_get_child_blocks_metadata();
-	$used_blocks = dream_get_post_used_blocks($post_id, $child_blocks_metadata);
-	$child_theme_blocks_path = dirname(__DIR__, 2) . '/src/templates/blocks';
+	$blocks_metadata = dream_child_get_blocks_metadata(); // Helper function from block-helpers.php
 
-	// Only enqueue styles for child theme blocks actually used on this page
-	foreach ($used_blocks as $block_slug) {
-		$style_path = $child_theme_blocks_path . '/' . $block_slug . '/style.css';
+	// Detect blocks NOW (when post content is definitely loaded)
+	$used_blocks = dream_child_get_post_used_blocks($post_id, $blocks_metadata);
 
-		if (file_exists($style_path)) {
-			wp_enqueue_style(
-				'child_blocks_style_' . $block_slug,
-				get_stylesheet_directory_uri() . '/src/templates/blocks/' . $block_slug . '/style.css',
-				array(),
-				wp_get_theme()->get('Version'),
-				'all'
-			);
-		}
+	// Temporary debug
+	if (defined('WP_DEBUG') && WP_DEBUG) {
+		error_log('wp hook (child) - Post ID: ' . $post_id);
+		error_log('wp hook (child) - Post content length: ' . strlen(get_post($post_id)->post_content));
+		error_log('wp hook (child) - Detected blocks: ' . print_r($used_blocks, true));
 	}
-}
-add_action('enqueue_block_assets', 'dream_enqueue_child_block_styles');
 
-//function dream_enqueue_child_block_styles() {
-//    $child_theme_blocks_path = dirname(__DIR__, 2) . '/src/templates/blocks';
-//    $child_theme_blocks = array_filter(scandir($child_theme_blocks_path), 'filter_block_dir');
-//    foreach ($child_theme_blocks as $block) {
-//      if ( file_exists( $child_theme_blocks_path . '/' . $block . '/style.css' ) ) {
-//          wp_enqueue_style('child_blocks_style_' . $block, get_stylesheet_directory_uri() . '/src/templates/blocks/' . $block . '/style.css', array(), wp_get_theme()->get( 'Version' ), 'all');
-//      }
-//    }
-//}
-//add_action( 'enqueue_block_assets', 'dream_enqueue_child_block_styles' );
+	// Then hook into enqueue_block_assets to actually enqueue the styles
+	add_action('enqueue_block_assets', function() use ($used_blocks) {
+		$blocks_path = get_stylesheet_directory() . '/src/templates/blocks';
+
+		// Only enqueue styles for blocks actually used on this page
+		foreach ($used_blocks as $block_slug) {
+			$style_path = $blocks_path . '/' . $block_slug . '/style.css';
+
+			if (file_exists($style_path)) {
+				wp_enqueue_style(
+					'child_blocks_css_' . $block_slug,
+					get_stylesheet_directory_uri() . '/src/templates/blocks/' . $block_slug . '/style.css',
+					array(),
+					wp_get_theme()->get('Version'),
+					'all'
+				);
+			}
+		}
+	});
+});
 
 
-// Admin editor: Load all child block admin styles (no caching needed - editor needs all blocks available)
+// Admin editor: Load block admin styles (optimized - only load non-empty files)
+// Note: block.json references assets, but WordPress won't auto-enqueue empty files
+// So we handle enqueuing here with content check to skip empty/whitespace-only files
 function dream_enqueue_child_block_admin_styles() {
-	$child_theme_blocks_path = dirname(__DIR__, 2) . '/src/templates/blocks';
-	$child_theme_blocks = array_filter(scandir($child_theme_blocks_path), 'filter_block_dir');
+	$blocks_path = get_stylesheet_directory() . '/src/templates/blocks';
+	$blocks = array_filter(scandir($blocks_path), 'dream_child_filter_block_dir'); // Helper function from block-helpers.php
 
-	foreach ($child_theme_blocks as $block) {
-		if (file_exists($child_theme_blocks_path . '/' . $block . '/index.css')) {
-			wp_enqueue_style(
-				'child_block_admin_style_' . $block,
-				get_stylesheet_directory_uri() . '/src/templates/blocks/' . $block . '/index.css',
-				array(),
-				wp_get_theme()->get('Version'),
-				'all'
-			);
+	foreach ($blocks as $block) {
+		$index_css_path = $blocks_path . '/' . $block . '/index.css';
+
+		// Only enqueue if file exists AND has actual content (not just whitespace)
+		if (file_exists($index_css_path)) {
+			$content = file_get_contents($index_css_path);
+			if (!empty(trim($content))) {
+				wp_enqueue_style(
+					'child_blocks_css_' . $block,
+					get_stylesheet_directory_uri() . '/src/templates/blocks/' . $block . '/index.css',
+					array(),
+					wp_get_theme()->get('Version'),
+					'all'
+				);
+			}
 		}
 	}
 }
 add_action('enqueue_block_editor_assets', 'dream_enqueue_child_block_admin_styles');
-
-//function dream_enqueue_child_block_admin_styles() {
-//    $child_theme_blocks_path = dirname(__DIR__, 2) . '/src/templates/blocks';
-//    $child_theme_blocks = array_filter(scandir($child_theme_blocks_path), 'filter_block_dir');
-//    foreach ($child_theme_blocks as $block) {
-//        if ( file_exists( $child_theme_blocks_path . '/' . $block . '/index.css' ) ) {
-//            wp_enqueue_style('child_blocks_admin_style_' . $block, get_stylesheet_directory_uri() . '/src/templates/blocks/' . $block . '/index.css', array(), wp_get_theme()->get( 'Version' ), 'all');
-//        }
-//    }
-//}
-//add_action( 'enqueue_block_editor_assets', 'dream_enqueue_child_block_admin_styles' );
