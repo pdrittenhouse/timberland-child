@@ -27,8 +27,5 @@
         "grunt-svg-sprite": "^2.0.1",
         "pixrem": "^5.0.0",
         "sass": "^1.56.1"
-    },
-    "dependencies": {
-        "bootstrap": "^5.2.2"
     }
 }
