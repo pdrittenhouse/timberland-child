@@ -8,6 +8,8 @@ function dream_child_enqueue_styles() {
     );
 
 	// Get cached child customizer CSS
+	// NOTE: Uses parent theme's customizer functions with child theme's CSS variable overrides
+	// This is NOT duplication - child CSS variables in _css-variables.scss override parent values
 	$cached_child_customizer_css = get_transient( 'dream_child_customizer_css' );
 
 	if ( false === $cached_child_customizer_css ) {
