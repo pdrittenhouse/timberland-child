@@ -11,7 +11,38 @@
  *
  */
 const sass = require('sass');
+const path = require('path');
+const fs = require('fs');
+
 module.exports = function(grunt) {
+
+    // Dynamically detect parent theme directory
+    // Looks for the first directory in ../ that has a node_modules/bootstrap folder
+    const themesDir = path.resolve(__dirname, '..');
+    const childThemeName = path.basename(__dirname);
+    let parentThemeDir = null;
+
+    // Read all directories in themes folder
+    const themeDirs = fs.readdirSync(themesDir).filter(file => {
+        return fs.statSync(path.join(themesDir, file)).isDirectory() && file !== childThemeName;
+    });
+
+    // Find parent theme (has node_modules/bootstrap)
+    for (const dir of themeDirs) {
+        const bootstrapPath = path.join(themesDir, dir, 'node_modules/bootstrap');
+        if (fs.existsSync(bootstrapPath)) {
+            parentThemeDir = path.join('..', dir, 'node_modules');
+            grunt.log.writeln('Found parent theme Bootstrap at: ' + dir);
+            break;
+        }
+    }
+
+    // Fallback: derive parent theme name from child theme name (remove '-child' suffix)
+    if (!parentThemeDir) {
+        const parentThemeName = childThemeName.replace(/-child$/, '');
+        parentThemeDir = path.join('..', parentThemeName, 'node_modules');
+        grunt.log.warn('Could not auto-detect parent theme, using derived name: ' + parentThemeName);
+    }
 
     // Project configuration.
     grunt.initConfig({
@@ -19,14 +50,17 @@ module.exports = function(grunt) {
         copy: {
             main: {
                 files: [
-                    {
-                        expand: true,
-                        flatten: false, // flattens results to a single level
-                        cwd: 'node_modules/bootstrap/scss/', // makes all src relative to cwd
-                        src: ['vendor/**/*', 'mixins/**/*', 'helpers/**/*', 'utilities/**/*', '_functions.scss', '_variables*.scss', '_maps.scss', '_mixins.scss', '_utilities.scss', '_root.scss', '_reboot.scss'], // includes files within path
-                        dest: 'src/libs/bootstrap/', //copy file to location
-                        filter: 'isFile',
-                    },
+                    // NOTE: Bootstrap copy task no longer needed - child theme now imports from parent theme's node_modules
+                    // The includePaths in sass options (above) resolves ~bootstrap to parent theme's node_modules
+                    // Keeping this task definition for backwards compatibility, but it can be removed
+                    // {
+                    //     expand: true,
+                    //     flatten: false, // flattens results to a single level
+                    //     cwd: 'node_modules/bootstrap/scss/', // makes all src relative to cwd
+                    //     src: ['vendor/**/*', 'mixins/**/*', 'helpers/**/*', 'utilities/**/*', '_functions.scss', '_variables*.scss', '_maps.scss', '_mixins.scss', '_utilities.scss', '_root.scss', '_reboot.scss'], // includes files within path
+                    //     dest: 'src/libs/bootstrap/', //copy file to location
+                    //     filter: 'isFile',
+                    // },
                     // {
                     //     expand: true,
                     //     flatten: false, // flattens results to a single level
@@ -64,7 +98,7 @@ module.exports = function(grunt) {
                            }
                        }]
                    },
-                   mode: {
+                    mode: {
                         view: {
                             dest: '',
                             sprite: './svg/sprites/sprite',
@@ -106,7 +140,12 @@ module.exports = function(grunt) {
             options : {
                 implementation: sass,
                 sourceMap : true,
-                outputStyle : "expanded"
+                outputStyle : "expanded",
+                // Add parent theme's node_modules to resolve path (dynamically detected above)
+                // This allows child theme to use parent's Bootstrap without hardcoding parent theme name
+                includePaths: [
+                    parentThemeDir
+                ]
             },
             public : {
                 files : {
