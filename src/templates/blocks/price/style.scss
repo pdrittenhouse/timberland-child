@@ -1,0 +1,137 @@
+.price {
+
+    &-wrapper {}
+
+    .label {}
+
+    .amount {
+        font-weight: 600;
+        line-height: 1;
+    }
+
+    .price-main {
+        display: inline-block;
+        white-space: nowrap;
+    }
+
+    .symbol {
+        @include fontSize(24px);
+        vertical-align: top;
+        margin-top: rem-calc(3px);
+        display: inline-block;
+    }
+
+    .whole {
+        @include fontSize(32px);
+        vertical-align: top;
+        display: inline-block;
+        margin-left: rem-calc(-4px);
+    }
+
+    .separator {
+        @include fontSize(18px);
+        vertical-align: top;
+        margin-top: rem-calc(3px);
+        margin-left: rem-calc(-3px);
+        margin-right: rem-calc(-3px);
+        display: inline-block;
+    }
+
+    .price-meta {
+        @include fontSize(18px);
+        vertical-align: top;
+        margin-top: rem-calc(3px);
+        display: inline-block;
+        white-space: nowrap;
+    }
+
+    .remainder {
+        vertical-align: top;
+    }
+
+    .frequency-separator {
+        @include fontSize(24px);
+        margin-left: rem-calc(-6px);
+        margin-right: rem-calc(-6px);
+    }
+
+    .frequency {}
+
+    .details {
+        line-height: 1;
+    }
+
+    .terms {
+        @include fontSize(10px, 16px);
+    }
+
+    &.is-style-large {
+
+        .price-wrapper {
+            display: grid;
+            grid-template-columns: auto auto auto auto auto auto;
+            grid-template-rows: auto auto;
+        }
+
+        .label {}
+
+        .amount {
+            display: contents;
+        }
+
+        .price-main {
+            display: block;
+            grid-column-start: 1;
+            grid-column-end: span 2;
+            grid-row-start: 1;
+            grid-row-end: span 2;
+            // text-align: right;
+        }
+
+        .symbol {
+            @include fontSize(30px, 36px);
+            margin-top: rem-calc(10px);
+        }
+
+        .whole {
+            @include fontSize(80px, 80px);
+        }
+
+        .separator {
+            margin-left: rem-calc(-4px);
+            margin-right: rem-calc(2px);
+            margin-top: rem-calc(17px);
+        }
+
+        .details {}
+
+        .price-meta {
+            @include fontSize(28px, 34px);
+            display: block;
+            grid-column-start: 3;
+            grid-column-end: span 4;
+            grid-row-start: 1;
+            grid-row-end: auto;
+            margin-top: rem-calc(5px);
+        }
+
+        .remainder {
+            vertical-align: text-top;
+        }
+
+        .frequency-separator {
+            @include fontSize(28px, 34px);
+        }
+
+        .frequency {}
+
+        .details {
+            grid-column-start: 3;
+            grid-column-end: span 4;
+            grid-row-start: 2;
+            grid-row-end: auto;
+        }
+
+        .terms {}
+    }
+}

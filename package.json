@@ -14,8 +14,10 @@
     "devDependencies": {
         "autoprefixer": "^9.8.6",
         "cssnano": "^4.1.11",
+        "glob": "^10.3.10",
         "grunt": "^1.5.3",
         "grunt-cli": "^1.4.3",
+        "grunt-contrib-clean": "^2.0.1",
         "grunt-contrib-compress": "^2.0.0",
         "grunt-contrib-copy": "^1.0.0",
         "grunt-contrib-imagemin": "^4.0.0",

@@ -9,8 +9,11 @@
 //Import Utilities
 @import "utility/all";
 
-// Import Bootstrap Variable Overrides
+// Import Bootstrap Variable Overrides (non-printing)
 @import "variables/bootstrap";
+
+// Import Bootstrap Root CSS Output (CSS custom properties)
+@import "variables/bootstrap-root";
 
 // Import Custom Variables
 @import "global/utilities";

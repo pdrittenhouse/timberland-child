@@ -1,0 +1,25 @@
+//
+// Block Variables
+//
+// This file is automatically prepended to all block SCSS files during compilation.
+// It provides access to Bootstrap variables, child theme variables, utilities, and mixins.
+//
+// DO NOT include any CSS that prints output - only variables, functions, and mixins.
+//
+
+// Child Theme Variables
+@import "../../variables/theme-variables";
+@import "../../variables/colors";
+@import "../../variables/type";
+@import "../../variables/zindex";
+@import "../../variables/animations";
+@import "../../variables/custom-variables";
+
+// Child Theme Utility Functions & Mixins
+@import "../../utility/all";
+
+// Bootstrap Variable Overrides (this also imports Bootstrap core variables)
+@import "../../variables/bootstrap";
+
+// Child Theme Global Utilities (non-printing mixins/functions only)
+@import "../../global/utilities";

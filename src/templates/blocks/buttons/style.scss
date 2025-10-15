@@ -1,0 +1,20 @@
+ .buttons-group {
+
+   &-wrapper {}
+
+   &.vertical {
+
+     .button {
+
+       &:last-child {}
+     }
+   }
+
+   &:not(.vertical) {
+
+     .button {
+
+       &:last-child {}
+     }
+   }
+ }

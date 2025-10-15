@@ -57,16 +57,16 @@ $container-max-widths: (
 );
 
 // Colors
-$primary:       c(blaze-orange);
-$secondary:     c(burnt-orange);
-$tertiary:      c(pacific-blue);
-$quaternary:    c(shiraz);
-$quinary:       c(merlin);
-$senary:        c(pacific-blue);
-$septenary:     c(blaze-orange);
-$octonary:      c(merlin);
-$nonary:        c(burnt-orange);
-$denary:        c(california);
+$primary:       c(tobasco);
+$secondary:     c(catalina-blue);
+$tertiary:      c(crete);
+$quaternary:    c(classic-rose);
+$quinary:       c(anakiwa);
+$senary:        c(shiraz);
+$septenary:     c(catalina-blue);
+$octonary:      c(crete);
+$nonary:        c(classic-rose);
+$denary:        c(anakiwa);
 $success:       lightgreen;
 $info:          yellow;
 $warning:       pink;
@@ -111,12 +111,8 @@ $theme-colors: (
   }
 }
 
-// Create CSS properties for colors without bs- prefix [FIX FOR DEPRECATED BOOTSTRAP 4 FUNCTIONALITY]
-@each $name, $color in $theme-colors {
-  :root {
-    --#{"" + $name}: #{$color};
-  }
-}
+// NOTE: CSS custom properties output moved to _bootstrap-root.scss
+// Import _bootstrap-root.scss in styles.scss to output the :root {} variables
 
 // Content
 $body-bg:                   c(white);
@@ -215,6 +211,7 @@ $dropdown-divider-bg:     $dropdown-border-color;
 // Bootstrap non-printing tools. DO NOT REMOVE,
 // because Sass overrides must be defined
 // BEFORE the !default values are.
+// Import from PARENT theme's node_modules (resolved via Gruntfile includePaths)
 @import "bootstrap/scss/mixins/banner";
 @include bsBanner("");
 
@@ -226,6 +223,5 @@ $dropdown-divider-bg:     $dropdown-border-color;
 @import "bootstrap/scss/mixins";
 @import "bootstrap/scss/utilities";
 
-// CSS Properties
-@import "bootstrap/scss/root";
-
+// NOTE: Bootstrap root CSS output moved to _bootstrap-root.scss
+// Import _bootstrap-root.scss in styles.scss to output the Bootstrap CSS custom properties

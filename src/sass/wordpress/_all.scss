@@ -1,4 +1,7 @@
-@import 'blocks/all';
+// NOTE: Block styles moved to individual block directories
+// Each block now has its own style.scss that compiles to style.css
+// @import 'blocks/all'; // REMOVED - blocks are now conditionally loaded
+
 @import 'plugins/all';
 
 @import 'colors';

@@ -13,6 +13,7 @@
 const sass = require('sass');
 const path = require('path');
 const fs = require('fs');
+const { globSync } = require('glob');
 
 module.exports = function(grunt) {
 
@@ -21,6 +22,7 @@ module.exports = function(grunt) {
     const themesDir = path.resolve(__dirname, '..');
     const childThemeName = path.basename(__dirname);
     let parentThemeDir = null;
+    let parentThemeName = null;
 
     // Read all directories in themes folder
     const themeDirs = fs.readdirSync(themesDir).filter(file => {
@@ -32,6 +34,7 @@ module.exports = function(grunt) {
         const bootstrapPath = path.join(themesDir, dir, 'node_modules/bootstrap');
         if (fs.existsSync(bootstrapPath)) {
             parentThemeDir = path.join('..', dir, 'node_modules');
+            parentThemeName = dir;
             grunt.log.writeln('Found parent theme Bootstrap at: ' + dir);
             break;
         }
@@ -39,10 +42,48 @@ module.exports = function(grunt) {
 
     // Fallback: derive parent theme name from child theme name (remove '-child' suffix)
     if (!parentThemeDir) {
-        const parentThemeName = childThemeName.replace(/-child$/, '');
+        parentThemeName = childThemeName.replace(/-child$/, '');
         parentThemeDir = path.join('..', parentThemeName, 'node_modules');
         grunt.log.warn('Could not auto-detect parent theme, using derived name: ' + parentThemeName);
     }
+
+    // Dynamically find all child block SCSS files (auto-detection like webpack)
+    const blockScssFiles = globSync('./src/templates/blocks/**/style.scss');
+
+    // Filter out hidden directories (like .block template)
+    const filteredBlockScssFiles = blockScssFiles.filter(filePath => !filePath.includes('/.'));
+
+    grunt.log.writeln('[Block SCSS] Found ' + filteredBlockScssFiles.length + ' block SCSS files');
+
+    // Build dynamic sass files object for blocks
+    const blockSassFiles = {};
+    const blockCopyFiles = [];
+    const blockTempFiles = [];
+
+    filteredBlockScssFiles.forEach(filePath => {
+        // Extract block name from path
+        const match = filePath.match(/blocks\/([^\/]+)\/style\.scss$/);
+        if (match && match[1]) {
+            const blockName = match[1];
+            // Compile temp file with prepended imports to dist/blocks/[block-name]/style.css
+            blockSassFiles['dist/blocks/' + blockName + '/style.css'] = '.tmp/blocks/' + blockName + '/style.scss';
+
+            // Track temp file locations
+            blockTempFiles.push({
+                blockName: blockName,
+                source: filePath,
+                temp: '.tmp/blocks/' + blockName + '/style.scss'
+            });
+
+            // Prepare copy task: dist -> src
+            blockCopyFiles.push({
+                src: 'dist/blocks/' + blockName + '/style.css',
+                dest: 'src/templates/blocks/' + blockName + '/style.css'
+            });
+
+            grunt.log.writeln('[Block SCSS] Added entry: ' + blockName);
+        }
+    });
 
     // Project configuration.
     grunt.initConfig({
@@ -79,6 +120,10 @@ module.exports = function(grunt) {
                     // }
                 ],
             },
+            // Copy compiled block CSS files back to source directories
+            blocks: {
+                files: blockCopyFiles
+            }
         },
         svg_sprite: {
             dist: {
@@ -144,7 +189,9 @@ module.exports = function(grunt) {
                 // Add parent theme's node_modules to resolve path (dynamically detected above)
                 // This allows child theme to use parent's Bootstrap without hardcoding parent theme name
                 includePaths: [
-                    parentThemeDir
+                    parentThemeDir,
+                    // Add parent theme's pattern source path for variable imports
+                    path.join('..', parentThemeName, 'src/patternlab/source/_patterns')
                 ]
             },
             public : {
@@ -153,6 +200,20 @@ module.exports = function(grunt) {
                     "dist/admin.css" : "src/sass/wordpress/admin/admin.scss",
                     "dist/editor.css" : "src/sass/wordpress/editor/editor.scss"
                 }
+            },
+            // Compile block SCSS files with variable injection
+            blocks: {
+                options: {
+                    implementation: sass,
+                    sourceMap: true,
+                    outputStyle: "expanded",
+                    includePaths: [
+                        parentThemeDir,
+                        path.join('..', parentThemeName, 'src/patternlab/source/_patterns'),
+                        './src' // Add child theme src for relative imports
+                    ]
+                },
+                files: blockSassFiles
             }
         },
         watch: {
@@ -167,7 +228,19 @@ module.exports = function(grunt) {
                     "src/js/parts/**/*.js",
                     "src/sass/**/*.scss"
                 ],
-                tasks: ["uglify","sass"]
+                tasks: ["uglify","sass:public"]
+            },
+            blocks: {
+                options: {
+                    reload: false,
+                    spawn: false,
+                    interrupt: false,
+                    livereload: true
+                },
+                files: [
+                    "src/templates/blocks/**/style.scss"
+                ],
+                tasks: ["prepare-blocks", "sass:blocks", "postcss:blocks", "copy:blocks", "clean:blocks"]
             },
             fonts: {
                 options: {
@@ -201,6 +274,16 @@ module.exports = function(grunt) {
                     annotation: "dist/" // ...to the specified directory
                 },
                 src: "dist/*.css"
+            },
+            // Minify block CSS files (runs on dist before copying to src)
+            blocks: {
+                map: {
+                    inline: false,
+                    annotation: function(dest) {
+                        return dest.replace(/\.css$/, '');
+                    }
+                },
+                src: "dist/blocks/**/style.css"
             }
         },
         compress: {
@@ -214,7 +297,24 @@ module.exports = function(grunt) {
                 dest: 'dist/',
                 ext: '.gz'
             }
+        },
+        clean: {
+            // Clean up dist/blocks and temp directories after copying to source
+            blocks: ['dist/blocks', '.tmp/blocks']
         }
+    });
+
+    // Custom task to prepend variable imports to block SCSS files
+    grunt.registerTask('prepare-blocks', 'Prepend variable imports to block SCSS files', function() {
+        blockTempFiles.forEach(function(block) {
+            const sourceContent = grunt.file.read(block.source);
+            // Import path is relative to .tmp/blocks/[block-name]/ directory
+            const tempContent = '@import "../../../src/sass/wordpress/blocks/block-variables";\n' + sourceContent;
+
+            // Ensure temp directory exists and write file
+            grunt.file.write(block.temp, tempContent);
+            grunt.log.writeln('Prepared block SCSS: ' + block.blockName);
+        });
     });
 
     grunt.loadNpmTasks("grunt-contrib-copy");
@@ -224,12 +324,13 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-svg-sprite");
     grunt.loadNpmTasks('grunt-contrib-compress');
+    grunt.loadNpmTasks('grunt-contrib-clean');
 
     // Default task(s).
     // grunt.registerTask("default", ["svg_sprite","uglify","sass"]);
-    grunt.registerTask("default", ["uglify","sass"]);
-    grunt.registerTask("sprites", ["svg_sprite","sass"]);
-    grunt.registerTask("init", ["copy", "svg_sprite", "uglify", "sass"]);
+    grunt.registerTask("default", ["uglify","sass:public","prepare-blocks","sass:blocks","postcss:blocks","copy:blocks","clean:blocks"]);
+    grunt.registerTask("sprites", ["svg_sprite","sass:public","prepare-blocks","sass:blocks","postcss:blocks","copy:blocks","clean:blocks"]);
+    grunt.registerTask("init", ["copy", "svg_sprite", "uglify", "sass:public","prepare-blocks","sass:blocks","postcss:blocks","copy:blocks","clean:blocks"]);
     // grunt.registerTask("init", ["copy", "uglify", "sass"]);
-    grunt.registerTask("prod", ["svg_sprite", "uglify","sass","postcss", "compress"]);
+    grunt.registerTask("prod", ["svg_sprite", "uglify","sass:public","prepare-blocks","sass:blocks","postcss:blocks","copy:blocks","clean:blocks","postcss:public", "compress"]);
 };

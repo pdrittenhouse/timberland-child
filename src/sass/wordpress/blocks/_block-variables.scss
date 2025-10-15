@@ -1,0 +1,24 @@
+//
+// Block Variables
+//
+// This file is automatically prepended to all block SCSS files during compilation.
+// It provides access to Bootstrap variables, child theme variables, and mixins.
+//
+// DO NOT include any CSS that prints output - only variables, functions, and mixins.
+// All printed CSS (like utility classes and CSS custom properties) should be in styles.scss only.
+//
+
+// Child Theme Variables (non-printing)
+@import "../../variables/theme-variables";
+@import "../../variables/colors";
+@import "../../variables/type";
+@import "../../variables/zindex";
+@import "../../variables/animations";
+@import "../../variables/custom-variables";
+
+// Child Theme Utility Functions & Mixins (non-printing)
+@import "../../utility/all";
+
+// Bootstrap Variables & Mixins (non-printing)
+// NOTE: CSS output has been split to _bootstrap-root.scss which is only imported in styles.scss
+@import "../../variables/bootstrap";

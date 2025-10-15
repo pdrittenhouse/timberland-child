@@ -1,0 +1,8 @@
+.block-section {
+
+    &--wrapper {
+
+        > .container,
+        > .container-fluid {}
+    }
+}

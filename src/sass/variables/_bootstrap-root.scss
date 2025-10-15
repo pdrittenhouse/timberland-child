@@ -1,0 +1,16 @@
+//
+// Bootstrap Root CSS Output
+//
+// This file contains ONLY the CSS output portions from _bootstrap.scss
+// It should be imported in styles.scss AFTER _bootstrap.scss
+//
+
+// Create CSS properties for colors without bs- prefix [FIX FOR DEPRECATED BOOTSTRAP 4 FUNCTIONALITY]
+@each $name, $color in $theme-colors {
+  :root {
+    --#{"" + $name}: #{$color};
+  }
+}
+
+// Bootstrap CSS Properties (Root Variables)
+@import "bootstrap/scss/root";
