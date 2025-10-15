@@ -2,7 +2,7 @@
   "name": "acf/highlight-grid",
   "title": "Highlight Grid",
   "description": "A highlight grid block.",
-  "category": "tagstrategies",
+  "category": "timberland-child",
   "icon": "grid-view",
   "keywords": ["highlight", "grid"],
   "attributes": {},
@@ -36,6 +36,7 @@
   "script": "./script.js",
   "editorStyle": "./index.css",
   "style": "./style.css",
+  "viewScript": [ "file:./view.js" ],
   "acf": {
     "mode": "preview",
     "renderCallback": "dream_block_render",

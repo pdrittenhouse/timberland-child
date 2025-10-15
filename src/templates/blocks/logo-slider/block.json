@@ -2,7 +2,7 @@
   "name": "acf/logo-slider",
   "title": "Logo Slider",
   "description": "A logo slider block.",
-  "category": "updater",
+  "category": "timberland-child",
   "icon": "wordpress-alt",
   "keywords": ["logo", "slider", "carousel"],
   "attributes": {},
@@ -36,6 +36,7 @@
   "script": "./script.js",
   "editorStyle": "./index.css",
   "style": "./style.css",
+  "viewScript": [ "file:./view.js" ],
   "acf": {
     "mode": "preview",
     "renderCallback": "dream_block_render",
