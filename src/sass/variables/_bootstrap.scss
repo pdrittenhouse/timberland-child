@@ -215,16 +215,17 @@ $dropdown-divider-bg:     $dropdown-border-color;
 // Bootstrap non-printing tools. DO NOT REMOVE,
 // because Sass overrides must be defined
 // BEFORE the !default values are.
-@import "../../libs/bootstrap/mixins/banner";
+@import "bootstrap/scss/mixins/banner";
 @include bsBanner("");
 
 // scss-docs-start import-stack
 // Configuration
-@import "../../libs/bootstrap/functions";
-@import "../../libs/bootstrap/variables";
-@import "../../libs/bootstrap/maps";
-@import "../../libs/bootstrap/mixins";
-@import "../../libs/bootstrap/utilities";
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
 
 // CSS Properties
-@import "../../libs/bootstrap/root";
+@import "bootstrap/scss/root";
+
