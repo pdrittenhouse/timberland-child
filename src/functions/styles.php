@@ -52,7 +52,9 @@ function dream_child_enqueue_styles() {
 	wp_add_inline_style( 'child_styles', $cached_child_customizer_css );
 }
 if ( !is_admin() ) {
-	add_action( 'wp_enqueue_scripts', 'dream_child_enqueue_styles' );
+	// Priority 15: Load AFTER parent patterns (priority 10) but before child blocks (priority 20)
+	// This ensures: parent styles -> parent patterns -> parent blocks -> child styles -> child blocks
+	add_action( 'wp_enqueue_scripts', 'dream_child_enqueue_styles', 15 );
 }
 
 
@@ -166,16 +168,23 @@ add_action('wp', function() {
 			$style_path = $blocks_path . '/' . $block_slug . '/style.css';
 
 			if (file_exists($style_path)) {
+				// Create dependency array - depend on parent block style if it exists
+				$dependencies = array('child_styles'); // Always depend on child main stylesheet
+				$parent_handle = 'blocks_css_' . $block_slug;
+				if (wp_style_is($parent_handle, 'enqueued') || wp_style_is($parent_handle, 'registered')) {
+					$dependencies[] = $parent_handle;
+				}
+
 				wp_enqueue_style(
 					'child_blocks_css_' . $block_slug,
 					get_stylesheet_directory_uri() . '/src/templates/blocks/' . $block_slug . '/style.css',
-					array(),
+					$dependencies,
 					wp_get_theme()->get('Version'),
 					'all'
 				);
 			}
 		}
-	});
+	}, 20); // Priority 20 to run after parent theme (default 10)
 });
 
 
@@ -193,10 +202,17 @@ function dream_enqueue_child_block_admin_styles() {
 		if (file_exists($index_css_path)) {
 			$content = file_get_contents($index_css_path);
 			if (!empty(trim($content))) {
+				// Create dependency array - depend on parent block admin style if it exists
+				$dependencies = array('child_block_css'); // Always depend on child editor stylesheet
+				$parent_handle = 'blocks_css_' . $block;
+				if (wp_style_is($parent_handle, 'enqueued') || wp_style_is($parent_handle, 'registered')) {
+					$dependencies[] = $parent_handle;
+				}
+
 				wp_enqueue_style(
 					'child_blocks_css_' . $block,
 					get_stylesheet_directory_uri() . '/src/templates/blocks/' . $block . '/index.css',
-					array(),
+					$dependencies,
 					wp_get_theme()->get('Version'),
 					'all'
 				);
@@ -204,4 +220,4 @@ function dream_enqueue_child_block_admin_styles() {
 		}
 	}
 }
-add_action('enqueue_block_editor_assets', 'dream_enqueue_child_block_admin_styles');
+add_action('enqueue_block_editor_assets', 'dream_enqueue_child_block_admin_styles', 20); // Priority 20 to run after parent theme
