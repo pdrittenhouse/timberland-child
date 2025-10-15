@@ -49,17 +49,21 @@ module.exports = function(grunt) {
 
     // Dynamically find all child block SCSS files (auto-detection like webpack)
     const blockScssFiles = globSync('./src/templates/blocks/**/style.scss');
+    const blockIndexScssFiles = globSync('./src/templates/blocks/**/index.scss');
 
     // Filter out hidden directories (like .block template)
     const filteredBlockScssFiles = blockScssFiles.filter(filePath => !filePath.includes('/.'));
+    const filteredBlockIndexScssFiles = blockIndexScssFiles.filter(filePath => !filePath.includes('/.'));
 
     grunt.log.writeln('[Block SCSS] Found ' + filteredBlockScssFiles.length + ' block SCSS files');
+    grunt.log.writeln('[Block Index SCSS] Found ' + filteredBlockIndexScssFiles.length + ' block index SCSS files');
 
     // Build dynamic sass files object for blocks
     const blockSassFiles = {};
     const blockCopyFiles = [];
     const blockTempFiles = [];
 
+    // Process style.scss files
     filteredBlockScssFiles.forEach(filePath => {
         // Extract block name from path
         const match = filePath.match(/blocks\/([^\/]+)\/style\.scss$/);
@@ -71,6 +75,7 @@ module.exports = function(grunt) {
             // Track temp file locations
             blockTempFiles.push({
                 blockName: blockName,
+                fileType: 'style',
                 source: filePath,
                 temp: '.tmp/blocks/' + blockName + '/style.scss'
             });
@@ -82,6 +87,33 @@ module.exports = function(grunt) {
             });
 
             grunt.log.writeln('[Block SCSS] Added entry: ' + blockName);
+        }
+    });
+
+    // Process index.scss files
+    filteredBlockIndexScssFiles.forEach(filePath => {
+        // Extract block name from path
+        const match = filePath.match(/blocks\/([^\/]+)\/index\.scss$/);
+        if (match && match[1]) {
+            const blockName = match[1];
+            // Compile temp file with prepended imports to dist/blocks/[block-name]/index.css
+            blockSassFiles['dist/blocks/' + blockName + '/index.css'] = '.tmp/blocks/' + blockName + '/index.scss';
+
+            // Track temp file locations
+            blockTempFiles.push({
+                blockName: blockName,
+                fileType: 'index',
+                source: filePath,
+                temp: '.tmp/blocks/' + blockName + '/index.scss'
+            });
+
+            // Prepare copy task: dist -> src
+            blockCopyFiles.push({
+                src: 'dist/blocks/' + blockName + '/index.css',
+                dest: 'src/templates/blocks/' + blockName + '/index.css'
+            });
+
+            grunt.log.writeln('[Block Index SCSS] Added entry: ' + blockName);
         }
     });
 
@@ -238,7 +270,8 @@ module.exports = function(grunt) {
                     livereload: true
                 },
                 files: [
-                    "src/templates/blocks/**/style.scss"
+                    "src/templates/blocks/**/style.scss",
+                    "src/templates/blocks/**/index.scss"
                 ],
                 tasks: ["prepare-blocks", "sass:blocks", "postcss:blocks", "copy:blocks", "clean:blocks"]
             },
@@ -283,7 +316,7 @@ module.exports = function(grunt) {
                         return dest.replace(/\.css$/, '');
                     }
                 },
-                src: "dist/blocks/**/style.css"
+                src: "dist/blocks/**/*.css"
             }
         },
         compress: {
