@@ -27,8 +27,8 @@
 //Import CSS Variables
 @import "variables/css-variables";
 
-// Bootstrap CSS Reset
-@import "../libs/bootstrap/reboot";
+// Bootstrap CSS Reset (from parent theme's node_modules)
+@import "bootstrap/scss/reboot";
 
 //Import WordPress Overrides
 @import "wordpress/all";
