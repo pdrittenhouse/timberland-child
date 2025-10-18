@@ -125,7 +125,7 @@ function dream_child_acf_block_editor_style()
 }
 
 if (is_admin()) {
-	add_action('enqueue_block_assets', 'dream_child_acf_block_editor_style');
+	add_action('enqueue_block_assets', 'dream_child_acf_block_editor_style', 20); // Priority 20 to run after parent theme
 }
 
 
