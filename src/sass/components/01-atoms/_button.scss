@@ -30,6 +30,7 @@
       &-block {}
 
       &-default {
+        @include button();
 
         &.ghost {}
       }
