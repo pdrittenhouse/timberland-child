@@ -37,80 +37,6 @@
   }
 }
 
-// Overflow
-.overflow-hidden {
-  overflow: hidden;
-  > .container {
-    overflow: hidden;
-  }
-}
-.overflow-visible {
-  overflow: visible;
-  >.container {
-    overflow: visible;
-  }
-}
-.overflow-auto {
-  overflow: auto;
-  >.container {
-    overflow: auto;
-  }
-}
-.overflow-scroll {
-  overflow: scroll;
-  >.container {
-    overflow: scroll;
-  }
-}
-.overflow-x-hidden {
-  overflow-x: hidden;
-  > .container {
-    overflow-x: hidden;
-  }
-}
-.overflow-x-visible {
-  overflow-x: visible;
-  >.container {
-    overflow-x: visible;
-  }
-}
-.overflow-x-auto {
-  overflow-x: auto;
-  >.container {
-    overflow-x: auto;
-  }
-}
-.overflow-x-scroll {
-  overflow-x: scroll;
-  >.container {
-    overflow-x: scroll;
-  }
-}
-.overflow-y-hidden {
-  overflow-y: hidden;
-  >.container {
-    overflow-y: hidden;
-  }
-}
-.overflow-y-visible {
-  overflow-y: visible;
-  >.container {
-    overflow-y: visible;
-  }
-}
-.overflow-y-auto {
-  overflow-y: auto;
-  >.container {
-    overflow-y: auto;
-  }
-}
-.overflow-y-scroll {
-  overflow-y: scroll;
-  >.container {
-    overflow-y: scroll;
-  }
-}
-
 // Angle Graphic
 @each $name, $color in $theme-colors {
 
@@ -146,60 +72,6 @@
     }
   }
 
-}
-
-
-// Z Index
-@each $index in $z-indexes {
-  .z-#{$index} {
-    z-index: z(#{$index}) !important;
-  }
-}
-
-.container-overflow-hidden {
-
-  .container,
-  .container-fluid {
-      overflow: hidden;
-  }
-}
-
-// Font Weights
-
-.fw-100 {
-    font-weight: 100 !important;
-}
-
-.fw-200 {
-    font-weight: 200 !important;
-}
-
-.fw-300 {
-    font-weight: 300 !important;
-}
-
-.fw-400 {
-    font-weight: 400 !important;
-}
-
-.fw-500 {
-    font-weight: 500 !important;
-}
-
-.fw-600 {
-    font-weight: 600 !important;
-}
-
-.fw-700 {
-    font-weight: 700 !important;
-}
-
-.fw-800 {
-    font-weight: 800 !important;
-}
-
-.fw-900 {
-    font-weight: 900 !important;
 }
 
 // Bootstrap Utility overrides
@@ -659,3 +531,4 @@ $displays: (
     }
   }
 }
+
