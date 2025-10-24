@@ -145,6 +145,48 @@
 	{% set button_margin_right = fields.button['margin']['margin']['right']['auto'] == true ? 'margin-right: auto;' : parent_block_data['name'] != 'acf/group' and fields.button['margin']['margin']['right']['right'] is not empty ? 'margin-right: ' ~ fields.button['margin']['margin']['right']['right'] ~ 'px;' %}
 {% endif %}
 
+{# Generate srcset using optimal fallback chain #}
+{% if fields.image['image_type'] == 'file' and fields.image['image']['id'] %}
+	{% set hero_image_id = fields.image['image']['id'] %}
+	{% set hero_image_srcset = null %}
+	{% set hero_image_sizes = null %}
+
+	{# Try cached srcset first (fastest - post meta lookup) #}
+	{% set cached_srcset = function('dream_get_cached_srcset', hero_image_id, 'featured-widescreen') %}
+	{% if cached_srcset %}
+		{% set hero_image_srcset = cached_srcset.srcset %}
+		{% set hero_image_sizes = cached_srcset.sizes %}
+	{% else %}
+		{# Fallback to WordPress function if cache miss #}
+		{% set hero_image_srcset = function('wp_get_attachment_image_srcset', hero_image_id, 'featured-widescreen') %}
+		{% set hero_image_sizes = function('wp_get_attachment_image_sizes', hero_image_id, 'featured-widescreen') %}
+	{% endif %}
+
+	{# Fallback to ACF sizes array if WordPress function also failed #}
+	{% if not hero_image_srcset and fields.image['image']['sizes'] %}
+		{% set srcset_parts = [] %}
+		{% for size_name, size_url in fields.image['image']['sizes'] %}
+			{% if size_name matches '/^[a-z]/' and size_url matches '/^http/' %}
+				{% set width_key = size_name ~ '-width' %}
+				{% if fields.image['image']['sizes'][width_key] %}
+					{% set srcset_parts = srcset_parts|merge([size_url ~ ' ' ~ fields.image['image']['sizes'][width_key] ~ 'w']) %}
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+		{% if srcset_parts|length > 0 %}
+			{% set hero_image_srcset = srcset_parts|join(', ') %}
+			{% set hero_image_sizes = '(max-width: 768px) 100vw, 1600px' %}
+		{% endif %}
+	{% endif %}
+
+	{# Final fallback to TimberImage (heaviest - only if other methods failed) #}
+	{% if not hero_image_srcset %}
+		{% set hero_image_obj = TimberImage(hero_image_id) %}
+		{% set hero_image_srcset = hero_image_obj.srcset %}
+		{% set hero_image_sizes = '(max-width: 768px) 100vw, 1600px' %}
+	{% endif %}
+{% endif %}
+
 {% if fields.hero_type == 'jumbotron' %}
 	{% embed '@molecules/jumbotron/_jumbotron.tpl.twig' with {
       jumbotron_other_styles: bg_color ~ text_color ~ bg_image_size ~ bg_position ~ bg_repeat ~ bg_attachment ~ margin_top ~ margin_bottom ~ margin_left ~ margin_right ~ height ~ min_height ~ max_height ~ border_top_width ~ border_top_style ~ border_top_color ~ border_bottom_width ~ border_bottom_style ~ border_bottom_color ~ border_left_width ~ border_left_style ~ border_left_color ~ border_right_width ~ border_right_style ~ border_right_color ~ border_top_left_radius ~ border_top_right_radius ~ border_bottom_left_radius ~ border_bottom_right_radius ~ box_shadow,
@@ -167,8 +209,11 @@
 					<div class="image-wrapper">
 						{% include '@atoms/image/_image.tpl.twig' with {
 							variant: 'primary',
-							src: fields.image['image_type'] == 'file' and fields.image['image']['url'] ? fields.image['image']['url'] : fields.image['image_type'] == 'url' and fields.image['image_url'] ? fields.image['image_url'],
+							src: fields.image['image_type'] == 'file' and fields.image['image']['sizes'] and fields.image['image']['sizes']['featured-widescreen'] ? fields.image['image']['sizes']['featured-widescreen'] : (fields.image['image_type'] == 'file' and fields.image['image']['url'] ? fields.image['image']['url'] : fields.image['image_type'] == 'url' and fields.image['image_url'] ? fields.image['image_url']),
+							srcset: hero_image_srcset ? hero_image_srcset : false,
+							sizes: hero_image_sizes ? hero_image_sizes : false,
 							alt: fields.image['image_type'] == 'file' and fields.image['image']['alt'] ? fields.image['image']['alt'],
+							size: 'featured-widescreen',
 							image_other_classes: ''
 						} %}
 					</div>
@@ -264,9 +309,12 @@
 		description: fields.text,
 		image: {
 			variant: 'aspect-ratio',
-			src: fields.image['image_type'] == 'file' and fields.image['image']['url'] ? fields.image['image']['url'] : fields.image['image_type'] == 'url' and fields.image['image_url'] ? fields.image['image_url'],
+			src: hero_image_obj ? hero_image_obj.src('featured-widescreen') : (fields.image['image_type'] == 'file' and fields.image['image']['url'] ? fields.image['image']['url'] : fields.image['image_type'] == 'url' and fields.image['image_url'] ? fields.image['image_url']),
+			srcset: hero_image_obj ? hero_image_obj.srcset,
+			sizes: hero_image_obj ? '(max-width: 768px) 100vw, 1600px',
 			alt: fields.image['image_type'] == 'file' and fields.image['image']['alt'] ? fields.image['image']['alt'],
 			width: '16',
+			size: 'featured-widescreen',
 			height: '9'
 		},
 		image_right: fields.image_right,
@@ -345,8 +393,8 @@
 				context_placement: fields.button['context']['placement'],
 				context_container: fields.button['context']['container'],
 				close_button: fields.button['close'],
-				aria_label: fields.button['aria_label'],
 				hide_label: fields.button['hide_label'],
+				aria_label: fields.button['aria_label'],
 				button_classes: [
 					fields.button['close'] != 'black' and fields.button['close'] != 'white' and fields.button['background_color']['bg_color'] == 'palette' and fields.button['background_color']['bg_theme_color'] ? 'bg-' ~ fields.button['background_color']['bg_theme_color'],
 					fields.button['close'] != 'black' and fields.button['close'] != 'white' and fields.button['text_color']['color'] == 'palette' and fields.button['text_color']['theme_color'] ? 'text-' ~ fields.button['text_color']['theme_color'],

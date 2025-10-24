@@ -45,12 +45,57 @@
 <div class="{{ block_classes }}" {{ block_attributes }}>
     <div class="block-highlight-grid--wrapper">
         {% for item in fields.items %}
+            {# Generate srcset using optimal fallback chain #}
+            {% if item.image.id %}
+                {% set item_image_id = item.image.id %}
+                {% set item_image_srcset = null %}
+                {% set item_image_sizes = null %}
+
+                {# Try cached srcset first (fastest - post meta lookup) #}
+                {% set cached_srcset = function('dream_get_cached_srcset', item_image_id, 'thumbnail-medium') %}
+                {% if cached_srcset %}
+                    {% set item_image_srcset = cached_srcset.srcset %}
+                    {% set item_image_sizes = cached_srcset.sizes %}
+                {% else %}
+                    {# Fallback to WordPress function if cache miss #}
+                    {% set item_image_srcset = function('wp_get_attachment_image_srcset', item_image_id, 'thumbnail-medium') %}
+                    {% set item_image_sizes = function('wp_get_attachment_image_sizes', item_image_id, 'thumbnail-medium') %}
+                {% endif %}
+
+                {# Fallback to ACF sizes array if WordPress function also failed #}
+                {% if not item_image_srcset and item.image.sizes %}
+                    {% set srcset_parts = [] %}
+                    {% for size_name, size_url in item.image.sizes %}
+                        {% if size_name matches '/^[a-z]/' and size_url matches '/^http/' %}
+                            {% set width_key = size_name ~ '-width' %}
+                            {% if item.image.sizes[width_key] %}
+                                {% set srcset_parts = srcset_parts|merge([size_url ~ ' ' ~ item.image.sizes[width_key] ~ 'w']) %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if srcset_parts|length > 0 %}
+                        {% set item_image_srcset = srcset_parts|join(', ') %}
+                        {% set item_image_sizes = '(max-width: 768px) 100vw, 300px' %}
+                    {% endif %}
+                {% endif %}
+
+                {# Final fallback to TimberImage (heaviest - only if other methods failed) #}
+                {% if not item_image_srcset %}
+                    {% set item_image_obj = TimberImage(item_image_id) %}
+                    {% set item_image_srcset = item_image_obj.srcset %}
+                    {% set item_image_sizes = '(max-width: 768px) 100vw, 300px' %}
+                {% endif %}
+            {% endif %}
+
             <div class="block-highlight-grid--item">
                 {% if item.item_type == true and item.image is not empty %}
                     {% include "@atoms/image/_image.tpl.twig" with {
                         variant: 'primary',
-                        src: item.image.url,
+                        src: item.image.sizes and item.image.sizes['thumbnail-medium'] ? item.image.sizes['thumbnail-medium'] : item.image.url,
+                        srcset: item_image_srcset ? item_image_srcset : false,
+                        sizes: item_image_sizes ? item_image_sizes : false,
                         alt: item.image.alt,
+                        size: 'thumbnail-medium',
                         image_other_classes: 'block-highlight-grid--image'
                     } %}
                 {% elseif item.title %}
