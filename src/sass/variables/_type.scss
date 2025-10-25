@@ -19,15 +19,16 @@ $georgia: Georgia, Times, "Times New Roman", serif;
 $poppins: 'Poppins', sans-serif;
 $barlow: 'Barlow', sans-serif;
 $brother-xl: brother-xl, sans-serif;
+$courier: "Courier", monospace;
 
 // Define font stack variables
-$font-stack-base: $poppins;
-$font-stack-alternate: $barlow;
-$font-stack-serif: $georgia;
-$font-stack-sans-serif: $brother-xl;
+$font-stack-base: $helvetica;
+$font-stack-alternate: $georgia;
+$font-stack-serif: $font-stack-alternate;
+$font-stack-sans-serif: $font-stack-base;
 $font-stack-navs: $font-stack-sans-serif;
 $font-stack-headings: $font-stack-sans-serif;
-$font-stack-monospace: $source-code-pro;
+$font-stack-monospace: $courier;
 $font-stack-code: $font-stack-monospace;
 $font-stack-buttons: $font-stack-sans-serif;
 
