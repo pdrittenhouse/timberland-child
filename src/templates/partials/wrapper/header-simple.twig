@@ -10,7 +10,7 @@
 {% if options.hide_header_content == true %}
   {% embed '@organisms/header/_header.tpl.twig' with {
     background: header_bg ? header_bg,
-    navbar_breakpoint: 'xl',
+    navbar_breakpoint: options.navbar_breakpoint ? options.navbar_breakpoint : 'lg',
     navbar_toggler_classes: hide_primary_nav == 'both' and hide_header_cta == 'both' and hide_header_search == 'both' and hide_secondary_nav == 'both' and hide_social_nav == 'both' and hide_secondary_nav == 'both' ? 'd-none',
     header_classes: [
       'site-header--simple',
@@ -39,7 +39,7 @@
   {# Header #}
   {% embed '@organisms/header/_header.tpl.twig' with {
     background: header_bg ? header_bg,
-    navbar_breakpoint: 'xl',
+    navbar_breakpoint: options.navbar_breakpoint ? options.navbar_breakpoint : 'lg',
     navbar_toggler_classes: hide_primary_nav == 'both' and hide_header_cta == 'both' and hide_header_search == 'both' and hide_secondary_nav == 'both' and hide_social_nav == 'both' and hide_secondary_nav == 'both' ? 'd-none',
     header_classes: [
       'site-header--simple',
