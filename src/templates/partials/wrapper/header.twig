@@ -259,7 +259,8 @@
           hide_primary_nav == 'desktop' ? 'd-xxl-none',
           hide_primary_nav == 'both' ? 'd-none'
         ],
-        'nav_other_classes': 'primary-nav'
+        'nav_other_classes': 'primary-nav',
+        'relative_mega_menu': options.nav_item_relative
       } %}
       <div class="button-wrapper">
         {% include '@atoms/button/' ~ header_cta_template with {
