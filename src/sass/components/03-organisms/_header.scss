@@ -10,51 +10,974 @@
 
 .site-header {
 
+  .logged-in & {
+    @media only screen and (max-width: 782px) {}
+  }
+
+  .static-header-enabled & {}
+
+  .sticky-header-enabled & {}
+
+  .absolute-header-enabled & {}
+
+  .fixed-header-enabled & {}
+
+  .hide-header.shrink-header-enabled.header-shrunk &,
+  .sticky-header-enabled.shrink-header-enabled.header-shrunk &,
+  .absolute-header-enabled.shrink-header-enabled.header-shrunk &,
+  .fixed-header-enabled.shrink-header-enabled.header-shrunk & {
+
+    .site-header--content {}
+
+    .branding--site-logo {}
+
+    .branding--site-name {}
+
+    .branding--site-slogan {}
+
+    .site-header--search {}
+
+    @each $breakpoint in map-keys($grid-breakpoints) {
+      $next: breakpoint-next($breakpoint, $grid-breakpoints);
+      $infix: breakpoint-infix($next, $grid-breakpoints);
+
+      &.navbar-expand#{$infix} {
+        @if $breakpoint != 'none' and $breakpoint != 'xs' {
+
+          .site-header--content {
+            @include media-breakpoint-up($next) {}
+          }
+
+          .branding--site-logo {
+            @include media-breakpoint-up($next) {}
+          }
+
+          .branding--site-name {
+            @include media-breakpoint-up($next) {}
+          }
+
+          .branding--site-slogan {
+            @include media-breakpoint-up($next) {}
+          }
+        }
+      }
+    }
+  }
+
+  .hide-header & {}
+
+  .hide-header.header-hidden & {}
+
+  .hide-header.header-hidden.scroll-up & {}
+
+  .hide-header.header-hidden.scroll-down & {}
+
+  body:not(.include-header-containers) & {
+
+    .site-header--container {}
+
+    .site-header--content {
+      > .site-header--container {
+        > .site-header--row {}
+      }
+    }
+  }
+
+  .include-header-containers & {
+
+    .site-header--container {}
+
+    .site-header--row {}
+
+    .site-header--column {}
+
+    &.full-width {}
+
+    @each $breakpoint in map-keys($grid-breakpoints) {
+      $next: breakpoint-next($breakpoint, $grid-breakpoints);
+      $infix: breakpoint-infix($next, $grid-breakpoints);
+
+      &.navbar-expand#{$infix} {
+        @if $breakpoint != 'none' and $breakpoint != 'xs' {
+
+          &.full-width-mobile {
+            .site-header--container {
+              @include media-breakpoint-up($next) {}
+            }
+          }
+
+          &.full-width-desktop {
+            .site-header--container {
+              @include media-breakpoint-down($next) {}
+            }
+          }
+
+          &:not(.full-width) {
+            &:not(.full-width-mobile) {
+              .site-header--container {
+                @include media-breakpoint-down($next) {}
+              }
+            }
+
+            &:not(.full-width-desktop) {
+              .site-header--container {
+                @include media-breakpoint-up($next) {}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .include-header-containers.fluid-header-containers & {
+    .site-header--wrapper {
+      > .site-header--container {}
+    }
+  }
+
+  .include-content-containers.max-width-fluid-containers & {
+
+    .site-header--container {}
+
+    &.full-width,
+    &.full-width-desktop {
+      .site-header--container {}
+    }
+  }
+
+  &.relative-to-container {
+    &:not(.center-mobile) {
+      &.mobile-nav-top,
+      &.mobile-nav-bottom,
+      &.mobile-nav-right,
+      &.mobile-nav-left,
+      &.mobile-nav-overlay {
+        .site-header--container {}
+      }
+    }
+  }
+
+  &.logo-right {
+    @each $breakpoint in map-keys($grid-breakpoints) {
+      $next: breakpoint-next($breakpoint, $grid-breakpoints);
+      $infix: breakpoint-infix($next, $grid-breakpoints);
+
+      &.navbar-expand#{$infix} {
+        @if $breakpoint != 'none' and $breakpoint != 'xs' {
+
+          .site-header--branding {
+            @include media-breakpoint-up($next) {}
+          }
+
+          .branding--site-logo {
+            @include media-breakpoint-up($next) {}
+          }
+
+          .branding--site-name,
+          .branding--site-slogan {
+            @include media-breakpoint-up($next) {}
+          }
+
+          .site-header--navigation {
+            @include media-breakpoint-up($next) {}
+          }
+
+          .site-header--primary-nav,
+          .site-header--secondary-nav {
+            @include media-breakpoint-up($next) {}
+
+            .navbar-nav {
+              @include media-breakpoint-up($next) {}
+            }
+          }
+
+          .primary-nav,
+          .secondary-nav {
+            @include media-breakpoint-up($next) {}
+          }
+
+          .searchform {
+            @include media-breakpoint-up($next) {}
+          }
+        }
+      }
+    }
+  }
+
+  &.center-mobile {}
+
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
+
+    &.navbar-expand#{$infix} {
+      @if $breakpoint != 'none' and $breakpoint != 'xs' {
+
+        &.center-mobile {
+          .site-header--branding {
+            @include media-breakpoint-down($next) {}
+          }
+
+          .branding {
+            @include media-breakpoint-down($next) {}
+          }
+
+          .branding--site-logo {
+            @include media-breakpoint-down($next) {}
+          }
+
+          .site-header--brand-name {}
+
+          .navbar-toggler {}
+        }
+
+        &:not(.center-mobile) {
+          .site-header--branding {}
+
+          .site-header--navigation {
+            @include media-breakpoint-down($next) {}
+          }
+
+          .navbar-toggler {}
+        }
+      }
+    }
+
+    &.logo-right {
+      .branding--site-logo {}
+
+      .branding--site-name,
+      .branding--site-slogan {}
+
+      .navbar-toggler {}
+    }
+  }
+
+  &.full-screen-mobile-nav {}
+
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
+
+    &.navbar-expand#{$infix} {
+      @if $breakpoint != 'none' and $breakpoint != 'xs' {
+
+        &.full-screen-mobile-nav {
+          &.mobile-nav-top,
+          &.mobile-nav-bottom {
+            .navbar-collapse {
+              @include media-breakpoint-down($next) {}
+            }
+          }
+
+          &.mobile-nav-left,
+          &.mobile-nav-right {
+            .navbar-collapse {
+              @include media-breakpoint-down($next) {}
+            }
+          }
+
+          &.mobile-nav-overlay {
+            .navbar-collapse {
+              @include media-breakpoint-down($next) {}
+            }
+          }
+
+          &.center-mobile-nav-content {
+            &.mobile-nav-top,
+            &.mobile-nav-bottom,
+            &.mobile-nav-left,
+            &.mobile-nav-right {
+              .site-header--navbar-wrapper {}
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.mobile-nav-top {}
+
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
+
+    &.navbar-expand#{$infix} {
+      @if $breakpoint != 'none' and $breakpoint != 'xs' {
+
+        &.mobile-nav-top {
+          .navbar-collapse {
+            @include media-breakpoint-down($next) {}
+
+            &.collapsing {}
+
+            &.show {
+              @include media-breakpoint-down($next) {}
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.mobile-nav-bottom {}
+
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
+
+    &.navbar-expand#{$infix} {
+      @if $breakpoint != 'none' and $breakpoint != 'xs' {
+
+        &.mobile-nav-bottom {
+          .navbar-collapse {
+            @include media-breakpoint-down($next) {}
+
+            &.collapsing {}
+
+            &.show {
+              @include media-breakpoint-down($next) {}
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.mobile-nav-right {}
+
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
+
+    &.navbar-expand#{$infix} {
+      @if $breakpoint != 'none' and $breakpoint != 'xs' {
+
+        &.mobile-nav-right {
+          .navbar-collapse {
+            @include media-breakpoint-down($next) {}
+
+            &.collapsing {}
+
+            &.show {
+              @include media-breakpoint-down($next) {}
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.mobile-nav-left {}
+
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
+
+    &.navbar-expand#{$infix} {
+      @if $breakpoint != 'none' and $breakpoint != 'xs' {
+
+        &.mobile-nav-left {
+          .navbar-collapse {
+            @include media-breakpoint-down($next) {}
+
+            &.collapsing {}
+
+            &.show {
+              @include media-breakpoint-down($next) {}
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.mobile-nav-overlay {}
+
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
+
+    &.navbar-expand#{$infix} {
+      @if $breakpoint != 'none' and $breakpoint != 'xs' {
+
+        &.mobile-nav-overlay {
+          .navbar-collapse {
+            @include media-breakpoint-down($next) {}
+
+            &.collapsing {}
+
+            &.show {
+              @include media-breakpoint-down($next) {}
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.center-nav-toggle {
+    &:not(.center-mobile):not(.inline-toggle) {
+      &.mobile-nav-top,
+      &.mobile-nav-bottom,
+      &.mobile-nav-left,
+      &.mobile-nav-right,
+      &.mobile-nav-overlay {
+        .navbar-toggler {}
+      }
+    }
+  }
+
+  &.show-mobile-button {}
+
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
+
+    &.navbar-expand#{$infix} {
+      @if $breakpoint != 'none' and $breakpoint != 'xs' {
+
+        &.show-mobile-button {
+          .button-wrapper--mobile {
+            @include media-breakpoint-down($next) {}
+          }
+
+          &.align-mobile-button {
+            &:not(.center-mobile) {
+              &.mobile-nav-top,
+              &.mobile-nav-bottom,
+              &.mobile-nav-left,
+              &.mobile-nav-right {
+
+                .site-header--branding {
+                  @include media-breakpoint-down($next) {}
+                }
+
+                .site-header--navigation {
+                  @include media-breakpoint-down($next) {}
+                }
+
+                &.logo-right {
+                  .site-header--branding {
+                    @include media-breakpoint-down($next) {}
+                  }
+
+                  .site-header--navigation {
+                    @include media-breakpoint-down($next) {}
+                  }
+                }
+
+                &:not(.logo-right) {
+                  &.inline-toggle,
+                  &.full-height-mobile-cta {
+                    .site-header--navigation {
+                      @include media-breakpoint-down($next) {}
+                    }
+                  }
+
+                  &.full-height-mobile-cta {
+                    .button-wrapper--mobile {
+                      @include media-breakpoint-down($next) {}
+                    }
+                  }
+                }
+
+                &.inline-toggle,
+                &.full-height-mobile-cta {
+                  .site-header--navigation {
+                    @include media-breakpoint-down($next) {}
+
+                    > .row {
+                      @include media-breakpoint-down($next) {}
+                    }
+                  }
+                }
+
+                &.inline-toggle {
+                  .navbar-toggler {}
+
+                  &.logo-right {
+                    .site-header--navigation {
+                      @include media-breakpoint-down($next) {}
+                    }
+                  }
+
+                  &:not(.full-height-mobile-cta) {
+                    .site-header--navigation {
+                      @include media-breakpoint-down($next) {}
+                    }
+                  }
+
+                  &.reverse-mobile-buttons {
+                    .navbar-toggler {
+                      @include media-breakpoint-down($next) {}
+                    }
+                  }
+                }
+
+                &.full-height-mobile-cta {
+                  .site-header--navigation {
+                    @include media-breakpoint-down($next) {}
+
+                    > .row {}
+                  }
+
+                  .button-wrapper--mobile {
+                    @include media-breakpoint-down($next) {}
+                  }
+
+                  .mobile-cta {
+                    @include media-breakpoint-down($next) {}
+                  }
+
+                  &:not(.reverse-mobile-buttons) {
+                    .mobile-cta {
+                      @include media-breakpoint-down($next) {}
+                    }
+                  }
+
+                  &.reverse-mobile-buttons {
+                    &.logo-right {
+                      .mobile-cta {
+                        @include media-breakpoint-down($next) {}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.align-to-content {
+    &:not(.center-mobile-nav-content) {
+      &.mobile-nav-left {
+        .navbar-collapse {
+          @each $breakpoint-name, $breakpoint in $grid-breakpoints {
+            @each $width-name, $width in $container-max-widths {
+              @if $breakpoint-name == $width-name and ($breakpoint-name == 'md') {
+                @include media-breakpoint-only(#{$breakpoint-name}) {}
+              }
+            }
+          }
+        }
+      }
+
+      &.mobile-nav-right {
+        .navbar-collapse {
+          @each $breakpoint-name, $breakpoint in $grid-breakpoints {
+            @each $width-name, $width in $container-max-widths {
+              @if $breakpoint-name == $width-name and ($breakpoint-name == 'md') {
+                @include media-breakpoint-only(#{$breakpoint-name}) {}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.site-header--simple {
+    @each $breakpoint in map-keys($grid-breakpoints) {
+      $next: breakpoint-next($breakpoint, $grid-breakpoints);
+      $infix: breakpoint-infix($next, $grid-breakpoints);
+
+      &.navbar-expand#{$infix} {
+        @if $breakpoint != 'none' and $breakpoint != 'xs' {
+          .site-header--branding,
+          .site-header--navigation {
+            @include media-breakpoint-up($next) {}
+          }
+        }
+      }
+    }
+  }
+
+  &.site-header--stacked {
+    @each $breakpoint in map-keys($grid-breakpoints) {
+      $next: breakpoint-next($breakpoint, $grid-breakpoints);
+      $infix: breakpoint-infix($next, $grid-breakpoints);
+
+      &.navbar-expand#{$infix} {
+        @if $breakpoint != 'none' and $breakpoint != 'xs' {
+
+          &.logo-right {
+            .site-header--branding {
+              @include media-breakpoint-up($next) {}
+            }
+
+            .site-header--navigation {
+              @include media-breakpoint-up($next) {}
+            }
+
+            .site-header--primary-nav {
+              @include media-breakpoint-up($next) {}
+            }
+          }
+
+          .site-header--branding,
+          .site-header--navigation {
+            @include media-breakpoint-up($next) {}
+          }
+
+          .primary-nav {
+            @include media-breakpoint-up($next) {}
+          }
+        }
+      }
+    }
+  }
+
+  &.site-header--centered {
+    @each $breakpoint in map-keys($grid-breakpoints) {
+      $next: breakpoint-next($breakpoint, $grid-breakpoints);
+      $infix: breakpoint-infix($next, $grid-breakpoints);
+
+      &.navbar-expand#{$infix} {
+        @if $breakpoint != 'none' and $breakpoint != 'xs' {
+
+          &.logo-right {
+            .site-header--branding {
+              @include media-breakpoint-up($next) {}
+            }
+
+            .site-header--navigation {
+              @include media-breakpoint-up($next) {}
+            }
+
+            .site-header--primary-nav {
+              @include media-breakpoint-up($next) {}
+            }
+          }
+
+          .site-header--content {
+            > .site-header--container {
+              > .site-header--row {
+                @include media-breakpoint-up($next) {}
+              }
+            }
+          }
+
+          .site-header--branding {
+            @include media-breakpoint-up($next) {}
+          }
+
+          .site-header--navigation {
+            @include media-breakpoint-up($next) {}
+
+            > .site-header--row,
+            .navbar-collapse,
+            .site-header--navbar-wrapper,
+            .site-header--row {
+              @include media-breakpoint-up($next) {}
+            }
+          }
+
+          .site-header--secondary-nav {
+            @include media-breakpoint-up($next) {}
+
+            .navbar-nav {}
+          }
+
+          .secondary-nav {
+            @include media-breakpoint-up($next) {}
+          }
+
+          .site-header--primary-nav {
+            @include media-breakpoint-up($next) {}
+          }
+
+          .primary-nav {
+            @include media-breakpoint-up($next) {}
+          }
+        }
+      }
+    }
+
+    .branding {}
+  }
+
+  &.site-header--side {
+
+    @each $breakpoint in map-keys($grid-breakpoints) {
+      $next: breakpoint-next($breakpoint, $grid-breakpoints);
+      $infix: breakpoint-infix($next, $grid-breakpoints);
+
+      &.navbar-expand#{$infix} {
+        @if $breakpoint != 'none' and $breakpoint != 'xs' {
+          @include media-breakpoint-up($next) {}
+
+          .side-header--right & {
+            @include media-breakpoint-up($next) {}
+          }
+        }
+      }
+    }
+
+    .site-header--wrapper {}
+
+    .site-header--content {
+      + .site-header--container {}
+    }
+
+    .site-header--container {}
+
+    .site-header--row {}
+
+    .site-header--branding {
+      .branding--site-logo {}
+    }
+
+    @each $breakpoint in map-keys($grid-breakpoints) {
+      $next: breakpoint-next($breakpoint, $grid-breakpoints);
+      $infix: breakpoint-infix($next, $grid-breakpoints);
+
+      &.navbar-expand#{$infix} {
+        @if $breakpoint != 'none' and $breakpoint != 'xs' {
+
+          .site-header--container {
+            @include media-breakpoint-up($next) {}
+          }
+
+          .site-header--branding {
+            @include media-breakpoint-up($next) {}
+
+            .branding {
+              @include media-breakpoint-up($next) {}
+            }
+          }
+
+          .site-header--navigation {
+            @include media-breakpoint-up($next) {}
+          }
+        }
+      }
+    }
+
+    .navbar-collapse {
+      &.collapsing {}
+
+      &.show {}
+
+      .side-header--right & {
+        &.collapsing {}
+
+        &.show {}
+      }
+    }
+
+    @each $breakpoint in map-keys($grid-breakpoints) {
+      $next: breakpoint-next($breakpoint, $grid-breakpoints);
+      $infix: breakpoint-infix($next, $grid-breakpoints);
+
+      &.navbar-expand#{$infix} {
+        @if $breakpoint != 'none' and $breakpoint != 'xs' {
+
+          .navbar-collapse {
+            @include media-breakpoint-up($next) {}
+
+            &.collapsing {
+              @include media-breakpoint-up($next) {}
+            }
+
+            &.show {
+              @include media-breakpoint-up($next) {}
+            }
+
+            .side-header--right & {
+              @include media-breakpoint-up($next) {}
+
+              &.collapsing {
+                @include media-breakpoint-up($next) {}
+              }
+
+              &.show {
+                @include media-breakpoint-up($next) {}
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &:not(.center-mobile) {
+      .navbar-toggler {}
+
+      &.mobile-nav-left {
+        .navbar-toggler {}
+      }
+
+      &.mobile-nav-right {
+        .navbar-toggler {}
+      }
+    }
+
+    &.full-screen-mobile-nav {
+      &.mobile-nav-top,
+      &.mobile-nav-bottom {
+        .navbar-collapse {}
+      }
+    }
+
+    @each $breakpoint in map-keys($grid-breakpoints) {
+      $next: breakpoint-next($breakpoint, $grid-breakpoints);
+      $infix: breakpoint-infix($next, $grid-breakpoints);
+
+      &.navbar-expand#{$infix} {
+        &:not(.center-mobile) {
+          .navbar-toggler {
+            @include media-breakpoint-up($next) {}
+          }
+
+          &.mobile-nav-right {
+            .navbar-toggler {
+              @include media-breakpoint-up($next) {}
+            }
+          }
+        }
+
+        &.full-screen-mobile-nav {
+          &.mobile-nav-top,
+          &.mobile-nav-bottom {
+            .navbar-collapse {
+              @include media-breakpoint-up($next) {}
+            }
+          }
+        }
+      }
+    }
+  }
+
+  a {
+    &:hover,
+    &:focus {}
+  }
+
   &--wrapper {}
 
-  &--alert {}
+  &--alert {
+    > .site-header--container {
+      > .site-header--row {
+        > .site-header--column {
+          .include-header-containers & {}
+
+          &:empty {}
+        }
+      }
+    }
+
+    p {
+      &:last-child {}
+    }
+
+    a {
+      &:hover,
+      &:focus {}
+    }
+  }
 
   &--content {}
 
   &--branding {}
 
-  .branding {
+  .branding--site-logo {}
 
-    .branding--site-logo {}
+  .branding {}
 
-    .branding--link {
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
 
-      &:hover,
-      &:focus {}
-    }
+    &.navbar-expand#{$infix} {
+      .site-header--content {
+        @include media-breakpoint-up($next) {}
+      }
 
-    .branding--site-name {
+      .site-header--branding {
+        @include media-breakpoint-up($next) {}
+      }
 
-      &:hover,
-      &:focus {}
-    }
+      .branding--site-logo {
+        @include media-breakpoint-up($next) {}
+      }
 
-    .branding--site-slogan {
-
-      &:hover,
-      &:focus {}
+      .branding {
+        @include media-breakpoint-up($next) {}
+      }
     }
   }
 
   .co-brand {
+    &:before {}
 
     .branding--site-logo {}
   }
+
+  .branding--link {
+    &:hover,
+    &:focus {}
+  }
+
+  .branding--site-name,
+  .branding--site-slogan {
+    &:hover,
+    &:focus {}
+  }
+
+  .branding--site-name {}
+
+  .branding--site-slogan {}
 
   &--brand-name {}
 
   &--navigation {}
 
-  .navbar-toggler {
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
 
+    &.navbar-expand#{$infix} {
+      .co-brand {
+        @include media-breakpoint-up($next) {}
+
+        &:before {
+          @include media-breakpoint-up($next) {}
+        }
+
+        .branding--site-logo {
+          @include media-breakpoint-up($next) {}
+        }
+      }
+
+      .branding--site-name {
+        @include media-breakpoint-up($next) {}
+      }
+
+      .branding--site-slogan {
+        @include media-breakpoint-up($next) {}
+      }
+
+      .site-header--brand-name {
+        @include media-breakpoint-up($next) {}
+      }
+
+      .site-header--navigation {
+        @include media-breakpoint-up($next) {}
+
+        > .site-header--row {
+          @include media-breakpoint-up($next) {}
+        }
+      }
+    }
+  }
+
+  .navbar-toggler {
     &:hover,
     &:focus {
-
       .svg {}
     }
 
@@ -62,9 +985,7 @@
   }
 
   .navbar-collapse {
-
     &.collapse {
-
       &:not(.show) {}
     }
 
@@ -73,21 +994,78 @@
     &.show {}
   }
 
-  &--navbar-wrapper {
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
 
+    &.navbar-expand#{$infix} {
+      .navbar-collapse {
+        @include media-breakpoint-down($next) {}
+
+        @include media-breakpoint-up($next) {}
+
+        &.show {
+          @include media-breakpoint-down($next) {}
+        }
+      }
+    }
+  }
+
+  &--navbar-wrapper {
     > .row {}
   }
 
-  &--secondary-nav {}
+  &--secondary-nav {
+    .navbar-nav {
+      .nav {
+        > .nav-item {
+          > .nav-link {}
+        }
+      }
+    }
+  }
+
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
+
+    &.navbar-expand#{$infix} {
+      .site-header--secondary-nav {
+        @include media-breakpoint-up($next) {}
+
+        .navbar-nav {
+          @include media-breakpoint-up($next) {}
+        }
+      }
+    }
+  }
 
   .secondary-nav {
-
     > .nav-item {
-
       > .nav-link {
-
         &:hover,
         &:focus {}
+      }
+    }
+  }
+
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
+
+    &.navbar-expand#{$infix} {
+      .secondary-nav {
+        @include media-breakpoint-down($next) {}
+
+        @include media-breakpoint-up($next) {}
+
+        > .nav-item {
+          @include media-breakpoint-up($next) {}
+
+          > .nav-link {
+            @include media-breakpoint-up($next) {}
+          }
+        }
       }
     }
   }
@@ -95,12 +1073,9 @@
   &--social-nav {}
 
   .header-social-nav {
-
     .social-nav-item {
-
       &:hover,
       &:focus {
-
         .icon,
         .svg--icon,
         svg {}
@@ -112,33 +1087,63 @@
     }
 
     .social-nav-link {
-
       &:hover {}
     }
   }
 
-  &--primary-nav {}
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
+
+    &.navbar-expand#{$infix} {
+      .site-header--social-nav {
+        @include media-breakpoint-up($next) {}
+      }
+
+      .header-social-nav {
+        @include media-breakpoint-up($next) {}
+      }
+    }
+  }
+
+  &--primary-nav {
+    .navbar-nav {
+      .nav {
+        > .nav-item {
+          > .nav-link {}
+        }
+      }
+    }
+  }
+
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
+
+    &.navbar-expand#{$infix} {
+      .site-header--primary-nav {
+        @include media-breakpoint-up($next) {}
+
+        .navbar-nav {
+          @include media-breakpoint-up($next) {}
+        }
+      }
+    }
+  }
 
   .primary-nav {
-
     > .nav-item {
-
       > .nav-link {
-
         &:hover,
         &:focus {}
       }
 
       &.dropdown {
-
         > .dropdown-toggle {}
 
         > .dropdown-menu {
-
           > .dropdown-item {
-
             > .nav-link {
-
               &:hover,
               &:focus {}
             }
@@ -149,31 +1154,78 @@
   }
 
   .button-wrapper {
-
     &--mobile {}
   }
 
-  .header-cta-button {
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
 
+    &.navbar-expand#{$infix} {
+      .primary-nav {
+        @include media-breakpoint-down($next) {}
+
+        @include media-breakpoint-up($next) {}
+
+        > .nav-item {
+          @include media-breakpoint-up($next) {}
+
+          > .nav-link {
+            @include media-breakpoint-up($next) {}
+          }
+
+          &.dropdown {
+            > .dropdown-menu {
+              > .dropdown-item {
+                > .nav-link {
+                  @include media-breakpoint-up($next) {}
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .button-wrapper {
+        @include media-breakpoint-up($next) {}
+      }
+    }
+  }
+
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
+
+    &.navbar-expand#{$infix} {
+      .header-cta-button {
+        &.mobile-cta {
+          @include media-breakpoint-up($next) {}
+        }
+      }
+
+      .searchform {
+        @include media-breakpoint-up($next) {}
+      }
+    }
+  }
+
+  .header-cta-button {
     &:not(.navbar-toggler) {}
 
     .svg {}
 
     &:hover,
     &:focus {
-
       .svg {}
     }
 
     &.mobile-cta {
-
       &:not(.navbar-toggler) {}
 
       .svg {}
 
       &:hover,
       &:focus {
-
         .svg {}
       }
     }
@@ -184,204 +1236,357 @@
   .searchform {}
 
   .search-field {
-
     &:hover,
     &:focus {}
   }
 
   .search-submit {
-
     &:not(.navbar-toggler) {}
   }
 
-  // Layout variants
-  &.logo-right {
+  &.navbar-expand-none {
+    .include-header-containers & {
+      &.full-width-desktop {
+        .site-header--container {}
+      }
 
-    .site-header--branding {}
-
-    .branding--site-logo {}
-
-    .branding--site-name,
-    .branding--site-slogan {}
-
-    .site-header--navigation {}
-
-    .site-header--primary-nav,
-    .site-header--secondary-nav {
-
-      .navbar-nav {}
+      &:not(.full-width) {
+        &:not(.full-width-mobile) {
+          .site-header--container {}
+        }
+      }
     }
 
-    .primary-nav,
+    &.center-mobile {
+      .site-header--branding {}
+
+      .branding {}
+
+      .branding--site-logo {}
+
+      .site-header--brand-name {}
+
+      .navbar-toggler {}
+    }
+
+    &:not(.center-mobile) {
+      .site-header--branding {}
+
+      .site-header--navigation {}
+    }
+
+    &.full-screen-mobile-nav {
+      &.mobile-nav-top,
+      &.mobile-nav-bottom {
+        .navbar-collapse {}
+      }
+
+      &.mobile-nav-left,
+      &.mobile-nav-right {
+        .navbar-collapse {}
+      }
+
+      &.mobile-nav-overlay {
+        .navbar-collapse {}
+      }
+    }
+
+    &.mobile-nav-top {
+      .navbar-collapse {
+        &.show {}
+      }
+    }
+
+    &.mobile-nav-bottom {
+      .navbar-collapse {
+        &.show {}
+      }
+    }
+
+    &.mobile-nav-right {
+      .navbar-collapse {
+        &.show {}
+      }
+    }
+
+    &.mobile-nav-left {
+      .navbar-collapse {
+        &.show {}
+      }
+    }
+
+    &.mobile-nav-overlay {
+      .navbar-collapse {
+        &.show {}
+      }
+    }
+
+    &.show-mobile-button {
+      .button-wrapper--mobile {}
+
+      &.align-mobile-button {
+        &:not(.center-mobile) {
+          &.mobile-nav-top,
+          &.mobile-nav-bottom,
+          &.mobile-nav-left,
+          &.mobile-nav-right {
+
+            .site-header--branding {}
+
+            .site-header--navigation {}
+
+            &.logo-right {
+              .site-header--branding {}
+
+              .site-header--navigation {}
+            }
+
+            &:not(.logo-right) {
+              &.inline-toggle,
+              &.full-height-mobile-cta {
+                .site-header--navigation {}
+              }
+
+              &.full-height-mobile-cta {
+                .button-wrapper--mobile {}
+              }
+            }
+
+            &.inline-toggle,
+            &.full-height-mobile-cta {
+              .site-header--navigation {
+                > .row {}
+              }
+            }
+
+            &.inline-toggle {
+              &.logo-right {
+                .site-header--navigation {}
+              }
+
+              &:not(.full-height-mobile-cta) {
+                .site-header--navigation {}
+              }
+
+              &.reverse-mobile-buttons {
+                .navbar-toggler {}
+              }
+            }
+
+            &.full-height-mobile-cta {
+              .site-header--navigation {}
+
+              .button-wrapper--mobile {}
+
+              .mobile-cta {}
+
+              &:not(.reverse-mobile-buttons) {
+                .mobile-cta {}
+              }
+
+              &.reverse-mobile-buttons {
+                &.logo-right {
+                  .mobile-cta {}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .navbar-collapse {
+      &.show {}
+    }
+
     .secondary-nav {}
 
-    .searchform {}
+    .primary-nav {}
   }
 
-  &.center-mobile {
+  &.navbar-expand-xs {
+    .hide-header.shrink-header-enabled.header-shrunk &,
+    .sticky-header-enabled.shrink-header-enabled.header-shrunk &,
+    .absolute-header-enabled.shrink-header-enabled.header-shrunk &,
+    .fixed-header-enabled.shrink-header-enabled.header-shrunk & {
 
-    .site-header--branding {}
+      .site-header--content {}
 
-    .branding {}
+      .branding--site-logo {}
 
-    .branding--site-logo {}
+      .branding--site-name {}
 
-    .site-header--brand-name {}
+      .branding--site-slogan {}
+    }
 
-    .navbar-toggler {}
-  }
+    .include-header-containers & {
+      &.full-width-mobile {
+        .site-header--container {}
+      }
 
-  &:not(.center-mobile) {
-
-    .site-header--branding {}
-
-    .site-header--navigation {}
-
-    .navbar-toggler {}
+      &:not(.full-width) {
+        &:not(.full-width-desktop) {
+          .site-header--container {}
+        }
+      }
+    }
 
     &.logo-right {
+      .site-header--branding {}
 
       .branding--site-logo {}
 
       .branding--site-name,
       .branding--site-slogan {}
 
-      .navbar-toggler {}
-    }
-  }
-
-  &.site-header--simple {
-
-    .site-header--branding,
-    .site-header--navigation {}
-  }
-
-  &.site-header--stacked {
-
-    &.logo-right {
-
-      .site-header--branding {}
-
       .site-header--navigation {}
 
-      .site-header--primary-nav {}
-    }
-
-    .site-header--branding,
-    .site-header--navigation {}
-
-    .primary-nav {}
-  }
-
-  &.site-header--centered {
-
-    &.logo-right {
-
-      .site-header--branding {}
-
-      .site-header--navigation {}
-
-      .site-header--primary-nav {}
-    }
-
-    .site-header--content {
-
-      > .site-header--container {
-
-        > .site-header--row {}
+      .site-header--primary-nav,
+      .site-header--secondary-nav {
+        .navbar-nav {}
       }
+
+      .primary-nav,
+      .secondary-nav {}
+
+      .searchform {}
     }
 
-    .site-header--branding {}
-
-    .branding {}
-
-    .site-header--navigation {
-
-      > .site-header--row,
-      .navbar-collapse,
-      .site-header--navbar-wrapper,
-      .site-header--row {}
+    &.site-header--simple {
+      .site-header--branding,
+      .site-header--navigation {}
     }
 
-    .site-header--secondary-nav {
+    &.site-header--stacked {
+      &.logo-right {
+        .site-header--branding {}
 
-      .navbar-nav {}
+        .site-header--navigation {}
+
+        .site-header--primary-nav {}
+      }
+
+      .site-header--branding,
+      .site-header--navigation {}
+
+      .primary-nav {}
     }
 
-    .secondary-nav {}
+    &.site-header--centered {
+      &.logo-right {
+        .site-header--branding {}
 
-    .site-header--primary-nav {}
+        .site-header--navigation {}
 
-    .primary-nav {}
-  }
+        .site-header--primary-nav {}
+      }
 
-  &.site-header--side {
+      .site-header--content {
+        > .site-header--container {
+          > .site-header--row {}
+        }
+      }
 
-    .side-header--right & {}
+      .site-header--branding {}
 
-    .site-header--wrapper {}
+      .site-header--navigation {
+        > .site-header--row,
+        .navbar-collapse,
+        .site-header--navbar-wrapper,
+        .site-header--row {}
+      }
 
-    .site-header--content {
+      .site-header--secondary-nav {}
 
-      + .site-header--container {}
+      .secondary-nav {}
+
+      .site-header--primary-nav {}
+
+      .primary-nav {}
     }
 
-    .site-header--container {}
+    &.site-header--side {
+      .side-header--right & {}
 
-    .site-header--row {}
+      .site-header--container {}
 
-    .site-header--branding {
+      .site-header--branding {
+        .branding {}
+      }
 
-      .branding {}
+      .site-header--navigation {}
 
-      .branding--site-logo {}
-    }
-
-    .site-header--navigation {}
-
-    .navbar-collapse {
-
-      &.collapsing {}
-
-      &.show {}
-
-      .side-header--right & {
-
+      .navbar-collapse {
         &.collapsing {}
 
         &.show {}
+
+        .side-header--right & {
+          &.collapsing {}
+
+          &.show {}
+        }
       }
     }
 
-    &:not(.center-mobile) {
+    .site-header--content {}
 
-      .navbar-toggler {}
+    .site-header--branding {}
 
-      &.mobile-nav-left {
+    .branding--site-logo {}
 
-        .navbar-toggler {}
-      }
+    .branding {}
 
-      &.mobile-nav-right {
+    .co-brand {
+      .branding--site-logo {}
+    }
 
-        .navbar-toggler {}
+    .branding--site-name {}
+
+    .branding--site-slogan {}
+
+    .site-header--brand-name {}
+
+    .site-header--navigation {
+      > .site-header--row {}
+    }
+
+    .navbar-toggler {}
+
+    .navbar-collapse {
+      &.collapse {
+        &:not(.show) {}
       }
     }
 
-    &.full-screen-mobile-nav {
+    .site-header--secondary-nav {
+      .navbar-nav {}
+    }
 
-      &.mobile-nav-top,
-      &.mobile-nav-bottom {
+    .site-header--social-nav {}
 
-        .navbar-collapse {}
+    .header-social-nav {}
+
+    .site-header--primary-nav {
+      .navbar-nav {}
+    }
+
+    .primary-nav {
+      > .nav-item {
+        > .nav-link {}
+
+        &.dropdown {
+          > .dropdown-menu {
+            > .dropdown-item {
+              > .nav-link {}
+            }
+          }
+        }
       }
     }
-  }
 
-  a {
+    .button-wrapper {}
 
-    &:hover,
-    &:focus {}
+    .searchform {}
   }
 }
