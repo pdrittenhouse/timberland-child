@@ -1,11 +1,11 @@
 (function($){
-    var dream = dream || {};
+    var timberland = timberland || {};
 
     /**
-     * dream.init accepts functions to call on page ready. This is just a wrapper to avoid having to add the jQuery binding in multiple scripts
+     * timberland.init accepts functions to call on page ready. This is just a wrapper to avoid having to add the jQuery binding in multiple scripts
      */
     var _init = [];
-    dream.init = function(method){
+    timberland.init = function(method){
         _init.push(method);
     };
 
@@ -18,5 +18,5 @@
         }
     });
 
-    window.dream = dream;
+    window.timberland = timberland;
 })(jQuery);

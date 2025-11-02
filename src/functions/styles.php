@@ -1,6 +1,6 @@
 <?php
 
-function dream_child_enqueue_styles() {
+function timberland_child_enqueue_styles() {
     wp_enqueue_style( 'child_styles',
         get_stylesheet_directory_uri() . '/dist/styles.css',
         array( 'styles' ),
@@ -10,7 +10,7 @@ function dream_child_enqueue_styles() {
 	// Get cached child customizer CSS
 	// NOTE: Uses parent theme's customizer functions with child theme's CSS variable overrides
 	// This is NOT duplication - child CSS variables in _css-variables.scss override parent values
-	$cached_child_customizer_css = get_transient( 'dream_child_customizer_css' );
+	$cached_child_customizer_css = get_transient( 'timberland_child_customizer_css' );
 
 	if ( false === $cached_child_customizer_css ) {
 		// Generate all child customizer CSS
@@ -45,7 +45,7 @@ function dream_child_enqueue_styles() {
 		$cached_child_customizer_css .= theme_get_customizer_footer_copyright();
 
 		// Cache for 1 week (or until customizer is saved)
-		set_transient( 'dream_child_customizer_css', $cached_child_customizer_css, WEEK_IN_SECONDS );
+		set_transient( 'timberland_child_customizer_css', $cached_child_customizer_css, WEEK_IN_SECONDS );
 	}
 
 	// Add the cached CSS
@@ -54,17 +54,17 @@ function dream_child_enqueue_styles() {
 if ( !is_admin() ) {
 	// Priority 15: Load AFTER parent patterns (priority 10) but before child blocks (priority 20)
 	// This ensures: parent styles -> parent patterns -> parent blocks -> child styles -> child blocks
-	add_action( 'wp_enqueue_scripts', 'dream_child_enqueue_styles', 15 );
+	add_action( 'wp_enqueue_scripts', 'timberland_child_enqueue_styles', 15 );
 }
 
 
-function dream_child_enqueue_admin_styles() {
+function timberland_child_enqueue_admin_styles() {
 
 	// Enqueue Styles
 	wp_enqueue_style( 'child_admin_styles', get_stylesheet_directory_uri() . '/dist/admin.css', array('admin_styles'), wp_get_theme()->get( 'Version' ), 'all' );
 
 	// Get cached admin child customizer CSS
-	$cached_child_admin_customizer_css = get_transient( 'dream_child_admin_customizer_css' );
+	$cached_child_admin_customizer_css = get_transient( 'timberland_child_admin_customizer_css' );
 
 	if ( false === $cached_child_admin_customizer_css ) {
 		// Generate all admin child customizer CSS
@@ -99,7 +99,7 @@ function dream_child_enqueue_admin_styles() {
 		// $cached_child_admin_customizer_css .= theme_get_customizer_footer_copyright();
 
 		// Cache for 1 week (or until customizer is saved)
-		set_transient( 'dream_child_admin_customizer_css', $cached_child_admin_customizer_css, WEEK_IN_SECONDS );
+		set_transient( 'timberland_child_admin_customizer_css', $cached_child_admin_customizer_css, WEEK_IN_SECONDS );
 	}
 
 	// Add the cached CSS
@@ -108,24 +108,24 @@ function dream_child_enqueue_admin_styles() {
 }
 
 if ( is_admin() ) {
-	add_action( 'admin_enqueue_scripts', 'dream_child_enqueue_admin_styles' );
+	add_action( 'admin_enqueue_scripts', 'timberland_child_enqueue_admin_styles' );
 }
 
 // Clear child customizer CSS cache when customizer is saved
 add_action( 'customize_save_after', function() {
-	delete_transient( 'dream_child_customizer_css' );
-	delete_transient( 'dream_child_admin_customizer_css' );
+	delete_transient( 'timberland_child_customizer_css' );
+	delete_transient( 'timberland_child_admin_customizer_css' );
 });
 
 
 // Block Editor Styles
-function dream_child_acf_block_editor_style()
+function timberland_child_acf_block_editor_style()
 {
 	wp_enqueue_style('child_block_css', get_stylesheet_directory_uri() . '/dist/editor.css', array('block_css'), wp_get_theme()->get( 'Version' ), 'all' );
 }
 
 if (is_admin()) {
-	add_action('enqueue_block_assets', 'dream_child_acf_block_editor_style', 20); // Priority 20 to run after parent theme
+	add_action('enqueue_block_assets', 'timberland_child_acf_block_editor_style', 20); // Priority 20 to run after parent theme
 }
 
 
@@ -147,10 +147,10 @@ add_action('wp', function() {
 	}
 
 	$post_id = get_the_ID();
-	$blocks_metadata = dream_child_get_blocks_metadata(); // Helper function from block-helpers.php
+	$blocks_metadata = timberland_child_get_blocks_metadata(); // Helper function from block-helpers.php
 
 	// Detect blocks NOW (when post content is definitely loaded)
-	$used_blocks = dream_child_get_post_used_blocks($post_id, $blocks_metadata);
+	$used_blocks = timberland_child_get_post_used_blocks($post_id, $blocks_metadata);
 
 	// Temporary debug
 	if (defined('WP_DEBUG') && WP_DEBUG) {
@@ -191,9 +191,9 @@ add_action('wp', function() {
 // Admin editor: Load block admin styles (optimized - only load non-empty files)
 // Note: block.json references assets, but WordPress won't auto-enqueue empty files
 // So we handle enqueuing here with content check to skip empty/whitespace-only files
-function dream_enqueue_child_block_admin_styles() {
+function timberland_enqueue_child_block_admin_styles() {
 	$blocks_path = get_stylesheet_directory() . '/src/templates/blocks';
-	$blocks = array_filter(scandir($blocks_path), 'dream_child_filter_block_dir'); // Helper function from block-helpers.php
+	$blocks = array_filter(scandir($blocks_path), 'timberland_child_filter_block_dir'); // Helper function from block-helpers.php
 
 	foreach ($blocks as $block) {
 		$index_css_path = $blocks_path . '/' . $block . '/index.css';
@@ -220,4 +220,73 @@ function dream_enqueue_child_block_admin_styles() {
 		}
 	}
 }
-add_action('enqueue_block_editor_assets', 'dream_enqueue_child_block_admin_styles', 20); // Priority 20 to run after parent theme
+add_action('enqueue_block_editor_assets', 'timberland_enqueue_child_block_admin_styles', 20); // Priority 20 to run after parent theme
+
+
+/**
+ * Language-specific styles (WPML Support) - Child Theme Overrides
+ * Conditionally load child theme language-specific CSS based on active WPML language
+ * Loaded AFTER parent theme language styles for proper cascade
+ */
+function timberland_child_enqueue_language_styles() {
+	// Only run if WPML is active
+	if (!defined('ICL_LANGUAGE_CODE')) {
+		return;
+	}
+
+	$current_lang = ICL_LANGUAGE_CODE; // e.g., 'en', 'es', 'ar'
+
+	// Check for language-specific stylesheet
+	$lang_file = get_stylesheet_directory() . "/dist/lang/lang-{$current_lang}.css";
+
+	if (file_exists($lang_file)) {
+		// Only enqueue if file has actual content (not just whitespace)
+		$content = file_get_contents($lang_file);
+		if (!empty(trim($content))) {
+			// Create dependency array - depend on parent language style if it exists
+			$dependencies = array('child_styles'); // Always depend on child main stylesheet
+			$parent_lang_handle = "timberland-lang-{$current_lang}";
+			if (wp_style_is($parent_lang_handle, 'enqueued') || wp_style_is($parent_lang_handle, 'registered')) {
+				$dependencies[] = $parent_lang_handle;
+			}
+
+			wp_enqueue_style(
+				"timberland-child-lang-{$current_lang}",
+				get_stylesheet_directory_uri() . "/dist/lang/lang-{$current_lang}.css",
+				$dependencies,
+				wp_get_theme()->get('Version'),
+				'all'
+			);
+		}
+	}
+
+	// RTL stylesheet for right-to-left languages (child overrides)
+	if (is_rtl()) {
+		$rtl_file = get_stylesheet_directory() . '/dist/lang/rtl.css';
+
+		if (file_exists($rtl_file)) {
+			$content = file_get_contents($rtl_file);
+			if (!empty(trim($content))) {
+				// Create dependency array - depend on parent RTL style if it exists
+				$dependencies = array('child_styles');
+				$parent_rtl_handle = 'timberland-rtl';
+				if (wp_style_is($parent_rtl_handle, 'enqueued') || wp_style_is($parent_rtl_handle, 'registered')) {
+					$dependencies[] = $parent_rtl_handle;
+				}
+
+				wp_enqueue_style(
+					'timberland-child-rtl',
+					get_stylesheet_directory_uri() . '/dist/lang/rtl.css',
+					$dependencies,
+					wp_get_theme()->get('Version'),
+					'all'
+				);
+			}
+		}
+	}
+}
+
+// Load language styles on frontend (priority 25: after parent language styles at 20)
+if (!is_admin()) {
+	add_action('wp_enqueue_scripts', 'timberland_child_enqueue_language_styles', 25);
+}

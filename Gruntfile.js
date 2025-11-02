@@ -117,6 +117,33 @@ module.exports = function(grunt) {
         }
     });
 
+    // Dynamically find all language SCSS files (WPML support)
+    const langScssFiles = globSync('./src/sass/lang/_lang-*.scss');
+    const rtlScssFile = './src/sass/lang/_rtl.scss';
+
+    grunt.log.writeln('[Language SCSS] Found ' + langScssFiles.length + ' language files');
+
+    // Build dynamic sass files object for languages
+    const langSassFiles = {};
+
+    // Add RTL file
+    if (fs.existsSync(rtlScssFile)) {
+        langSassFiles['dist/lang/rtl.css'] = rtlScssFile;
+        grunt.log.writeln('[Language SCSS] Added RTL entry: rtl');
+    }
+
+    // Process language-specific files
+    langScssFiles.forEach(filePath => {
+        // Extract language code from path
+        // Example: _lang-es.scss -> es
+        const match = filePath.match(/_lang-([a-z]{2})\.scss$/);
+        if (match && match[1]) {
+            const langCode = match[1];
+            langSassFiles['dist/lang/lang-' + langCode + '.css'] = filePath;
+            grunt.log.writeln('[Language SCSS] Added entry: lang-' + langCode);
+        }
+    });
+
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
@@ -246,6 +273,20 @@ module.exports = function(grunt) {
                     ]
                 },
                 files: blockSassFiles
+            },
+            // Compile language-specific SCSS files (WPML support)
+            lang: {
+                options: {
+                    implementation: sass,
+                    sourceMap: true,
+                    outputStyle: "expanded",
+                    includePaths: [
+                        parentThemeDir,
+                        path.join('..', parentThemeName, 'src/patternlab/source/_patterns'),
+                        './src'
+                    ]
+                },
+                files: langSassFiles
             }
         },
         watch: {
@@ -286,6 +327,18 @@ module.exports = function(grunt) {
                     'source/fonts/fontello'
                 ],
                 tasks: ['fontello']
+            },
+            lang: {
+                options: {
+                    reload: false,
+                    spawn: false,
+                    interrupt: false,
+                    livereload: true
+                },
+                files: [
+                    "src/sass/lang/**/*.scss"
+                ],
+                tasks: ["sass:lang", "postcss:lang"]
             }
         },
         postcss: {
@@ -317,6 +370,14 @@ module.exports = function(grunt) {
                     }
                 },
                 src: "dist/blocks/**/*.css"
+            },
+            // Minify language CSS files
+            lang: {
+                map: {
+                    inline: false,
+                    annotation: "dist/lang/"
+                },
+                src: "dist/lang/**/*.css"
             }
         },
         compress: {
@@ -361,9 +422,9 @@ module.exports = function(grunt) {
 
     // Default task(s).
     // grunt.registerTask("default", ["svg_sprite","uglify","sass"]);
-    grunt.registerTask("default", ["uglify","sass:public","prepare-blocks","sass:blocks","postcss:blocks","copy:blocks","clean:blocks"]);
-    grunt.registerTask("sprites", ["svg_sprite","sass:public","prepare-blocks","sass:blocks","postcss:blocks","copy:blocks","clean:blocks"]);
-    grunt.registerTask("init", ["copy", "svg_sprite", "uglify", "sass:public","prepare-blocks","sass:blocks","postcss:blocks","copy:blocks","clean:blocks"]);
+    grunt.registerTask("default", ["uglify","sass:public","prepare-blocks","sass:blocks","postcss:blocks","copy:blocks","clean:blocks","sass:lang","postcss:lang"]);
+    grunt.registerTask("sprites", ["svg_sprite","sass:public","prepare-blocks","sass:blocks","postcss:blocks","copy:blocks","clean:blocks","sass:lang","postcss:lang"]);
+    grunt.registerTask("init", ["copy", "svg_sprite", "uglify", "sass:public","prepare-blocks","sass:blocks","postcss:blocks","copy:blocks","clean:blocks","sass:lang","postcss:lang"]);
     // grunt.registerTask("init", ["copy", "uglify", "sass"]);
-    grunt.registerTask("prod", ["svg_sprite", "uglify","sass:public","prepare-blocks","sass:blocks","postcss:blocks","copy:blocks","clean:blocks","postcss:public", "compress"]);
+    grunt.registerTask("prod", ["svg_sprite", "uglify","sass:public","prepare-blocks","sass:blocks","postcss:blocks","copy:blocks","clean:blocks","sass:lang","postcss:public","postcss:lang", "compress"]);
 };

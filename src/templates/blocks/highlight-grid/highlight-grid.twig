@@ -52,7 +52,7 @@
                 {% set item_image_sizes = null %}
 
                 {# Try cached srcset first (fastest - post meta lookup) #}
-                {% set cached_srcset = function('dream_get_cached_srcset', item_image_id, 'thumbnail-medium') %}
+                {% set cached_srcset = function('timberland_get_cached_srcset', item_image_id, 'thumbnail-medium') %}
                 {% if cached_srcset %}
                     {% set item_image_srcset = cached_srcset.srcset %}
                     {% set item_image_sizes = cached_srcset.sizes %}

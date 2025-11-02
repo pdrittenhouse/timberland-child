@@ -152,7 +152,7 @@
 	{% set hero_image_sizes = null %}
 
 	{# Try cached srcset first (fastest - post meta lookup) #}
-	{% set cached_srcset = function('dream_get_cached_srcset', hero_image_id, 'featured-widescreen') %}
+	{% set cached_srcset = function('timberland_get_cached_srcset', hero_image_id, 'featured-widescreen') %}
 	{% if cached_srcset %}
 		{% set hero_image_srcset = cached_srcset.srcset %}
 		{% set hero_image_sizes = cached_srcset.sizes %}

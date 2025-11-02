@@ -1,6 +1,6 @@
 <?php
 
-function dream_child_enqueue_scripts() {
+function timberland_child_enqueue_scripts() {
     wp_enqueue_script(
         'child-script',
         get_stylesheet_directory_uri() . '/dist/scripts.min.js',
@@ -11,10 +11,10 @@ function dream_child_enqueue_scripts() {
 }
 
 if ( !is_admin() ) {
-    add_action( 'wp_enqueue_scripts', 'dream_child_enqueue_scripts', 9999 );
+    add_action( 'wp_enqueue_scripts', 'timberland_child_enqueue_scripts', 9999 );
 }
 
-function dream_child_enqueue_admin_scripts() {
+function timberland_child_enqueue_admin_scripts() {
 
 	//Enqueue Scripts
 
@@ -23,7 +23,7 @@ function dream_child_enqueue_admin_scripts() {
 }
 
 if ( is_admin() ) {
-	add_action( 'admin_enqueue_scripts', 'dream_child_enqueue_admin_scripts' );
+	add_action( 'admin_enqueue_scripts', 'timberland_child_enqueue_admin_scripts' );
 }
 
 
@@ -44,7 +44,7 @@ add_action('wp_enqueue_scripts', function() {
 	}
 
 	// Only proceed if parent theme minification function exists
-	if (!function_exists('dream_generate_minified_js')) {
+	if (!function_exists('timberland_generate_minified_js')) {
 		return;
 	}
 
@@ -69,7 +69,7 @@ add_action('wp_enqueue_scripts', function() {
 					$source_file = get_stylesheet_directory() . '/src/templates/blocks/' . $block_name . '/' . $file_name;
 					if (file_exists($source_file)) {
 						// Generate minified version using parent theme function
-						$min_path = dream_generate_minified_js($source_file, $block_name, $file_type, true);
+						$min_path = timberland_generate_minified_js($source_file, $block_name, $file_type, true);
 						if ($min_path) {
 							// Update the script src to point to minified version
 							$relative_min_path = str_replace(get_stylesheet_directory(), '', $min_path);
@@ -98,8 +98,8 @@ add_action('enqueue_block_assets', function() {
 	}
 
 	$post_id = get_the_ID();
-	$blocks_metadata = dream_child_get_blocks_metadata();
-	$used_blocks = dream_child_get_post_used_blocks($post_id, $blocks_metadata);
+	$blocks_metadata = timberland_child_get_blocks_metadata();
+	$used_blocks = timberland_child_get_post_used_blocks($post_id, $blocks_metadata);
 	$blocks_path = get_stylesheet_directory() . '/src/templates/blocks';
 
 	// Only enqueue scripts for blocks actually used on this page
@@ -112,8 +112,8 @@ add_action('enqueue_block_assets', function() {
 			// In production, use minified version from parent theme helper
 			if (!defined('WP_DEBUG') || !WP_DEBUG) {
 				// Use parent theme's minification function
-				if (function_exists('dream_generate_minified_js')) {
-					$min_path = dream_generate_minified_js($script_path, $block_slug, 'script', true);
+				if (function_exists('timberland_generate_minified_js')) {
+					$min_path = timberland_generate_minified_js($script_path, $block_slug, 'script', true);
 					if ($min_path) {
 						$enqueue_url = get_stylesheet_directory_uri() . str_replace(get_stylesheet_directory(), '', $min_path);
 					}
@@ -135,9 +135,9 @@ add_action('enqueue_block_assets', function() {
 // Admin editor: Load block admin scripts (optimized - only load non-empty files)
 // Note: block.json references assets, but WordPress won't auto-enqueue empty files
 // So we handle enqueuing here with content check to skip empty/whitespace-only files
-function dream_enqueue_child_block_admin_scripts() {
+function timberland_enqueue_child_block_admin_scripts() {
 	$blocks_path = get_stylesheet_directory() . '/src/templates/blocks';
-	$blocks = array_filter(scandir($blocks_path), 'dream_child_filter_block_dir'); // Helper function from block-helpers.php
+	$blocks = array_filter(scandir($blocks_path), 'timberland_child_filter_block_dir'); // Helper function from block-helpers.php
 
 	foreach ($blocks as $block) {
 		$index_js_path = $blocks_path . '/' . $block . '/index.js';
@@ -157,4 +157,4 @@ function dream_enqueue_child_block_admin_scripts() {
 		}
 	}
 }
-add_action('enqueue_block_editor_assets', 'dream_enqueue_child_block_admin_scripts');
+add_action('enqueue_block_editor_assets', 'timberland_enqueue_child_block_admin_scripts');

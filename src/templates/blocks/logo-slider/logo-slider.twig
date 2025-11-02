@@ -100,7 +100,7 @@
 						{% set logo_image_sizes = null %}
 
 						{# Try cached srcset first (fastest - post meta lookup) #}
-						{% set cached_srcset = function('dream_get_cached_srcset', logo_image_id, 'logo') %}
+						{% set cached_srcset = function('timberland_get_cached_srcset', logo_image_id, 'logo') %}
 						{% if cached_srcset %}
 							{% set logo_image_srcset = cached_srcset.srcset %}
 							{% set logo_image_sizes = cached_srcset.sizes %}
@@ -183,7 +183,7 @@
 						{% set logo_image_sizes = null %}
 
 						{# Try cached srcset first (fastest - post meta lookup) #}
-						{% set cached_srcset = function('dream_get_cached_srcset', logo_image_id, 'logo') %}
+						{% set cached_srcset = function('timberland_get_cached_srcset', logo_image_id, 'logo') %}
 						{% if cached_srcset %}
 							{% set logo_image_srcset = cached_srcset.srcset %}
 							{% set logo_image_sizes = cached_srcset.sizes %}

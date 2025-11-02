@@ -39,7 +39,7 @@
   "viewScript": [ "file:./view.js" ],
   "acf": {
     "mode": "preview",
-    "renderCallback": "dream_block_render",
+    "renderCallback": "timberland_block_render",
     "postTypes": true,
     "parent": "acf/blockname",
     "reusable": true

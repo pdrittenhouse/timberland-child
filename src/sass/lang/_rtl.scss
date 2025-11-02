@@ -1,0 +1,11 @@
+/**
+ * RTL (Right-to-Left) Language Support - Child Theme Overrides
+ *
+ * Add child theme-specific RTL overrides here
+ * Parent theme RTL styles are loaded first
+ */
+
+[dir="rtl"] body,
+body.rtl {
+  // Add child theme RTL overrides here
+}

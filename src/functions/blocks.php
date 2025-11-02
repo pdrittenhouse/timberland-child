@@ -1,6 +1,6 @@
 <?php
 
-function dream_child_block_categories( $categories ) {
+function timberland_child_block_categories( $categories ) {
 
     $categories[] = array(
         'slug'  => 'timberland-child',
@@ -11,16 +11,16 @@ function dream_child_block_categories( $categories ) {
 }
 
 if ( version_compare( get_bloginfo( 'version' ), '5.8', '>=' ) ) {
-    add_filter( 'block_categories_all', 'dream_child_block_categories' );
+    add_filter( 'block_categories_all', 'timberland_child_block_categories' );
 } else {
-    add_filter( 'block_categories', 'dream_child_block_categories' );
+    add_filter( 'block_categories', 'timberland_child_block_categories' );
 }
 
 /**
  * Register child theme blocks
  */
-add_action( 'init', 'dream_child_register_blocks', 5 );
-function dream_child_register_blocks() {
+add_action( 'init', 'timberland_child_register_blocks', 5 );
+function timberland_child_register_blocks() {
   $blocks_path = dirname(__DIR__) . '/templates/blocks';
 
   // Return early if blocks directory doesn't exist
@@ -42,7 +42,7 @@ function dream_child_register_blocks() {
  * Conditionally loads only the block.php files for blocks used on the current page
  * Always loads all blocks for AJAX requests and archives
  */
-function dream_child_include_block_php_files() {
+function timberland_child_include_block_php_files() {
   $blocks_path = dirname(__DIR__) . '/templates/blocks';
 
   if ( !is_dir($blocks_path) ) {
@@ -82,7 +82,7 @@ function dream_child_include_block_php_files() {
     }
 
     // Get blocks used on this post
-    $used_blocks = dream_get_post_used_blocks($post_id, $child_blocks_metadata);
+    $used_blocks = timberland_get_post_used_blocks($post_id, $child_blocks_metadata);
 
     // Only include block.php for blocks used on this page
     foreach ($used_blocks as $block_slug) {
@@ -107,12 +107,12 @@ function dream_child_include_block_php_files() {
 // This ensures block.php files are loaded before AJAX handlers run
 add_action( 'init', function() {
   if ( wp_doing_ajax() || is_admin() ) {
-    dream_child_include_block_php_files();
+    timberland_child_include_block_php_files();
   }
 }, 10 );
 
 add_action( 'wp', function() {
   if ( ! wp_doing_ajax() && ! is_admin() ) {
-    dream_child_include_block_php_files();
+    timberland_child_include_block_php_files();
   }
 }, 10 );
