@@ -30,7 +30,7 @@ function dream_child_clear_cache() {
 	// Clear wp_cache for dream_child_blocks group (Memcached on WP Engine)
 	wp_cache_flush_group('dream_child_blocks');
 
-	// Note: Minified block JS files are cleared by parent theme's dream_clear_timber_cache()
+	// Note: Minified block JS files are cleared by parent theme's dream_clear_all_cache()
 
 	return true;
 }
