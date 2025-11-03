@@ -24,7 +24,9 @@
       options.site_header_layout.header_layout != 'default' ? 'site-header-' ~ options.site_header_layout.header_layout : post.meta('site_header_layout').header_layout != 'default' ? 'site-header-' ~ post.meta('site_header_layout').header_layout,
       'd-block'
     ],
-    header_other_classes: ''
+    header_other_classes: '',
+    cache_version: cache_version,
+    paths: paths
   } %}
     {% block header %}
       {% block additional_content %}
@@ -52,7 +54,9 @@
       full_screen ? 'full-screen-mobile-nav',
       options.site_header_layout.header_layout != 'default' ? 'site-header-' ~ options.site_header_layout.header_layout : post.meta('site_header_layout').header_layout != 'default' ? 'site-header-' ~ post.meta('site_header_layout').header_layout,
     ],
-    header_other_classes: ''
+    header_other_classes: '',
+    cache_version: cache_version,
+    paths: paths
   } %}
 
     {% block header_branding %}
