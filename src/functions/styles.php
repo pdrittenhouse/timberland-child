@@ -198,25 +198,22 @@ function timberland_enqueue_child_block_admin_styles() {
 	foreach ($blocks as $block) {
 		$index_css_path = $blocks_path . '/' . $block . '/index.css';
 
-		// Only enqueue if file exists AND has actual content (not just whitespace)
-		if (file_exists($index_css_path)) {
-			$content = file_get_contents($index_css_path);
-			if (!empty(trim($content))) {
-				// Create dependency array - depend on parent block admin style if it exists
-				$dependencies = array('child_block_css'); // Always depend on child editor stylesheet
-				$parent_handle = 'blocks_css_' . $block;
-				if (wp_style_is($parent_handle, 'enqueued') || wp_style_is($parent_handle, 'registered')) {
-					$dependencies[] = $parent_handle;
-				}
-
-				wp_enqueue_style(
-					'child_blocks_css_' . $block,
-					get_stylesheet_directory_uri() . '/src/templates/blocks/' . $block . '/index.css',
-					$dependencies,
-					wp_get_theme()->get('Version'),
-					'all'
-				);
+		// Only enqueue if file exists and has content (filesize > 10 bytes)
+		if (file_exists($index_css_path) && filesize($index_css_path) > 10) {
+			// Create dependency array - depend on parent block admin style if it exists
+			$dependencies = array('child_block_css'); // Always depend on child editor stylesheet
+			$parent_handle = 'blocks_css_' . $block;
+			if (wp_style_is($parent_handle, 'enqueued') || wp_style_is($parent_handle, 'registered')) {
+				$dependencies[] = $parent_handle;
 			}
+
+			wp_enqueue_style(
+				'child_blocks_css_' . $block,
+				get_stylesheet_directory_uri() . '/src/templates/blocks/' . $block . '/index.css',
+				$dependencies,
+				wp_get_theme()->get('Version'),
+				'all'
+			);
 		}
 	}
 }
@@ -239,49 +236,43 @@ function timberland_child_enqueue_language_styles() {
 	// Check for language-specific stylesheet
 	$lang_file = get_stylesheet_directory() . "/dist/lang/lang-{$current_lang}.css";
 
-	if (file_exists($lang_file)) {
-		// Only enqueue if file has actual content (not just whitespace)
-		$content = file_get_contents($lang_file);
-		if (!empty(trim($content))) {
-			// Create dependency array - depend on parent language style if it exists
-			$dependencies = array('child_styles'); // Always depend on child main stylesheet
-			$parent_lang_handle = "timberland-lang-{$current_lang}";
-			if (wp_style_is($parent_lang_handle, 'enqueued') || wp_style_is($parent_lang_handle, 'registered')) {
-				$dependencies[] = $parent_lang_handle;
-			}
-
-			wp_enqueue_style(
-				"timberland-child-lang-{$current_lang}",
-				get_stylesheet_directory_uri() . "/dist/lang/lang-{$current_lang}.css",
-				$dependencies,
-				wp_get_theme()->get('Version'),
-				'all'
-			);
+	// Only enqueue if file exists and has content (filesize > 100 bytes to account for minified empty CSS)
+	if (file_exists($lang_file) && filesize($lang_file) > 100) {
+		// Create dependency array - depend on parent language style if it exists
+		$dependencies = array('child_styles'); // Always depend on child main stylesheet
+		$parent_lang_handle = "timberland-lang-{$current_lang}";
+		if (wp_style_is($parent_lang_handle, 'enqueued') || wp_style_is($parent_lang_handle, 'registered')) {
+			$dependencies[] = $parent_lang_handle;
 		}
+
+		wp_enqueue_style(
+			"timberland-child-lang-{$current_lang}",
+			get_stylesheet_directory_uri() . "/dist/lang/lang-{$current_lang}.css",
+			$dependencies,
+			wp_get_theme()->get('Version'),
+			'all'
+		);
 	}
 
 	// RTL stylesheet for right-to-left languages (child overrides)
 	if (is_rtl()) {
 		$rtl_file = get_stylesheet_directory() . '/dist/lang/rtl.css';
 
-		if (file_exists($rtl_file)) {
-			$content = file_get_contents($rtl_file);
-			if (!empty(trim($content))) {
-				// Create dependency array - depend on parent RTL style if it exists
-				$dependencies = array('child_styles');
-				$parent_rtl_handle = 'timberland-rtl';
-				if (wp_style_is($parent_rtl_handle, 'enqueued') || wp_style_is($parent_rtl_handle, 'registered')) {
-					$dependencies[] = $parent_rtl_handle;
-				}
-
-				wp_enqueue_style(
-					'timberland-child-rtl',
-					get_stylesheet_directory_uri() . '/dist/lang/rtl.css',
-					$dependencies,
-					wp_get_theme()->get('Version'),
-					'all'
-				);
+		if (file_exists($rtl_file) && filesize($rtl_file) > 100) {
+			// Create dependency array - depend on parent RTL style if it exists
+			$dependencies = array('child_styles');
+			$parent_rtl_handle = 'timberland-rtl';
+			if (wp_style_is($parent_rtl_handle, 'enqueued') || wp_style_is($parent_rtl_handle, 'registered')) {
+				$dependencies[] = $parent_rtl_handle;
 			}
+
+			wp_enqueue_style(
+				'timberland-child-rtl',
+				get_stylesheet_directory_uri() . '/dist/lang/rtl.css',
+				$dependencies,
+				wp_get_theme()->get('Version'),
+				'all'
+			);
 		}
 	}
 }
