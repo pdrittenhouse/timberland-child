@@ -34,7 +34,9 @@
       options.site_header_layout.header_layout != 'default' ? 'site-header-' ~ options.site_header_layout.header_layout : post.meta('site_header_layout').header_layout != 'default' ? 'site-header-' ~ post.meta('site_header_layout').header_layout,
       'd-block'
     ],
-    header_other_classes: ''
+    header_other_classes: '',
+    cache_version: cache_version,
+    paths: paths
   } %}
     {% block header %}
       {% block additional_content %}
@@ -149,7 +151,9 @@
       center_mobile_nav ? 'center-mobile-nav-content',
       options.site_header_layout.header_layout != 'default' ? 'site-header-' ~ options.site_header_layout.header_layout : post.meta('site_header_layout').header_layout != 'default' ? 'site-header-' ~ post.meta('site_header_layout').header_layout,
     ],
-    header_other_classes: ''
+    header_other_classes: '',
+    cache_version: cache_version,
+    paths: paths
   } %}
 
     {% block header_branding %}
@@ -220,7 +224,9 @@
           hide_secondary_nav == 'desktop' ? 'd-xxl-none',
           hide_secondary_nav == 'both' ? 'd-none'
         ],
-        'nav_other_classes': 'secondary-nav'
+        'nav_other_classes': 'secondary-nav',
+        'cache_version': cache_version,
+        'paths': paths
       } %}
     {% endblock secondary_navigation %}
 
@@ -260,7 +266,9 @@
           hide_primary_nav == 'both' ? 'd-none'
         ],
         'nav_other_classes': 'primary-nav',
-        'relative_mega_menu': options.nav_item_relative
+        'relative_mega_menu': options.nav_item_relative,
+        'cache_version': cache_version,
+        'paths': paths
       } %}
       <div class="button-wrapper">
         {% include '@atoms/button/' ~ header_cta_template with {
@@ -359,7 +367,9 @@
           icon_width: '16px',
           icon_height: '16px',
           icon_name: 'search',
-          icon_color: 'white'
+          icon_color: 'white',
+          cache_version: cache_version,
+          paths: paths
         } %}
       </div>
     {% endblock search %}
