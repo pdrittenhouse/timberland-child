@@ -234,11 +234,11 @@
 					{% endif %}
 
 					{% if fields['title'] %}
-						<h2 class="jumbotron--title" {{ (fields.color['color'] == 'palette' and fields.color['theme_color']) or (fields.color['color'] == 'custom' and fields.color['custom_color']) ? 'style="color: inherit;"' }}>{{ fields['title'] }}</h2>
+						<h1 class="jumbotron--title" {{ (fields.color['color'] == 'palette' and fields.color['theme_color']) or (fields.color['color'] == 'custom' and fields.color['custom_color']) ? 'style="color: inherit;"' }}>{{ fields['title'] }}</h1>
 					{% endif %}
 
 					{% if fields['subtitle'] %}
-						<h3 class="jumbotron--subtitle" {{ (fields.color['color'] == 'palette' and fields.color['theme_color']) or (fields.color['color'] == 'custom' and fields.color['custom_color']) ? 'style="color: inherit;"' }}>{{ fields['subtitle'] }}</h3>
+						<h2 class="jumbotron--subtitle" {{ (fields.color['color'] == 'palette' and fields.color['theme_color']) or (fields.color['color'] == 'custom' and fields.color['custom_color']) ? 'style="color: inherit;"' }}>{{ fields['subtitle'] }}</h2>
 					{% endif %}
 
 					{% if fields['text'] %}
