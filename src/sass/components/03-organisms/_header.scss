@@ -42,7 +42,7 @@
       $infix: breakpoint-infix($next, $grid-breakpoints);
 
       &.navbar-expand#{$infix} {
-        @if $breakpoint != 'none' and $breakpoint != 'xs' {
+        @if $breakpoint != 'none' and $breakpoint != 'xs' and $next != null {
 
           .site-header--content {
             @include media-breakpoint-up($next) {}
@@ -98,7 +98,7 @@
       $infix: breakpoint-infix($next, $grid-breakpoints);
 
       &.navbar-expand#{$infix} {
-        @if $breakpoint != 'none' and $breakpoint != 'xs' {
+        @if $breakpoint != 'none' and $breakpoint != 'xs' and $next != null {
 
           &.full-width-mobile {
             .site-header--container {
@@ -164,7 +164,7 @@
       $infix: breakpoint-infix($next, $grid-breakpoints);
 
       &.navbar-expand#{$infix} {
-        @if $breakpoint != 'none' and $breakpoint != 'xs' {
+        @if $breakpoint != 'none' and $breakpoint != 'xs' and $next != null {
 
           .site-header--branding {
             @include media-breakpoint-up($next) {}
@@ -212,7 +212,7 @@
     $infix: breakpoint-infix($next, $grid-breakpoints);
 
     &.navbar-expand#{$infix} {
-      @if $breakpoint != 'none' and $breakpoint != 'xs' {
+      @if $breakpoint != 'none' and $breakpoint != 'xs' and $next != null {
 
         &.center-mobile {
           .site-header--branding {
@@ -261,7 +261,7 @@
     $infix: breakpoint-infix($next, $grid-breakpoints);
 
     &.navbar-expand#{$infix} {
-      @if $breakpoint != 'none' and $breakpoint != 'xs' {
+      @if $breakpoint != 'none' and $breakpoint != 'xs' and $next != null {
 
         &.full-screen-mobile-nav {
           &.mobile-nav-top,
@@ -304,7 +304,7 @@
     $infix: breakpoint-infix($next, $grid-breakpoints);
 
     &.navbar-expand#{$infix} {
-      @if $breakpoint != 'none' and $breakpoint != 'xs' {
+      @if $breakpoint != 'none' and $breakpoint != 'xs' and $next != null {
 
         &.mobile-nav-top {
           .navbar-collapse {
@@ -328,7 +328,7 @@
     $infix: breakpoint-infix($next, $grid-breakpoints);
 
     &.navbar-expand#{$infix} {
-      @if $breakpoint != 'none' and $breakpoint != 'xs' {
+      @if $breakpoint != 'none' and $breakpoint != 'xs' and $next != null {
 
         &.mobile-nav-bottom {
           .navbar-collapse {
@@ -352,7 +352,7 @@
     $infix: breakpoint-infix($next, $grid-breakpoints);
 
     &.navbar-expand#{$infix} {
-      @if $breakpoint != 'none' and $breakpoint != 'xs' {
+      @if $breakpoint != 'none' and $breakpoint != 'xs' and $next != null {
 
         &.mobile-nav-right {
           .navbar-collapse {
@@ -376,7 +376,7 @@
     $infix: breakpoint-infix($next, $grid-breakpoints);
 
     &.navbar-expand#{$infix} {
-      @if $breakpoint != 'none' and $breakpoint != 'xs' {
+      @if $breakpoint != 'none' and $breakpoint != 'xs' and $next != null {
 
         &.mobile-nav-left {
           .navbar-collapse {
@@ -400,7 +400,7 @@
     $infix: breakpoint-infix($next, $grid-breakpoints);
 
     &.navbar-expand#{$infix} {
-      @if $breakpoint != 'none' and $breakpoint != 'xs' {
+      @if $breakpoint != 'none' and $breakpoint != 'xs' and $next != null {
 
         &.mobile-nav-overlay {
           .navbar-collapse {
@@ -436,7 +436,7 @@
     $infix: breakpoint-infix($next, $grid-breakpoints);
 
     &.navbar-expand#{$infix} {
-      @if $breakpoint != 'none' and $breakpoint != 'xs' {
+      @if $breakpoint != 'none' and $breakpoint != 'xs' and $next != null {
 
         &.show-mobile-button {
           .button-wrapper--mobile {
@@ -587,7 +587,7 @@
       $infix: breakpoint-infix($next, $grid-breakpoints);
 
       &.navbar-expand#{$infix} {
-        @if $breakpoint != 'none' and $breakpoint != 'xs' {
+        @if $breakpoint != 'none' and $breakpoint != 'xs' and $next != null {
           .site-header--branding,
           .site-header--navigation {
             @include media-breakpoint-up($next) {}
@@ -603,7 +603,7 @@
       $infix: breakpoint-infix($next, $grid-breakpoints);
 
       &.navbar-expand#{$infix} {
-        @if $breakpoint != 'none' and $breakpoint != 'xs' {
+        @if $breakpoint != 'none' and $breakpoint != 'xs' and $next != null {
 
           &.logo-right {
             .site-header--branding {
@@ -638,7 +638,7 @@
       $infix: breakpoint-infix($next, $grid-breakpoints);
 
       &.navbar-expand#{$infix} {
-        @if $breakpoint != 'none' and $breakpoint != 'xs' {
+        @if $breakpoint != 'none' and $breakpoint != 'xs' and $next != null {
 
           &.logo-right {
             .site-header--branding {
@@ -708,7 +708,7 @@
       $infix: breakpoint-infix($next, $grid-breakpoints);
 
       &.navbar-expand#{$infix} {
-        @if $breakpoint != 'none' and $breakpoint != 'xs' {
+        @if $breakpoint != 'none' and $breakpoint != 'xs' and $next != null {
           @include media-breakpoint-up($next) {}
 
           .side-header--right & {
@@ -737,7 +737,7 @@
       $infix: breakpoint-infix($next, $grid-breakpoints);
 
       &.navbar-expand#{$infix} {
-        @if $breakpoint != 'none' and $breakpoint != 'xs' {
+        @if $breakpoint != 'none' and $breakpoint != 'xs' and $next != null {
 
           .site-header--container {
             @include media-breakpoint-up($next) {}
@@ -775,7 +775,7 @@
       $infix: breakpoint-infix($next, $grid-breakpoints);
 
       &.navbar-expand#{$infix} {
-        @if $breakpoint != 'none' and $breakpoint != 'xs' {
+        @if $breakpoint != 'none' and $breakpoint != 'xs' and $next != null {
 
           .navbar-collapse {
             @include media-breakpoint-up($next) {}

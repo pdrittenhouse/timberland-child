@@ -427,4 +427,7 @@ module.exports = function(grunt) {
     grunt.registerTask("init", ["copy", "svg_sprite", "uglify", "sass:public","prepare-blocks","sass:blocks","postcss:blocks","copy:blocks","clean:blocks","sass:lang","postcss:lang"]);
     // grunt.registerTask("init", ["copy", "uglify", "sass"]);
     grunt.registerTask("prod", ["svg_sprite", "uglify","sass:public","prepare-blocks","sass:blocks","postcss:blocks","copy:blocks","clean:blocks","sass:lang","postcss:public","postcss:lang", "compress"]);
+    grunt.registerTask("public", ["uglify", "sass:public", "postcss:public"]);
+    grunt.registerTask("blocks", ["prepare-blocks", "sass:blocks", "postcss:blocks", "copy:blocks", "clean:blocks"]);
+    grunt.registerTask("lang", ["sass:lang", "postcss:lang"]);
 };

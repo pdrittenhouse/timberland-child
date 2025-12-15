@@ -22,3 +22,7 @@
 // Bootstrap Variables & Mixins (non-printing)
 // NOTE: CSS output has been split to _bootstrap-root.scss which is only imported in styles.scss
 @import "../../variables/bootstrap";
+
+// SVG Sprite Mixins (non-printing)
+// TODO: Restructure sprites into printing and non-printing
+@import "../../global/sprites";

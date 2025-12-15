@@ -220,8 +220,8 @@
         'nav_id': 'secondaryNav',
         'navbar_breakpoint': 'xs',
         'nav_classes': [
-          hide_secondary_nav == 'mobile' ? 'd-none d-xxl-flex',
-          hide_secondary_nav == 'desktop' ? 'd-xxl-none',
+          hide_secondary_nav == 'mobile' ? 'd-none d-' ~ options.navbar_breakpoint | default('lg') ~ '-flex',
+          hide_secondary_nav == 'desktop' ? 'd-' ~ options.navbar_breakpoint | default('lg') ~ '-none',
           hide_secondary_nav == 'both' ? 'd-none'
         ],
         'nav_other_classes': 'secondary-nav',
@@ -244,8 +244,8 @@
         'menu_hide_icons': false,
         'menu_icon_nav_direction': 'horizontal',
         'menu_nav_classes': [
-          hide_social_nav == 'mobile' ? 'd-none d-xxl-flex',
-          hide_social_nav == 'desktop' ? 'd-xxl-none',
+          hide_social_nav == 'mobile' ? 'd-none d-' ~ options.navbar_breakpoint | default('lg') ~ '-flex',
+          hide_social_nav == 'desktop' ? 'd-' ~ options.navbar_breakpoint | default('lg') ~ '-none',
           hide_social_nav == 'both' ? 'd-none'
         ],
         'menu_nav_other_classes': 'header-social-nav'
@@ -261,12 +261,14 @@
         'navbar_breakpoint': options.navbar_breakpoint ? options.navbar_breakpoint : 'lg',
         'breakpoints': sass_data['scssBreakpoints'],
         'nav_classes': [
-          hide_primary_nav == 'mobile' ? 'd-none d-xxl-flex',
-          hide_primary_nav == 'desktop' ? 'd-xxl-none',
+          hide_primary_nav == 'mobile' ? 'd-none d-' ~ options.navbar_breakpoint | default('lg') ~ '-flex',
+          hide_primary_nav == 'desktop' ? 'd-' ~ options.navbar_breakpoint | default('lg') ~ '-none',
           hide_primary_nav == 'both' ? 'd-none'
         ],
         'nav_other_classes': 'primary-nav',
-        'relative_mega_menu': options.nav_item_relative,
+        'relative_mega_menu': options.enable_mega_menus and options.nav_item_relative ? options.nav_item_relative,
+        'container_relative_menu': options.enable_mega_menus and options.container_relative ? options.container_relative,
+        'toggle_open_menus': options.toggle_menus,
         'cache_version': cache_version,
         'paths': paths
       } %}
@@ -295,8 +297,8 @@
           hide_label: options.header_cta.header_cta.hide_label,
           button_classes: [
             'header-cta-button',
-            hide_header_cta == 'mobile' ? 'd-none d-xxl-flex',
-            hide_header_cta == 'desktop' ? 'd-xxl-none',
+            hide_header_cta == 'mobile' ? 'd-none d-' ~ options.navbar_breakpoint | default('lg') ~ '-flex',
+            hide_header_cta == 'desktop' ? 'd-' ~ options.navbar_breakpoint | default('lg') ~ '-none',
             hide_header_cta == 'both' ? 'd-none',
             options.header_cta.header_cta.background_color['bg_color'] == 'palette' and options.header_cta.header_cta.background_color['bg_theme_color'] ? 'bg-' ~ options.header_cta.header_cta.background_color['bg_theme_color'],
             options.header_cta.header_cta.text_color['color'] == 'palette' and options.header_cta.header_cta.text_color['theme_color'] ? 'text-' ~ options.header_cta.header_cta.text_color['theme_color']
@@ -349,7 +351,7 @@
     {% endblock pre_nav %}
 
     {% block search %}
-      <div class="pt-2 {{ hide_header_search == 'mobile' ? 'd-none d-xxl-flex' }} {{ hide_header_search == 'desktop' ? 'd-xxl-none' }} {{ hide_header_search == 'both' ? 'd-none' }}">
+      <div class="pt-2 {{ hide_header_search == 'mobile' ? 'd-none d-' ~ options.navbar_breakpoint | default('lg') ~ '-flex' }} {{ hide_header_search == 'desktop' ? 'd-' ~ options.navbar_breakpoint | default('lg') ~ '-none' }} {{ hide_header_search == 'both' ? 'd-none' }}">
 {#        {{ function('get_search_form') }}#}
         {% include "partials/content/searchform.twig" with {
           show_label: false,

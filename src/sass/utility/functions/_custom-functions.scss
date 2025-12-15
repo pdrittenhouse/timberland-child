@@ -1,0 +1,47 @@
+// * A function to reliably retrieve the value of a Bootstrap $spacers list.
+// *
+// * @param $key
+// *   The key in the Bootstrap spacers list you wish to access.
+//  *
+//  * @example spacers(1);
+//  *
+//  */
+@function spacers($key) {
+  @if map-has-key($spacers, $key) {
+    @return map-get($spacers, $key);
+  }
+
+  @warn "Unknown `#{$key}` in $spacers.";
+
+  @return null;
+}
+
+// * A function to retrieve Bootstrap $grid_breakpoints in relation to current breakpoint.
+// *
+// * @param $name
+// *   The current breakpoint
+// *
+// * @param $steps
+// *   The number of steps to move up (positive) or down (negative)
+// *
+// * @param $grid-breakpoints
+// *   The map of breakpoints to use. Defaults to $grid-breakpoints
+// * @example breakpoint-step(md, 2, $grid-breakpoints);
+// *
+// */
+@function breakpoint-step($name, $steps: 1, $map: $grid-breakpoints) {
+  $keys: map-keys($map);
+  $index: index($keys, $name);
+
+  @if not $index {
+    @return null;
+  }
+
+  $target-index: $index + $steps;
+
+  @if $target-index < 1 or $target-index >length($keys) {
+    @return null;
+  }
+
+  @return nth($keys, $target-index);
+}

@@ -8,6 +8,12 @@
   --body-bg: #{$body-bg};
   --body-text: #{$body-color};
 
+  // Grid
+  --grid-columns: #{$grid-columns};
+  --grid-gutter-width: #{$grid-gutter-width};
+  --grid-column-padding: #{$grid-gutter-width * .5};
+  --grid-row-columns: #{$grid-row-columns};
+
   // Header
   --header-bg: #{c(white)};
   --header-text: #{c(black)};
