@@ -66,6 +66,8 @@
 {% set box_shadow_color = fields['box_shadow']['color']['color'] == 'palette' and fields['box_shadow']['color']['theme_color'] ? 'var(--' ~ fields['box_shadow']['color']['theme_color'] ~ ')' : fields['box_shadow']['color']['color'] == 'custom' and fields['box_shadow']['color']['custom_color'] ? fields['box_shadow']['color']['custom_color'] %}
 {% set box_shadow_inset = fields['box_shadow']['inset'] == true ? 'inset' %}
 {% set box_shadow = fields['box_shadow']['horizontal_offset'] is not empty or fields['box_shadow']['vertical_offset'] is not empty or fields['box_shadow']['blur'] is not empty or fields['box_shadow']['spread'] is not empty or box_shadow_color or box_shadow_inset == true ? 'box-shadow: ' ~ fields['box_shadow']['horizontal_offset'] ~ 'px ' ~ fields['box_shadow']['vertical_offset'] ~ 'px ' ~ fields['box_shadow']['blur'] ~ 'px ' ~ fields['box_shadow']['spread'] ~ 'px ' ~ box_shadow_color ~ ' ' ~ box_shadow_inset ~ ';' %}
+{% set overlay_gradient = fields.gradient_overlay != true and block.style.color.gradient ? 'background:' ~ block.style.color.gradient ~ ';' %}
+
 
 {# Set Background Video Position #}
 {% set vpos = fields.bg_vertical_position ? fields.bg_vertical_position ~ '%' : '0%' %}
@@ -79,11 +81,12 @@
 	fields.hero_type == 'jumbotron' and fields.hero_layout.jumbotron_layout['jumbotron_layout'] != 'default' ? 'jumbotron-' ~ fields.hero_layout.jumbotron_layout['jumbotron_layout'],
 	fields.hero_type == 'jumbotron' and (fields.hero_layout.jumbotron_layout['jumbotron_layout'] == 'gradient-overlay-left' or fields.hero_layout.jumbotron_layout['jumbotron_layout'] == 'gradient-overlay-right') ? 'gradient-' ~ fields.hero_layout.jumbotron_layout['gradient'],
 	fields.hero_type == 'feature' and fields.hero_layout.feature_layout['feature_layout'] != 'default' ? 'feature-' ~ fields.hero_layout.feature_layout['feature_layout'],
+	fields.gradient_overlay != true and block['gradient'] ? 'gradient-' ~ block['gradient'],
 	block['className']
 ]) | sort | join(' ') | trim %}
 
 {% set block_attributes = block_attributes|default([])|merge([
-	fields.hero_type == 'feature' and (bg_color or text_color or bg_image_size or bg_position or bg_repeat or bg_attachment or margin_top or margin_bottom or margin_left or margin_right or padding_top or padding_bottom or padding_left or padding_right or height or min_height or max_height or border_top_width or border_top_style or border_top_color or border_bottom_width or border_bottom_style or border_bottom_color or border_left_width or border_left_style or border_left_color or border_right_width or border_right_style or border_right_color or border_top_left_radius or border_top_right_radius or border_bottom_left_radius or border_bottom_right_radius or box_shadow) ? 'style="' ~ bg_color ~ text_color ~ bg_image_size ~ bg_position ~ bg_repeat ~ bg_attachment ~ margin_top ~ margin_bottom ~ margin_left ~ margin_right ~ padding_top ~ padding_bottom ~ padding_left ~ padding_right ~ height ~ min_height ~ max_height ~ border_top_width ~ border_top_style ~ border_top_color ~ border_bottom_width ~ border_bottom_style ~ border_bottom_color ~ border_left_width ~ border_left_style ~ border_left_color ~ border_right_width ~ border_right_style ~ border_right_color ~ border_top_left_radius ~ border_top_right_radius ~ border_bottom_left_radius ~ border_bottom_right_radius ~ box_shadow ~ '"',
+	fields.hero_type == 'feature' and (bg_color or text_color or bg_image_size or bg_position or bg_repeat or bg_attachment or margin_top or margin_bottom or margin_left or margin_right or padding_top or padding_bottom or padding_left or padding_right or height or min_height or max_height or border_top_width or border_top_style or border_top_color or border_bottom_width or border_bottom_style or border_bottom_color or border_left_width or border_left_style or border_left_color or border_right_width or border_right_style or border_right_color or border_top_left_radius or border_top_right_radius or border_bottom_left_radius or border_bottom_right_radius or box_shadow or overlay_gradient) ? 'style="' ~ bg_color ~ text_color ~ bg_image_size ~ bg_position ~ bg_repeat ~ bg_attachment ~ margin_top ~ margin_bottom ~ margin_left ~ margin_right ~ padding_top ~ padding_bottom ~ padding_left ~ padding_right ~ height ~ min_height ~ max_height ~ border_top_width ~ border_top_style ~ border_top_color ~ border_bottom_width ~ border_bottom_style ~ border_bottom_color ~ border_left_width ~ border_left_style ~ border_left_color ~ border_right_width ~ border_right_style ~ border_right_color ~ border_top_left_radius ~ border_top_right_radius ~ border_bottom_left_radius ~ border_bottom_right_radius ~ box_shadow ~ overlay_gradient ~ '"',
 	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_mp4 ? 'data-mp4="' ~ fields.bg_mp4 ~ '"',
 	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_webm ? 'data-webm="' ~ fields.bg_webm ~ '"',
 	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_ogv ? 'data-ogv="' ~ fields.bg_ogv ~ '"',
@@ -187,9 +190,15 @@
 	{% endif %}
 {% endif %}
 
+{% set overlay_styles = [
+  fields.overlay_bg['bg_color'] == 'custom' ? 'background-color:' ~ fields.overlay_bg['bg_custom_color'] ~ ';',
+  fields.gradient_overlay == true and block.style.color.gradient ? 'background:' ~ block.style.color.gradient ~ ';',
+  fields.overlay_opacity ? 'opacity: ' ~ fields.overlay_opacity ~ ';'
+] | sort | join(' ') | trim %}
+
 {% if fields.hero_type == 'jumbotron' %}
 	{% embed '@molecules/jumbotron/_jumbotron.tpl.twig' with {
-      jumbotron_other_styles: bg_color ~ text_color ~ bg_image_size ~ bg_position ~ bg_repeat ~ bg_attachment ~ margin_top ~ margin_bottom ~ margin_left ~ margin_right ~ height ~ min_height ~ max_height ~ border_top_width ~ border_top_style ~ border_top_color ~ border_bottom_width ~ border_bottom_style ~ border_bottom_color ~ border_left_width ~ border_left_style ~ border_left_color ~ border_right_width ~ border_right_style ~ border_right_color ~ border_top_left_radius ~ border_top_right_radius ~ border_bottom_left_radius ~ border_bottom_right_radius ~ box_shadow,
+      jumbotron_other_styles: bg_color ~ text_color ~ bg_image_size ~ bg_position ~ bg_repeat ~ bg_attachment ~ margin_top ~ margin_bottom ~ margin_left ~ margin_right ~ height ~ min_height ~ max_height ~ border_top_width ~ border_top_style ~ border_top_color ~ border_bottom_width ~ border_bottom_style ~ border_bottom_color ~ border_left_width ~ border_left_style ~ border_left_color ~ border_right_width ~ border_right_style ~ border_right_color ~ border_top_left_radius ~ border_top_right_radius ~ border_bottom_left_radius ~ border_bottom_right_radius ~ box_shadow ~ overlay_gradient,
       jumbotron_bg_image: fields.bg_video != true ? bg_image,
 	  image_left: fields.image_left,
       jumbotron_image: fields.image['image_type'] == 'file' and fields.image['image']['url'] ? fields.image['image']['url'] : fields.image['image_type'] == 'url' and fields.image['image_url'] ? fields.image['image_url'],
@@ -203,6 +212,11 @@
       jumbotron_other_classes: block_classes,
       jumbotron_other_attributes: block_attributes
     } %}
+		{% block overlay %}
+			{% if fields.include_overlay %}
+				<span class="overlay {{ fields.overlay_bg['bg_color'] == 'palette' and fields.overlay_bg['bg_theme_color'] ? 'bg-' ~ fields.overlay_bg['bg_theme_color'] }} {{ fields.gradient_overlay == true and block['gradient'] ? 'gradient-' ~ block['gradient'] }}" {{ overlay_styles ? 'style="' ~ overlay_styles ~ '"' }}></span>
+			{% endif %}
+		{% endblock overlay %}
 		{% block jumbotron_image %}
 			{% if (fields.image['image_type'] == 'file' and fields.image['image']['url']) or (fields.image['image_type'] == 'url' and fields.image['image_url']) or fields.innerblocks_location == 'image' %}
 				<div class="jumbotron--image">
@@ -307,6 +321,7 @@
 		title: fields.title,
 		subtitle: fields.subtitle,
 		description: fields.text,
+		overlay: fields.include_overlay,
 		image: {
 			variant: 'aspect-ratio',
 			src: hero_image_obj ? hero_image_obj.src('featured-widescreen') : (fields.image['image_type'] == 'file' and fields.image['image']['url'] ? fields.image['image']['url'] : fields.image['image_type'] == 'url' and fields.image['image_url'] ? fields.image['image_url']),
@@ -323,6 +338,11 @@
 		feature_other_classes: block_classes,
 		feature_other_attributes: block_attributes,
 		} %}
+		{% block overlay %}
+			{% if fields.include_overlay %}
+				<span class="overlay {{ fields.overlay_bg['bg_color'] == 'palette' and fields.overlay_bg['bg_theme_color'] ? 'bg-' ~ fields.overlay_bg['bg_theme_color'] }} {{ fields.gradient_overlay == true and block['gradient'] ? 'gradient-' ~ block['gradient'] }}" {{ overlay_styles ? 'style="' ~ overlay_styles ~ '"' }}></span>
+			{% endif %}
+		{% endblock overlay %}
 		{% block image %}
 			{% if image.src or fields.innerblocks_location == 'image' %}
 				<div class="feature-image">

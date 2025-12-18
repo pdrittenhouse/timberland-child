@@ -1,1 +1,11 @@
-.hero-unit {}
+.hero-unit {
+    position: relative;
+
+    .overlay {
+        @include cover();
+    }
+
+    > .container {
+        position: relative;
+    }
+}
