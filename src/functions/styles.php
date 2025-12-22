@@ -1,11 +1,44 @@
 <?php
 
-function timberland_child_enqueue_styles() {
+function timberland_child_enqueue_styles($pattern_paths = array(), $pattern_css_handles = array()) {
+    static $styles_enqueued = false;
+
+    // Prevent duplicate enqueueing
+    if ($styles_enqueued) {
+        return;
+    }
+
+    // Build dependencies based on what's actually registered
+    $dependencies = array('styles'); // Parent theme styles are always available
+
+    // Add optional Bootstrap dependencies if they're registered
+    $optional_deps = array(
+        'bootstrap-critical',
+        'bootstrap-utilities'
+    );
+
+    foreach ($optional_deps as $dep) {
+        if (wp_style_is($dep, 'registered')) {
+            $dependencies[] = $dep;
+        }
+    }
+
+    // If called from pattern loader action, add pattern CSS handles as dependencies
+    if (!empty($pattern_css_handles) && is_array($pattern_css_handles)) {
+        foreach ($pattern_css_handles as $handle) {
+            if (wp_style_is($handle, 'registered')) {
+                $dependencies[] = $handle;
+            }
+        }
+    }
+
     wp_enqueue_style( 'child_styles',
         get_stylesheet_directory_uri() . '/dist/styles.css',
-        array( 'styles' ),
+        $dependencies,
         wp_get_theme()->get( 'Version' ) // This only works if you have Version defined in the style header.
     );
+
+    $styles_enqueued = true;
 
 	// Get cached child customizer CSS
 	// NOTE: Uses parent theme's customizer functions with child theme's CSS variable overrides
@@ -51,10 +84,16 @@ function timberland_child_enqueue_styles() {
 	// Add the cached CSS
 	wp_add_inline_style( 'child_styles', $cached_child_customizer_css );
 }
+
 if ( !is_admin() ) {
-	// Priority 15: Load AFTER parent patterns (priority 10) but before child blocks (priority 20)
-	// This ensures: parent styles -> parent patterns -> parent blocks -> child styles -> child blocks
-	add_action( 'wp_enqueue_scripts', 'timberland_child_enqueue_styles', 15 );
+	// ONLY hook to pattern enqueue action - patterns load AFTER bootstrap
+	// This ensures child styles load after BOTH Bootstrap AND Pattern assets
+	add_action( 'timberland_after_pattern_enqueue', 'timberland_child_enqueue_styles', 10, 2 );
+
+	// Fallback for pages that don't have patterns (rare, but possible)
+	// Priority 100 ensures it runs after most other enqueues
+	add_action( 'wp_enqueue_scripts', 'timberland_child_enqueue_styles', 100 );
+
 }
 
 
