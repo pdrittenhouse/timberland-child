@@ -191,13 +191,6 @@ add_action('wp', function() {
 	// Detect blocks NOW (when post content is definitely loaded)
 	$used_blocks = timberland_child_get_post_used_blocks($post_id, $blocks_metadata);
 
-	// Temporary debug
-	if (defined('WP_DEBUG') && WP_DEBUG) {
-		error_log('wp hook (child) - Post ID: ' . $post_id);
-		error_log('wp hook (child) - Post content length: ' . strlen(get_post($post_id)->post_content));
-		error_log('wp hook (child) - Detected blocks: ' . print_r($used_blocks, true));
-	}
-
 	// Then hook into enqueue_block_assets to actually enqueue the styles
 	add_action('enqueue_block_assets', function() use ($used_blocks) {
 		$blocks_path = get_stylesheet_directory() . '/src/templates/blocks';
