@@ -35,21 +35,11 @@ function timberland_child_get_blocks_metadata() {
 	// Use hybrid cache: wp_cache (Memcached on WP Engine) + transient fallback
 	$blocks_metadata = timberland_cache_get('child_blocks_metadata', 'timberland_child_blocks');
 
-	// Temporary debug logging
-	if (defined('WP_DEBUG') && WP_DEBUG) {
-		error_log('timberland_child_get_blocks_metadata - Called, cache hit: ' . ($blocks_metadata !== false ? 'YES' : 'NO'));
-	}
-
 	if (false === $blocks_metadata) {
 		$blocks_metadata = [];
 
 		// Scan child theme blocks ONLY
 		$blocks_path = get_stylesheet_directory() . '/src/templates/blocks';
-
-		// Temporary debug logging
-		if (defined('WP_DEBUG') && WP_DEBUG) {
-			error_log('timberland_child_get_blocks_metadata - Scanning CHILD theme blocks from: ' . $blocks_path);
-		}
 
 		if (file_exists($blocks_path)) {
 			$blocks = array_filter(scandir($blocks_path), 'timberland_child_filter_block_dir');
@@ -66,12 +56,6 @@ function timberland_child_get_blocks_metadata() {
 					}
 				}
 			}
-		}
-
-		// Temporary debug logging
-		if (defined('WP_DEBUG') && WP_DEBUG) {
-			error_log('timberland_child_get_blocks_metadata - Found ' . count($blocks_metadata) . ' child theme blocks');
-			error_log('timberland_child_get_blocks_metadata - Blocks: ' . print_r($blocks_metadata, true));
 		}
 
 		// Cache for 1 week (hybrid: both wp_cache and transient)
@@ -154,57 +138,21 @@ function timberland_child_get_post_used_blocks($post_id, $blocks_metadata) {
 	// We use >= because saves can happen within the same second as cache creation
 	$cache_is_stale = ($cache_time && $post_modified_time >= $cache_time);
 
-	// Temporary debug logging
-	if (defined('WP_DEBUG') && WP_DEBUG) {
-		error_log('timberland_child_get_post_used_blocks - Post ID: ' . $post_id);
-		error_log('timberland_child_get_post_used_blocks - Cache hit: ' . ($used_blocks !== false ? 'YES' : 'NO'));
-		error_log('timberland_child_get_post_used_blocks - Post modified GMT: ' . date('Y-m-d H:i:s', $post_modified_time) . ' (' . $post_modified_time . ')');
-		error_log('timberland_child_get_post_used_blocks - Cache created: ' . ($cache_time ? date('Y-m-d H:i:s', $cache_time) . ' (' . $cache_time . ')' : 'NONE'));
-		error_log('timberland_child_get_post_used_blocks - Cache is stale: ' . ($cache_is_stale ? 'YES' : 'NO'));
-		if ($used_blocks !== false) {
-			error_log('timberland_child_get_post_used_blocks - Cached blocks: ' . print_r($used_blocks, true));
-		}
-	}
-
 	// Rebuild cache if it doesn't exist OR if post was modified at/after cache was created
 	if (false === $used_blocks || $cache_is_stale) {
 		$used_blocks = [];
 		$post = get_post($post_id);
 
-		// Temporary debug logging
-		if (defined('WP_DEBUG') && WP_DEBUG) {
-			error_log('timberland_child_get_post_used_blocks - Cache MISS, rescanning post');
-			error_log('timberland_child_get_post_used_blocks - Post object: ' . ($post ? 'Found' : 'NULL'));
-		}
-
 		if ($post) {
 			$post_content = $post->post_content;
-
-			// Temporary debug logging
-			if (defined('WP_DEBUG') && WP_DEBUG) {
-				error_log('timberland_child_get_post_used_blocks - Post content length: ' . strlen($post_content));
-				error_log('timberland_child_get_post_used_blocks - Post content first 500 chars: ' . substr($post_content, 0, 500));
-				error_log('timberland_child_get_post_used_blocks - Blocks metadata count: ' . count($blocks_metadata));
-				error_log('timberland_child_get_post_used_blocks - Blocks metadata: ' . print_r($blocks_metadata, true));
-			}
 
 			// Parse blocks using WordPress parse_blocks() for reliable detection
 			$parsed_blocks = parse_blocks($post_content);
 			$block_names_in_content = timberland_child_extract_block_names_recursive($parsed_blocks);
 
-			// Temporary debug logging
-			if (defined('WP_DEBUG') && WP_DEBUG) {
-				error_log('timberland_child_get_post_used_blocks - Parsed block names: ' . print_r($block_names_in_content, true));
-			}
-
 			// Match against our block metadata
 			foreach ($blocks_metadata as $block_slug => $block_name) {
 				$found = in_array($block_name, $block_names_in_content);
-
-				// Temporary debug logging
-				if (defined('WP_DEBUG') && WP_DEBUG) {
-					error_log('timberland_child_get_post_used_blocks - Checking block: ' . $block_slug . ' (' . $block_name . ') - Result: ' . ($found ? 'FOUND' : 'NOT FOUND'));
-				}
 
 				if ($found) {
 					$used_blocks[] = $block_slug;
@@ -213,10 +161,6 @@ function timberland_child_get_post_used_blocks($post_id, $blocks_metadata) {
 
 			// Check for referenced patterns and get their blocks
 			if (preg_match_all('/<!-- wp:block {"ref":(\d+)} \/-->/', $post_content, $matches)) {
-				// Temporary debug logging
-				if (defined('WP_DEBUG') && WP_DEBUG) {
-					error_log('timberland_child_get_post_used_blocks - Found pattern references: ' . print_r($matches[1], true));
-				}
 
 				foreach ($matches[1] as $pattern_id) {
 					$pattern_blocks = timberland_child_get_pattern_used_blocks($pattern_id, $blocks_metadata);
@@ -226,13 +170,6 @@ function timberland_child_get_post_used_blocks($post_id, $blocks_metadata) {
 
 			// Remove duplicates
 			$used_blocks = array_unique($used_blocks);
-		}
-
-		// Temporary debug logging
-		if (defined('WP_DEBUG') && WP_DEBUG) {
-			error_log('timberland_child_get_post_used_blocks - Detected blocks: ' . print_r($used_blocks, true));
-			error_log('timberland_child_get_post_used_blocks - Setting cache key: ' . $cache_key);
-			error_log('timberland_child_get_post_used_blocks - Storing post modified time as cache time: ' . $post_modified_time);
 		}
 
 		// Cache for 1 day and store the POST'S modified time (not current time)
