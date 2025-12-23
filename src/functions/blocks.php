@@ -81,8 +81,8 @@ function timberland_child_include_block_php_files() {
       }
     }
 
-    // Get blocks used on this post
-    $used_blocks = timberland_get_post_used_blocks($post_id, $child_blocks_metadata);
+    // Get blocks used on this post (use child theme function for child theme blocks)
+    $used_blocks = timberland_child_get_post_used_blocks($post_id, $child_blocks_metadata);
 
     // Only include block.php for blocks used on this page
     foreach ($used_blocks as $block_slug) {
