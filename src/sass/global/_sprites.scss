@@ -9,22 +9,32 @@
 
 // Data URI Sprite Mixins
 @mixin icon-cloud($width: 24px, $height: 16px, $color: #000, $display: inline-block) {
-    display: $display;
-    background-image: svg-url('<svg viewBox="0 0 24 16" xml:space="preserve" width="24" height="16" xmlns="http://www.w3.org/2000/svg"><path fill="#{$color}" fill-rule="evenodd" clip-rule="evenodd" d="M19.4 6c-.7-3.4-3.7-6-7.4-6-2.9 0-5.4 1.6-6.6 4C2.3 4.4 0 6.9 0 10c0 3.3 2.7 6 6 6h13c2.8 0 5-2.2 5-5 0-2.6-2.1-4.8-4.6-5z"/></svg>');
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: $height;
-    width: $width;
-    background-position: center;
+   display: $display;
+   height: $height;
+   width: $width;
+   background-color: $color;
+   -webkit-mask-image: svg-url('<svg viewBox="0 0 24 16" xml:space="preserve" width="24" height="16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.4 6c-.7-3.4-3.7-6-7.4-6-2.9 0-5.4 1.6-6.6 4C2.3 4.4 0 6.9 0 10c0 3.3 2.7 6 6 6h13c2.8 0 5-2.2 5-5 0-2.6-2.1-4.8-4.6-5z"/></svg>');
+   -webkit-mask-repeat: no-repeat;
+   -webkit-mask-position: center;
+   -webkit-mask-size: contain;
+   mask-image: svg-url('<svg viewBox="0 0 24 16" xml:space="preserve" width="24" height="16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.4 6c-.7-3.4-3.7-6-7.4-6-2.9 0-5.4 1.6-6.6 4C2.3 4.4 0 6.9 0 10c0 3.3 2.7 6 6 6h13c2.8 0 5-2.2 5-5 0-2.6-2.1-4.8-4.6-5z"/></svg>');
+   mask-repeat: no-repeat;
+   mask-position: center;
+   mask-size: contain;
 }
 @mixin icon-moon($width: 24px, $height: 24px, $color: #000, $display: inline-block) {
-    display: $display;
-    background-image: svg-url('<svg viewBox="0 0 24 24" xml:space="preserve" width="24" height="24" y="16" xmlns="http://www.w3.org/2000/svg"><path fill="#{$color}" d="M11.4 2c-3 2.8-3.2 7.6-.4 10.6s7.6 3.2 10.6.4c.1-.1.3-.2.4-.4-.3 5.2-4.7 9.4-10 9.4-5.5 0-10-4.5-10-10 0-5.3 4.1-9.7 9.4-10z"/></svg>');
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: $height;
-    width: $width;
-    background-position: center;
+   display: $display;
+   height: $height;
+   width: $width;
+   background-color: $color;
+   -webkit-mask-image: svg-url('<svg viewBox="0 0 24 24" xml:space="preserve" width="24" height="24" y="16" xmlns="http://www.w3.org/2000/svg"><path d="M11.4 2c-3 2.8-3.2 7.6-.4 10.6s7.6 3.2 10.6.4c.1-.1.3-.2.4-.4-.3 5.2-4.7 9.4-10 9.4-5.5 0-10-4.5-10-10 0-5.3 4.1-9.7 9.4-10z"/></svg>');
+   -webkit-mask-repeat: no-repeat;
+   -webkit-mask-position: center;
+   -webkit-mask-size: contain;
+   mask-image: svg-url('<svg viewBox="0 0 24 24" xml:space="preserve" width="24" height="24" y="16" xmlns="http://www.w3.org/2000/svg"><path d="M11.4 2c-3 2.8-3.2 7.6-.4 10.6s7.6 3.2 10.6.4c.1-.1.3-.2.4-.4-.3 5.2-4.7 9.4-10 9.4-5.5 0-10-4.5-10-10 0-5.3 4.1-9.7 9.4-10z"/></svg>');
+   mask-repeat: no-repeat;
+   mask-position: center;
+   mask-size: contain;
 }
 // ----------------------------------------------------------------
 
