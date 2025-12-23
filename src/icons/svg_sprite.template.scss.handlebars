@@ -7,25 +7,6 @@
 //                                              //
 //////////////////////////////////////////////////
 
-// Data URI Sprite Mixins
-{{#shapes}}
-@mixin icon-{{ base }}($width: {{ width.inner }}px, $height: {{ height.inner }}px, $color: #000, $display: inline-block) {
-   display: $display;
-   height: $height;
-   width: $width;
-   background-color: $color;
-   -webkit-mask-image: svg-url('{{{svg}}}');
-   -webkit-mask-repeat: no-repeat;
-   -webkit-mask-position: center;
-   -webkit-mask-size: contain;
-   mask-image: svg-url('{{{svg}}}');
-   mask-repeat: no-repeat;
-   mask-position: center;
-   mask-size: contain;
-}
-{{/shapes}}
-// ----------------------------------------------------------------
-
 // Utility Classes
 {{#shapes}}
 .icon-{{ base }} {
