@@ -176,48 +176,52 @@ if (is_admin()) {
 /**
  * Block Styles - Detect blocks early when post content is guaranteed to be loaded
  * @link https://jasonyingling.me/enqueueing-scripts-and-styles-for-gutenberg-blocks/
+ *
+ * NOTE: Block style enqueuing has been moved to each block's block.php file.
+ * Since block.php files are already loaded conditionally in blocks.php, each block
+ * enqueues its own styles directly. See timberland_child_include_block_php_files() in blocks.php
  */
 
-// Detect blocks on 'wp' hook (after main query is set, before template loads)
-add_action('wp', function() {
-	// Only run on singular pages where we have a single post
-	if (!is_singular()) {
-		return;
-	}
-
-	$post_id = get_the_ID();
-	$blocks_metadata = timberland_child_get_blocks_metadata(); // Helper function from block-helpers.php
-
-	// Detect blocks NOW (when post content is definitely loaded)
-	$used_blocks = timberland_child_get_post_used_blocks($post_id, $blocks_metadata);
-
-	// Then hook into enqueue_block_assets to actually enqueue the styles
-	add_action('enqueue_block_assets', function() use ($used_blocks) {
-		$blocks_path = get_stylesheet_directory() . '/src/templates/blocks';
-
-		// Only enqueue styles for blocks actually used on this page
-		foreach ($used_blocks as $block_slug) {
-			$style_path = $blocks_path . '/' . $block_slug . '/style.css';
-
-			if (file_exists($style_path)) {
-				// Create dependency array - depend on parent block style if it exists
-				$dependencies = array('child_styles'); // Always depend on child main stylesheet
-				$parent_handle = 'blocks_css_' . $block_slug;
-				if (wp_style_is($parent_handle, 'enqueued') || wp_style_is($parent_handle, 'registered')) {
-					$dependencies[] = $parent_handle;
-				}
-
-				wp_enqueue_style(
-					'child_blocks_css_' . $block_slug,
-					get_stylesheet_directory_uri() . '/src/templates/blocks/' . $block_slug . '/style.css',
-					$dependencies,
-					wp_get_theme()->get('Version'),
-					'all'
-				);
-			}
-		}
-	}, 20); // Priority 20 to run after parent theme (default 10)
-});
+// // Detect blocks on 'wp' hook (after main query is set, before template loads)
+// add_action('wp', function() {
+// 	// Only run on singular pages where we have a single post
+// 	if (!is_singular()) {
+// 		return;
+// 	}
+//
+// 	$post_id = get_the_ID();
+// 	$blocks_metadata = timberland_child_get_blocks_metadata(); // Helper function from block-helpers.php
+//
+// 	// Detect blocks NOW (when post content is definitely loaded)
+// 	$used_blocks = timberland_child_get_post_used_blocks($post_id, $blocks_metadata);
+//
+// 	// Then hook into enqueue_block_assets to actually enqueue the styles
+// 	add_action('enqueue_block_assets', function() use ($used_blocks) {
+// 		$blocks_path = get_stylesheet_directory() . '/src/templates/blocks';
+//
+// 		// Only enqueue styles for blocks actually used on this page
+// 		foreach ($used_blocks as $block_slug) {
+// 			$style_path = $blocks_path . '/' . $block_slug . '/style.css';
+//
+// 			if (file_exists($style_path)) {
+// 				// Create dependency array - depend on parent block style if it exists
+// 				$dependencies = array('child_styles'); // Always depend on child main stylesheet
+// 				$parent_handle = 'blocks_css_' . $block_slug;
+// 				if (wp_style_is($parent_handle, 'enqueued') || wp_style_is($parent_handle, 'registered')) {
+// 					$dependencies[] = $parent_handle;
+// 				}
+//
+// 				wp_enqueue_style(
+// 					'child_blocks_css_' . $block_slug,
+// 					get_stylesheet_directory_uri() . '/src/templates/blocks/' . $block_slug . '/style.css',
+// 					$dependencies,
+// 					wp_get_theme()->get('Version'),
+// 					'all'
+// 				);
+// 			}
+// 		}
+// 	}, 20); // Priority 20 to run after parent theme (default 10)
+// });
 
 
 // Admin editor: Load block admin styles (optimized - only load non-empty files)
