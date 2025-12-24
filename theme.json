@@ -69,6 +69,35 @@
                     "color": "var(--transparent)"
                 }
             ]
+        },
+        "typography": {
+            "fontSizes": [
+                {
+                "slug": "small",
+                "name": "Small",
+                "size": "calc(var(--paragraph-font-size) * .75)"
+                },
+                {
+                "slug": "medium",
+                "name": "Medium",
+                "size": "calc(var(--paragraph-font-size) * .875)"
+                },
+                {
+                "slug": "regular",
+                "name": "Regular",
+                "size": "var(--paragraph-font-size)"
+                },
+                {
+                "slug": "extralarge",
+                "name": "Extra Large",
+                "size": "calc(var(--paragraph-font-size) * 1.5)"
+                },
+                {
+                "slug": "huge",
+                "name": "Huge",
+                "size": "calc(var(--paragraph-font-size) * 2.125)"
+                }
+            ]
         }
     }
 }
