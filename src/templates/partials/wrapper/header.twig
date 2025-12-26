@@ -214,6 +214,33 @@
       {% endif %}
     {% endblock header_branding %}
 
+    {% block nav_toggle %}
+      {% embed '@atoms/button/_button.tpl.twig' with {
+        button_id: 'navToggle',
+        button_classes: [
+          'navbar-toggler',
+          'collapsed',
+          'hamburger',
+          'hamburger--' ~ options.hamburger_animation | default('boring'),
+          navbar_toggler_classes
+        ],
+        button_toggle: 'collapse',
+        button_attributes: [
+          'type="button"',
+          'data-bs-target="#siteNav"',
+          'aria-controls="siteNav"',
+          'aria-expanded="false"',
+          'aria-label="Toggle navigation"'
+        ]
+      } %}
+        {% block button_content %}
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        {% endblock button_content %}
+      {% endembed %}
+    {% endblock nav_toggle %}
+
     {% block secondary_navigation %}
       {% include "partials/menus/menu.twig" with {
         'menu': menu_secondary.get_items,
@@ -256,6 +283,7 @@
       {% include "partials/menus/menu.twig" with {
         'menu': menu_primary.get_items,
         'navbar_id': 'primaryNavigation',
+        'navbar_other_classes': options.include_menu_overlay ? 'has-overlay',
         'nav_id': 'primaryNav',
         'hover_dropdown': options.hover_dropdown,
         'navbar_breakpoint': options.navbar_breakpoint ? options.navbar_breakpoint : 'lg',
