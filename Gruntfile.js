@@ -59,9 +59,9 @@ module.exports = function(grunt) {
     grunt.log.writeln('[Block Index SCSS] Found ' + filteredBlockIndexScssFiles.length + ' block index SCSS files');
 
     // Build dynamic sass files object for blocks
-    // Compiles directly from source (no temp files needed - imports are in the SCSS files)
+    // Compiles directly from source to source directory (CSS alongside SCSS for block.json)
+    // This allows grunt-newer caching to work since destination files persist
     const blockSassFiles = {};
-    const blockCopyFiles = [];
 
     // Process style.scss files
     filteredBlockScssFiles.forEach(filePath => {
@@ -69,14 +69,8 @@ module.exports = function(grunt) {
         const match = filePath.match(/blocks\/([^\/]+)\/style\.scss$/);
         if (match && match[1]) {
             const blockName = match[1];
-            // Compile directly from source to dist/blocks/[block-name]/style.css
-            blockSassFiles['dist/blocks/' + blockName + '/style.css'] = filePath;
-
-            // Prepare copy task: dist -> src
-            blockCopyFiles.push({
-                src: 'dist/blocks/' + blockName + '/style.css',
-                dest: 'src/templates/blocks/' + blockName + '/style.css'
-            });
+            // Compile directly to source directory (same location as SCSS)
+            blockSassFiles['src/templates/blocks/' + blockName + '/style.css'] = filePath;
 
             grunt.log.writeln('[Block SCSS] Added entry: ' + blockName);
         }
@@ -88,14 +82,8 @@ module.exports = function(grunt) {
         const match = filePath.match(/blocks\/([^\/]+)\/index\.scss$/);
         if (match && match[1]) {
             const blockName = match[1];
-            // Compile directly from source to dist/blocks/[block-name]/index.css
-            blockSassFiles['dist/blocks/' + blockName + '/index.css'] = filePath;
-
-            // Prepare copy task: dist -> src
-            blockCopyFiles.push({
-                src: 'dist/blocks/' + blockName + '/index.css',
-                dest: 'src/templates/blocks/' + blockName + '/index.css'
-            });
+            // Compile directly to source directory (same location as SCSS)
+            blockSassFiles['src/templates/blocks/' + blockName + '/index.css'] = filePath;
 
             grunt.log.writeln('[Block Index SCSS] Added entry: ' + blockName);
         }
@@ -163,10 +151,6 @@ module.exports = function(grunt) {
                     // }
                 ],
             },
-            // Copy compiled block CSS files back to source directories
-            blocks: {
-                files: blockCopyFiles
-            }
         },
         svg_sprite: {
             dist: {
@@ -302,7 +286,7 @@ module.exports = function(grunt) {
                     "src/templates/blocks/**/style.scss",
                     "src/templates/blocks/**/index.scss"
                 ],
-                tasks: ["sass:blocks", "postcss:blocks", "copy:blocks", "clean:blocks"]
+                tasks: ["sass:blocks", "postcss:blocks"]
             },
             fonts: {
                 options: {
@@ -349,7 +333,7 @@ module.exports = function(grunt) {
                 },
                 src: "dist/*.css"
             },
-            // Minify block CSS files (runs on dist before copying to src)
+            // Minify block CSS files (in-place in source directories)
             blocks: {
                 map: {
                     inline: false,
@@ -357,7 +341,7 @@ module.exports = function(grunt) {
                         return dest.replace(/\.css$/, '');
                     }
                 },
-                src: "dist/blocks/**/*.css"
+                src: "src/templates/blocks/**/*.css"
             },
             // Minify language CSS files
             lang: {
@@ -380,10 +364,6 @@ module.exports = function(grunt) {
                 ext: '.gz'
             }
         },
-        clean: {
-            // Clean up dist/blocks after copying to source
-            blocks: ['dist/blocks']
-        }
     });
 
     grunt.loadNpmTasks("grunt-contrib-copy");
@@ -393,17 +373,16 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-svg-sprite");
     grunt.loadNpmTasks('grunt-contrib-compress');
-    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-newer');
 
     // Default task(s).
     // grunt.registerTask("default", ["svg_sprite","uglify","sass"]);
-    grunt.registerTask("default", ["newer:uglify","newer:sass:public","newer:sass:blocks","postcss:blocks","copy:blocks","clean:blocks","newer:sass:lang","postcss:lang"]);
-    grunt.registerTask("sprites", ["svg_sprite","newer:sass:public","newer:sass:blocks","postcss:blocks","copy:blocks","clean:blocks","newer:sass:lang","postcss:lang"]);
-    grunt.registerTask("init", ["copy", "svg_sprite", "uglify", "sass:public","sass:blocks","postcss:blocks","copy:blocks","clean:blocks","sass:lang","postcss:lang"]);
+    grunt.registerTask("default", ["newer:uglify","newer:sass:public","newer:sass:blocks","newer:postcss:blocks","newer:sass:lang","postcss:lang"]);
+    grunt.registerTask("sprites", ["svg_sprite","newer:sass:public","newer:sass:blocks","newer:postcss:blocks","newer:sass:lang","postcss:lang"]);
+    grunt.registerTask("init", ["copy", "svg_sprite", "uglify", "sass:public","sass:blocks","postcss:blocks","sass:lang","postcss:lang"]);
     // grunt.registerTask("init", ["copy", "uglify", "sass"]);
-    grunt.registerTask("prod", ["svg_sprite", "uglify", "sass:public", "sass:blocks", "postcss:blocks", "copy:blocks", "clean:blocks", "sass:lang", "postcss:public", "postcss:lang", "compress"]);
+    grunt.registerTask("prod", ["svg_sprite", "uglify", "sass:public", "sass:blocks", "postcss:blocks", "sass:lang", "postcss:public", "postcss:lang", "compress"]);
     grunt.registerTask("public", ["newer:uglify", "newer:sass:public", "postcss:public"]);
-    grunt.registerTask("blocks", ["newer:sass:blocks", "postcss:blocks", "copy:blocks", "clean:blocks"]);
+    grunt.registerTask("blocks", ["newer:sass:blocks", "newer:postcss:blocks"]);
     grunt.registerTask("lang", ["newer:sass:lang", "postcss:lang"]);
 };
