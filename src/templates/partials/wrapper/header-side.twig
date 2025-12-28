@@ -37,9 +37,16 @@
     ],
     header_other_classes: '',
     cache_version: cache_version,
-    paths: paths
+    paths: paths,
+    header_alert_content: post.meta('header_alert_message') ? post.meta('header_alert_message') : options.header_alert_message ? options.header_alert_message,
+    alert_other_classes: post.meta('header_alert_layout').alert_layout != 'default' ? 'alert-layout-' ~ post.meta('header_alert_layout').alert_layout : options.header_alert_layout.alert_layout != 'default' ? 'alert-layout-' ~ options.header_alert_layout.alert_layout
   } %}
     {% block header %}
+      {% block nav_top %}
+        {% if header_alerts_widget_area %}
+          {{ header_alerts_widget_area }}
+        {% endif %}
+      {% endblock nav_top %}
       {% block additional_content %}
         {% if header_widget_area %}
           {{ header_widget_area }}
@@ -155,8 +162,16 @@
     ],
     header_other_classes: '',
     cache_version: cache_version,
-    paths: paths
+    paths: paths,
+    header_alert_content: post.meta('header_alert_message') ? post.meta('header_alert_message') : options.header_alert_message ? options.header_alert_message,
+    alert_other_classes: post.meta('header_alert_layout').alert_layout != 'default' ? 'alert-layout-' ~ post.meta('header_alert_layout').alert_layout : options.header_alert_layout.alert_layout != 'default' ? 'alert-layout-' ~ options.header_alert_layout.alert_layout
   } %}
+
+    {% block nav_top %}
+      {% if header_alerts_widget_area %}
+        {{ header_alerts_widget_area }}
+      {% endif %}
+    {% endblock nav_top %}
 
     {% block header_branding %}
       {% if site_logo and (site_logo ends with '.svg') %}
@@ -192,31 +207,7 @@
         </div>
       {% endif %}
 
-      {# Cobrand #}
-      {% if options.co_brand['url'] and (options.co_brand['url'] ends with '.svg') %}
-        {% include "@atoms/branding/_branding.tpl.twig" with {
-          url: site.url,
-          logo_svg_inline: options.co_brand['url'] | replace({(site.url): ''}),
-          colorOriginal: options.header_logo_use_original_color,
-          branding_classes: [
-            'co-brand'
-          ],
-          branding_other_classes: display_header_text == true ? '' : 'hide-text'
-        } %}
-      {% elseif options.co_brand['url'] %}
-        {% include "@atoms/branding/_branding.tpl.twig" with {
-          url: site.url,
-          logo_bg_img_src: options.co_brand['url'],
-          height: options.brand_height ~ 'px',
-          branding_classes: [
-            'co-brand'
-          ],
-          branding_other_classes: display_header_text == true ? '' : 'hide-text'
-        } %}
-      {% endif %}
-    {% endblock header_branding %}
-
-    {% block nav_toggle %}
+      {% block nav_toggle %}
       {% embed '@atoms/button/_button.tpl.twig' with {
         button_id: 'navToggle',
         button_classes: [
@@ -242,6 +233,30 @@
         {% endblock button_content %}
       {% endembed %}
     {% endblock nav_toggle %}
+
+      {# Cobrand #}
+      {% if options.co_brand['url'] and (options.co_brand['url'] ends with '.svg') %}
+        {% include "@atoms/branding/_branding.tpl.twig" with {
+          url: site.url,
+          logo_svg_inline: options.co_brand['url'] | replace({(site.url): ''}),
+          colorOriginal: options.header_logo_use_original_color,
+          branding_classes: [
+            'co-brand'
+          ],
+          branding_other_classes: display_header_text == true ? '' : 'hide-text'
+        } %}
+      {% elseif options.co_brand['url'] %}
+        {% include "@atoms/branding/_branding.tpl.twig" with {
+          url: site.url,
+          logo_bg_img_src: options.co_brand['url'],
+          height: options.brand_height ~ 'px',
+          branding_classes: [
+            'co-brand'
+          ],
+          branding_other_classes: display_header_text == true ? '' : 'hide-text'
+        } %}
+      {% endif %}
+    {% endblock header_branding %}
 
     {% block secondary_navigation %}
       {% include "partials/menus/menu.twig" with {
@@ -285,8 +300,8 @@
       {% include "partials/menus/menu.twig" with {
         'menu': menu_primary.get_items,
         'navbar_id': 'primaryNavigation',
-        'nav_id': 'primaryNav',
         'navbar_other_classes': options.include_menu_overlay ? 'has-overlay',
+        'nav_id': 'primaryNav',
         'hover_dropdown': options.hover_dropdown,
         'navbar_breakpoint': options.navbar_breakpoint ? options.navbar_breakpoint : 'lg',
         'breakpoints': sass_data['scssBreakpoints'],
@@ -382,7 +397,27 @@
 
     {% block search %}
       <div class="pt-2 {{ hide_header_search == 'mobile' ? 'd-none d-' ~ options.navbar_breakpoint | default('lg') ~ '-flex' }} {{ hide_header_search == 'desktop' ? 'd-' ~ options.navbar_breakpoint | default('lg') ~ '-none' }} {{ hide_header_search == 'both' ? 'd-none' }}">
-        {{ function('get_search_form') }}
+{#        {{ function('get_search_form') }}#}
+        {% include "partials/content/searchform.twig" with {
+          show_label: false,
+          label: '',
+          placeholder: 'Search',
+          placeholder_color: 'black',
+          button_text: 'Search',
+          button_color: 'black',
+          button_size: 'lg',
+          button_outline: false,
+          button_block: false,
+          button_nowrap: true,
+          hide_button_label: true,
+          hide_icon: false,
+          icon_width: '16px',
+          icon_height: '16px',
+          icon_name: 'search',
+          icon_color: 'white',
+          cache_version: cache_version,
+          paths: paths
+        } %}
       </div>
     {% endblock search %}
 

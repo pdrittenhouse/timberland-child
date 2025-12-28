@@ -37,9 +37,16 @@
     ],
     header_other_classes: '',
     cache_version: cache_version,
-    paths: paths
+    paths: paths,
+    header_alert_content: post.meta('header_alert_message') ? post.meta('header_alert_message') : options.header_alert_message ? options.header_alert_message,
+    alert_other_classes: post.meta('header_alert_layout').alert_layout != 'default' ? 'alert-layout-' ~ post.meta('header_alert_layout').alert_layout : options.header_alert_layout.alert_layout != 'default' ? 'alert-layout-' ~ options.header_alert_layout.alert_layout
   } %}
     {% block header %}
+      {% block nav_top %}
+        {% if header_alerts_widget_area %}
+          {{ header_alerts_widget_area }}
+        {% endif %}
+      {% endblock nav_top %}
       {% block additional_content %}
         {% if header_widget_area %}
           {{ header_widget_area }}
@@ -155,8 +162,16 @@
     ],
     header_other_classes: '',
     cache_version: cache_version,
-    paths: paths
+    paths: paths,
+    header_alert_content: post.meta('header_alert_message') ? post.meta('header_alert_message') : options.header_alert_message ? options.header_alert_message,
+    alert_other_classes: post.meta('header_alert_layout').alert_layout != 'default' ? 'alert-layout-' ~ post.meta('header_alert_layout').alert_layout : options.header_alert_layout.alert_layout != 'default' ? 'alert-layout-' ~ options.header_alert_layout.alert_layout
   } %}
+
+    {% block nav_top %}
+      {% if header_alerts_widget_area %}
+        {{ header_alerts_widget_area }}
+      {% endif %}
+    {% endblock nav_top %}
 
     {% block header_branding %}
       {% if site_logo and (site_logo ends with '.svg') %}
@@ -285,8 +300,8 @@
       {% include "partials/menus/menu.twig" with {
         'menu': menu_primary.get_items,
         'navbar_id': 'primaryNavigation',
-        'nav_id': 'primaryNav',
         'navbar_other_classes': options.include_menu_overlay ? 'has-overlay',
+        'nav_id': 'primaryNav',
         'hover_dropdown': options.hover_dropdown,
         'navbar_breakpoint': options.navbar_breakpoint ? options.navbar_breakpoint : 'lg',
         'breakpoints': sass_data['scssBreakpoints'],
@@ -389,7 +404,7 @@
           placeholder: 'Search',
           placeholder_color: 'black',
           button_text: 'Search',
-          button_color: 'tobasco',
+          button_color: 'black',
           button_size: 'lg',
           button_outline: false,
           button_block: false,
