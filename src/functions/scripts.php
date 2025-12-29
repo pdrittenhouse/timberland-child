@@ -85,51 +85,55 @@ add_action('wp_enqueue_scripts', function() {
 /**
  * Manual enqueue for script.js files (ACF doesn't auto-enqueue the "script" property)
  * Also handles minification in production
+ *
+ * NOTE: Block script enqueuing has been moved to each block's block.php file.
+ * Child theme block.php files are loaded by the parent theme's timberland_include_block_php_files().
+ * Each block enqueues its own scripts via timberland_enqueue_block_assets().
  */
-add_action('enqueue_block_assets', function() {
-	// Only on frontend
-	if (is_admin()) {
-		return;
-	}
-
-	// Only on singular pages
-	if (!is_singular()) {
-		return;
-	}
-
-	$post_id = get_the_ID();
-	$blocks_metadata = timberland_child_get_blocks_metadata();
-	$used_blocks = timberland_child_get_post_used_blocks($post_id, $blocks_metadata);
-	$blocks_path = get_stylesheet_directory() . '/src/templates/blocks';
-
-	// Only enqueue scripts for blocks actually used on this page
-	foreach ($used_blocks as $block_slug) {
-		$script_path = $blocks_path . '/' . $block_slug . '/script.js';
-
-		if (file_exists($script_path) && filesize($script_path) > 0) { // Only enqueue non-empty files
-			$enqueue_url = get_stylesheet_directory_uri() . '/src/templates/blocks/' . $block_slug . '/script.js';
-
-			// In production, use minified version from parent theme helper
-			if (!defined('WP_DEBUG') || !WP_DEBUG) {
-				// Use parent theme's minification function
-				if (function_exists('timberland_generate_minified_js')) {
-					$min_path = timberland_generate_minified_js($script_path, $block_slug, 'script', true);
-					if ($min_path) {
-						$enqueue_url = get_stylesheet_directory_uri() . str_replace(get_stylesheet_directory(), '', $min_path);
-					}
-				}
-			}
-
-			wp_enqueue_script(
-				'child_block_script_' . $block_slug,
-				$enqueue_url,
-				array('jquery', 'acf-input'),
-				wp_get_theme()->get('Version'),
-				true
-			);
-		}
-	}
-});
+// add_action('enqueue_block_assets', function() {
+// 	// Only on frontend
+// 	if (is_admin()) {
+// 		return;
+// 	}
+//
+// 	// Only on singular pages
+// 	if (!is_singular()) {
+// 		return;
+// 	}
+//
+// 	$post_id = get_the_ID();
+// 	$blocks_metadata = timberland_child_get_blocks_metadata();
+// 	$used_blocks = timberland_child_get_post_used_blocks($post_id, $blocks_metadata);
+// 	$blocks_path = get_stylesheet_directory() . '/src/templates/blocks';
+//
+// 	// Only enqueue scripts for blocks actually used on this page
+// 	foreach ($used_blocks as $block_slug) {
+// 		$script_path = $blocks_path . '/' . $block_slug . '/script.js';
+//
+// 		if (file_exists($script_path) && filesize($script_path) > 0) { // Only enqueue non-empty files
+// 			$enqueue_url = get_stylesheet_directory_uri() . '/src/templates/blocks/' . $block_slug . '/script.js';
+//
+// 			// In production, use minified version from parent theme helper
+// 			if (!defined('WP_DEBUG') || !WP_DEBUG) {
+// 				// Use parent theme's minification function
+// 				if (function_exists('timberland_generate_minified_js')) {
+// 					$min_path = timberland_generate_minified_js($script_path, $block_slug, 'script', true);
+// 					if ($min_path) {
+// 						$enqueue_url = get_stylesheet_directory_uri() . str_replace(get_stylesheet_directory(), '', $min_path);
+// 					}
+// 				}
+// 			}
+//
+// 			wp_enqueue_script(
+// 				'child_block_script_' . $block_slug,
+// 				$enqueue_url,
+// 				array('jquery', 'acf-input'),
+// 				wp_get_theme()->get('Version'),
+// 				true
+// 			);
+// 		}
+// 	}
+// });
 
 
 // Admin editor: Load block admin scripts (optimized - only load non-empty files)

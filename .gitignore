@@ -36,3 +36,6 @@ Thumbs.db
 
 # Ignore tests
 .eslintcache
+
+# Ignore compiled CSS source maps
+src/templates/blocks/**/*.css.map

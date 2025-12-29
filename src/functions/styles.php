@@ -178,8 +178,8 @@ if (is_admin()) {
  * @link https://jasonyingling.me/enqueueing-scripts-and-styles-for-gutenberg-blocks/
  *
  * NOTE: Block style enqueuing has been moved to each block's block.php file.
- * Since block.php files are already loaded conditionally in blocks.php, each block
- * enqueues its own styles directly. See timberland_child_include_block_php_files() in blocks.php
+ * Child theme block.php files are loaded by the parent theme's timberland_include_block_php_files().
+ * Each block enqueues its own styles via timberland_enqueue_block_assets().
  */
 
 // // Detect blocks on 'wp' hook (after main query is set, before template loads)
