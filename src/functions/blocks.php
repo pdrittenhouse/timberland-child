@@ -2,11 +2,9 @@
 /**
  * Child Theme Block Registration
  *
- * Note: Child theme block.php files for block OVERRIDES (blocks without their own block.json)
- * are loaded by the parent theme's timberland_include_block_php_files() function.
- * This file only handles:
- * - Registering the child theme block category
- * - Registering NEW child theme blocks (those with their own block.json)
+ * Block.php loading is split between parent and child themes:
+ * - Block OVERRIDES (without block.json): Loaded by parent theme's timberland_include_block_php_files()
+ * - Child-SPECIFIC blocks (with block.json): Loaded by timberland_child_include_block_php_files() below
  */
 
 /**
@@ -35,12 +33,11 @@ add_action( 'init', 'timberland_child_register_blocks', 5 );
 function timberland_child_register_blocks() {
     $blocks_path = dirname(__DIR__) . '/templates/blocks';
 
-    // Return early if blocks directory doesn't exist
     if ( !is_dir($blocks_path) ) {
         return;
     }
 
-    $blocks = array_filter(scandir($blocks_path), 'filter_block_dir');
+    $blocks = array_filter(scandir($blocks_path), 'timberland_child_filter_block_dir');
 
     foreach ($blocks as $block) {
         if ( file_exists( $blocks_path . '/' . $block . '/block.json' ) ) {
@@ -48,3 +45,41 @@ function timberland_child_register_blocks() {
         }
     }
 }
+
+/**
+ * Include block.php files for child-SPECIFIC blocks (those with their own block.json)
+ * Block overrides are handled by the parent theme's timberland_include_block_php_files()
+ */
+function timberland_child_include_block_php_files() {
+    $blocks_path = dirname(__DIR__) . '/templates/blocks';
+
+    if ( !is_dir($blocks_path) ) {
+        return;
+    }
+
+    $blocks = array_filter(scandir($blocks_path), 'timberland_child_filter_block_dir');
+
+    foreach ($blocks as $block) {
+        // Only load block.php for blocks that have their own block.json (child-specific blocks)
+        // Blocks without block.json are overrides and handled by the parent theme
+        if ( file_exists( $blocks_path . '/' . $block . '/block.json' ) ) {
+            $block_php_file = $blocks_path . '/' . $block . '/block.php';
+            if ( file_exists( $block_php_file ) ) {
+                require_once $block_php_file;
+            }
+        }
+    }
+}
+
+// Load child-specific block.php files
+add_action( 'init', function() {
+    if ( wp_doing_ajax() || is_admin() ) {
+        timberland_child_include_block_php_files();
+    }
+}, 10 );
+
+add_action( 'wp', function() {
+    if ( ! wp_doing_ajax() && ! is_admin() ) {
+        timberland_child_include_block_php_files();
+    }
+}, 10 );
