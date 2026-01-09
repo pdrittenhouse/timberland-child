@@ -26,6 +26,8 @@ $timberland_child_includes = array(
     "scripts.php",
     "styles.php",
     "blocks.php",
+    "block-styles.php",
+    "block-layouts.php",
     "redirects.php",
     "rewrites.php",
     "routes.php",
