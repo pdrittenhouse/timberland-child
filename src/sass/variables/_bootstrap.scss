@@ -206,9 +206,9 @@ $card-border-color:           var(--card-border-color);
 $card-bg:                     var(--card-bg);
 
 // Links
-$link-color:                  var(--link);
+$link-color:                  c(black);
 $link-decoration:             var(--link-decoration-line) var(--link-decoration-style) var(--link-decoration-color);
-$link-hover-color:            var(--link-hover);
+$link-hover-color:            c(blaze-orange);
 $link-hover-decoration:       var(--link-hover-decoration-line) var(--link-hover-decoration-style) var(--link-hover-decoration-color);
 
 // Form Inputs

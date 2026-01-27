@@ -534,8 +534,8 @@
   --social-nav-item-hover-border-style: none;
 
   // Links
-  --link: #{c(black)};
-  --link-hover: #{c(blaze-orange)};
+  --link: #{$link-color};
+  --link-hover: #{$link-hover-color};
   --link-decoration-line: none;
   --link-decoration-style: solid;
   --link-decoration-color: #{c(blaze-orange)};
