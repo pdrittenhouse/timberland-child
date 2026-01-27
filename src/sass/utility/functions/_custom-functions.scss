@@ -45,3 +45,12 @@
 
   @return nth($keys, $target-index);
 }
+
+// Generate :not() selectors for all container-{breakpoint} classes
+@function exclude-container-breakpoints($breakpoints: $grid-breakpoints) {
+  $selector: '';
+  @each $breakpoint, $value in $breakpoints {
+    $selector: $selector + ':not(.container-#{$breakpoint})';
+  }
+  @return $selector;
+}

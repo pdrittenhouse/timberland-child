@@ -36,17 +36,17 @@
 {% set bg_position = bg_hor_pos or bg_ver_pos ? 'background-position: ' ~ bg_hor_pos ~ ' ' ~ bg_ver_pos ~ ';' %}
 {% set bg_repeat = fields.bg_image['bg_repeat'] ? 'background-repeat: ' ~ fields.bg_image['bg_repeat'] ~ ';' %}
 {% set bg_attachment = fields.bg_image['bg_attachment'] ? 'background-attachment: ' ~ fields.bg_image['bg_attachment'] ~ ';' %}
-{% set padding_top  = fields.padding['padding']['top'] is not empty ? 'padding-top: ' ~ fields.padding['padding']['top'] ~ 'px;' %}
-{% set padding_bottom = fields.padding['padding']['bottom'] is not empty ? 'padding-bottom: ' ~ fields.padding['padding']['bottom'] ~ 'px;' %}
-{% set padding_left = fields.padding['padding']['left'] is not empty ? 'padding-left: ' ~ fields.padding['padding']['left'] ~ 'px;' %}
-{% set padding_right = fields.padding['padding']['right'] is not empty ? 'padding-right: ' ~ fields.padding['padding']['right'] ~ 'px;' %}
+{% set padding_top  = fields.hero_type != 'section' and fields.padding['padding']['top'] is not empty ? 'padding-top: ' ~ fields.padding['padding']['top'] ~ 'px;' %}
+{% set padding_bottom = fields.hero_type != 'section' and fields.padding['padding']['bottom'] is not empty ? 'padding-bottom: ' ~ fields.padding['padding']['bottom'] ~ 'px;' %}
+{% set padding_left = fields.hero_type != 'section' and fields.padding['padding']['left'] is not empty ? 'padding-left: ' ~ fields.padding['padding']['left'] ~ 'px;' %}
+{% set padding_right = fields.hero_type != 'section' and fields.padding['padding']['right'] is not empty ? 'padding-right: ' ~ fields.padding['padding']['right'] ~ 'px;' %}
 {% set margin_top = fields.margin['margin']['top']['auto'] == true ? 'margin-top: auto;' : fields.margin['margin']['top']['top'] is not empty ? 'margin-top: ' ~ fields.margin['margin']['top']['top'] ~ 'px;' %}
 {% set margin_bottom = fields.margin['margin']['bottom']['auto'] == true ? 'margin-bottom: auto;' : fields.margin['margin']['bottom']['bottom'] is not empty ? 'margin-bottom: ' ~ fields.margin['margin']['bottom']['bottom'] ~ 'px;' %}
 {% set margin_left = fields.margin['margin']['left']['auto'] == true ? 'margin-left: auto;' : fields.margin['margin']['left']['left'] is not empty ? 'margin-left: ' ~ fields.margin['margin']['left']['left'] ~ 'px;' %}
 {% set margin_right = fields.margin['margin']['right']['auto'] == true ? 'margin-right: auto;' : fields.margin['margin']['right']['right'] is not empty ? 'margin-right: ' ~ fields.margin['margin']['right']['right'] ~ 'px;' %}
-{% set height = fields.height['height']['height']['value'] is not empty ? 'height: ' ~ fields.height['height']['height']['value']  ~ fields.height['height']['height']['unit'] ~  ';' %}
-{% set min_height = fields.height['height']['min_height'] is not empty ? 'min-height: ' ~ fields.height['height']['min_height']  ~ 'px;' %}
-{% set max_height = fields.height['height']['max_height'] is not empty ? 'max-height: ' ~ fields.height['height']['max_height']  ~ 'px;' %}
+{% set height = fields.hero_type != 'section' and fields.height['height']['height']['value'] is not empty ? 'height: ' ~ fields.height['height']['height']['value']  ~ fields.height['height']['height']['unit'] ~  ';' %}
+{% set min_height = fields.hero_type != 'section' and fields.height['height']['min_height'] is not empty ? 'min-height: ' ~ fields.height['height']['min_height']  ~ 'px;' %}
+{% set max_height = fields.hero_type != 'section' and fields.height['height']['max_height'] is not empty ? 'max-height: ' ~ fields.height['height']['max_height']  ~ 'px;' %}
 {% set border_top_width = fields['border']['top']['width'] is not empty ? 'border-top-width: ' ~ fields['border']['top']['width'] ~ 'px;' %}
 {% set border_top_style = fields['border']['top']['style'] ? 'border-top-style: ' ~ fields['border']['top']['style'] ~ ';' %}
 {% set border_top_color = fields['border']['top']['color'] == 'custom' and fields['border']['top']['custom_color'] ? 'border-top-color: ' ~ fields['border']['top']['custom_color'] ~ ';' : fields['border']['top']['color'] == 'palette' and fields['border']['top']['theme_color'] ? 'border-top-color: var(--' ~ fields['border']['top']['theme_color'] ~ ');' %}
@@ -75,6 +75,7 @@
 
 {% set block_classes = block_classes|default([])|merge([
 	'hero-unit',
+	fields.hero_type == 'section' ? 'hero-section' : fields.hero_type == 'jumbotron' ? 'hero-jumbotron' : fields.hero_type == 'feature' ? 'hero-feature' : null,
 	((fields.image['image_type'] == 'file' and fields.image['image']['url'] is empty) or (fields.image['image_type'] == 'url' and fields.image['image_url'] is empty)) and fields.innerblocks_location == 'image' ? 'has-image',
 	fields.bg_video != true and fields.bg_color['bg_color'] == 'palette' and fields.bg_color['bg_theme_color'] ? 'bg-' ~ fields.bg_color['bg_theme_color'],
 	fields.color['color'] == 'palette' and fields.color['theme_color'] ? 'text-' ~ fields.color['theme_color'],
@@ -82,22 +83,23 @@
 	fields.hero_type == 'jumbotron' and (fields.hero_layout.jumbotron_layout['jumbotron_layout'] == 'gradient-overlay-left' or fields.hero_layout.jumbotron_layout['jumbotron_layout'] == 'gradient-overlay-right') ? 'gradient-' ~ fields.hero_layout.jumbotron_layout['gradient'],
 	fields.hero_type == 'feature' and fields.hero_layout.feature_layout['feature_layout'] != 'default' ? 'feature-' ~ fields.hero_layout.feature_layout['feature_layout'],
 	fields.gradient_overlay != true and block['gradient'] ? 'gradient-' ~ block['gradient'],
+	fields.hero_type == 'section' and fields.hero_layout.section_layout['section_layout'] != 'default' ? 'section-layout-' ~ fields.hero_layout.section_layout['section_layout'],
 	block['className']
 ]) | sort | join(' ') | trim %}
 
 {% set block_attributes = block_attributes|default([])|merge([
 	fields.hero_type == 'feature' and (bg_color or text_color or bg_image_size or bg_position or bg_repeat or bg_attachment or margin_top or margin_bottom or margin_left or margin_right or padding_top or padding_bottom or padding_left or padding_right or height or min_height or max_height or border_top_width or border_top_style or border_top_color or border_bottom_width or border_bottom_style or border_bottom_color or border_left_width or border_left_style or border_left_color or border_right_width or border_right_style or border_right_color or border_top_left_radius or border_top_right_radius or border_bottom_left_radius or border_bottom_right_radius or box_shadow or overlay_gradient) ? 'style="' ~ bg_color ~ text_color ~ bg_image_size ~ bg_position ~ bg_repeat ~ bg_attachment ~ margin_top ~ margin_bottom ~ margin_left ~ margin_right ~ padding_top ~ padding_bottom ~ padding_left ~ padding_right ~ height ~ min_height ~ max_height ~ border_top_width ~ border_top_style ~ border_top_color ~ border_bottom_width ~ border_bottom_style ~ border_bottom_color ~ border_left_width ~ border_left_style ~ border_left_color ~ border_right_width ~ border_right_style ~ border_right_color ~ border_top_left_radius ~ border_top_right_radius ~ border_bottom_left_radius ~ border_bottom_right_radius ~ box_shadow ~ overlay_gradient ~ '"',
-	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_mp4 ? 'data-mp4="' ~ fields.bg_mp4 ~ '"',
-	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_webm ? 'data-webm="' ~ fields.bg_webm ~ '"',
-	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_ogv ? 'data-ogv="' ~ fields.bg_ogv ~ '"',
-	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.jumbotron_bg_image['bg_image_type'] == 'file' and fields.jumbotron_bg_image['bg_image']['url'] ? 'data-poster="' ~ fields.jumbotron_bg_image['bg_image']['url'] ~ '"' : fields.bg_video == true and fields.jumbotron_bg_image['bg_image_type'] == 'url' and fields.jumbotron_bg_image['bg_image_url'] ? 'data-poster="' ~ fields.jumbotron_bg_image['bg_image_url'] ~ '"',
-	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_loop == true ? 'data-loop="true"' : 'data-loop="false"',
-	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_muted == true ? 'data-muted="true"' : 'data-muted="false"',
-	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_autoplay == true ? 'data-autoplay="true"' : 'data-autoplay="false"',
-	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_resizing == true ? 'data-resizing="true"' : 'data-resizing="false"',
-	fields.hero_type == 'jumbotron' and fields.bg_video == true ? 'data-position="' ~ hpos ~ ' ' ~ vpos ~ '"',
-	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_color['bg_color'] == 'custom' and fields.bg_color['bg_custom_color'] ? 'data-bg-color="' ~ fields.bg_color['bg_custom_color'] ~ '"' : fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_color['bg_color'] == 'palette' and fields.bg_color['bg_theme_color'] ? fields.hero_type == 'jumbotron' and fields.bg_video == true ? 'data-bg-color="var(--' ~ fields.bg_color['bg_theme_color'] ~ ')"' : 'data-bg-color="transparent"',
-	fields.hero_type == 'jumbotron' and fields.bg_video == true and fields.bg_video_classes ? 'data-video-classes="' ~ fields.bg_video_classes ~ '"'
+	fields.hero_type != 'feature' and fields.bg_video == true and fields.bg_mp4 ? 'data-mp4="' ~ fields.bg_mp4 ~ '"',
+	fields.hero_type != 'feature' and fields.bg_video == true and fields.bg_webm ? 'data-webm="' ~ fields.bg_webm ~ '"',
+	fields.hero_type != 'feature' and fields.bg_video == true and fields.bg_ogv ? 'data-ogv="' ~ fields.bg_ogv ~ '"',
+	fields.hero_type != 'feature' and fields.bg_video == true and fields.bg_image['bg_image_type'] == 'file' and fields.bg_image['bg_image']['url'] ? 'data-poster="' ~ fields.bg_image['bg_image']['url'] ~ '"' : fields.bg_video == true and fields.bg_image['bg_image_type'] == 'url' and fields.bg_image['bg_image_url'] ? 'data-poster="' ~ fields.bg_image['bg_image_url'] ~ '"',
+	fields.hero_type != 'feature' and fields.bg_video == true and fields.bg_loop == true ? 'data-loop="true"' : 'data-loop="false"',
+	fields.hero_type != 'feature' and fields.bg_video == true and fields.bg_muted == true ? 'data-muted="true"' : 'data-muted="false"',
+	fields.hero_type != 'feature' and fields.bg_video == true and fields.bg_autoplay == true ? 'data-autoplay="true"' : 'data-autoplay="false"',
+	fields.hero_type != 'feature' and fields.bg_video == true and fields.bg_resizing == true ? 'data-resizing="true"' : 'data-resizing="false"',
+	fields.hero_type != 'feature' and fields.bg_video == true ? 'data-position="' ~ hpos ~ ' ' ~ vpos ~ '"',
+	fields.hero_type != 'feature' and fields.bg_video == true and fields.bg_color['bg_color'] == 'custom' and fields.bg_color['bg_custom_color'] ? 'data-bg-color="' ~ fields.bg_color['bg_custom_color'] ~ '"' : fields.hero_type != 'feature' and fields.bg_video == true and fields.bg_color['bg_color'] == 'palette' and fields.bg_color['bg_theme_color'] ? fields.hero_type != 'feature' and fields.bg_video == true ? 'data-bg-color="var(--' ~ fields.bg_color['bg_theme_color'] ~ ')"' : 'data-bg-color="transparent"',
+	fields.hero_type != 'feature' and fields.bg_video == true and fields.bg_video_classes ? 'data-video-classes="' ~ fields.bg_video_classes ~ '"'
 ]) | sort | join(' ') | trim %}
 
 {% if fields.button['link']['title'] %}
@@ -196,13 +198,121 @@
   fields.overlay_opacity ? 'opacity: ' ~ fields.overlay_opacity ~ ';'
 ] | sort | join(' ') | trim %}
 
-{% if fields.hero_type == 'jumbotron' %}
+{% if fields.hero_type == 'section' %}
+	{% if options.remove_content_containers != true %}
+		{% set default_padding = 'var(--grid-column-padding)' %}
+	{% endif %}
+
+	{# Vertical Alignment #}
+	{% if fields.vertical_alignment['vert_align'] %}
+		{% set vertical_alignment = [] %}
+		{% for alignment in fields.vertical_alignment['vert_align'] %}
+			{% if alignment['breakpoint'] %}
+				{% set bp = '-' ~ alignment.breakpoint %}
+			{% else %}
+				{% set bp = '' %}
+			{% endif %}
+			{% if alignment['alignment'] %}
+				{% set valign = '-' ~ alignment.alignment %}
+			{% endif %}
+			{% if valign %}
+				{% set vertical_alignment = vertical_alignment|default([])|merge([
+			'align-items' ~ bp  ~ valign
+		]) %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+
+	{% set section_styles = [
+		bg_color ? bg_color,
+		text_color ? text_color,
+		bg_image ? bg_image,
+		bg_image_size ? bg_image_size,
+		bg_position ? bg_position,
+		bg_repeat ? bg_repeat,
+		bg_attachment ? bg_attachment,
+		margin_top ? margin_top,
+		margin_bottom ? margin_bottom,
+		margin_left ? margin_left,
+		margin_right ? margin_right,
+		border_top_width ? border_top_width,
+		border_top_style ? border_top_style,
+		border_top_color ? border_top_color,
+		border_bottom_width ? border_bottom_width,
+		border_bottom_style ? border_bottom_style,
+		border_bottom_color ? border_bottom_color,
+		border_left_width ? border_left_width,
+		border_left_style ? border_left_style,
+		border_left_color ? border_left_color,
+		border_right_width ? border_right_width,
+		border_right_style ? border_right_style,
+		border_right_color ? border_right_color,
+		border_top_left_radius ? border_top_left_radius,
+		border_top_right_radius ? border_top_right_radius,
+		border_bottom_left_radius ? border_bottom_left_radius,
+		border_bottom_right_radius ? border_bottom_right_radius,
+		box_shadow ? box_shadow,
+		fields.include_overlay != true and overlay_gradient ? overlay_gradient
+	] | sort | join(' ') | trim %}
+
+	{% set wrapper_styles = [
+		fields.height['height']['height']['value'] is not empty ? 'height: ' ~ fields.height['height']['height']['value']  ~ fields.height['height']['height']['unit'] ~  ';',
+		fields.height['height']['min_height'] is not empty ? 'min-height: ' ~ fields.height['height']['min_height']  ~ 'px;',
+		fields.hero_type != 'section' and fields.height['height']['max_height'] is not empty ? 'max-height: ' ~ fields.height['height']['max_height']  ~ 'px;',
+		fields.include_container != true or block_context['acf/fields']['container'] == true and (options.remove_content_containers == true or block_post.custom['remove_content_container'] == true) and fields.padding['padding']['top'] is not empty ? 'padding-top: ' ~ fields.padding['padding']['top'] ~ 'px;',
+		fields.include_container != true or block_context['acf/fields']['container'] == true and (options.remove_content_containers == true or block_post.custom['remove_content_container'] == true) and fields.padding['padding']['bottom'] is not empty ? 'padding-bottom: ' ~ fields.padding['padding']['bottom'] ~ 'px;',
+		fields.include_container != true or block_context['acf/fields']['container'] == true and (options.remove_content_containers == true or block_post.custom['remove_content_container'] == true) and fields.padding['padding']['left'] is not empty ? 'padding-left: ' ~ fields.padding['padding']['left'] ~ 'px;',
+		fields.include_container != true or block_context['acf/fields']['container'] == true and (options.remove_content_containers == true or block_post.custom['remove_content_container'] == true) and fields.padding['padding']['right'] is not empty ? 'padding-right: ' ~ fields.padding['padding']['right'] ~ 'px;',
+		fields.col_gap['value'] ? 'column-gap: ' ~ fields.col_gap['value'] ~ fields.col_gap['unit'] ~ ';',
+	] | sort | join(' ') | trim %}
+
+	{% set container_breakpoint = fields.container_breakpoint.breakpoint ? '-' ~ fields.container_breakpoint.breakpoint : '' %}
+
+	{% set container_classes = [
+		fields.full_width == true ? 'container-fluid' : 'container' ~ container_breakpoint,
+		fields.full_width == true ? fields.max_width_fluid_container == true ? 'max-width-fluid-container',
+		fields.container_bg_color['bg_color'] == 'palette' and fields.container_bg_color['bg_theme_color'] ? 'bg-' ~ fields.container_bg_color['bg_theme_color']
+	] | sort | join(' ') | trim %}
+
+	{% set container_styles = [
+		fields.bg_video != true and fields.container_bg_color['bg_color'] == 'custom' ? 'background-color:' ~ fields.container_bg_color['bg_custom_color'] ~ ';',
+		fields.include_container == true and block_context['acf/fields']['container'] != true and (options.remove_content_containers == true or block_post.custom['remove_content_container'] == true) and fields.padding['padding']['top'] is not empty ? 'padding-top: ' ~ fields.padding['padding']['top'] ~ 'px;',
+		fields.include_container == true and block_context['acf/fields']['container'] != true and (options.remove_content_containers == true or block_post.custom['remove_content_container'] == true) and fields.padding['padding']['bottom'] is not empty ? 'padding-bottom: ' ~ fields.padding['padding']['bottom'] ~ 'px;',
+		fields.include_container == true and block_context['acf/fields']['container'] != true and (options.remove_content_containers == true or block_post.custom['remove_content_container'] == true) and fields.padding['padding']['left'] is not empty ? 'padding-left: ' ~ fields.padding['padding']['left'] ~ 'px;',
+		fields.include_container == true and block_context['acf/fields']['container'] != true and (options.remove_content_containers == true or block_post.custom['remove_content_container'] == true) and fields.padding['padding']['right'] is not empty ? 'padding-right: ' ~ fields.padding['padding']['right'] ~ 'px;'
+	] | sort | join(' ') | trim %}
+
+	{% set wrapper_classes = [
+		'hero-section--wrapper',
+		vertical_alignment|length > 0 ? vertical_alignment|sort|join(' ')|trim
+	] | sort | join(' ') | trim %}
+
+	<section class="{{ block_classes }}" {{ block_attributes }}>
+		{% if fields.include_overlay %}
+			<span class="overlay {{ fields.overlay_bg['bg_color'] == 'palette' and fields.overlay_bg['bg_theme_color'] ? 'bg-' ~ fields.overlay_bg['bg_theme_color'] }} {{ fields.gradient_overlay == true and block['gradient'] ? 'gradient-' ~ block['gradient'] }}" {{ overlay_styles ? 'style="' ~ overlay_styles ~ '"' }}></span>
+		{% endif %}
+		<div class="{{ wrapper_classes }}" {{ wrapper_styles ? 'style="' ~ wrapper_styles ~ '"' }}>
+			{% if fields.include_container == true and block_context['acf/fields']['container'] != true and (options.remove_content_containers == true or block_post.custom['remove_content_container'] == true) %}
+				<div class="{{ container_classes }}" {{ container_styles ? 'style="' ~ container_styles ~ '"' }}>
+				{% endif %}
+
+				<InnerBlocks/>
+
+				{% if fields.include_container == true and block_context['acf/fields']['container'] != true and (options.remove_content_containers == true or block_post.custom['remove_content_container'] == true) %}
+				</div>
+			{% endif %}
+		</div>
+	</section>
+
+{% elseif fields.hero_type == 'jumbotron' %}
 	{% embed '@molecules/jumbotron/_jumbotron.tpl.twig' with {
       jumbotron_other_styles: bg_color ~ text_color ~ bg_image_size ~ bg_position ~ bg_repeat ~ bg_attachment ~ margin_top ~ margin_bottom ~ margin_left ~ margin_right ~ height ~ min_height ~ max_height ~ border_top_width ~ border_top_style ~ border_top_color ~ border_bottom_width ~ border_bottom_style ~ border_bottom_color ~ border_left_width ~ border_left_style ~ border_left_color ~ border_right_width ~ border_right_style ~ border_right_color ~ border_top_left_radius ~ border_top_right_radius ~ border_bottom_left_radius ~ border_bottom_right_radius ~ box_shadow ~ overlay_gradient,
       jumbotron_bg_image: fields.bg_video != true ? bg_image,
 	  image_left: fields.image_left,
       jumbotron_image: fields.image['image_type'] == 'file' and fields.image['image']['url'] ? fields.image['image']['url'] : fields.image['image_type'] == 'url' and fields.image['image_url'] ? fields.image['image_url'],
       remove_container: fields.include_container == true and (options.remove_content_containers == true or block_post.custom['remove_content_container'] == true) ? false : true,
+	  container_breakpoint: fields.container_breakpoint.breakpoint,
+	  max_width_fluid_container: fields.max_width_fluid_container,
       jumbotron_fluid: fields['full_width'],
 	  vertical_center: fields.vertical_center,
       button_text: 'Learn more',
@@ -310,6 +420,8 @@
 	{% embed '@molecules/feature/_feature.tpl.twig' with {
 		id: fields.id['id'] ? fields.id['id'] : fields.id['id_gen'] ? 'feature' ~ fields.id['id_gen'],
 		include_container: fields.include_container,
+		container_breakpoint: fields.container_breakpoint.breakpoint,
+		max_width_fluid_container: fields.max_width_fluid_container,
 		full_width: fields.full_width,
 		vertical: fields.vertical,
 		vertical_center: fields.vertical_center,

@@ -47,6 +47,61 @@ function timberland_child_register_blocks() {
 }
 
 /**
+ * Get child theme blocks used in widget areas
+ *
+ * Scans all active widget areas for block widgets containing child theme blocks.
+ * Returns array of block slugs (e.g., ['logo-slider', 'custom-cta'])
+ *
+ * @return array Array of child theme block slugs found in widgets
+ */
+function timberland_child_get_widget_used_blocks() {
+    global $wp_registered_sidebars;
+
+    if (empty($wp_registered_sidebars)) {
+        return [];
+    }
+
+    $blocks_path = get_stylesheet_directory() . '/src/templates/blocks';
+    $child_blocks_metadata = timberland_child_get_blocks_metadata();
+    $found_blocks = [];
+
+    // Loop through all registered sidebars
+    foreach ($wp_registered_sidebars as $sidebar_id => $sidebar) {
+        if (!is_active_sidebar($sidebar_id)) {
+            continue;
+        }
+
+        $widgets = wp_get_sidebars_widgets();
+        if (empty($widgets[$sidebar_id])) {
+            continue;
+        }
+
+        foreach ($widgets[$sidebar_id] as $widget_id) {
+            // Check if it's a block widget
+            if (strpos($widget_id, 'block-') === 0) {
+                $widget_options = get_option('widget_block');
+                $widget_number = str_replace('block-', '', $widget_id);
+
+                if (isset($widget_options[$widget_number]['content'])) {
+                    $content = $widget_options[$widget_number]['content'];
+                    $blocks = parse_blocks($content);
+                    $block_names = timberland_child_extract_block_names_recursive($blocks);
+
+                    // Check which child theme blocks are used
+                    foreach ($child_blocks_metadata as $block_slug => $block_name) {
+                        if (in_array($block_name, $block_names)) {
+                            $found_blocks[] = $block_slug;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return array_unique($found_blocks);
+}
+
+/**
  * Include block.php files for child-SPECIFIC blocks (those with their own block.json)
  * Conditionally loads only the block.php files for blocks used on the current page
  * Always loads all blocks for AJAX requests and archives
@@ -81,6 +136,10 @@ function timberland_child_include_block_php_files() {
         $post_id = get_the_ID();
         $blocks_metadata = timberland_child_get_blocks_metadata();
         $used_blocks = timberland_child_get_post_used_blocks($post_id, $blocks_metadata);
+
+        // Also include blocks used in widget areas (ensures block.php runs before enqueue_block_assets)
+        $widget_blocks = timberland_child_get_widget_used_blocks();
+        $used_blocks = array_unique(array_merge($used_blocks, $widget_blocks));
 
         // Only include block.php for blocks used on this page
         foreach ($used_blocks as $block_slug) {

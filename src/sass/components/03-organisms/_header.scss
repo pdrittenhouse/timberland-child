@@ -85,43 +85,58 @@
 
   .include-header-containers & {
 
-    .site-header--container {}
+    .site-header--container {
+      @include make-container;
+    }
 
-    .site-header--row {}
+    .site-header--row {
+      @include make-row;
+    }
 
-    .site-header--column {}
+    .site-header--column {
+      @include make-col-ready;
+      @include make-col(12);
+    }
 
     &.full-width {}
 
+    // Full-width responsive to navbar-expand-* breakpoint
     @each $breakpoint in map-keys($grid-breakpoints) {
       $next: breakpoint-next($breakpoint, $grid-breakpoints);
       $infix: breakpoint-infix($next, $grid-breakpoints);
 
       &.navbar-expand#{$infix} {
         @if $breakpoint != 'none' and $breakpoint != 'xs' and $next != null {
-
           &.full-width-mobile {
             .site-header--container {
-              @include media-breakpoint-up($next) {}
+              @include media-breakpoint-up($next) {
+                @include make-container-max-widths;
+              }
             }
           }
 
           &.full-width-desktop {
             .site-header--container {
-              @include media-breakpoint-down($next) {}
+              @include media-breakpoint-down($next) {
+                @include make-container-max-widths;
+              }
             }
           }
 
           &:not(.full-width) {
             &:not(.full-width-mobile) {
               .site-header--container {
-                @include media-breakpoint-down($next) {}
+                @include media-breakpoint-down($next) {
+                  @include make-container-max-widths;
+                }
               }
             }
 
             &:not(.full-width-desktop) {
               .site-header--container {
-                @include media-breakpoint-up($next) {}
+                @include media-breakpoint-up($next) {
+                  @include make-container-max-widths;
+                }
               }
             }
           }
@@ -132,17 +147,24 @@
 
   .include-header-containers.fluid-header-containers & {
     .site-header--wrapper {
-      > .site-header--container {}
+      > .site-header--container {
+        max-width: none;
+      }
     }
   }
 
-  .include-content-containers.max-width-fluid-containers & {
+  .include-header-containers.max-width-fluid-containers & {
 
-    .site-header--container {}
+    .site-header--container {
+      max-width: map-get($container-max-widths, nth(map-keys($container-max-widths), -1));
+    }
 
     &.full-width,
     &.full-width-desktop {
-      .site-header--container {}
+
+      .site-header--container {
+        max-width: map-get($container-max-widths, nth(map-keys($container-max-widths), -1));
+      }
     }
   }
 
@@ -1220,7 +1242,41 @@
     }
 
     &.mobile-cta {
-      &:not(.navbar-toggler) {}
+      @include replace(inline-block);
+
+      &:not(.navbar-toggler) {
+        margin-top: var(--header-mobile-cta-margin-top);
+        margin-bottom: var(--header-mobile-cta-margin-bottom);
+        margin-left: var(--header-mobile-cta-margin-left);
+        margin-right: var(--header-mobile-cta-margin-right);
+
+        &.btn-link {
+          border: none;
+
+
+          &:hover {
+            background-color: transparent;
+            border: none;
+          }
+        }
+
+        .button--label,
+        .button-label {
+          font-size: var(--header-mobile-cta-font-size);
+          line-height: var(--header-mobile-cta-line-height);
+        }
+
+        &:hover,
+        &:focus {
+
+
+          .button--label,
+          .button-label {
+            font-size: var(--header-mobile-cta-font-size-hover);
+            line-height: var(--header-mobile-cta-line-height-hover);
+          }
+        }
+      }
 
       .svg {}
 
@@ -1253,6 +1309,12 @@
       &:not(.full-width) {
         &:not(.full-width-mobile) {
           .site-header--container {}
+        }
+      }
+
+      &:not(.full-width):not(.full-width-mobile):not(.full-width-desktop) {
+        .site-header--container {
+          @include make-container-max-widths;
         }
       }
     }

@@ -1,3 +1,14 @@
+// .max-width-fluid-containers {
+
+//   .container-fluid {
+//     max-width: map-get($container-max-widths, nth(map-keys($container-max-widths), -1));
+//   }
+// }
+
+.max-width-fluid-container.container-fluid#{exclude-container-breakpoints()} {
+  max-width: map-get($container-max-widths, nth(map-keys($container-max-widths), -1));
+}
+
 .content-wrapper {
 
   &.sidebar-active {

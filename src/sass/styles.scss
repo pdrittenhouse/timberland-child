@@ -15,6 +15,11 @@
 // Import Bootstrap Root CSS Output (CSS custom properties)
 @import "variables/bootstrap-root";
 
+// Bootstrap Grid
+// uses child theme's $container-max-widths and $grid-breakpoints
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+
 // Import Custom Variables
 @import "global/utilities";
 

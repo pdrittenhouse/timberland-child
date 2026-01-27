@@ -2,7 +2,7 @@
 /**
  * Block Styles
  */
-function timberland_register_block_styles() {
+function timberland_child_register_block_styles() {
 
   if ( function_exists( 'register_block_style' ) ) {
 

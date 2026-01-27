@@ -6,6 +6,36 @@
 
 .site-footer {
 
+  .include-footer-containers &  {
+
+    .site-footer--container {
+      @include make-container;
+    }
+
+    .site-footer--row {
+      @include make-row;
+    }
+
+    .site-footer--column {
+      @include make-col-ready;
+      @include make-col(12);
+    }
+  }
+
+  .include-footer-containers.max-width-footer-container & {
+
+    .site-footer--container {
+      @include make-container-max-widths;
+    }
+  }
+
+  .include-footer-containers.max-width-fluid-containers & {
+
+    .site-footer--container {
+      max-width: map-get($container-max-widths, nth(map-keys($container-max-widths), -1));
+    }
+  }
+
   &.two-cols {
 
     .site-footer--brand-name {}

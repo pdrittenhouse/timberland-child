@@ -1,8 +1,9 @@
-// Block: logo-slider - Frontend Styles
 // Child theme variable imports (required for Grunt compilation)
 @import "sass/wordpress/blocks/block-variables";
 
 .block-logo-slider {
+    max-width: 100vw;
+    overflow-x: hidden;
 
     .slick-carousel-wrapper {}
 
@@ -97,6 +98,91 @@
                 }
             }
         }
+
+        &.count-ten {
+
+            .carousel-cell {
+                width: 50%;
+
+                @include media-breakpoint-between(md, xl) {
+                    width: 33.333%;
+                }
+
+                @include media-breakpoint-between(xl, xxl) {
+                    width: 20%;
+                }
+
+                @include media-breakpoint-between(xxl, xxxl) {
+                    width: 12.5%;
+                }
+
+                @include media-breakpoint-up(xxxl) {
+                    width: 10%;
+                }
+            }
+        }
+
+
+        &.count-twelve {
+
+
+            .carousel-cell {
+                width: 50%;
+
+                @include media-breakpoint-between(md, xl) {
+                    width: 33.333%;
+                }
+
+                @include media-breakpoint-between(xl, xxl) {
+                    width: 20%;
+                }
+
+                @include media-breakpoint-between(xxl, xxxl) {
+                    width: 12.5%;
+                }
+
+                @include media-breakpoint-between(xxxl, xxxxl) {
+                    width: 10%;
+                }
+
+                @include media-breakpoint-up(xxxxl) {
+                    width: 8.33333333%;
+                }
+            }
+        }
+
+
+        &.count-sixteen {
+
+            .carousel-cell {
+                width: 50%;
+
+                @include media-breakpoint-between(md, xl) {
+                    width: 33.333%;
+                }
+
+                @include media-breakpoint-between(xl, xxl) {
+                    width: 20%;
+                }
+
+                @include media-breakpoint-between(xxl, xxxl) {
+                    width: 12.5%;
+                }
+
+                @include media-breakpoint-between(xxxl, xxxxl) {
+                    width: 10%;
+                }
+
+                @include media-breakpoint-between(xxxxl, xxxxxl) {
+                    width: 8.33333333%;
+                }
+
+                @include media-breakpoint-up(xxxxxl) {
+                    width: 6.25%;
+                }
+            }
+        }
+
     }
 
     .flickity-viewport {}
