@@ -33,7 +33,9 @@ $timberland_child_includes = array(
     "routes.php",
     "search.php",
     "theme-support.php",
-    "widgets.php"
+    "widgets.php",
+    "post-labels.php",
+    "posts-settings.php"
 );
 
 foreach($timberland_child_includes as $inc){
